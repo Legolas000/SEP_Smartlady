@@ -1,0 +1,138 @@
+<div class="col-sm-8" ng-controller="RegisterController as regCtrl">
+    <div class="row">
+        <div class="col-md-3">
+            <br>
+        </div>
+        <div class="col-md-6">
+            <div class="row main">
+                <div class="panel-heading">
+                    <div class="panel-title text-center">
+                        <h1 class="title">Sign Up Now</h1>
+                        <hr>
+                    </div>
+                </div>
+                <div class="main-login main-center">
+                    <form name="registerForm" id="registerForm" class="form-horizontal"  ng-submit="doRegister()">
+                        <div class="form-group" ng-class="{ 'has-error': registerForm.fullname.$dirty && registerForm.fullname.$error.required }">
+                            <label for="fullname" class="cols-sm-2 control-label">Your Full Name</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                  <span class="input-group-addon">
+                                    <i class="fa fa-user fa" aria-hidden="true"></i>
+                                  </span>
+                                    <input required type="text" class="form-control" ng-model="fullname"
+                                           name="fullname" id="fullname" placeholder="Enter your Full Name">
+                                </div>
+                                <span ng-show="registerForm.fullname.$dirty && registerForm.fullname.$error.required"
+                                      class="help-block">Fullname is required</span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error': registerForm.email.$dirty && registerForm.email.$error.required }">
+                            <label for="email" class="cols-sm-2 control-label">Email</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                      <span class="input-group-addon">
+                                        <i class="fa fa-envelope fa" aria-hidden="true"></i>
+                                      </span>
+                                    <input type="email" class="form-control" id="email" name="email"
+                                           ng-model="email"
+                                           placeholder="Enter your Email" required>
+                                </div>
+                            </div>
+                            <span ng-show="registerForm.email.$dirty && registerForm.email.$error.required" class="help-block">Email is required</span>
+                            <span class="help-block" ng-show="registerForm.email.$dirty && registerForm.email.$invalid && registerForm.email.$error.email">Invalid email.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="address" class="cols-sm-2 control-label">Your Address</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                  <span class="input-group-addon">
+                                    <i class="fa fa-home fa" aria-hidden="true"></i>
+                                  </span>
+                                    <input required type="text" class="form-control" ng-model="address"
+                                           name="address" id="address" placeholder="Enter your address">
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="userroll"  class="cols-sm-2 control-label">User role</label>
+                            <div class="cols-sm-10" ng-class="{ 'has-error': registerForm.userroll.$dirty && registerForm.userroll.$error.required }">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-users fa" aria-hidden="true"></i>
+                                    </span>
+                                    <select class="custom-select form-control crsa-selected" required ng-model="userrole" name="userroll" id="userroll">
+                                        <option >Select a role</option>
+                                        <option value="1">Reader</option>
+                                        <option value="2">Writer</option>
+                                        <option value="3">Advertiser</option>
+                                    </select>
+                                </div>
+                                <span ng-show="registerForm.userroll.$dirty && registerForm.userroll.$error.required" class="help-block">Please select a value</span>
+
+                            </div>
+
+                        </div>
+                        <div class="form-group" ng-show="userrole == '2'" ng-class="{ 'has-error': registerForm.userroll.$dirty && registerForm.userroll.$error.required }">
+                            <label for="userdescription" class="cols-sm-2 control-label">Your Description</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                  <span class="input-group-addon">
+                                    <i class="fa fa fa-file-text-o" aria-hidden="true"></i>
+                                  </span>
+                                    <textarea class = "form-control" rows = "3" ng-model="userdescription" name="userdescription" id="userdescription"></textarea>
+                                </div>
+                            </div>
+                            <span ng-show="registerForm.userdescription.$dirty && registerForm.userdescription.$error.required" class="help-block">Userdescription is required</span>
+
+                        </div>
+
+                        <div class="form-group" ng-class="{ 'has-error': registerForm.password.$dirty && registerForm.password.$error.required }">
+                            <label for="password" class="cols-sm-2 control-label">Password</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                  <span class="input-group-addon">
+                                    <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                                  </span>
+                                    <input type="password" class="form-control" name="password" id="password"
+                                           required ng-model="password" placeholder="Enter your Password">
+                                </div>
+                            </div>
+                            <span ng-show="registerForm.password.$dirty && registerForm.password.$error.required" class="help-block">Password is required</span>
+
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error': registerForm.confirmPassword.$dirty && registerForm.confirmPassword.$error.required }">
+                            <label for="confirmPassword" class="cols-sm-2 control-label">Confirm Password</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                      <span class="input-group-addon">
+                                        <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                                      </span>
+                                    <input type="password" class="form-control" name="confirmPassword" id="confirmPassword"
+                                           required  ng-model="confirmPassword" placeholder="Confirm your Password"
+                                           data-password-verify="password">
+                                </div>
+                            </div>
+                            <div class="help-block" ng-show="registerForm.confirmPassword.$dirty && registerForm.confirmPassword.$error.required">
+                                Field required!</div>
+                            <div class="help-block" ng-show="registerForm.confirmPassword.$dirty && registerForm.confirmPassword.$error.passwordVerify">
+                                Fields are not equal!</div>
+
+                        </div>
+                        <div class="form-group ">
+                            <input type="submit" value="Register" ng-disabled="registerForm.$invalid"
+                                    class="btn btn-primary btn-lg btn-block login-button" />
+                        </div>
+                        <div class="login-register">
+                            <a href="/#/login">Login</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <br>
+        </div>
+    </div>
+</div>
