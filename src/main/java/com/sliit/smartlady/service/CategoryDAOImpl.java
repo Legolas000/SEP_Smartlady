@@ -102,23 +102,25 @@ public class CategoryDAOImpl implements CategoryDAO {
 	public List<Category> getAllCategories() {
 		String sql = "SELECT * FROM categories";
 		List<Category> listCategory = jdbcTemplate.query(sql,  new RowMapper<Category>() {
-			
+
 			@Override
 			public Category mapRow(ResultSet rs, int rowNum) throws SQLException {
-				
+
 				Category lCategory = new Category();
-				
-				lCategory.setId(rs.getInt("catID"));
+
+				//	lCategory.setID((rs.getInt("id")));
 				lCategory.setCatName(rs.getString("catName"));
-				lCategory.setCatDescription(rs.getString("catDescription"));
-				lCategory.setNoOfHits(rs.getInt("noOfHits"));
+				//	lCategory.setcatDescription(rs.getString("catDescription"));
+
+
+
 				return lCategory;
 			}
 		});
-		
+
 		return listCategory;
-	}	
-	
+	}
+
 	@Override
 	public boolean isCategoryExist(Category category)
 	{

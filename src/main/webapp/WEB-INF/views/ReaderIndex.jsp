@@ -22,6 +22,14 @@
 	<link href="/static/css/magazine-css/style.css" rel="stylesheet" type="text/css" media="screen"/>
 	<link href="/static/css/magazine-css/fonts/fontawesome-webfontba72.woff" rel="stylesheet" type="text/css" media="screen"/>
 
+	<%--writer page css--%>
+
+	<link href="/static/css/writer-css/bootstrap.min.css" rel="stylesheet">
+	<link href="/static/css/writer-css/logo-nav.css" rel="stylesheet">
+	<link href="/static/css/writer-css/sweetAlert/sweetalert.css" rel="stylesheet">
+
+	<%--End writer css--%>
+
 	<%--<link href="/static/css/magazine-css/sign-style.css" rel="stylesheet" type="text/css" media="screen"/>
     <link href="/static/css/magazine-css/sign-form-elements.css" rel="stylesheet" type="text/css" media="screen"/>--%>
 
@@ -973,10 +981,11 @@
 </div>
 <!-- End Container -->
 
-login
+
 
 <script type="text/javascript" src="/static/js/lib/angular-1.4.4.js"></script>
 <script type="text/javascript" src="/static/js/lib/angular-route.min.js"></script>
+<script type="text/javascript" src="/static/js/writer-js/sweetAlert/sweetalert.min.js"></script>
 <script type="text/javascript" src="/static/js/lib/angular-cookies.js"></script>
 <script type="text/javascript" src="/static/js/lib/angular-password.min.js"></script>
 
@@ -984,11 +993,11 @@ login
 <script type="text/javascript" src="/static/js/controller/user_controller.js"></script>
 <script type="text/javascript" src="/static/js/controller/login_controller.js"></script>
 <script type="text/javascript" src="/static/js/controller/register_controller.js"></script>
-<%--<script type="text/javascript" src="/static/js/controller/article_controller.js"></script>--%>
+<script type="text/javascript" src="/static/js/controller/article_controller.js"></script>
 <script type="text/javascript" src="/static/js/service/user_service.js"></script>
 <script type="text/javascript" src="/static/js/service/register_service.js"></script>
 <script type="text/javascript" src="/static/js/service/login_service.js"></script>
-<%--<script type="text/javascript" src="/static/js/service/article_service.js"></script>--%>
+<script type="text/javascript" src="/static/js/service/article_service.js"></script>
 
 
 <script type="text/javascript" src="/static/js/magazine-js/jquery.min.js"></script>
@@ -1005,6 +1014,26 @@ login
 <script type="text/javascript" src="/static/js/magazine-js/script.js"></script>
 <script type="text/javascript" src="/static/js/magazine-js/jquery.backstretch.min.js"></script>
 <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js" type="text/javascript"></script>
+
+<%--rich text editor js--%>
+<script type="text/javascript" src="/static/js/writer-js/tinymce-dist/tinymce.js"></script>
+<script type="text/javascript" src="/static/js/writer-js/angular/angular.js"></script>
+<script type="text/javascript" src="/static/js/writer-js/angular-ui-tinymce/src/tinymce.js"></script>
+<%-- end rich text editor --%>
+
+<%-- image picker writer --%>
+<script>
+
+	var loadFile = function(event) {
+		var reader = new FileReader();
+		reader.onload = function(){
+			var output = document.getElementById('output');
+			output.src = reader.result;
+		};
+		reader.readAsDataURL(event.target.files[0]);
+	};
+</script>
+<%--end image picker--%>
 
 <%--<script type="text/javascript" src="/static/js/magazine-js/sign-scripts.js"></script>--%>
 

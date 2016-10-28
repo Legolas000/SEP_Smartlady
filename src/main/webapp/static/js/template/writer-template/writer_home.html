@@ -1,0 +1,89 @@
+<div class="col-sm-12"  ng-controller="ArticleController as articleCtrl">
+    <!-- Navigation -->
+
+
+
+    <!--<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">-->
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="#">Write Article</a>
+                    </li>
+                    <li>
+                        <a href="#">My Articles</a>
+                    </li>
+                    <li>
+                        <a href="#">Summery</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    <br><br><br>
+
+    <!--</nav>-->
+
+
+    <!-- Page Content -->
+    <div class="container">
+        <form name="articleForm" ng-submit="articleFormSubmit()" class="form-horizontal"  method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label class="col-sm-2">Title:<span style="color:red;font-weight:normal"><noraml>*</noraml></span></label>
+                <div class="col-sm-6">
+                    <input type="text" name="titleName" class="form-control" ng-model="articleCtrl.article.title" id="title" placeholder="Enter title"  />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="dropdown">
+                    <label class="col-sm-2">Category:<span style="color:red;font-weight:normal"><noraml>*</noraml></span></label>
+                    <div class="col-sm-6">
+                        <select id="categories" class="form-control" ng-model="articleCtrl.article.category" ng-options="item for item in categoriesName"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2">Article Body:<span style="color:red;font-weight:normal"><noraml>*</noraml></span></label>
+                <div class="col-sm-8">
+                    <textarea ui-tinymce="tinymceOptions" ng-model="articleCtrl.article.description" rows="18" cols="40"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2">Cover Image:<span style="color:red;font-weight:normal"><noraml>*</noraml></span></label>
+                <input type="file" name="file" accept="image/*" onchange="loadFile(event)">
+                <img id="output" width="150" height="150"/>
+
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-8">
+                    <label class="col-sm-2"><span style="color:red;font-weight:normal"><noraml>* - Required</noraml></span></label>
+                </div>
+                <div class="col-sm-4">
+                    <button type="submit" class="btn btn-default">Save</button>
+                    <button type="button" class="btn btn-default">Cancel</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+
+
+
+
+

@@ -1,6 +1,6 @@
 'use strict';
 
-var App = angular.module('myApp',['ngRoute','ngCookies','ngPassword','ui.bootstrap']);
+var App = angular.module('myApp',['ngRoute','ui.tinymce','ngCookies','ngPassword','ui.bootstrap']);
 
 angular.module('myApp').config(['$routeProvider', function($routeProvider) {
     $routeProvider
@@ -14,7 +14,7 @@ angular.module('myApp').config(['$routeProvider', function($routeProvider) {
             resolve: {
                 "check":function($location,$rootScope) {
                     if($rootScope.userRole == 2){
-                        $location.path('/writer');
+                        $location.path('/writer_home');
                     }
                 }
             },
@@ -22,8 +22,13 @@ angular.module('myApp').config(['$routeProvider', function($routeProvider) {
             authenticated: true
            // controller : "UserController as userCtrl"
         })
-        .when('/writer', {
-            templateUrl: '/static/js/template/writer-template/home.html',
+        .when('/writer_home', {
+            templateUrl: '/static/js/template/writer-template/writer_home.html',
+            authenticated: false
+            // controller : "UserController as userCtrl"
+        })
+        .when('/writer_articles', {
+            templateUrl: '/static/js/template/writer-template/writer_articles.html',
             authenticated: false
             // controller : "UserController as userCtrl"
         })

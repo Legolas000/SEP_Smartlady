@@ -1,70 +1,120 @@
 'use strict';
 
-angular.module('myApp').controller('ArticleController', ['$scope', 'ArticleService','$location','$route',
-                        function($scope, ArticleService,$location,$route) {
+angular.module('myApp')
+    .controller('ArticleController', ['$scope', 'ArticleService','$location','$route','$window',
+        function($scope,ArticleService,$location,$route,$window) {
 
-    var self = this;
-    self.article={
-        id:null,
-        title:'',
-        description:'',
-        publishedDate:'',
-        imagePath:'',
-        isFeatured:null,
-        overallRating:null,
-        categoryID:null,
-        writerID:null,
-        status:''
-    };
+            var self = this;
+
+            $scope.tinymceOptions = {
+                plugins: 'link image code',
+                toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+            };
 
 
+            self.category = {
+                id:null,
+                catName:'',
+                catDescription:''
+            };
 
-    self.articles=[];
-    /*if(async!= null){
-        self.article={
-            id:async.id,
-            title:async.title,
-            description:async.description,
-            publishedDate:async.publishedDate,
-            imagePath:async.imagePath,
-            isFeatured:async.isFeatured,
-            overallRating:async.overallRating,
-            categoryID:async.categoryID,
-            writerID:async.writerID,
-            status:async.status
-        };
-    }*/
+            self.categories = [];
+            $scope.categoriesName = [];
 
-    self.approve = approve;
+            $scope.title='';
+            $scope.description = '';
 
-    fetchAllArticles();
+            self.article={
+                id:null,
+                title:'',
+                description:'',
+                category:''
+            };
 
-    function fetchAllArticles(){
-        ArticleService.fetchAllArticles()
-            .then(
-                function(d) {
-                    self.articles = d;
-                },
-                function(errResponse){
-                    console.error('Error while fetching Articles');
-                }
-            );
-    }
+            self.articles=[];
 
 
-    function updateStatus(id){
-    	ArticleService.updateStatus(id)
-            .then(
-            	fetchAllArticles,
-                function(errResponse){
-                    console.error('Error while updating Article');
-                }
-            );
-    }
+            fetchAllCategories();
 
-    function approve(id) {
-    	updateStatus(id);
-        console.log('Article approval confirmed for id:- ', id);
-    }
+            function fetchAllCategories(){
+                ArticleService.fetchAllCategories()
+                    .then(
+                        function(data){
+                            self.categories = data;
+                            for(var i=0; i<self.categories.length; i++){
+                                $scope.categoriesName[i] = self.categories[i].catName;
+                            }
+                        },
+                        function(errResponse){
+                            console.error('Error while fetching Categories');
+                        }
+                    )
+            }
 
-}]);
+            /*$scope.saveArticle = function(){
+
+             $window.alert(self.article.description);
+             }*/
+
+            $scope.articleFormSubmit = function(){
+                swal("Here's a message!");
+                var v = (''+self.article.title).length;
+                console.log(v);
+                if(((''+self.article.title).length == 0) || ((''+$scope.description).length == 0)){
+                     sweetAlert("Error", "Article Title or Body Cannot be Empty", "error");
+                 }
+
+                 var e = document.getElementById("categories");
+                 var select = e.options[e.selectedIndex].value;
+                 if(select==0) {
+                    sweetAlert("Error", "Please Select a Category", "error");
+                 }
+                 else {
+                ArticleService.articleFormSubmit()
+                    .then(
+                        function (response) {
+                            if (response) {
+                                swal('Article created succussfully');
+                            } else {
+                                sweetAlert("Error", "Something went wrong. Article not created", "error");
+                            }
+
+                        }
+                    )
+                 }
+
+            }
+
+
+
+
+
+            function fetchAllArticles(){
+                ArticleService.fetchAllArticles()
+                    .then(
+                        function(data) {
+                            self.articles = data;
+                        },
+                        function(errResponse){
+                            console.error('Error while fetching Articles');
+                        }
+                    );
+            }
+
+
+            function updateStatus(id){
+                ArticleService.updateStatus(id)
+                    .then(
+                        fetchAllArticles,
+                        function(errResponse){
+                            console.error('Error while updating Article');
+                        }
+                    );
+            }
+
+            function approve(id) {
+                updateStatus(id);
+                console.log('Article approval confirmed for id:- ', id);
+            }
+
+        }]);
