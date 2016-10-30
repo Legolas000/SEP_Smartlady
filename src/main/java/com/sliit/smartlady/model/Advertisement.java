@@ -2,122 +2,131 @@ package com.sliit.smartlady.model;
 
 public class Advertisement {
 
-	private int advID;
-	private String image;
+	private int id;
+	private String imagePath;
 	private String description;
-	private String published_date;
-	private String expiry_date;
+	private String publishedDate;
+	private String expiryDate;
 	private String url;
 	private String status;
 	private float payment;
-	
-	public Advertisement() {
-		this.advID = 0;
-	}
-	
-	public Advertisement(int advID, String image, String description, String published_date
-			, String expiry_date, String url, float payment){
-	
-		this.advID = advID;
-		this.image = image;
-		this.description = description;
-		this.published_date = published_date;
-		this.expiry_date = expiry_date;
-		this.url = url;
-		this.payment = payment;
-	}
-	
-	public Boolean findByID(int advID)
-	{
-		return advID == this.advID;
-	}
-	
-	public int getID()
-	{
-		return advID;
-	}
-	
-	public void setID(int advID)
-	{
-		this.advID = advID;
-	}
-	
-	public String getDescription()
-	{
-		return description;
-	}
-	
-	public void setDescription(String description)
-	{
-		this.description = description;
-	}
-	
-	public String getPublishedDate()
-	{
-		return published_date;
-	}
-	
-	public void setPublishedDate(String published_date)
-	{
-		this.published_date = published_date;
-	}
-	
-	public String getExpiryDate()
-	{
-		return expiry_date;
-	}
-	
-	public void setExpiryDate(String expiry_date)
-	{
-		this.expiry_date = expiry_date;
+	private int categoryID;
+	private int userID;
+	private Category category;
+
+	public String getUserImage() {
+		return userImage;
 	}
 
-	public String getURL()
-	{
+	public void setUserImage(String userImage) {
+		this.userImage = userImage;
+	}
+
+	private String userImage;
+	//private User user;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getPublishedDate() {
+		return publishedDate;
+	}
+
+	public void setPublishedDate(String publishedDate) {
+		this.publishedDate = publishedDate;
+	}
+
+	public String getExpiryDate() {
+		return expiryDate;
+	}
+
+	public void setExpiryDate(String expiryDate) {
+		this.expiryDate = expiryDate;
+	}
+
+	public String getUrl() {
 		return url;
 	}
-	
-	public void setURL(String url)
-	{
+
+	public void setUrl(String url) {
 		this.url = url;
 	}
-	
-	public float getPayment()
-	{
+
+	public float getPayment() {
 		return payment;
 	}
-	
-	public void setPayment(float payment)
-	{
+
+	public void setPayment(float payment) {
 		this.payment = payment;
 	}
-	
-	public void setStatus(String status)
-	{
-		this.status = status;
-	}
-	
-	public String getStatus()
-	{
+
+	public String getStatus() {
 		return status;
 	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof Advertisement))
-			return false;
-		Advertisement other = (Advertisement) obj;
-		if (advID != other.advID)
-			return false;
-		return true;
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
-	
+
+	public int getCategoryID() {
+		return categoryID;
+	}
+
+	public void setCategoryID(int categoryID) {
+		this.categoryID = categoryID;
+	}
+
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
 	@Override
 	public String toString() {
-		return "Advertisement [advID=" + advID + ", published_date=" + published_date + ", Description=" + description + ", URL= "+ url + "]";
+		return "Advertisement{" +
+				"id=" + id +
+				", imagePath='" + imagePath + '\'' +
+				", description='" + description + '\'' +
+				", publishedDate='" + publishedDate + '\'' +
+				", expiryDate='" + expiryDate + '\'' +
+				", url='" + url + '\'' +
+				", payment=" + payment +
+				", status='" + status + '\'' +
+				", categoryID=" + categoryID +
+				", userID=" + userID +
+				", category=" + category +
+				'}';
 	}
 }

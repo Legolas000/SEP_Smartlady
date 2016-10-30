@@ -633,7 +633,19 @@
 	<section class="block-wrapper">
 		<div class="container">
 			<div class="row">
-				<div ng-view autoscroll="true"></div>
+				<!-- --- Arham's page side nav bar ------->
+				<div class="col-sm-3 sidebar" ng-if="userRole === 3">
+					<div class="container-fluid">
+						<h4 class="sidenav-head"><b>Advertiser's Self Blog</b></h4>
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href="/#/assignadvertise" class="glyphicon glyphicon-upload"> Assign New Addvertise</a></li>
+							<li><a href="/#/advertiserprofile" class="glyphicon glyphicon-user" > View My Profile</a></li>
+							<li><a href="/#/viewUpdateAdvertise" class="glyphicon glyphicon-upload" ng-click="adctrl.viewAdvertises()"> All My Updates</a></li>
+						</ul><br>
+					</div>
+				</div>
+				<div data-ng-view></div>
+				<%--<div ng-view autoscroll="true"></div>--%>
 				<%--<ng-include src="'/static/js/template/reader-template/include/side-bar.html'"></ng-include>--%>
 				<div class="col-sm-4" ng-if="userRole === 1 || userRole === 0">
 
@@ -1020,11 +1032,13 @@
 <script type="text/javascript" src="/static/js/magazine-js/script.js"></script>
 <script type="text/javascript" src="/static/js/magazine-js/jquery.backstretch.min.js"></script>
 <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js" type="text/javascript"></script>
+<script type="text/javascript" src="/static/js/controller/advertiser_controller.js"></script>
+<script type="text/javascript" src="/static/js/service/advertiser_service.js"></script>
 
 <%--rich text editor js--%>
 <script type="text/javascript" src="/static/js/writer-js/tinymce-dist/tinymce.js"></script>
 <script type="text/javascript" src="/static/js/writer-js/angular/angular.js"></script>
-<script type="text/javascript" src="/static/js/writer-js/angular-ui-tinymce/src/tinymce.js"></script>
+<%--<script type="text/javascript" src="/static/js/writer-js/angular-ui-tinymce/src/tinymce.js"></script>--%>
 <%-- end rich text editor --%>
 
 <%-- image picker writer --%>

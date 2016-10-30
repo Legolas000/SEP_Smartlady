@@ -1,6 +1,6 @@
 'use strict';
 
-var App = angular.module('myApp',['ngRoute','ui.tinymce','ngCookies','ngPassword','ui.bootstrap','angulike']);
+var App = angular.module('myApp',['ngRoute','ngCookies','ngPassword','ui.bootstrap','angulike']);
 
 angular.module('myApp').config(['$routeProvider', function($routeProvider) {
     $routeProvider
@@ -15,6 +15,8 @@ angular.module('myApp').config(['$routeProvider', function($routeProvider) {
                 "check":function($location,$rootScope) {
                     if($rootScope.userRole == 2){
                         $location.path('/writer_home');
+                    }else if($rootScope.userRole == 3){
+                        $location.path('/advertiser_home');
                     }
                 }
             },
@@ -24,6 +26,11 @@ angular.module('myApp').config(['$routeProvider', function($routeProvider) {
         })
         .when('/writer_home', {
             templateUrl: '/static/js/template/writer-template/writer_home.html',
+            authenticated: false
+            // controller : "UserController as userCtrl"
+        })
+        .when('/advertiser_home', {
+            templateUrl: '/static/js/template/advertiser-template/requestAdvertise.jsp',
             authenticated: false
             // controller : "UserController as userCtrl"
         })
@@ -53,6 +60,15 @@ angular.module('myApp').config(['$routeProvider', function($routeProvider) {
         .when('/logout', {
             templateUrl: '/static/js/template/reader-template/login.html',
             authenticated: false
+        })
+        .when('/assignadvertise', {
+            templateUrl: '/static/js/template/advertiser-template/requestAdvertise.jsp',
+            controller : "AdvertiserController as adctrl"
+        })
+
+        .when('/viewUpdateAdvertise', {
+            templateUrl: '/static/js/template/advertiser-template/viewUpdateAdvertise.jsp',
+            controller : "AdvertiserController as adctrl"
         })
 
         .otherwise({redirectTo:'/'});
@@ -90,7 +106,22 @@ angular.module('myApp')
         }]);
 
 
-
+App.directive("fileModel",function() {
+    return {
+        restrict: 'EA',
+        scope: {
+            setFileData: "&"
+        },
+        link: function(scope, ele, attrs) {
+            ele.on('change', function() {
+                scope.$apply(function() {
+                    var val = ele[0].files[0];
+                    scope.setFileData({ value: val });
+                });
+            });
+        }
+    }
+});
 
 
 
