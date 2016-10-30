@@ -20,11 +20,12 @@
 	<link href="/static/css/magazine-css/owl.theme.css" rel="stylesheet" type="text/css" media="screen"/>
 	<link href="/static/css/magazine-css/ticker-style.css" rel="stylesheet" type="text/css"/>
 	<link href="/static/css/magazine-css/style.css" rel="stylesheet" type="text/css" media="screen"/>
+	<link href="/static/css/magazine-css/rating.css" rel="stylesheet" type="text/css" media="screen"/>
 	<link href="/static/css/magazine-css/fonts/fontawesome-webfontba72.woff" rel="stylesheet" type="text/css" media="screen"/>
 
 	<%--writer page css--%>
 
-	<link href="/static/css/writer-css/bootstrap.min.css" rel="stylesheet">
+	<%--<link href="/static/css/writer-css/bootstrap.min.css" rel="stylesheet">--%>
 	<link href="/static/css/writer-css/logo-nav.css" rel="stylesheet">
 	<link href="/static/css/writer-css/sweetAlert/sweetalert.css" rel="stylesheet">
 
@@ -107,8 +108,10 @@
 								</li>
 								<li><span class="time-now">{{currentDate | date:'medium'}}</span></li>
 								<li><a href="#" >Contact</a></li>
+
 								<li ng-if="!currentUserSignedIn"><a href="/#/login">Log In</a></li>
 								<li ng-if="!currentUserSignedIn"><a href="/#/register">Sign Up</a></li>
+								<li ng-if="currentUserSignedIn" ng-controller="LoginController"><a href="/#/editProfile">Your Profile</a></li>
 								<li ng-if="currentUserSignedIn" ng-controller="LoginController"><a href="/#/logout" ng-click="doLogOut()">Log Out</a></li>
 
 
@@ -988,9 +991,12 @@
 <script type="text/javascript" src="/static/js/writer-js/sweetAlert/sweetalert.min.js"></script>
 <script type="text/javascript" src="/static/js/lib/angular-cookies.js"></script>
 <script type="text/javascript" src="/static/js/lib/angular-password.min.js"></script>
+<script type="text/javascript" src="/static/js/lib/angulike.js"></script>
+
 
 <script type="text/javascript" src="/static/js/app.js"></script>
 <script type="text/javascript" src="/static/js/controller/user_controller.js"></script>
+<script type="text/javascript" src="/static/js/controller/rating_controller.js"></script>
 <script type="text/javascript" src="/static/js/controller/login_controller.js"></script>
 <script type="text/javascript" src="/static/js/controller/register_controller.js"></script>
 <script type="text/javascript" src="/static/js/controller/article_controller.js"></script>

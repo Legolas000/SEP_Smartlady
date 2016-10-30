@@ -436,7 +436,7 @@
 
             <!--<div class="news-post article-post" &lt;!&ndash;ng-repeat="articleByDate in userCtrl.wholeArticles"&ndash;&gt;-->
             <div class="news-post article-post"
-                 ng-repeat="articleByDate in filtered = userCtrl.wholeArticles | filter:search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                 ng-repeat="articleByDate in filtered = items | filter:search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
                 <div class="row">
                     <div class="col-sm-5">
                         <div class="post-gallery">
@@ -452,10 +452,11 @@
                                 <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
                                 <li><i class="fa fa-eye"></i>872</li>
                             </ul>
+                            <star-rating ng-controller="RatingCtrl" ng-model="user1" ></star-rating><br/>
                            <!-- <div ng-bind-html="articleByDate.description"></div>-->
                             <!--<p>{{ articleByDate.description | limitTo: 100 }}</p>-->
-                            <br/><br/><br/>
-                            <a ng-click="userCtrl.getReaderArticle(articleByDate.id)" class="read-more-button" ><i class="fa fa-arrow-circle-right"></i>Read More</a>
+                            <br/><br/>
+                            <a ng-href="/#/readarticles/{{articleByDate.id}}"  class="read-more-button" ><i class="fa fa-arrow-circle-right"></i>Read More</a>
                         </div>
                     </div>
                 </div>
@@ -483,6 +484,21 @@
 
     </div>
     <!-- End block content -->
+
+    <div ng-controller="RatingCtrl" class="container">
+        <h1>Angular Star Rating Directive</h1>
+        Average Rating: {{ averageRating }}
+        <div class="average">
+            <average-star-rating ng-model="averageRating" max="5"><average-star-rating>
+        </div>
+        User 1 rating <star-rating ng-model="user1" ></star-rating><br/>
+        User 2 rating <star-rating ng-model="user2" ></star-rating><br/>
+        User 3 rating <star-rating ng-model="user3" ></star-rating><br/>
+
+        <div><strong>Rating 1:</strong> {{user1.rating}}</div>
+        <div><strong>Rating 2:</strong> {{user2.rating}}</div>
+        <div><strong>Rating 2:</strong> {{user3.rating}}</div>
+    </div>
 
 </div>
 

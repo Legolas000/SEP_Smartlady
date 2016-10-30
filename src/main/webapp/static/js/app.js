@@ -1,6 +1,6 @@
 'use strict';
 
-var App = angular.module('myApp',['ngRoute','ui.tinymce','ngCookies','ngPassword','ui.bootstrap']);
+var App = angular.module('myApp',['ngRoute','ui.tinymce','ngCookies','ngPassword','ui.bootstrap','angulike']);
 
 angular.module('myApp').config(['$routeProvider', function($routeProvider) {
     $routeProvider
@@ -36,9 +36,14 @@ angular.module('myApp').config(['$routeProvider', function($routeProvider) {
             templateUrl: '/static/js/template/reader-template/register.html',
             authenticated: false
             // controller : "UserController as userCtrl"
+        }).when('/editProfile', {
+            templateUrl: '/static/js/template/reader-template/edit_profile.html',
+            authenticated: false
+            // controller : "UserController as userCtrl"
         })
-        .when('/readarticles', {
+        .when('/readarticles/:articleId', {
             templateUrl: '/static/js/template/reader-template/single-post.html',
+            controller : "UserController as userCtrl",
             authenticated: true
         })
         .when('/category', {
@@ -57,31 +62,32 @@ angular.module('myApp').config(['$routeProvider', function($routeProvider) {
 
 angular.module('myApp')
         .run(["$rootScope","$location","LoginService",
-    function($rootScope, $location, LoginService) {
-    $rootScope.location = $location;
-    $rootScope.$on("$routeChangeStart", function (event, next, current) {
-        if(next.$$route.authenticated){
-            console.log("next.$$route.authenticated");
-            $rootScope.currentUserSignedIn = true;
-            if(!LoginService.getAuthStatus()){
-                console.log("$location.path('/')");
-                $rootScope.currentUserSignedIn = false;
-                $location.path('/');
-            }
-        }
+            function($rootScope, $location, LoginService) {
+            $rootScope.location = $location;
+            $rootScope.facebookAppId = '756171607855514'; // set your facebook app id here
+            $rootScope.$on("$routeChangeStart", function (event, next, current) {
+                if(next.$$route.authenticated){
+                    console.log("next.$$route.authenticated");
+                    $rootScope.currentUserSignedIn = true;
+                    if(!LoginService.getAuthStatus()){
+                        console.log("$location.path('/')");
+                        $rootScope.currentUserSignedIn = false;
+                        $location.path('/');
+                    }
+                }
 
-        if(next.$$route.originalPath == '/'){
-            console.log("next.$$route.originalPath == '/'");
-            $rootScope.currentUserSignedIn = false;
-            if(LoginService.getAuthStatus()){
-                console.log("$location.path(current.$$route.originalPath)");
-                $rootScope.currentUserSignedIn = true;
+                if(next.$$route.originalPath == '/'){
+                    console.log("next.$$route.originalPath == '/'");
+                    $rootScope.currentUserSignedIn = false;
+                    if(LoginService.getAuthStatus()){
+                        console.log("$location.path(current.$$route.originalPath)");
+                        $rootScope.currentUserSignedIn = true;
 
-                $location.path(current.$$route.originalPath);
-            }
-        }
-    });
-}]);
+                        $location.path(current.$$route.originalPath);
+                    }
+                }
+            });
+        }]);
 
 
 

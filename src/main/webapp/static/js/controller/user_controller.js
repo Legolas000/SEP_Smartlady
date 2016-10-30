@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('myApp').controller('UserController',
-                        ['$scope', 'UserService','LoginService','$location','$routeParams','$sce',
+                        ['$scope', 'UserService','LoginService','$location','$route','$routeParams','$sce',
                         '$cookies','$rootScope','filterFilter',
-                        function($scope, UserService,LoginService,$location,$routeParams,$sce,$cookies,$rootScope,filterFilter) {
+                        function($scope, UserService,LoginService,$location,$route,$routeParams,$sce,$cookies,$rootScope,filterFilter) {
     var self = this;
 
     $scope.currentDate = new Date();
@@ -30,6 +30,10 @@ angular.module('myApp').controller('UserController',
         totalLikes:null,
         totalViews:null
     };
+
+    if($routeParams.articleId != null){
+        getReaderArticle($routeParams.articleId);
+    }
 
 
     self.records = [
@@ -65,11 +69,11 @@ angular.module('myApp').controller('UserController',
     self.articlesToAdd = [];
 
     self.obj = null;
-
+    $scope.items = [];
     getFeturedArticle();
     getArticlesSortedByDate();
 
-    self.getReaderArticle = getReaderArticle;
+    //self.getReaderArticle = getReaderArticle;
 
 
     /*if(self.locationPath === '/home'){
@@ -93,7 +97,9 @@ angular.module('myApp').controller('UserController',
                 self.article = data;
                 self.article.description = $sce.trustAsHtml(self.article.description );
                 console.log("getReaderArticle - self.article :> " + self.article.title);
-                $location.url('/readarticles');
+                getSocialShareModel();
+                //$location.url('/readarticles');
+
             },
             function (errResponse) {
                 console.error('Error while fetching Articles');
@@ -159,6 +165,10 @@ angular.module('myApp').controller('UserController',
 
                         });
                     });
+
+                    $scope.items = self.wholeArticles;
+                    getPagination();
+
                 },
                 function (errResponse) {
                     console.error('Error while fetching featured article');
@@ -166,199 +176,8 @@ angular.module('myApp').controller('UserController',
             );
     }
 
-    /*--------------------------------*/
-
-
-
-
-        $scope.items = [{
-            "name": "name 1",
-            "category": [{
-                "category": "management"
-            }, {
-                "category": "business"
-            }],
-            "branch": "West"
-        }, {
-            "name": "name 2",
-            "category": [{
-                "category": "engineering"
-            }],
-            "branch": "West"
-        }, {
-            "name": "name 3",
-            "category": [{
-                "category": "management"
-            }, {
-                "category": "engineering"
-            }],
-            "branch": "West"
-        }, {
-            "name": "name 4",
-            "category": [{
-                "category": "management"
-            }, {
-                "category": "business"
-            }],
-            "branch": "West"
-        }, {
-            "name": "name 5",
-            "category": [{
-                "category": "management"
-            }, {
-                "category": "business"
-            }],
-            "branch": "East"
-        }, {
-            "name": "name 6",
-            "category": [{
-                "category": "management"
-            }, {
-                "category": "business"
-            }],
-            "branch": "East"
-        }, {
-            "name": "name 7",
-            "category": [{
-                "category": "management"
-            }, {
-                "category": "business"
-            }],
-            "branch": "East"
-        }, {
-            "name": "name 8",
-            "category": [{
-                "category": "business"
-            }],
-            "branch": "West"
-        }, {
-            "name": "name 9",
-            "category": [{
-                "category": "management"
-            }, {
-                "category": "business"
-            }],
-            "branch": "East"
-        }, {
-            "name": "name 10",
-            "category": [{
-                "category": "management"
-            }],
-            "branch": "East"
-        }, {
-            "name": "name 11",
-            "category": [{
-                "category": "management"
-            }, {
-                "category": "business"
-            }],
-            "branch": "East"
-        }, {
-            "name": "name 12",
-            "category": [{
-                "category": "engineering"
-            }],
-            "branch": "West"
-        }, {
-            "name": "name 13",
-            "category": [{
-                "category": "management"
-            }, {
-                "category": "business"
-            }],
-            "branch": "West"
-        }, {
-            "name": "name 14",
-            "category": [{
-                "category": "engineering"
-            }],
-            "branch": "East"
-        }, {
-            "name": "name 15",
-            "category": [{
-                "category": "management"
-            }, {
-                "category": "engineering"
-            }],
-            "branch": "East"
-        }, {
-            "name": "name 16",
-            "category": [{
-                "category": "management"
-            }],
-            "branch": "West"
-        }, {
-            "name": "name 17",
-            "category": [{
-                "category": "management"
-            }],
-            "branch": "East"
-        }, {
-            "name": "name 18",
-            "category": [{
-                "category": "business"
-            }],
-            "branch": "West"
-        }, {
-            "name": "name 19",
-            "category": [{
-                "category": "business"
-            }],
-            "branch": "West"
-        }, {
-            "name": "name 20",
-            "category": [{
-                "category": "engineering"
-            }],
-            "branch": "East"
-        }, {
-            "name": "Peter",
-            "category": [{
-                "category": "business"
-            }],
-            "branch": "East"
-        }, {
-            "name": "Frank",
-            "category": [{
-                "category": "management"
-            }],
-            "branch": "East"
-        }, {
-            "name": "Joe",
-            "category": [{
-                "category": "business"
-            }],
-            "branch": "East"
-        }, {
-            "name": "Ralph",
-            "category": [{
-                "category": "management"
-            }, {
-                "category": "business"
-            }],
-            "branch": "East"
-        }, {
-            "name": "Gina",
-            "category": [{
-                "category": "business"
-            }],
-            "branch": "East"
-        }, {
-            "name": "Sam",
-            "category": [{
-                "category": "management"
-            }, {
-                "category": "engineering"
-            }],
-            "branch": "East"
-        }, {
-            "name": "Britney",
-            "category": [{
-                "category": "business"
-            }],
-            "branch": "West"
-        }];
-
+    function getPagination() {
+        console.log("Items : " + $scope.items);
         // create empty search model (object) to trigger $watch on update
         $scope.search = {};
 
@@ -380,6 +199,17 @@ angular.module('myApp').controller('UserController',
             $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
             $scope.currentPage = 1;
         }, true);
+    }
+
+    function getSocialShareModel() {
+        console.log("$location.absUrl() : " + $location.absUrl());
+        $scope.myModel = {
+            Url: 'http://jasonwatmore.com/post/2014/08/01/AngularJS-directives-for-social-sharing-buttons-Facebook-Like-GooglePlus-Twitter-and-Pinterest.aspx',
+            //Url: $location.absUrl(),
+            Name: self.article.title,
+            ImageUrl: self.article.coverImagePath
+        };
+    }
 
 
 

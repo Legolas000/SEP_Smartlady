@@ -78,7 +78,4 @@ public class SmartLadyConfiguration extends WebMvcConfigurerAdapter{
 		return new FeaturedArticleDAOImpl(getDataSource());
 	}
 
-
-
-
 }

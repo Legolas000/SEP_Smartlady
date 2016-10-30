@@ -108,12 +108,10 @@ public class CategoryDAOImpl implements CategoryDAO {
 
 				Category lCategory = new Category();
 
-				//	lCategory.setID((rs.getInt("id")));
+				lCategory.setId((rs.getInt("id")));
 				lCategory.setCatName(rs.getString("catName"));
-				//	lCategory.setcatDescription(rs.getString("catDescription"));
-
-
-
+				lCategory.setCatDescription(rs.getString("catDescription"));
+				lCategory.setNoOfHits(rs.getInt("noOfHits"));
 				return lCategory;
 			}
 		});
