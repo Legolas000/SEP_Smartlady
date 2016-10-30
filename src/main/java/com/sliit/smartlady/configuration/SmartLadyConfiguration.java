@@ -78,14 +78,7 @@ public class SmartLadyConfiguration extends WebMvcConfigurerAdapter{
 		return new FeaturedArticleDAOImpl(getDataSource());
 	}
 
-	@Bean(name = "multipartResolver")
-	public MultipartResolver getMultipartResolver() {
-		CommonsMultipartResolver resover = new CommonsMultipartResolver();
-		// 1MB
-		resover.setMaxUploadSize(1 * 1024 * 1024);
 
-		return resover;
-	}
 
 
 }
