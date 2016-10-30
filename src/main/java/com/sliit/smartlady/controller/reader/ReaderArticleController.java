@@ -24,9 +24,9 @@ public class ReaderArticleController {
 	FeaturedArticleDAO featuredArticleDAO;*/
 	
 	//----------------------------Get All Articles----------------------------------
-	@RequestMapping(value = "/readarticles/{writerId}", method = RequestMethod.GET)
-	public ResponseEntity<List<Article>> listAllArticles(@PathVariable("writerId") int writerId ){
-		List<Article> articles = articleDAO.getAllArticles(writerId);
+	@RequestMapping(value = "/readarticles/", method = RequestMethod.GET)
+	public ResponseEntity<List<Article>> listAllArticles(){
+		List<Article> articles = articleDAO.getAllArticles();
 
 		 if(articles.isEmpty()){
 	            return new ResponseEntity<List<Article>>(HttpStatus.NO_CONTENT);
@@ -53,7 +53,6 @@ public class ReaderArticleController {
 
         }
         return null;
-
 	}
 
 	//---------------------------- Get All Articles By Date ----------------------------------
