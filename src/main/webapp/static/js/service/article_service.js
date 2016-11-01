@@ -1,17 +1,19 @@
 'use strict';
 
-angular.module('myApp').factory('ArticleService', ['$http', '$q', '$window', function($http, $q,$window){
+angular.module('myApp').factory('ArticleService', ['$http', '$q','$rootScope', '$window', function($http, $q,$rootScope,$window){
 
     var REST_SERVICE_URI = 'http://localhost:8080';
+
+    var writerId = $rootScope.user.id;
 
     var deferred;
 
     var factory = {
         fetchAllCategories:fetchAllCategories,
         fetchAllArticles: fetchAllArticles,
-        /*fetchArticleById: fetchArticleById,*/
         updateStatus: updateStatus,
-        articleFormSubmit: articleFormSubmit
+        articleFormSubmit: articleFormSubmit,
+        fetchFilterArticles : fetchFilterArticles
     };
 
     return factory;
@@ -47,15 +49,32 @@ angular.module('myApp').factory('ArticleService', ['$http', '$q', '$window', fun
         return deferred.promise;
     }
 
-    function fetchAllArticles() {
+    function fetchAllArticles(){
         deferred = $q.defer();
-        $http.get(REST_SERVICE_URI)
+        $http.get(REST_SERVICE_URI+'/getAllArticles/'+writerId)
             .then(
                 function (response) {
                     deferred.resolve(response.data);
                 },
                 function(errResponse){
-                    console.error('Error while fetching Articles');
+                    console.error('Error while fetching All Articles');
+                    deferred.reject(errResponse);
+                }
+            );
+        return deferred.promise;
+    }
+
+
+    function fetchFilterArticles(status) {
+        deferred = $q.defer();
+        $http.get(REST_SERVICE_URI+'/filterArticles/'+writerId+'/'+status)
+            .then(
+                function (response) {
+                    console.log('new bbbbbb  '+response.data);
+                    deferred.resolve(response.data);
+                },
+                function(errResponse){
+                    console.error('Error while fetching Filter Articles');
                     deferred.reject(errResponse);
                 }
             );

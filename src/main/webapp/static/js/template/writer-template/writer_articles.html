@@ -1,0 +1,101 @@
+<div class="col-sm-12"  ng-controller="ArticleController as articleCtrl">
+    <!-- Navigation -->
+
+
+
+    <!--<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">-->
+    <div class="container" ng-init="fetchAllArticles()">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#">Write Article</a>
+                </li>
+                <li class="active">
+                    <a href="#">My Articles</a>
+                </li>
+                <li>
+                    <a href="#">Summery</a>
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h3>Welcome {{writerName}}</h3>
+
+
+        <form>
+            <div class="row">
+                <div class="col-sm-2"></div>
+
+                <div class="col-sm-8">
+                    <input type="text" name="searchBox" class="form-control"  id="searchBox" placeholder="Search Article"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-2"></div>
+
+                <div class="col-sm-2">
+                    <input type="radio" name="search" ng-model="searchRadioBtn" ng-change='fetchAllArticles()' value="all" checked="checked">All
+                </div>
+                <div class="col-sm-2">
+                    <input type="radio" name="search" ng-model="searchRadioBtn" ng-change='fetchFilterAllArticles(0)' value="approved">Approved
+                </div>
+                <div class="col-sm-2">
+                    <input type="radio" name="search" ng-model="searchRadioBtn" ng-change='fetchFilterAllArticles(1)' value="pending">Pending
+                </div>
+                <div class="col-sm-2">
+                    <input type="radio" name="search" ng-model="searchRadioBtn" ng-change='fetchFilterAllArticles(2)' value="rejected">Rejected
+                </div>
+            </div>
+        </form>
+
+        <div class="row" ng-repeat="article in articles" ng-if="$index % 3 == 0">
+
+            <div class="col-sm-4" ng-show="size-1 >= $index">
+                <div>
+                    <img src="{{articles[$index].coverImagePath}}" width="200" height="200"><br>
+                    <a ng-href="{{articles[$index].title}}"><span style="font-size:1.5em;">{{articles[$index].title}}</span></a><br>
+                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>{{articles[$index].totalLikes}} Likes<br>
+                    <i class="fa fa-eye" aria-hidden="true"></i>{{articles[$index].totalViews}} Views<br><br>
+                </div>
+            </div>
+            <div class="col-sm-4" ng-show="size-1 >= $index+1">
+                <div>
+                    <img src="{{articles[$index+1].coverImagePath}}" width="200" height="200"><br>
+                    <a ng-href="{{articles[$index+1].title}}"><span style="font-size:1.5em;">{{articles[$index+1].title}}</span></a><br>
+                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>{{articles[$index+1].totalLikes}} Likes<br>
+                    <i class="fa fa-eye" aria-hidden="true"></i>{{articles[$index+1].totalViews}} Views<br><br>
+                </div>
+            </div>
+            <div class="col-sm-4" ng-show="size-1 >= $index+2">
+                <div>
+                    <img src="{{articles[$index+2].coverImagePath}}" width="200" height="200"><br>
+                    <a ng-href="{{articles[$index+2].title}}"><span style="font-size:1.5em;">{{articles[$index+2].title}}</span></a><br>
+                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>{{articles[$index+2].totalLikes}} Likes<br>
+                    <i class="fa fa-eye" aria-hidden="true"></i>{{articles[$index+2].totalViews}} Views<br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+

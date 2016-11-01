@@ -7,6 +7,10 @@ import java.util.List;
 public interface ArticleDAO {
 
 	public List<Article> getAllArticles(); //Get all unapproved articles
+
+	public List<Article> getArticlesByWriterId(int writerId);
+
+	public List<Article> getFilterArticles(int writerId,int status);
 	
 	public Article findByID(int artID);
 	
