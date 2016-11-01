@@ -452,7 +452,10 @@
                                 <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
                                 <li><i class="fa fa-eye"></i>872</li>
                             </ul>
-                            <star-rating ng-controller="RatingCtrl" ng-model="user1" ></star-rating><br/>
+
+                            <div>
+                                <average-star-rating ng-model="articleByDate.overallRating" max="5" ><average-star-rating>
+                            </div>
                            <!-- <div ng-bind-html="articleByDate.description"></div>-->
                             <!--<p>{{ articleByDate.description | limitTo: 100 }}</p>-->
                             <br/><br/>
@@ -485,7 +488,7 @@
     </div>
     <!-- End block content -->
 
-    <div ng-controller="RatingCtrl" class="container">
+    <!--<div  class="container">
         <h1>Angular Star Rating Directive</h1>
         Average Rating: {{ averageRating }}
         <div class="average">
@@ -498,7 +501,7 @@
         <div><strong>Rating 1:</strong> {{user1.rating}}</div>
         <div><strong>Rating 2:</strong> {{user2.rating}}</div>
         <div><strong>Rating 2:</strong> {{user3.rating}}</div>
-    </div>
+    </div>-->
 
 </div>
 

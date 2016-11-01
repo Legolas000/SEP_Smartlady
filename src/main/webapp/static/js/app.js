@@ -83,20 +83,16 @@ angular.module('myApp')
             $rootScope.facebookAppId = '756171607855514'; // set your facebook app id here
             $rootScope.$on("$routeChangeStart", function (event, next, current) {
                 if(next.$$route.authenticated){
-                    console.log("next.$$route.authenticated");
                     $rootScope.currentUserSignedIn = true;
                     if(!LoginService.getAuthStatus()){
-                        console.log("$location.path('/')");
                         $rootScope.currentUserSignedIn = false;
                         $location.path('/');
                     }
                 }
 
                 if(next.$$route.originalPath == '/'){
-                    console.log("next.$$route.originalPath == '/'");
                     $rootScope.currentUserSignedIn = false;
                     if(LoginService.getAuthStatus()){
-                        console.log("$location.path(current.$$route.originalPath)");
                         $rootScope.currentUserSignedIn = true;
 
                         $location.path(current.$$route.originalPath);

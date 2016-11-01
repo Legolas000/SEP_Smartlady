@@ -29,9 +29,24 @@
 				</ul>
 			</div>
 
+			<!-- Rate & Like area box -->
+			<div class="contact-form-box">
+
+				<div class="title-section">
+					<h1><span>Like & Rate</span></h1>
+				</div>
+				<div class="tab-content">
+					<a href="/"><i class="fa fa-thumbs-up fa-3x"></i></a> Like this article.
+					<span class="pull-right"><a href="" ng-click="doRating(userCtrl.article.id)"><star-rating ng-model="user1"></star-rating></a> <br/>
+						{{user1.rating}} stars for this article.</span><br>
+				</div>
+			</div>
+			<br/><br/>
 			<div class="share-post-box">
+				<div class="title-section">
+					<h1><span>Share Post</span></h1>
+				</div>
 				<ul class="share-box">
-					<li><span>Share Post</span></li>
 					<li fb-like="myModel.Url"></li>
 					<li tweet="myModel.Name" tweet-url="myModel.Url" ></li>
                     <li google-plus="myModel.Url"></li>
@@ -146,63 +161,11 @@
 				</div>
 			</div>
 
-            <!-- comment area box -->
-            <div class="comment-area-box">
-                <div class="title-section">
-                    <h1><span>5 Comments</span></h1>
-                </div>
-                <ul class="comment-tree">
-                    <li>
-                        <div class="comment-box">
-                            <img alt="" src="/static/upload/users/avatar6.jpg">
-                            <div class="comment-content">
-                                <h4>John Doe <a href="#"><i class="fa fa-comment-o"></i>Reply</a></h4>
-                                <span><i class="fa fa-clock-o"></i>27 may 2013 at 8:57 pm</span>
-                                <p>Suspendisse mauris. Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula. Integer adipiscing risus a sem. Nullam. </p>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="comment-box">
-                            <img alt="" src="/static/upload/users/avatar1.jpg">
-                            <div class="comment-content">
-                                <h4>John Doe <a href="#"><i class="fa fa-comment-o"></i>Reply</a></h4>
-                                <span><i class="fa fa-clock-o"></i>27 may 2013 at 8:57 pm</span>
-                                <p>Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula. Integer adipiscing risus a sem. Nullam quis massa sit amet nibh viverra malesuada. Nunc sem lacus, accumsan quis, faucibus non, congue vel, arcu. Ut scelerisque hendrerit tellus. Integer sagittis. </p>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="comment-box">
-                            <img alt="" src="/static/upload/users/avatar4.jpg">
-                            <div class="comment-content">
-                                <h4>John Doe <a href="#"><i class="fa fa-comment-o"></i>Reply</a></h4>
-                                <span><i class="fa fa-clock-o"></i>27 may 2013 at 8:57 pm</span>
-                                <p>Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula. Integer adipiscing risus a sem. Nullam quis massa sit amet nibh viverra malesuada. Nunc sem lacus, accumsan quis, faucibus non, congue vel, arcu. Ut scelerisque hendrerit tellus. Integer sagittis. </p>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="comment-box">
-                            <img alt="" src="/static/upload/users/avatar5.jpg">
-                            <div class="comment-content">
-                                <h4>John Doe <a href="#"><i class="fa fa-comment-o"></i>Reply</a></h4>
-                                <span><i class="fa fa-clock-o"></i>27 may 2013 at 8:57 pm</span>
-                                <p>Nullam quis massa sit amet nibh viverra malesuada. Nunc sem lacus, accumsan quis, faucibus non, congue vel. </p>
-                            </div>
-                        </div>
-                    </li>
-
-                </ul>
-            </div>
-            <!-- End comment area box -->
-
+			<br/>
 			<!-- contact form box -->
 			<div class="contact-form-box">
                 <div class="title-section">
-                    <h1><span>Leave a Comment</span> <span class="email-not-published">Your email address will not be published.</span></h1>
+                    <h1><span>Leave a Comment</span></h1>
                 </div>
 				<form id="comment-form">
 					<!--<div class="row">
@@ -227,6 +190,59 @@
 				</form>
 			</div>
 			<!-- End contact form box -->
+			<br/>
+			<!-- comment area box -->
+			<div class="comment-area-box">
+				<div class="title-section">
+					<h1><span>5 Comments</span></h1>
+				</div>
+				<ul class="comment-tree">
+					<li>
+						<div class="comment-box">
+							<img alt="" src="/static/upload/users/avatar6.jpg">
+							<div class="comment-content">
+								<h4>John Doe <a href="#"><i class="fa fa-comment-o"></i>Reply</a></h4>
+								<span><i class="fa fa-clock-o"></i>27 may 2013 at 8:57 pm</span>
+								<p>Suspendisse mauris. Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula. Integer adipiscing risus a sem. Nullam. </p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="comment-box">
+							<img alt="" src="/static/upload/users/avatar1.jpg">
+							<div class="comment-content">
+								<h4>John Doe <a href="#"><i class="fa fa-comment-o"></i>Reply</a></h4>
+								<span><i class="fa fa-clock-o"></i>27 may 2013 at 8:57 pm</span>
+								<p>Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula. Integer adipiscing risus a sem. Nullam quis massa sit amet nibh viverra malesuada. Nunc sem lacus, accumsan quis, faucibus non, congue vel, arcu. Ut scelerisque hendrerit tellus. Integer sagittis. </p>
+							</div>
+						</div>
+					</li>
+
+					<li>
+						<div class="comment-box">
+							<img alt="" src="/static/upload/users/avatar4.jpg">
+							<div class="comment-content">
+								<h4>John Doe <a href="#"><i class="fa fa-comment-o"></i>Reply</a></h4>
+								<span><i class="fa fa-clock-o"></i>27 may 2013 at 8:57 pm</span>
+								<p>Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula. Integer adipiscing risus a sem. Nullam quis massa sit amet nibh viverra malesuada. Nunc sem lacus, accumsan quis, faucibus non, congue vel, arcu. Ut scelerisque hendrerit tellus. Integer sagittis. </p>
+							</div>
+						</div>
+					</li>
+
+					<li>
+						<div class="comment-box">
+							<img alt="" src="/static/upload/users/avatar5.jpg">
+							<div class="comment-content">
+								<h4>John Doe <a href="#"><i class="fa fa-comment-o"></i>Reply</a></h4>
+								<span><i class="fa fa-clock-o"></i>27 may 2013 at 8:57 pm</span>
+								<p>Nullam quis massa sit amet nibh viverra malesuada. Nunc sem lacus, accumsan quis, faucibus non, congue vel. </p>
+							</div>
+						</div>
+					</li>
+
+				</ul>
+			</div>
+			<!-- End comment area box -->
 
 		</div>
 		<!-- End single-post box -->

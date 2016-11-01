@@ -26,7 +26,6 @@ angular.module('myApp').controller('RegisterController',
                     RegisterService.doRegister(userData)
                         .then(
                             function (data) {
-                                console.log("MSG : "+ data);
                                 $location.path('/');
                             },
                             function (errResponse) {

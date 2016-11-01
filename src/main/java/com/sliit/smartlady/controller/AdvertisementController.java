@@ -26,9 +26,7 @@ public class AdvertisementController {
 	//----------------------------Get All Advertise----------------------------------
 	@RequestMapping(value = "/advertisements/", method = RequestMethod.GET)
 	public ResponseEntity<List<Advertisement>> listAllArticles(){
-		System.out.println("GET method is calling in java");
 		List<Advertisement> advertise = advDAO.getAllAdvertisements();
-		System.out.println("data is : " + advertise);
 		 if(advertise.isEmpty()){
 	            return new ResponseEntity<List<Advertisement>>(HttpStatus.NO_CONTENT);
 	        }
@@ -39,8 +37,7 @@ public class AdvertisementController {
 	//--------------------Update a status of an article------------------------------
 	@RequestMapping(value = "/advertisements/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Advertisement> updateStatus(@PathVariable("id") int id) {
-        System.out.println("Updating advertisement " + id);
-         
+
         Advertisement currentAdvertisement = advDAO.findByID(id);
          
         if (currentAdvertisement==null) {
@@ -55,17 +52,13 @@ public class AdvertisementController {
     //--------------------Create New Advertise----------------------------------
 	@RequestMapping(value = "/assignadvertise/advertise/", method = RequestMethod.POST)
 	public ResponseEntity<String> createAdvertise(@RequestBody Advertisement advertisement) {
-		System.out.println("Creating advertisement:- ");
-		System.out.println("asingningh values"+advertisement.getDescription());
 		advDAO.SaveOrUpdate(advertisement);
-		System.out.println("success fully created");
 		String mesg = "test creating";
 		return new ResponseEntity<String>(mesg, HttpStatus.OK);
 	}
 
     @RequestMapping(value = "/upload", method = RequestMethod.GET)
     public String crunchifyDisplayForm() {
-        System.out.println("frst function calling");
 
         return "uploadfile";
     }
@@ -107,7 +100,6 @@ public class AdvertisementController {
 	@ResponseBody
 	public Object saveUserDataAndFile(@RequestParam(value = "file") MultipartFile file, HttpServletRequest request) {
 
-		System.out.println("Inside File upload" );
 		ObjectMapper mapper = new ObjectMapper();
 
 		String rootDirectory = "F:\\testUpload\\";

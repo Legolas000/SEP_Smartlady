@@ -26,7 +26,7 @@
 	<%--writer page css--%>
 
 	<%--<link href="/static/css/writer-css/bootstrap.min.css" rel="stylesheet">--%>
-	<link href="/static/css/writer-css/logo-nav.css" rel="stylesheet">
+	<%--<link href="/static/css/writer-css/logo-nav.css" rel="stylesheet">--%>
 	<link href="/static/css/writer-css/sweetAlert/sweetalert.css" rel="stylesheet">
 
 	<%--End writer css--%>
@@ -39,32 +39,32 @@
 
 
 	<style type="text/css">
-	body.boxed {
-		background: url('/static/images/pattern.png');
-	}
+		body.boxed {
+			background: url('/static/images/pattern.png');
+		}
 
-	@font-face {
-		font-family: 'FontAwesome';
-		src: url('/static/css/magazine-css/fonts/fontawesome-webfontd41d.eot');
-		src: url('/static/css/magazine-css/fonts/fontawesome-webfontd41d.eot') format('embedded-opentype'),
-		url('/static/css/magazine-css/fonts/fontawesome-webfontba72.woff') format('woff'),
-		url('/static/css/magazine-css/fonts/fontawesome-webfontba72.ttf') format('truetype'),
-		url('/static/css/magazine-css/fonts/fontawesome-webfontba72.svg') format('svg');
-		font-weight: normal;
-		font-style: normal
-	}
+		@font-face {
+			font-family: 'FontAwesome';
+			src: url('/static/css/magazine-css/fonts/fontawesome-webfontd41d.eot');
+			src: url('/static/css/magazine-css/fonts/fontawesome-webfontd41d.eot') format('embedded-opentype'),
+			url('/static/css/magazine-css/fonts/fontawesome-webfontba72.woff') format('woff'),
+			url('/static/css/magazine-css/fonts/fontawesome-webfontba72.ttf') format('truetype'),
+			url('/static/css/magazine-css/fonts/fontawesome-webfontba72.svg') format('svg');
+			font-weight: normal;
+			font-style: normal
+		}
 
-	.bx-wrapper .bx-loading {
-		min-height: 50px;
-		background: url(/static/images/bx_loader.gif) center center no-repeat #fff;
-		height: 100%;
-		width: 100%;
-		position: absolute;
-		top: 0;
-		left: 0;
-		z-index: 2000;
-	}
-</style>
+		.bx-wrapper .bx-loading {
+			min-height: 50px;
+			background: url(/static/images/bx_loader.gif) center center no-repeat #fff;
+			height: 100%;
+			width: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 2000;
+		}
+	</style>
 
 
 </head>
@@ -249,147 +249,8 @@
 	</header>
 	<!-- End Header -->
 
-	<!-- heading-news-section2 -->
-	<%--<section  ng-show="location.path() === '/home'" class="heading-news2">
 
-		<div class="container">
-
-			<div class="ticker-news-box">
-				<span class="breaking-news">breaking news</span>
-				<ul id="js-news1">
-					<li class="news-item"><span class="time-news">11:36 pm</span>  <a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</a> Donec odio. Quisque volutpat mattis eros... </li>
-					<li class="news-item"><span class="time-news">12:40 pm</span>  <a href="#">Dëshmitarja Abrashi: E kam parë Oliverin në turmë,</a> ndërsa neve na shpëtoi ?çika Mille? </li>
-					<li class="news-item"><span class="time-news">11:36 pm</span>  <a href="#">Franca do të bashkëpunojë me Kosovën në fushën e shëndetësisë. </a></li>
-					<li class="news-item"><span class="time-news">01:00 am</span>  <a href="#">DioGuardi, kështu e mbrojti Kosovën në Washington, </a> para serbit Vejvoda </li>
-				</ul>
-			</div>
-
-			<div  class="iso-call heading-news-box">
-				<div class="image-slider snd-size">
-					<span class="top-stories">TOP STORIES</span>
-					&lt;%&ndash;<ul class="bxslider">
-						<li ng-repeat="fArticle in userCtrl.articlesToAdd | limitTo:1">&ndash;%&gt;
-							<div class="news-post image-post"  &lt;%&ndash;ng-repeat="fArticle in userCtrl.articlesToAdd | limitTo:1"&ndash;%&gt;>
-								<img src="{{userCtrl.articlesToAdd[0].coverImagePath}}" alt="">
-								<div class="hover-box">
-									<div class="inner-hover">
-										<a class="category-post sport" href="sport.html">{{userCtrl.articlesToAdd[0].categoryName}}</a>
-										<h2><a href="single-post.html">{{userCtrl.articlesToAdd[0].title}}</a></h2>
-										<ul class="post-tags">
-											<li><i class="fa fa-clock-o"></i>{{userCtrl.articlesToAdd[0].publishedDate}}</li>
-											<li><i class="fa fa-user"></i>by <a href="#">{{userCtrl.articlesToAdd[0].writerName}}</a></li>
-											<li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
-											<li><i class="fa fa-eye"></i>872</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						&lt;%&ndash;</li>
-						&lt;%&ndash;<li>
-							<div class="news-post image-post">
-								<img src="/static/upload/news-posts/h2.jpg" alt="">
-								<div class="hover-box">
-									<div class="inner-hover">
-										<a class="category-post world" href="world.html">Business</a>
-										<h2><a href="single-post.html">Franca do të bashkëpunojë me Kosovën në ekonomi. </a></h2>
-										<ul class="post-tags">
-											<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-											<li><i class="fa fa-user"></i>by <a href="#">John Doe</a></li>
-											<li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
-											<li><i class="fa fa-eye"></i>872</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="news-post image-post">
-								<img src="/static/upload/news-posts/h8.jpg" alt="">
-								<div class="hover-box">
-									<div class="inner-hover">
-										<a class="category-post travel" href="travel.html">travel</a>
-										<h2><a href="single-post.html">Porti i Durresit më i vizituari në ballkan kete vit. </a></h2>
-										<ul class="post-tags">
-											<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-											<li><i class="fa fa-user"></i>by <a href="#">John Doe</a></li>
-											<li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
-											<li><i class="fa fa-eye"></i>872</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</li>&ndash;%&gt;
-					</ul>&ndash;%&gt;
-				</div>
-
-				<div class="news-post image-post default-size">
-					<img src="{{userCtrl.articlesToAdd[1].coverImagePath}}" alt="">
-					<div class="hover-box">
-						<div class="inner-hover">
-							<a class="category-post travel" href="travel.html">{{userCtrl.articlesToAdd[1].categoryName}}</a>
-							<h2><a href="single-post.html">{{userCtrl.articlesToAdd[1].title}}</a></h2>
-							<ul class="post-tags">
-								<li><i class="fa fa-clock-o"></i><span>{{userCtrl.articlesToAdd[1].publishedDate}}</span></li>
-								<li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
-							</ul>
-							<p>{{userCtrl.articlesToAdd[1].writerName}}</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="news-post image-post default-size">
-					<img src="{{userCtrl.articlesToAdd[2].coverImagePath}}" alt="">
-					<div class="hover-box">
-						<div class="inner-hover">
-							<a class="category-post travel" href="travel.html">{{userCtrl.articlesToAdd[2].categoryName}}</a>
-							<h2><a href="single-post.html">{{userCtrl.articlesToAdd[1].title}}</a></h2>
-							<ul class="post-tags">
-								<li><i class="fa fa-clock-o"></i><span>{{userCtrl.articlesToAdd[2].publishedDate}}</span></li>
-								<li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
-							</ul>
-							<p>{{userCtrl.articlesToAdd[2].writerName}}</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="news-post image-post default-size">
-					<img src="{{userCtrl.articlesToAdd[3].coverImagePath}}" alt="">
-					<div class="hover-box">
-						<div class="inner-hover">
-							<a class="category-post travel" href="travel.html">{{userCtrl.articlesToAdd[3].categoryName}}</a>
-							<h2><a href="single-post.html">{{userCtrl.articlesToAdd[3].title}}</a></h2>
-							<ul class="post-tags">
-								<li><i class="fa fa-clock-o"></i><span>{{userCtrl.articlesToAdd[3].publishedDate}}</span></li>
-								<li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
-							</ul>
-							<p>{{userCtrl.articlesToAdd[3].writerName}}</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="news-post image-post default-size">
-					<img src="{{userCtrl.articlesToAdd[4].coverImagePath}}" alt="">
-					<div class="hover-box">
-						<div class="inner-hover">
-							<a class="category-post travel" href="travel.html">{{userCtrl.articlesToAdd[4].categoryName}}</a>
-							<h2><a href="single-post.html">{{userCtrl.articlesToAdd[4].title}}</a></h2>
-							<ul class="post-tags">
-								<li><i class="fa fa-clock-o"></i><span>{{userCtrl.articlesToAdd[4].publishedDate}}</span></li>
-								<li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
-							</ul>
-							<p>{{userCtrl.articlesToAdd[4].writerName}}</p>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-
-	</section>
-	<!-- End heading-news-section -->
-	<br><br><br>--%>
-	<!-- heading-news4-section
-			================================================== -->
+	<!-- ================================================== -->
 	<section ng-show="location.path() === '/home'" class="heading-news4">
 		<div class="container">
 
@@ -406,28 +267,30 @@
 
 		<div class="heading-news-box">
 			<owl-carousel owl-options="owlOptions">
-			<div class="owl-wrapper">
-				<div class="owl-carousel" data-num="4">
+				<div class="owl-wrapper">
+					<div class="owl-carousel" data-num="4">
 
-					<div owl-carousel-item ng-repeat="articleNo in [0,1,2,3,4,5]" class="item">
-						<div class="news-post image-post4">
-							<div class="post-gallery">
-								<img src="{{userCtrl.articlesToAdd[articleNo].coverImagePath}}" alt="">
-								<a class="category-post {{userCtrl.articlesToAdd[articleNo].categoryName | lowercase}}" href="world.html">{{userCtrl.articlesToAdd[articleNo].categoryName}}</a>
-							</div>
-							<div class="post-content">
-								<h2><a href="single-post.html">{{userCtrl.articlesToAdd[articleNo].title}}</a></h2>
-								<ul class="post-tags">
-									<li><i class="fa fa-clock-o"></i>{{userCtrl.articlesToAdd[articleNo].publishedDate}}</li>
-									<li><i class="fa fa-user"></i>by <a href="#">{{userCtrl.articlesToAdd[articleNo].writerName}}</a></li>
-									<li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
-									<li><i class="fa fa-eye"></i>872</li>
-								</ul>
+						<div owl-carousel-item ng-repeat="articleNo in [0,1,2,3,4,5]" class="item">
+							<div class="news-post image-post4">
+								<div class="post-gallery">
+									<img src="{{userCtrl.articlesToAdd[articleNo].coverImagePath}}" alt="">
+									<a class="category-post {{userCtrl.articlesToAdd[articleNo].categoryName | lowercase}}" href="world.html">{{userCtrl.articlesToAdd[articleNo].categoryName}}</a>
+								</div>
+								<div class="post-content">
+									<h2><a href="single-post.html">{{userCtrl.articlesToAdd[articleNo].title}}</a></h2>
+									<ul class="post-tags">
+										<li><i class="fa fa-clock-o"></i>{{userCtrl.articlesToAdd[articleNo].publishedDate}}</li>
+										<li><i class="fa fa-user"></i>by <a href="#">{{userCtrl.articlesToAdd[articleNo].writerName}}</a></li>
+										<li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
+										<li><i class="fa fa-eye"></i>872</li>
+									</ul>
+
+								</div>
+
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 			</owl-carousel>
 		</div>
 
@@ -447,20 +310,22 @@
 				<div class="features-today-box owl-wrapper">
 					<div class="owl-carousel" data-num="4">
 
-							<div class="item news-post standard-post" owl-carousel-item ng-repeat="articleNo in [0,1,2,3,4,5,6,7]">
-								<div class="post-gallery">
-									<img src="{{userCtrl.articlesToAdd[articleNo].coverImagePath}}" alt="">
-									<a class="category-post {{userCtrl.articlesToAdd[articleNo].categoryName | lowercase}}" href="fashion.html">{{userCtrl.articlesToAdd[articleNo].categoryName}}</a>
-								</div>
-								<div class="post-content">
-									<h2><a href="single-post.html">{{userCtrl.articlesToAdd[articleNo].title}} </a></h2>
-									<ul class="post-tags">
-										<li><i class="fa fa-clock-o"></i>{{userCtrl.articlesToAdd[articleNo].publishedDate}}</li>
-										<li><i class="fa fa-user"></i>by <a href="#">{{userCtrl.articlesToAdd[articleNo].writerName}}</a></li>
-										<li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
-									</ul>
-								</div>
+						<div class="item news-post standard-post" owl-carousel-item ng-repeat="articleNo in [0,1,2,3,4,5,6,7]">
+							<div class="post-gallery">
+								<img src="{{userCtrl.articlesToAdd[articleNo].coverImagePath}}" alt="">
+								<a class="category-post {{userCtrl.articlesToAdd[articleNo].categoryName | lowercase}}" href="fashion.html">{{userCtrl.articlesToAdd[articleNo].categoryName}}</a>
 							</div>
+							<div class="post-content">
+								<h2><a href="single-post.html">{{userCtrl.articlesToAdd[articleNo].title}} </a></h2>
+								<ul class="post-tags">
+									<li><i class="fa fa-clock-o"></i>{{userCtrl.articlesToAdd[articleNo].publishedDate}}</li>
+									<li><i class="fa fa-user"></i>by <a href="#">{{userCtrl.articlesToAdd[articleNo].writerName}}</a></li>
+									<li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
+								</ul>
+
+							</div>
+
+						</div>
 
 					</div>
 				</div>
@@ -644,8 +509,7 @@
 						</ul><br>
 					</div>
 				</div>
-				<div data-ng-view></div>
-				<%--<div ng-view autoscroll="true"></div>--%>
+				<div ng-view autoscroll="true"></div>
 				<%--<ng-include src="'/static/js/template/reader-template/include/side-bar.html'"></ng-include>--%>
 				<div class="col-sm-4" ng-if="userRole === 1 || userRole === 0">
 
@@ -1016,6 +880,8 @@
 <script type="text/javascript" src="/static/js/service/register_service.js"></script>
 <script type="text/javascript" src="/static/js/service/login_service.js"></script>
 <script type="text/javascript" src="/static/js/service/article_service.js"></script>
+<script type="text/javascript" src="/static/js/controller/advertiser_controller.js"></script>
+<script type="text/javascript" src="/static/js/service/advertiser_service.js"></script>
 
 
 <script type="text/javascript" src="/static/js/magazine-js/jquery.min.js"></script>
@@ -1037,7 +903,6 @@
 
 <%--rich text editor js--%>
 <script type="text/javascript" src="/static/js/writer-js/tinymce-dist/tinymce.js"></script>
-<script type="text/javascript" src="/static/js/lib/angular-1.4.4.js"></script>
 <script type="text/javascript" src="/static/js/writer-js/angular-ui-tinymce/src/tinymce.js"></script>
 <%-- end rich text editor --%>
 

@@ -1,24 +1,25 @@
 'use strict';
 
 angular.module('myApp').factory('UserService',
-                        ['$http', '$q', function($http, $q){
+                        ['$http', '$q','$rootScope', function($http, $q, $rootScope){
 
             var REST_SERVICE_URI = 'http://localhost:8080/';
 
             var factory = {
                 fetchItemById: fetchItemById,
                 getFeturedArticleService: getFeturedArticleService,
-                getArticlesSortedByDate: getArticlesSortedByDate
+                getArticlesSortedByDate: getArticlesSortedByDate,
+                doRatingForArticle:doRatingForArticle,
+                fetchReadesDetails:fetchReadesDetails
             };
 
             return factory;
 
             function fetchItemById(category,id) {
                 var deferred = $q.defer();
-                $http.get(REST_SERVICE_URI+category+'/'+id)
+                $http.get(REST_SERVICE_URI+category+'/'+id+'/'+$rootScope.user.id)
                     .then(
                         function (response) {
-                            console.log('response to be edited', response.data);
                             deferred.resolve(response.data);
                         },
                         function(errResponse){
@@ -47,12 +48,10 @@ angular.module('myApp').factory('UserService',
             }*/
 
             function getFeturedArticleService() {
-                console.log("getFeturedArticleService called");
                 var deferred = $q.defer();
                 $http.get(REST_SERVICE_URI+"featuredarticle/")
                     .then(
                         function (response) {
-                            console.log('response to be edited featuredarticle from service', response.data);
                             deferred.resolve(JSON.stringify(response.data));
                         },
                         function(errResponse){
@@ -69,11 +68,48 @@ angular.module('myApp').factory('UserService',
                 $http.get(REST_SERVICE_URI+"allarticles/")
                     .then(
                         function (response) {
-                            console.log('response to be edited allarticles from service', response.data);
                             deferred.resolve(JSON.stringify(response.data));
                         },
                         function(errResponse){
                             console.error('Error while fetching allarticles');
+                            deferred.reject(errResponse);
+                        }
+                    );
+                return deferred.promise;
+            }
+
+            function doRatingForArticle(articleId,rating,userID) {
+
+                var reades = {
+                    'readerID':userID,
+                    'articleID':articleId,
+                    'rate':rating
+                };
+                JSON.stringify(reades);
+
+                var deferred = $q.defer();
+                $http.post(REST_SERVICE_URI+"rating",reades)
+                    .then(
+                        function (response) {
+                            deferred.resolve(response.data);
+                        },
+                        function(errResponse){
+                            console.error('Error while fetching rating : '+ errResponse.statusText);
+                            deferred.reject(errResponse);
+                        }
+                    );
+                return deferred.promise;
+            }
+
+            function fetchReadesDetails(articleId,userID){
+                var deferred = $q.defer();
+                $http.get(REST_SERVICE_URI+"reades/"+articleId+"/"+userID)
+                    .then(
+                        function (response) {
+                            deferred.resolve(response.data);
+                        },
+                        function(errResponse){
+                            console.error('Error while fetching reades details.');
                             deferred.reject(errResponse);
                         }
                     );

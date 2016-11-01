@@ -31,35 +31,6 @@ angular.module('myApp').controller('UserController',
         totalViews:null
     };
 
-    if($routeParams.articleId != null){
-        getReaderArticle($routeParams.articleId);
-    }
-
-
-    self.records = [
-        {
-            "Name" : "Alfreds Futterkiste",
-            "Country" : "Germany"
-        },{
-            "Name" : "Berglunds snabbköp",
-            "Country" : "Sweden"
-        },{
-            "Name" : "Centro comercial Moctezuma",
-            "Country" : "Mexico"
-        },{
-            "Name" : "Ernst Handel",
-            "Country" : "Austria"
-        }
-    ];
-
-    if(LoginService.getAuthStatus()){
-        $rootScope.userRole = $cookies.getObject("userAuthObj").userrole;
-        console.log("If userRole : "+ $rootScope.userRole );
-    }else{
-        $rootScope.userRole = 0;
-        console.log("Else userRole : "+ $rootScope.userRole );
-    }
-
 
     self.articles = [];
 
@@ -72,6 +43,43 @@ angular.module('myApp').controller('UserController',
     $scope.items = [];
     getFeturedArticle();
     getArticlesSortedByDate();
+
+    if($routeParams.articleId != null){
+        getReaderArticle($routeParams.articleId);
+    }
+
+
+    $scope.user1 = {rating:5};
+    $scope.averageRating = 0;
+
+    $scope.isReadonly = true;
+    $scope.rateFunction = function(rating) {
+    };
+
+    $scope.doRating = function(articleId){
+        //alert("$scope.user1 : "+ $scope.user1.rating+" & articleId : "+articleId +" & userid : "+$rootScope.user.id);
+        UserService.doRatingForArticle(articleId, $scope.user1.rating,$rootScope.user.id)
+        .then(
+            function (data) {
+                getFeturedArticle();
+                getArticlesSortedByDate();
+            },
+            function (errResponse) {
+                console.error('Error while fetching Articles');
+            }
+        );
+
+
+    }
+
+    if(LoginService.getAuthStatus()){
+        $rootScope.userRole = $cookies.getObject("userAuthObj").userrole;
+    }else{
+        $rootScope.userRole = 0;
+    }
+
+
+
 
     //self.getReaderArticle = getReaderArticle;
 
@@ -89,15 +97,14 @@ angular.module('myApp').controller('UserController',
 
     function getReaderArticle(id){
 
-        console.log("ID is :>>> "+ id);
         UserService.fetchItemById('readarticles', id)
         .then(
             function (data) {
                 self.article = {};
                 self.article = data;
                 self.article.description = $sce.trustAsHtml(self.article.description );
-                console.log("getReaderArticle - self.article :> " + self.article.title);
                 getSocialShareModel();
+                getReadesDetails(id);
                 //$location.url('/readarticles');
 
             },
@@ -105,6 +112,21 @@ angular.module('myApp').controller('UserController',
                 console.error('Error while fetching Articles');
             }
         );
+    }
+
+    function getReadesDetails(id) {
+        UserService.fetchReadesDetails(id,$rootScope.user.id)
+            .then(
+                function (data) {
+                    $scope.reades = data;
+                    if($scope.reades.rate != 0){
+                        $scope.user1.rating = $scope.reades.rate;
+                    }
+                },
+                function (errResponse) {
+                    console.error('Error while fetching Articles');
+                }
+            );
     }
 
     /*function getReaderArticle(id) {
@@ -145,6 +167,7 @@ angular.module('myApp').controller('UserController',
     }
 
     function getArticlesSortedByDate() {
+
         UserService.getArticlesSortedByDate()
             .then(
                 function (data) {
@@ -166,7 +189,7 @@ angular.module('myApp').controller('UserController',
                         });
                     });
 
-                    $scope.items = self.wholeArticles;
+                    $scope.items = JSON.parse(data);
                     getPagination();
 
                 },
@@ -177,7 +200,6 @@ angular.module('myApp').controller('UserController',
     }
 
     function getPagination() {
-        console.log("Items : " + $scope.items);
         // create empty search model (object) to trigger $watch on update
         $scope.search = {};
 
@@ -202,7 +224,6 @@ angular.module('myApp').controller('UserController',
     }
 
     function getSocialShareModel() {
-        console.log("$location.absUrl() : " + $location.absUrl());
         $scope.myModel = {
             Url: 'http://jasonwatmore.com/post/2014/08/01/AngularJS-directives-for-social-sharing-buttons-Facebook-Like-GooglePlus-Twitter-and-Pinterest.aspx',
             //Url: $location.absUrl(),

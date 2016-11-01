@@ -26,7 +26,6 @@ public class GuestRegisterController {
         String message = "";
         if(!userDAO.isUserExist(user)){
             userDAO.saveUserRegistration(user);
-            System.out.println("1.isUserExist false");
         }
         else {
             return new ResponseEntity<String>(HttpStatus.NO_CONTENT);

@@ -1,6 +1,7 @@
 package com.sliit.smartlady.service;
 
 import com.sliit.smartlady.model.Article;
+import com.sliit.smartlady.model.Reades;
 import com.sliit.smartlady.model.User;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -152,7 +153,6 @@ public class ArticleDAOImpl implements ArticleDAO {
 
 	@Override
 	public Article findByID(int articleID) {
-		System.out.println("findByID.articleID : " + articleID);
 		String sql = "SELECT * FROM articles WHERE id = " + articleID;
 
 		 return jdbcTemplate.query(sql, new ResultSetExtractor<Article>() {
@@ -241,9 +241,109 @@ public class ArticleDAOImpl implements ArticleDAO {
 		article = this.getArticleWithWriter(article);
 		article = this.getArticleWithCategory(article);
 
-		System.out.println("1.1 Writer Name : " + article.getUserAsWriter().getFullname());
-		System.out.println("1.2 Categoty Name : " + article.getCategory().getCatName());
 
 		return  article;
+	}
+
+	@Override
+	public Reades getReaderByReaderIDAndArticleID(int articleID, int readerID){
+
+
+		String sql = "SELECT * FROM reades WHERE readerID = " + readerID + " AND articleID = "+articleID;
+
+		return jdbcTemplate.query(sql, new ResultSetExtractor<Reades>() {
+
+			@Override
+			public Reades extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				if (rs.next()) {
+					Reades reades = new Reades();
+
+					reades.setReaderID(rs.getInt("readerID"));
+					reades.setArticleID(rs.getInt("articleID"));
+					reades.setLike(rs.getBoolean("isLike"));
+					reades.setViewed(rs.getBoolean("isViewed"));
+					reades.setRate(rs.getFloat("rate"));
+
+					return reades;
+				}
+				return null;
+			}
+		});
+	}
+
+
+	/*Created by Fazeel*/
+	@Override
+	public void saveReader(int articleID, int readerID) {
+
+		if(getReaderByReaderIDAndArticleID(articleID,readerID) == null){
+			String sql = "INSERT INTO reades(readerID, articleID, isLike, isViewed, rate) " +
+					"VALUES (?,?,?,?,?)";
+			jdbcTemplate.update(sql, readerID, articleID,0,1,0);
+		}
+
+	}
+
+	@Override
+	public void updateReaderRating(Reades reades) {
+		if(getReaderByReaderIDAndArticleID(reades.getArticleID(),reades.getReaderID()) != null){
+			String sql = "UPDATE reades SET rate = ? "+
+					" WHERE articleID = ? AND readerID = ?";
+			jdbcTemplate.update(sql, reades.getRate(),reades.getArticleID(),reades.getReaderID());
+
+		}
+	}
+
+	@Override
+	public void updateAverageReaderRating(Reades reades) {
+		if(getReaderByReaderIDAndArticleID(reades.getArticleID(),reades.getReaderID()) != null){
+			int totalRating = 0;
+			int totalUsers = 0;
+			double averageRating = 0.0;
+			totalRating = this.getTotalRatingForArticleByGroup(reades.getArticleID());
+			totalUsers = this.getTotalUsersForArticleByGroup(reades.getArticleID());
+			averageRating = totalRating*1.0/totalUsers;
+
+
+			String sql = "UPDATE articles SET overallRating = "+ averageRating +
+					" WHERE id = " + reades.getArticleID();
+			jdbcTemplate.update(sql);
+
+		}
+	}
+
+	private int getTotalRatingForArticleByGroup(int articleID){
+		String sql = "SELECT sum(rate) FROM reades WHERE  articleID = "+articleID +" GROUP BY  articleID";
+
+
+		return (int) jdbcTemplate.query(sql, new ResultSetExtractor() {
+
+			@Override
+			public Object extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				if (rs.next()) {
+					return rs.getInt(1);
+				}
+				return null;
+			}
+		});
+	}
+
+	private int getTotalUsersForArticleByGroup(int articleID){
+		String sql = "SELECT COUNT(articleID) FROM reades WHERE  articleID = "+articleID +" GROUP BY  articleID";
+
+
+		return (int) jdbcTemplate.query(sql, new ResultSetExtractor() {
+
+			@Override
+			public Object extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				if (rs.next()) {
+					return rs.getInt(1);
+				}
+				return null;
+			}
+		});
 	}
 }

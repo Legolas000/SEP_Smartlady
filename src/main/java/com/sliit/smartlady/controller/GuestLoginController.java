@@ -24,13 +24,11 @@ public class GuestLoginController {
     //---------------------------- Verify the login authentication ----------------------------------
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<User> loginAuth(@RequestBody User user){
-        System.out.println("User's email : " + user.getEmail());
         List<User> users = userDAO.getAllUsers();
         for(User u : users){
             System.out.println("Full name : "+u.getFullname());
         }
         User userDto = userDAO.findByEmailPassword(user.getEmail(),user.getPassword());
-        System.out.println("getFullname : "+userDto.getFullname());
         if(userDto == null){
             return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
         }

@@ -89,8 +89,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 		                category.setCatDescription(rs.getString("catDescription"));
 						category.setNoOfHits(rs.getInt("noOfHits"));
 		                
-		                System.out.println(category.getCatName());
-		                
+
 		                return category;
 		            }
 		            return null;

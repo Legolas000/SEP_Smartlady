@@ -55,7 +55,6 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User findByEmailPassword(String email, String password) {
-        System.out.println("findByID.email : " + email + "Password  "+ password);
         String sql1 = "SELECT * FROM user WHERE email = '" + email +"' AND password = '"+ password+"'" ;
 
         return jdbcTemplate.query(sql1, new ResultSetExtractor<User>() {
@@ -74,7 +73,6 @@ public class UserDAOImpl implements UserDAO {
                     userDto.setUserrole(rs.getInt("userrole"));
                     userDto.setAddress(rs.getString("address"));
 
-                    System.out.println("2 . userDto.getFullname : "+ userDto.getFullname());
                     return userDto;
                 }
                 return null;

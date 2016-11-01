@@ -38,18 +38,14 @@ angular.module('myApp').factory('LoginService',
         }
 
         function getAuthStatus() {
-            console.log("getAuthStatus called");
-
             var status = $cookies.get('auth');
             if(status){
                 $rootScope.userRole = $cookies.getObject("userAuthObj").userrole;
                 $rootScope.user = $cookies.getObject("userAuthObj");
-                console.log("$rootScope.userRole : " + $rootScope.userRole);
                 return true;
             }else{
                 $rootScope.userRole = 0;
                 $rootScope.user = null;
-                console.log("$rootScope.userRole : " + $rootScope.userRole);
                 return false;
             }
         }
