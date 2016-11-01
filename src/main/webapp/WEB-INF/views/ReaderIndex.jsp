@@ -1037,8 +1037,8 @@
 
 <%--rich text editor js--%>
 <script type="text/javascript" src="/static/js/writer-js/tinymce-dist/tinymce.js"></script>
-<script type="text/javascript" src="/static/js/writer-js/angular/angular.js"></script>
-<%--<script type="text/javascript" src="/static/js/writer-js/angular-ui-tinymce/src/tinymce.js"></script>--%>
+<script type="text/javascript" src="/static/js/lib/angular-1.4.4.js"></script>
+<script type="text/javascript" src="/static/js/writer-js/angular-ui-tinymce/src/tinymce.js"></script>
 <%-- end rich text editor --%>
 
 <%-- image picker writer --%>

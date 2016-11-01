@@ -68,7 +68,7 @@
             <div class="col-sm-4" ng-show="size-1 >= $index">
                 <div>
                     <img src="{{articles[$index].coverImagePath}}" width="200" height="200"><br>
-                    <a ng-href="{{articles[$index].title}}"><span style="font-size:1.5em;">{{articles[$index].title}}</span></a><br>
+                    <a ng-href="/#/readarticles/{{articles[$index].id}}"><span style="font-size:1.5em;">{{articles[$index].title}}</span></a><br>
                     <i class="fa fa-thumbs-up" aria-hidden="true"></i>{{articles[$index].totalLikes}} Likes<br>
                     <i class="fa fa-eye" aria-hidden="true"></i>{{articles[$index].totalViews}} Views<br><br>
                 </div>
@@ -76,7 +76,7 @@
             <div class="col-sm-4" ng-show="size-1 >= $index+1">
                 <div>
                     <img src="{{articles[$index+1].coverImagePath}}" width="200" height="200"><br>
-                    <a ng-href="{{articles[$index+1].title}}"><span style="font-size:1.5em;">{{articles[$index+1].title}}</span></a><br>
+                    <a ng-href="/#/readarticles/{{articles[$index].id}}"><span style="font-size:1.5em;">{{articles[$index+1].title}}</span></a><br>
                     <i class="fa fa-thumbs-up" aria-hidden="true"></i>{{articles[$index+1].totalLikes}} Likes<br>
                     <i class="fa fa-eye" aria-hidden="true"></i>{{articles[$index+1].totalViews}} Views<br><br>
                 </div>
@@ -84,7 +84,7 @@
             <div class="col-sm-4" ng-show="size-1 >= $index+2">
                 <div>
                     <img src="{{articles[$index+2].coverImagePath}}" width="200" height="200"><br>
-                    <a ng-href="{{articles[$index+2].title}}"><span style="font-size:1.5em;">{{articles[$index+2].title}}</span></a><br>
+                    <a ng-href="/#/readarticles/{{articles[$index].id}}"><span style="font-size:1.5em;">{{articles[$index+2].title}}</span></a><br>
                     <i class="fa fa-thumbs-up" aria-hidden="true"></i>{{articles[$index+2].totalLikes}} Likes<br>
                     <i class="fa fa-eye" aria-hidden="true"></i>{{articles[$index+2].totalViews}} Views<br><br>
                 </div>
