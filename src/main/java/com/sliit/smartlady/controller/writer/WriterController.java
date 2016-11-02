@@ -72,7 +72,6 @@ public class WriterController extends HttpServlet{
     //fetch filter articles
     @RequestMapping(value = "/filterArticles/{writerId}/{status}", method = RequestMethod.GET)
     public ResponseEntity<List<Article>>getFilterArticles(@PathVariable("writerId") int writerId, @PathVariable("status") int status){
-        System.out.println("filter articles called");
         List<Article> articles = articleDAO.getFilterArticles(writerId,status);
         if(articles.isEmpty()){
             return new ResponseEntity<List<Article>>(HttpStatus.NO_CONTENT);
@@ -80,6 +79,13 @@ public class WriterController extends HttpServlet{
         return new ResponseEntity<List<Article>>(articles, HttpStatus.OK);
     }
 
+    //delete an article
+    @RequestMapping(value = "/deleteArticle/{articleId}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> deleteArticle(@PathVariable("articleId") int articleId){
+        articleDAO.deleteArticle(articleId);
+        System.out.println("Article id "+articleId+" deleted success");
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
 
 
 

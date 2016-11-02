@@ -25,8 +25,8 @@
 
 	<%--writer page css--%>
 
-	<%--<link href="/static/css/writer-css/bootstrap.min.css" rel="stylesheet">--%>
-	<link href="/static/css/writer-css/logo-nav.css" rel="stylesheet">
+	<link href="/static/css/writer-css/bootstrap.min.css" rel="stylesheet">
+	<%--<link href="/static/css/writer-css/logo-nav.css" rel="stylesheet">--%>
 	<link href="/static/css/writer-css/sweetAlert/sweetalert.css" rel="stylesheet">
 
 	<%--End writer css--%>
@@ -64,6 +64,8 @@
 		left: 0;
 		z-index: 2000;
 	}
+
+
 </style>
 
 

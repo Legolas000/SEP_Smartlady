@@ -184,6 +184,12 @@ public class ArticleDAOImpl implements ArticleDAO {
 	}
 
 	@Override
+	public void deleteArticle(int articleId) {
+		String sql = "DELETE FROM articles WHERE id = ?";
+		jdbcTemplate.update(sql,articleId);
+	}
+
+	@Override
 	public List<Article> getSortedFeaturedArticle() {
 
 		List<Article> articleList = this.getAllArticles();

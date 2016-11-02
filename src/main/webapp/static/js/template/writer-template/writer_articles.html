@@ -41,7 +41,7 @@
                 <div class="col-sm-2"></div>
 
                 <div class="col-sm-8">
-                    <input type="text" name="searchBox" class="form-control"  id="searchBox" placeholder="Search Article"/>
+                    <input type="text" name="searchBox" class="form-control" ng-model="searchArticle" id="searchBox" placeholder="Search Article"/>
                 </div>
             </div>
 
@@ -63,7 +63,11 @@
             </div>
         </form>
 
-        <div class="row" ng-repeat="article in articles" ng-if="$index % 3 == 0">
+        <div ng-show="size == 0"><p>No Articles for you, Satrt write new Articles!!!</p></div>
+        <div class="row" ng-repeat="article in articles | filter:searchArticle" ng-if="$index % 3 == 0">
+
+            <!--  validation -->
+            <!--<div ng-if="articles length is 0 then show 404 page">-->
 
             <div class="col-sm-4" ng-show="size-1 >= $index">
                 <div>
@@ -71,22 +75,25 @@
                     <a ng-href="/#/readarticles/{{articles[$index].id}}"><span style="font-size:1.5em;">{{articles[$index].title}}</span></a><br>
                     <i class="fa fa-thumbs-up" aria-hidden="true"></i>{{articles[$index].totalLikes}} Likes<br>
                     <i class="fa fa-eye" aria-hidden="true"></i>{{articles[$index].totalViews}} Views<br><br>
+                    <button type="button" class="btn btn-danger" ng-click="deleteArticle(articles[$index].id)">Delete</button><br><br><br><br>
                 </div>
             </div>
             <div class="col-sm-4" ng-show="size-1 >= $index+1">
                 <div>
                     <img src="{{articles[$index+1].coverImagePath}}" width="200" height="200"><br>
-                    <a ng-href="/#/readarticles/{{articles[$index].id}}"><span style="font-size:1.5em;">{{articles[$index+1].title}}</span></a><br>
+                    <a ng-href="/#/readarticles/{{articles[$index+1].id}}"><span style="font-size:1.5em;">{{articles[$index+1].title}}</span></a><br>
                     <i class="fa fa-thumbs-up" aria-hidden="true"></i>{{articles[$index+1].totalLikes}} Likes<br>
                     <i class="fa fa-eye" aria-hidden="true"></i>{{articles[$index+1].totalViews}} Views<br><br>
+                    <button type="button" class="btn btn-danger" ng-click="deleteArticle(articles[$index+1].id)">Delete</button><br><br><br><br>
                 </div>
             </div>
             <div class="col-sm-4" ng-show="size-1 >= $index+2">
                 <div>
                     <img src="{{articles[$index+2].coverImagePath}}" width="200" height="200"><br>
-                    <a ng-href="/#/readarticles/{{articles[$index].id}}"><span style="font-size:1.5em;">{{articles[$index+2].title}}</span></a><br>
+                    <a ng-href="/#/readarticles/{{articles[$index+2].id}}"><span style="font-size:1.5em;">{{articles[$index+2].title}}</span></a><br>
                     <i class="fa fa-thumbs-up" aria-hidden="true"></i>{{articles[$index+2].totalLikes}} Likes<br>
                     <i class="fa fa-eye" aria-hidden="true"></i>{{articles[$index+2].totalViews}} Views<br><br>
+                    <button type="button" class="btn btn-danger" ng-click="deleteArticle(articles[$index+2].id)">Delete</button><br><br><br><br>
                 </div>
             </div>
         </div>

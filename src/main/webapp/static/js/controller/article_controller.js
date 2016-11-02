@@ -84,13 +84,34 @@ angular.module('myApp')
                 ArticleService.fetchFilterArticles(status)
                     .then(
                         function(data) {
-                            console.log('new aaaaa  '+data);
                             $scope.articles = data;
+                            $scope.size = data.length;
                         },
                         function(errResponse){
                             console.error('Controller-Error while fetching fillter Articles');
                         }
                     );
+            }
+
+            $scope.deleteArticle = function(id){
+
+                swal({
+                        title: "Are you sure?",
+                        text: "You will not be able to recover this Article",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Yes, delete it!",
+                        closeOnConfirm: false
+                    },
+                    function(){
+                        ArticleService.deleteArticle(id);
+                        swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                        $scope.fetchAllArticles();
+
+                    });
+
+
             }
 
 

@@ -13,6 +13,8 @@ public interface ArticleDAO {
 	public List<Article> getFilterArticles(int writerId,int status);
 	
 	public Article findByID(int artID);
+
+	public void deleteArticle(int articleId);
 	
 	public void updateStatus(Article article);
 	
