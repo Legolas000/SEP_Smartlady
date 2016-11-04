@@ -1,0 +1,51 @@
+<div id="adModal">
+    <div class="modal-header">
+        <h3 class="modal-title">Edit Row</h3>
+    </div>
+    <div class="modal-body">
+
+        <form name="serviceForm">
+
+        <div class="block">
+            <label>Id</label>
+            <input class="input" type="text" disabled value="{{vm.entity.id}}" />
+        </div>
+        <div class="block">
+            <label>Description</label>
+            <input class="input" type="text" ng-model="vm.entity.description"/>
+        </div>
+        <div class="block">
+            <label>URL</label>
+            <input class="input" type="text" ng-model="vm.entity.url"/>
+        </div>
+        <div class="block">
+            <label>Status</label>
+            <input class="input" type="text" ng-model="vm.entity.status"/>
+        </div>
+        <div class="block">
+            <label>Payment</label>
+            <input class="input" type="text" ng-model="vm.entity.payment"/>
+        </div>
+        <div class="block">
+            <label>Published Date</label>
+            <input class="input" type="text" ng-model="vm.entity.publishedDate"/>
+        </div>
+        <div class="block">
+            <label>Expiry Date</label>
+            <input class="input" type="text" ng-model="vm.entity.expiryDate"/>
+        </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="vm.update($event)">Approve</button>
+        <button class="btn btn-primary" ng-click="$close()">Cancel</button>
+    </div>
+</div>
+
+
+
+<!--<div class="block">-->
+    <!--<label>exposedws</label>-->
+    <!--<input class="input" type="text" ng-model="vm.entity.description"/>-->
+<!--</div>-->

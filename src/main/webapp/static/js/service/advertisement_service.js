@@ -9,7 +9,7 @@ function RowEditor($http, $rootScope, $modal) {
 
     function editRow(grid, row,event) {
         $modal.open({
-            templateUrl : 'static/js/partials/articleEditModal.html',
+            templateUrl : 'static/js/partials/advertisementEditModal.html',
             controller : [ '$http', '$modalInstance', 'grid', 'row','$mdDialog', RowEditCtrl ],
             controllerAs : 'vm',
             resolve : {

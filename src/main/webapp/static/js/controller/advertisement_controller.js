@@ -1,3 +1,6 @@
+
+
+
 angular.module('influx').controller('MainCtrl',['$scope', '$http', '$mdDialog', '$modal', 'RowEditor', 'uiGridConstants',function($scope, $http, $mdDialog,$modal, RowEditor, uiGridConstants) {
     var vm = this;
 
@@ -25,21 +28,33 @@ angular.module('influx').controller('MainCtrl',['$scope', '$http', '$mdDialog', 
             priority : 1,
         },
     }, {
-        field : 'title',
+        field : 'description',
         enableSorting : true,
         enableCellEdit : false
     }, {
-        field : 'description',
+        field : 'url',
         enableSorting : true,
         enableCellEdit : false
     }, {
         field : 'status',
         enableSorting : true,
         enableCellEdit : false
+    }, {
+        field : 'payment',
+        enableSorting : true,
+        enableCellEdit : false
+    }, {
+        field : 'publishedDate',
+        enableSorting : true,
+        enableCellEdit : false
+    }, {
+        field : 'expiryDate',
+        enableSorting : true,
+        enableCellEdit : false
     }];
 
 
-    $http.get('http://localhost:1212/SmartLady/articles/').success(function(response) {
+    $http.get('http://localhost:1212/SmartLady/advertisements/').success(function(response) {
         vm.serviceGrid.data = response;
     });
 
@@ -48,9 +63,12 @@ angular.module('influx').controller('MainCtrl',['$scope', '$http', '$mdDialog', 
     function addRow(event) {
         var newService = {
             "id" : "0",
-            "title" : "",
             "description" : "",
-            "status" : ""
+            "url" : "",
+            "status" : "",
+            "payment" : "",
+            "publishedDate" : "",
+            "expiryDate" : ""
         };
         var rowTmp = {};
         rowTmp.entity = newService;
@@ -65,11 +83,16 @@ angular.module('influx').controller('MainCtrl',['$scope', '$http', '$mdDialog', 
 
 }]);
 
+
+// TestTabApp.controller('RowEditCtrl', RowEditCtrl);
+
+
+// TestTabApp.controller('RowEditCtrl',['$scope', '$http', '$mdDialog', '$modalInstance', 'grid', 'row',function($scope, $http, $mdDialog,$modalInstance, grid, row) {
 function RowEditCtrl($http, $modalInstance, grid, row, $mdDialog) {
     var vm = this;
     vm.entity = angular.copy(row.entity);
     vm.update = update;
-    var REST_SERVICE_URI = 'http://localhost:1212/SmartLady/articles/';
+    var REST_SERVICE_URI = 'http://localhost:1212/SmartLady/advertisements/';
 
     // addEventListener('update', update, false);
     function update(event) {
@@ -99,7 +122,7 @@ function RowEditCtrl($http, $modalInstance, grid, row, $mdDialog) {
 //                                    deferred.resolve(response.data);
                         },
                         function (errResponse) {
-                            console.error('Error while approving Article',errResponse);
+                            console.error('Error while deleting Advertisement',errResponse);
 //                                    deferred.reject(errResponse);
                         }
                     );

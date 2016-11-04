@@ -7,10 +7,10 @@ function RowEditor($http, $rootScope, $modal) {
     var service = {};
     service.editRow = editRow;
 
-    function editRow(grid, row,event) {
+    function editRow(grid, row) {
         $modal.open({
-            templateUrl : 'static/js/partials/articleEditModal.html',
-            controller : [ '$http', '$modalInstance', 'grid', 'row','$mdDialog', RowEditCtrl ],
+            templateUrl : 'static/js/partials/categoryEditModal.html',
+            controller : [ '$http', '$modalInstance', 'grid', 'row', RowEditCtrl ],
             controllerAs : 'vm',
             resolve : {
                 grid : function() {
@@ -25,5 +25,3 @@ function RowEditor($http, $rootScope, $modal) {
 
     return service;
 }
-
-
