@@ -1,24 +1,22 @@
 package com.sliit.smartlady.service;
 
-import com.sliit.smartlady.model.Category;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.sql.DataSource;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
-import javax.sql.DataSource;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
+import com.sliit.smartlady.model.Category;
 
-public class CategoryDAOImpl implements CategoryDAO {
+public class CategoryDAOImpl implements CategoryDAO{
 
 	private JdbcTemplate jdbcTemplate;
-
-	public CategoryDAOImpl(){
-
-	}
-
+	
 	public CategoryDAOImpl(DataSource datasource)
 	{
 		jdbcTemplate = new JdbcTemplate(datasource);
@@ -28,16 +26,16 @@ public class CategoryDAOImpl implements CategoryDAO {
 	public void SaveOrUpdate(Category category) {
 		// TODO Auto-generated method stub
 		
-		if(category.getId()>0)
+		if(category.getID()>0)
 		{
 			String sql = "UPDATE categories SET catName = ?, catDescription = ? "+
 						" WHERE catID = ?";
-			jdbcTemplate.update(sql, category.getCatName(), category.getCatDescription(), category.getId());
+			jdbcTemplate.update(sql, category.getcatName(), category.getcatDescription(), category.getID());
 		}
 		else
 		{
 			String sql = "INSERT INTO categories(catName,catDescription) VALUES(?, ?)";
-			jdbcTemplate.update(sql, category.getCatName(), category.getCatDescription());
+			jdbcTemplate.update(sql, category.getcatName(), category.getcatDescription());
 		}
 		
 	}
@@ -50,9 +48,9 @@ public class CategoryDAOImpl implements CategoryDAO {
 	
 
 	@Override
-	public Category findByID(int id) {
+	public Category findByID(int catID) {
 		
-		String sql = "SELECT * FROM categories WHERE id = " + id;
+		String sql = "SELECT * FROM categories WHERE catID = " + catID;
 
 		 return jdbcTemplate.query(sql, new ResultSetExtractor<Category>() {
 			 
@@ -61,10 +59,9 @@ public class CategoryDAOImpl implements CategoryDAO {
 		                DataAccessException {
 		            if (rs.next()) {
 		            	Category category = new Category();
-		            	category.setId(rs.getInt("id"));
-		                category.setCatName(rs.getString("catName"));
-		                category.setCatDescription(rs.getString("catDescription"));
-						category.setNoOfHits(rs.getInt("noOfHits"));
+		            	category.setID(rs.getInt("catID"));
+		                category.setcatName(rs.getString("catName"));
+		                category.setcatDescription(rs.getString("catDescription"));
 		                return category;
 		            }
 		            return null;
@@ -84,12 +81,12 @@ public class CategoryDAOImpl implements CategoryDAO {
 		                DataAccessException {
 		            if (rs.next()) {
 		            	Category category = new Category();
-		            	category.setId(rs.getInt("catID"));
-		                category.setCatName(rs.getString("catName"));
-		                category.setCatDescription(rs.getString("catDescription"));
-						category.setNoOfHits(rs.getInt("noOfHits"));
+		            	category.setID(rs.getInt("catID"));
+		                category.setcatName(rs.getString("catName"));
+		                category.setcatDescription(rs.getString("catDescription"));
 		                
-
+		                System.out.println(category.getcatName());
+		                
 		                return category;
 		            }
 		            return null;
@@ -101,26 +98,26 @@ public class CategoryDAOImpl implements CategoryDAO {
 	public List<Category> getAllCategories() {
 		String sql = "SELECT * FROM categories";
 		List<Category> listCategory = jdbcTemplate.query(sql,  new RowMapper<Category>() {
-
+			
 			@Override
 			public Category mapRow(ResultSet rs, int rowNum) throws SQLException {
-
+				
 				Category lCategory = new Category();
-
-				lCategory.setId((rs.getInt("id")));
-				lCategory.setCatName(rs.getString("catName"));
-				lCategory.setCatDescription(rs.getString("catDescription"));
-				lCategory.setNoOfHits(rs.getInt("noOfHits"));
+				
+				lCategory.setID((rs.getInt("catID")));
+				lCategory.setcatName(rs.getString("catName"));
+				lCategory.setcatDescription(rs.getString("catDescription"));
+				
 				return lCategory;
 			}
 		});
-
+		
 		return listCategory;
-	}
-
+	}	
+	
 	@Override
 	public boolean isCategoryExist(Category category)
 	{
-		return findByName(category.getCatName()) != null;
+		return findByName(category.getcatName()) != null;
 	}
 }

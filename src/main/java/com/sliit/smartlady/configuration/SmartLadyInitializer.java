@@ -1,8 +1,8 @@
 package com.sliit.smartlady.configuration;
 
-import javax.servlet.Filter;
-
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import javax.servlet.Filter;
 
 public class SmartLadyInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
  
