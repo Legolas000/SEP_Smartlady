@@ -1,262 +1,262 @@
-<div class="col-sm-8">
+	<div class="col-sm-8">
 
-	<!-- block content -->
-	<div class="block-content">
+		<!-- block content -->
+		<div class="block-content">
 
-		<!-- single-post box -->
-		<div class="single-post-box">
+			<!-- single-post box -->
+			<div class="single-post-box">
 
-			<div class="title-post">
-				<h1>{{userCtrl.article.title}}</h1>
-				<ul class="post-tags">
-					<li><i class="fa fa-clock-o"></i>{{userCtrl.article.publishedDate}}</li>
-					<li><i class="fa fa-user"></i>by <a href="#">{{userCtrl.article.writerID}}</a></li>
-					<li><a href="#"><i class="fa fa-comments-o"></i><span></span></a></li>
-					<li><i class="fa fa-eye"></i></li>
-				</ul>
-			</div>
-
-			<div ng-bind-html="userCtrl.article.description">
-			</div>
-
-			<div class="post-tags-box">
-				<ul class="tags-box">
-					<li><i class="fa fa-tags"></i><span>Tags:</span></li>
-					<li><a href="#">News</a></li>
-					<li><a href="#">Fashion</a></li>
-					<li><a href="#">Politics</a></li>
-					<li><a href="#">Sport</a></li>
-				</ul>
-			</div>
-
-			<!-- Rate & Like area box -->
-			<div class="contact-form-box">
-
-				<div class="title-section">
-					<h1><span>Like & Rate</span></h1>
+				<div class="title-post">
+					<h1>{{userCtrl.article.title}}</h1>
+					<ul class="post-tags">
+						<li><i class="fa fa-clock-o"></i>{{userCtrl.article.publishedDate}}</li>
+						<li><i class="fa fa-user"></i>by <a href="#">{{userCtrl.article.writerID}}</a></li>
+						<li><a href="#"><i class="fa fa-comments-o"></i><span></span></a></li>
+						<li><i class="fa fa-eye"></i></li>
+					</ul>
 				</div>
-				<div class="tab-content">
-					<a href="/"><i class="fa fa-thumbs-up fa-3x"></i></a> Like this article.
-					<span class="pull-right"><a href="" ng-click="doRating(userCtrl.article.id)"><star-rating ng-model="user1"></star-rating></a> <br/>
-						{{user1.rating}} stars for this article.</span><br>
-				</div>
-			</div>
-			<br/><br/>
-			<div class="share-post-box">
-				<div class="title-section">
-					<h1><span>Share Post</span></h1>
-				</div>
-				<ul class="share-box">
-					<li fb-like="myModel.Url"></li>
-					<li tweet="myModel.Name" tweet-url="myModel.Url" ></li>
-                    <li google-plus="myModel.Url"></li>
-                    <li pin-it="myModel.Name" pin-it-image="myModel.ImageUrl"></li>
-				</ul>
-			</div>
 
-			<div class="prev-next-posts">
-				<div class="prev-post">
-					<img src="/static/upload/news-posts/listw4.jpg" alt="">
-					<div class="post-content">
-						<h2><a href="single-post.html" title="prev post">Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. </a></h2>
-						<ul class="post-tags">
-							<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-							<li><a href="#"><i class="fa fa-comments-o"></i><span>11</span></a></li>
-						</ul>
+				<div ng-bind-html="userCtrl.article.description">
+				</div>
+
+				<div class="post-tags-box">
+					<ul class="tags-box">
+						<li><i class="fa fa-tags"></i><span>Tags:</span></li>
+						<li><a href="#">News</a></li>
+						<li><a href="#">Fashion</a></li>
+						<li><a href="#">Politics</a></li>
+						<li><a href="#">Sport</a></li>
+					</ul>
+				</div>
+
+				<!-- Rate & Like area box -->
+				<div class="contact-form-box">
+
+					<div class="title-section">
+						<h1><span>Like & Rate</span></h1>
+					</div>
+					<div class="tab-content">
+						<a ng-click="doLike(userCtrl.article.id)"><i class="fa fa-thumbs-up fa-3x {{likeColor}}"></i></a> {{likeStaus == false ? ' Like this article. ' : ' You liked this article. '}}
+						<span class="pull-right"><a href="" ng-click="doRating(userCtrl.article.id)"><star-rating ng-model="user1"></star-rating></a> <br/>
+							{{user1.rating}} stars for this article.</span><br>
 					</div>
 				</div>
-				<div class="next-post">
-					<img src="/static/upload/news-posts/listw5.jpg" alt="">
-					<div class="post-content">
-						<h2><a href="single-post.html" title="next post">Donec consectetuer ligula vulputate sem tristique cursus. </a></h2>
-						<ul class="post-tags">
-							<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-							<li><a href="#"><i class="fa fa-comments-o"></i><span>8</span></a></li>
-						</ul>
+				<br/><br/>
+				<div class="share-post-box">
+					<div class="title-section">
+						<h1><span>Share Post</span></h1>
 					</div>
+					<ul class="share-box">
+						<li fb-like="myModel.Url"></li>
+						<li tweet="myModel.Name" tweet-url="myModel.Url" ></li>
+						<li google-plus="myModel.Url"></li>
+						<li pin-it="myModel.Name" pin-it-image="myModel.ImageUrl"></li>
+					</ul>
 				</div>
-			</div>
 
-			<div class="about-more-autor">
-				<ul class="nav nav-tabs">
-					<li class="active">
-						<a href="#about-autor" data-toggle="tab">About The Autor</a>
-					</li>
-					<li>
-						<a href="#more-autor" data-toggle="tab">More From Autor</a>
-					</li>
-				</ul>
-
-				<div class="tab-content">
-
-					<div class="tab-pane active" id="about-autor">
-						<div class="autor-box">
-							<img src="/static/upload/users/avatar1.jpg" alt="">
-							<div class="autor-content">
-								<div class="autor-title">
-									<h1><span>Jane Smith</span><a href="autor-details.html">18 Posts</a></h1>
-									<ul class="autor-social">
-										<li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-										<li><a href="#" class="google"><i class="fa fa-google-plus"></i></a></li>
-										<li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-										<li><a href="#" class="youtube"><i class="fa fa-youtube"></i></a></li>
-										<li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
-										<li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-										<li><a href="#" class="dribble"><i class="fa fa-dribbble"></i></a></li>
-									</ul>
-								</div>
-								<p>
-									Suspendisse mauris. Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula. Integer adipiscing risus a sem. Nullam quis massa sit amet nibh viverra malesuada.
-								</p>
-							</div>
+				<div class="prev-next-posts">
+					<div class="prev-post">
+						<img src="/static/upload/news-posts/listw4.jpg" alt="">
+						<div class="post-content">
+							<h2><a href="single-post.html" title="prev post">Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. </a></h2>
+							<ul class="post-tags">
+								<li><i class="fa fa-clock-o"></i>27 may 2013</li>
+								<li><a href="#"><i class="fa fa-comments-o"></i><span>11</span></a></li>
+							</ul>
 						</div>
 					</div>
-
-					<div class="tab-pane" id="more-autor">
-						<div class="more-autor-posts">
-
-							<div class="news-post image-post3">
-								<img src="/static/upload/news-posts/gal1.jpg" alt="">
-								<div class="hover-box">
-									<h2><a href="single-post.html">Donec odio. Quisque volutpat mattis eros.</a></h2>
-									<ul class="post-tags">
-										<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-									</ul>
-								</div>
-							</div>
-
-							<div class="news-post image-post3">
-								<img src="/static/upload/news-posts/gal2.jpg" alt="">
-								<div class="hover-box">
-									<h2><a href="single-post.html">Nullam malesuada erat ut turpis. </a></h2>
-									<ul class="post-tags">
-										<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-									</ul>
-								</div>
-							</div>
-
-							<div class="news-post image-post3">
-								<img src="/static/upload/news-posts/gal3.jpg" alt="">
-								<div class="hover-box">
-									<h2><a href="single-post.html">Suspendisse urna nibh.</a></h2>
-									<ul class="post-tags">
-										<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-									</ul>
-								</div>
-							</div>
-
-							<div class="news-post image-post3">
-								<img src="/static/upload/news-posts/gal4.jpg" alt="">
-								<div class="hover-box">
-									<h2><a href="single-post.html">Donec nec justo eget felis facilisis fermentum. Aliquam </a></h2>
-									<ul class="post-tags">
-										<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-									</ul>
-								</div>
-							</div>
-
+					<div class="next-post">
+						<img src="/static/upload/news-posts/listw5.jpg" alt="">
+						<div class="post-content">
+							<h2><a href="single-post.html" title="next post">Donec consectetuer ligula vulputate sem tristique cursus. </a></h2>
+							<ul class="post-tags">
+								<li><i class="fa fa-clock-o"></i>27 may 2013</li>
+								<li><a href="#"><i class="fa fa-comments-o"></i><span>8</span></a></li>
+							</ul>
 						</div>
 					</div>
-
 				</div>
-			</div>
 
-			<br/>
-			<!-- contact form box -->
-			<div class="contact-form-box">
-                <div class="title-section">
-                    <h1><span>Leave a Comment</span></h1>
-                </div>
-				<form id="comment-form">
-					<!--<div class="row">
-						<div class="col-md-4">
-							<label for="name">Name*</label>
-							<input id="name" name="name" type="text">
+				<div class="about-more-autor">
+					<ul class="nav nav-tabs">
+						<li class="active">
+							<a href="#about-autor" data-toggle="tab">About The Autor</a>
+						</li>
+						<li>
+							<a href="#more-autor" data-toggle="tab">More From Autor</a>
+						</li>
+					</ul>
+
+					<div class="tab-content">
+
+						<div class="tab-pane active" id="about-autor">
+							<div class="autor-box">
+								<img src="/static/upload/users/avatar1.jpg" alt="">
+								<div class="autor-content">
+									<div class="autor-title">
+										<h1><span>Jane Smith</span><a href="autor-details.html">18 Posts</a></h1>
+										<ul class="autor-social">
+											<li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
+											<li><a href="#" class="google"><i class="fa fa-google-plus"></i></a></li>
+											<li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+											<li><a href="#" class="youtube"><i class="fa fa-youtube"></i></a></li>
+											<li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
+											<li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+											<li><a href="#" class="dribble"><i class="fa fa-dribbble"></i></a></li>
+										</ul>
+									</div>
+									<p>
+										Suspendisse mauris. Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula. Integer adipiscing risus a sem. Nullam quis massa sit amet nibh viverra malesuada.
+									</p>
+								</div>
+							</div>
 						</div>
-						<div class="col-md-4">
-							<label for="mail">E-mail*</label>
-							<input id="mail" name="mail" type="text">
+
+						<div class="tab-pane" id="more-autor">
+							<div class="more-autor-posts">
+
+								<div class="news-post image-post3">
+									<img src="/static/upload/news-posts/gal1.jpg" alt="">
+									<div class="hover-box">
+										<h2><a href="single-post.html">Donec odio. Quisque volutpat mattis eros.</a></h2>
+										<ul class="post-tags">
+											<li><i class="fa fa-clock-o"></i>27 may 2013</li>
+										</ul>
+									</div>
+								</div>
+
+								<div class="news-post image-post3">
+									<img src="/static/upload/news-posts/gal2.jpg" alt="">
+									<div class="hover-box">
+										<h2><a href="single-post.html">Nullam malesuada erat ut turpis. </a></h2>
+										<ul class="post-tags">
+											<li><i class="fa fa-clock-o"></i>27 may 2013</li>
+										</ul>
+									</div>
+								</div>
+
+								<div class="news-post image-post3">
+									<img src="/static/upload/news-posts/gal3.jpg" alt="">
+									<div class="hover-box">
+										<h2><a href="single-post.html">Suspendisse urna nibh.</a></h2>
+										<ul class="post-tags">
+											<li><i class="fa fa-clock-o"></i>27 may 2013</li>
+										</ul>
+									</div>
+								</div>
+
+								<div class="news-post image-post3">
+									<img src="/static/upload/news-posts/gal4.jpg" alt="">
+									<div class="hover-box">
+										<h2><a href="single-post.html">Donec nec justo eget felis facilisis fermentum. Aliquam </a></h2>
+										<ul class="post-tags">
+											<li><i class="fa fa-clock-o"></i>27 may 2013</li>
+										</ul>
+									</div>
+								</div>
+
+							</div>
 						</div>
-						<div class="col-md-4">
-							<label for="website">Website</label>
-							<input id="website" name="website" type="text">
-						</div>
-					</div>-->
-					<label for="comment">Comment*</label>
-					<textarea id="comment" name="comment"></textarea>
-					<button type="submit" id="submit-contact">
-						<i class="fa fa-comment"></i> Post Comment
-					</button>
-				</form>
-			</div>
-			<!-- End contact form box -->
-			<br/>
-			<!-- comment area box -->
-			<div class="comment-area-box">
-				<div class="title-section">
-					<h1><span>5 Comments</span></h1>
+
+					</div>
 				</div>
-				<ul class="comment-tree">
-					<li>
-						<div class="comment-box">
-							<img alt="" src="/static/upload/users/avatar6.jpg">
-							<div class="comment-content">
-								<h4>John Doe <a href="#"><i class="fa fa-comment-o"></i>Reply</a></h4>
-								<span><i class="fa fa-clock-o"></i>27 may 2013 at 8:57 pm</span>
-								<p>Suspendisse mauris. Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula. Integer adipiscing risus a sem. Nullam. </p>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="comment-box">
-							<img alt="" src="/static/upload/users/avatar1.jpg">
-							<div class="comment-content">
-								<h4>John Doe <a href="#"><i class="fa fa-comment-o"></i>Reply</a></h4>
-								<span><i class="fa fa-clock-o"></i>27 may 2013 at 8:57 pm</span>
-								<p>Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula. Integer adipiscing risus a sem. Nullam quis massa sit amet nibh viverra malesuada. Nunc sem lacus, accumsan quis, faucibus non, congue vel, arcu. Ut scelerisque hendrerit tellus. Integer sagittis. </p>
-							</div>
-						</div>
-					</li>
 
-					<li>
-						<div class="comment-box">
-							<img alt="" src="/static/upload/users/avatar4.jpg">
-							<div class="comment-content">
-								<h4>John Doe <a href="#"><i class="fa fa-comment-o"></i>Reply</a></h4>
-								<span><i class="fa fa-clock-o"></i>27 may 2013 at 8:57 pm</span>
-								<p>Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula. Integer adipiscing risus a sem. Nullam quis massa sit amet nibh viverra malesuada. Nunc sem lacus, accumsan quis, faucibus non, congue vel, arcu. Ut scelerisque hendrerit tellus. Integer sagittis. </p>
+				<br/>
+				<!-- contact form box -->
+				<div class="contact-form-box">
+					<div class="title-section">
+						<h1><span>Leave a Comment</span></h1>
+					</div>
+					<form id="comment-form">
+						<!--<div class="row">
+							<div class="col-md-4">
+								<label for="name">Name*</label>
+								<input id="name" name="name" type="text">
 							</div>
-						</div>
-					</li>
-
-					<li>
-						<div class="comment-box">
-							<img alt="" src="/static/upload/users/avatar5.jpg">
-							<div class="comment-content">
-								<h4>John Doe <a href="#"><i class="fa fa-comment-o"></i>Reply</a></h4>
-								<span><i class="fa fa-clock-o"></i>27 may 2013 at 8:57 pm</span>
-								<p>Nullam quis massa sit amet nibh viverra malesuada. Nunc sem lacus, accumsan quis, faucibus non, congue vel. </p>
+							<div class="col-md-4">
+								<label for="mail">E-mail*</label>
+								<input id="mail" name="mail" type="text">
 							</div>
-						</div>
-					</li>
+							<div class="col-md-4">
+								<label for="website">Website</label>
+								<input id="website" name="website" type="text">
+							</div>
+						</div>-->
+						<label for="comment">Comment*</label>
+						<textarea id="comment" name="comment"></textarea>
+						<button type="submit" id="submit-contact">
+							<i class="fa fa-comment"></i> Post Comment
+						</button>
+					</form>
+				</div>
+				<!-- End contact form box -->
+				<br/>
+				<!-- comment area box -->
+				<div class="comment-area-box">
+					<div class="title-section">
+						<h1><span>5 Comments</span></h1>
+					</div>
+					<ul class="comment-tree">
+						<li>
+							<div class="comment-box">
+								<img alt="" src="/static/upload/users/avatar6.jpg">
+								<div class="comment-content">
+									<h4>John Doe <a href="#"><i class="fa fa-comment-o"></i>Reply</a></h4>
+									<span><i class="fa fa-clock-o"></i>27 may 2013 at 8:57 pm</span>
+									<p>Suspendisse mauris. Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula. Integer adipiscing risus a sem. Nullam. </p>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="comment-box">
+								<img alt="" src="/static/upload/users/avatar1.jpg">
+								<div class="comment-content">
+									<h4>John Doe <a href="#"><i class="fa fa-comment-o"></i>Reply</a></h4>
+									<span><i class="fa fa-clock-o"></i>27 may 2013 at 8:57 pm</span>
+									<p>Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula. Integer adipiscing risus a sem. Nullam quis massa sit amet nibh viverra malesuada. Nunc sem lacus, accumsan quis, faucibus non, congue vel, arcu. Ut scelerisque hendrerit tellus. Integer sagittis. </p>
+								</div>
+							</div>
+						</li>
 
-				</ul>
+						<li>
+							<div class="comment-box">
+								<img alt="" src="/static/upload/users/avatar4.jpg">
+								<div class="comment-content">
+									<h4>John Doe <a href="#"><i class="fa fa-comment-o"></i>Reply</a></h4>
+									<span><i class="fa fa-clock-o"></i>27 may 2013 at 8:57 pm</span>
+									<p>Fusce accumsan mollis eros. Pellentesque a diam sit amet mi ullamcorper vehicula. Integer adipiscing risus a sem. Nullam quis massa sit amet nibh viverra malesuada. Nunc sem lacus, accumsan quis, faucibus non, congue vel, arcu. Ut scelerisque hendrerit tellus. Integer sagittis. </p>
+								</div>
+							</div>
+						</li>
+
+						<li>
+							<div class="comment-box">
+								<img alt="" src="/static/upload/users/avatar5.jpg">
+								<div class="comment-content">
+									<h4>John Doe <a href="#"><i class="fa fa-comment-o"></i>Reply</a></h4>
+									<span><i class="fa fa-clock-o"></i>27 may 2013 at 8:57 pm</span>
+									<p>Nullam quis massa sit amet nibh viverra malesuada. Nunc sem lacus, accumsan quis, faucibus non, congue vel. </p>
+								</div>
+							</div>
+						</li>
+
+					</ul>
+				</div>
+				<!-- End comment area box -->
+
 			</div>
-			<!-- End comment area box -->
+			<!-- End single-post box -->
 
 		</div>
-		<!-- End single-post box -->
+		<!-- End block content -->
 
 	</div>
-	<!-- End block content -->
-
-</div>
 
 
-<script type="text/javascript" src="/static/js/app.js"></script>
-<script type="text/javascript" src="/static/js/controller/user_controller.js"></script>
-<!--<script type="text/javascript" src="/static/js/controller/article_controller.js"></script>-->
-<script type="text/javascript" src="/static/js/service/user_service.js"></script>
-<!--<script type="text/javascript" src="/static/js/service/article_service.js"></script>-->
+	<script type="text/javascript" src="/static/js/app.js"></script>
+	<script type="text/javascript" src="/static/js/controller/user_controller.js"></script>
+	<!--<script type="text/javascript" src="/static/js/controller/article_controller.js"></script>-->
+	<script type="text/javascript" src="/static/js/service/user_service.js"></script>
+	<!--<script type="text/javascript" src="/static/js/service/article_service.js"></script>-->
 
 
