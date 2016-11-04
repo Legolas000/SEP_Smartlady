@@ -45,6 +45,7 @@ public class UserDAOImpl implements UserDAO {
                 user.setUserrole(rs.getInt("userrole"));
                 user.setPassword(rs.getString("password"));
                 user.setAddress(rs.getString("address"));
+                user.setImagePath(rs.getString("imagePath"));
 
                 return user;
             }
@@ -71,6 +72,7 @@ public class UserDAOImpl implements UserDAO {
                     userDto.setUserdescription(rs.getString("userdescription"));
                     userDto.setPassword(rs.getString("password"));
                     userDto.setUserrole(rs.getInt("userrole"));
+                    userDto.setImagePath(rs.getString("imagePath"));
                     userDto.setAddress(rs.getString("address"));
 
                     return userDto;
@@ -102,6 +104,7 @@ public class UserDAOImpl implements UserDAO {
                         userDto.setPassword(rs.getString("password"));
                         userDto.setUserrole(rs.getInt("userrole"));
                         userDto.setAddress(rs.getString("address"));
+                        userDto.setImagePath(rs.getString("imagePath"));
 
                         return userDto;
                     }

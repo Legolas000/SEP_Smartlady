@@ -93,6 +93,25 @@ angular.module('myApp').controller('UserController',
                     );
             };
 
+            $scope.doComment = function(articleID){
+                var commentsData = {
+                    comments : $scope.userComments,
+                    userID : $rootScope.user.id,
+                    articleID : articleID,
+                    dateTime : $scope.currentDate
+                };
+
+                UserService.doComment(commentsData)
+                    .then(
+                        function (data) {
+                            getCommentsForArticle(articleID);
+                        },
+                        function (errResponse) {
+                            console.error('Error: Login fail. ');
+                        }
+                    );
+            }
+
             if(LoginService.getAuthStatus()){
                 $rootScope.userRole = $cookies.getObject("userAuthObj").userrole;
             }else{
@@ -109,6 +128,7 @@ angular.module('myApp').controller('UserController',
                             self.article.description = $sce.trustAsHtml(self.article.description );
                             getSocialShareModel();
                             getReadesDetails(id);
+                            getCommentsForArticle(id);
                             //$location.url('/readarticles');
 
                         },
@@ -135,6 +155,24 @@ angular.module('myApp').controller('UserController',
                         }
                     );
             }
+
+            function getCommentsForArticle(id) {
+                UserService.getCommentsForArticle(id)
+                    .then(
+                        function (data) {
+                            $scope.comments = JSON.parse(data);
+                            var noOfComments = 0;
+                            angular.forEach(JSON.parse(data), function(value, key){
+                                noOfComments++;
+                            });
+                            $scope.noOfComments = noOfComments;
+                        },
+                        function (errResponse) {
+                            console.error('Error while fetching Articles');
+                        }
+                    );
+            }
+
 
             function getFeturedArticle() {
                 UserService.getFeturedArticleService()

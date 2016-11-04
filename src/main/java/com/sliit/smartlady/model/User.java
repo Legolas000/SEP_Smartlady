@@ -11,6 +11,7 @@ public class User {
     private int userrole;
     private String address;
     private String userdescription;
+    private String imagePath;
 
     public int getId() {
         return id;
@@ -66,6 +67,14 @@ public class User {
 
     public void setUserdescription(String userdescription) {
         this.userdescription = userdescription;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     @Override

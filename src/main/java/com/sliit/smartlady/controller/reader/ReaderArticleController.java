@@ -4,13 +4,18 @@ package com.sliit.smartlady.controller.reader;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.sliit.smartlady.model.Article;
+import com.sliit.smartlady.model.Comments;
 import com.sliit.smartlady.model.Reades;
+import com.sliit.smartlady.model.User;
 import com.sliit.smartlady.service.ArticleDAO;
+import com.sliit.smartlady.service.CommentsDAO;
+import com.sliit.smartlady.service.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,8 +23,11 @@ public class ReaderArticleController {
 
 	@Autowired
 	ArticleDAO articleDAO;
-	/*@Autowired
-	FeaturedArticleDAO featuredArticleDAO;*/
+	@Autowired
+    CommentsDAO commentsDAO;
+    @Autowired
+    UserDAO userDAO;
+
 	
         //----------------------------Get All Articles----------------------------------
         @RequestMapping(value = "/readarticles/", method = RequestMethod.GET)
@@ -125,6 +133,47 @@ public class ReaderArticleController {
 
             return new ResponseEntity<Reades>(readesDetails, HttpStatus.OK);
         }
+
+        @RequestMapping(value = "/getComments/{articleId}", method = RequestMethod.GET)
+        public ResponseEntity<String> getReaderComments(@PathVariable("articleId") int articleId) {
+
+            try{
+
+                List<Comments> tempListOfComments = new ArrayList<>();
+                List<Comments> listOfComments = commentsDAO.getReaderCommentsByArticleID(articleId);
+
+                for(Comments comments : listOfComments){
+                    User user = userDAO.findByID(comments.getUserID());
+                    comments.setUser(user);
+                    tempListOfComments.add(comments);
+                }
+
+                ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+                String jsonListOfComments= ow.writeValueAsString(tempListOfComments);
+
+                if (tempListOfComments==null) {
+                    return new ResponseEntity<String >(HttpStatus.NOT_FOUND);
+                }
+
+                return new ResponseEntity<String>(jsonListOfComments, HttpStatus.OK);
+
+            }catch (Exception e){
+
+            }
+
+            return  null;
+
+
+        }
+
+
+    @RequestMapping(value = "/comment", method = RequestMethod.POST)
+    public ResponseEntity<String> doReaderComment(@RequestBody Comments comments){
+
+         commentsDAO.saveUserComments(comments);
+
+        return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+    }
 
 
 

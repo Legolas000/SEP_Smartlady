@@ -11,7 +11,9 @@
                     getArticlesSortedByDate: getArticlesSortedByDate,
                     doRatingForArticle:doRatingForArticle,
                     fetchReadesDetails:fetchReadesDetails,
-                    doLike:doLike
+                    doLike:doLike,
+                    getCommentsForArticle:getCommentsForArticle,
+                    doComment : doComment
                 };
 
                 return factory;
@@ -133,6 +135,37 @@
                             },
                             function(errResponse){
                                 console.error('Error while fetching reades details.');
+                                deferred.reject(errResponse);
+                            }
+                        );
+                    return deferred.promise;
+                }
+
+                function getCommentsForArticle(articleId) {
+                    var deferred = $q.defer();
+                    $http.get(REST_SERVICE_URI+"getComments/"+articleId)
+                        .then(
+                            function (response) {
+                                console.log( "response.data.id : " + JSON.stringify(response.data));
+                                deferred.resolve(JSON.stringify(response.data));
+                            },
+                            function(errResponse){
+                                console.error('Error while fetching reades details.');
+                                deferred.reject(errResponse);
+                            }
+                        );
+                    return deferred.promise;
+                }
+
+                function doComment(commentsData) {
+                    var deferred = $q.defer();
+                    $http.post(REST_SERVICE_URI+'comment',commentsData)
+                        .then(
+                            function (response) {
+                                deferred.resolve(response.data);
+                            },
+                            function(errResponse){
+                                console.error('Error while Registering'+errResponse.statusText);
                                 deferred.reject(errResponse);
                             }
                         );
