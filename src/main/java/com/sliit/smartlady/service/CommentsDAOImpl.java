@@ -62,4 +62,28 @@ public class CommentsDAOImpl implements CommentsDAO {
             System.out.println("Exception : "+ ex);
         }
     }
+
+    @Override
+    public List<Comments> getAllCommentsOrderByDateTime() {
+        String sql = "SELECT * FROM comments ORDER BY dateTime DESC";
+
+        List<Comments> listComments = jdbcTemplate.query(sql, new RowMapper<Comments>() {
+
+            @Override
+            public Comments mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+                Comments lComments = new Comments();
+
+                lComments.setId(rs.getInt("id"));
+                lComments.setDateTime(rs.getString("dateTime"));
+                lComments.setUserID(rs.getInt("userID"));
+                lComments.setArticleID(rs.getInt("articleID"));
+                lComments.setComments(rs.getString("comments"));
+
+                return lComments;
+            }
+        });
+
+        return listComments;
+    }
 }

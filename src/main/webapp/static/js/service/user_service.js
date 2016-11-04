@@ -13,7 +13,8 @@
                     fetchReadesDetails:fetchReadesDetails,
                     doLike:doLike,
                     getCommentsForArticle:getCommentsForArticle,
-                    doComment : doComment
+                    doComment : doComment,
+                    getAllComments:getAllComments
                 };
 
                 return factory;
@@ -141,12 +142,27 @@
                     return deferred.promise;
                 }
 
+                function getAllComments() {
+
+                    var deferred = $q.defer();
+                    $http.get(REST_SERVICE_URI+"getAllComments")
+                        .then(
+                            function (response) {
+                                deferred.resolve(JSON.stringify(response.data));
+                            },
+                            function(errResponse){
+                                console.error('Error while fetching All Comments in service.');
+                                deferred.reject(errResponse);
+                            }
+                        );
+                    return deferred.promise;
+                }
+
                 function getCommentsForArticle(articleId) {
                     var deferred = $q.defer();
                     $http.get(REST_SERVICE_URI+"getComments/"+articleId)
                         .then(
                             function (response) {
-                                console.log( "response.data.id : " + JSON.stringify(response.data));
                                 deferred.resolve(JSON.stringify(response.data));
                             },
                             function(errResponse){
@@ -171,6 +187,8 @@
                         );
                     return deferred.promise;
                 }
+
+
 
 
         }]);

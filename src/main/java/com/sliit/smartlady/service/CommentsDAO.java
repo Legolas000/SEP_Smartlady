@@ -10,6 +10,6 @@ import java.util.List;
  */
 public interface CommentsDAO {
     List<Comments> getReaderCommentsByArticleID(int articleID);
-
+    List<Comments> getAllCommentsOrderByDateTime();
     void saveUserComments(Comments comments);
 }

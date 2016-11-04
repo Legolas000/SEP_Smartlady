@@ -162,10 +162,38 @@ public class ReaderArticleController {
             }
 
             return  null;
+        }
 
+
+    @RequestMapping(value = "/getAllComments", method = RequestMethod.GET)
+    public ResponseEntity<String> getAllReaderComments() {
+
+        try{
+
+            List<Comments> tempListOfAllComments = new ArrayList<>();
+            List<Comments> listOfComments = commentsDAO.getAllCommentsOrderByDateTime();
+
+            for(Comments comments : listOfComments){
+                User user = userDAO.findByID(comments.getUserID());
+                comments.setUser(user);
+                tempListOfAllComments.add(comments);
+            }
+
+            ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+            String jsonListOfALLComments= ow.writeValueAsString(tempListOfAllComments);
+
+            if (tempListOfAllComments==null) {
+                return new ResponseEntity<String >(HttpStatus.NOT_FOUND);
+            }
+
+            return new ResponseEntity<String>(jsonListOfALLComments, HttpStatus.OK);
+
+        }catch (Exception e){
 
         }
 
+        return  null;
+    }
 
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
     public ResponseEntity<String> doReaderComment(@RequestBody Comments comments){

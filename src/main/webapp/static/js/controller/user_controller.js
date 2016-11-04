@@ -51,6 +51,7 @@ angular.module('myApp').controller('UserController',
 
             getFeturedArticle();
             getArticlesSortedByDate();
+            getAllComments();
 
             if($routeParams.articleId != null){
                 getReaderArticle($routeParams.articleId);
@@ -169,6 +170,23 @@ angular.module('myApp').controller('UserController',
                         },
                         function (errResponse) {
                             console.error('Error while fetching Articles');
+                        }
+                    );
+            }
+
+            function getAllComments() {
+                UserService.getAllComments()
+                    .then(
+                        function (data) {
+                            $scope.allComments = JSON.parse(data);
+                            var noOfAllComments = 0;
+                            angular.forEach(JSON.parse(data), function(value, key){
+                                noOfAllComments++;
+                            });
+                            $scope.noOfAllComments = noOfAllComments;
+                        },
+                        function (errResponse) {
+                            console.error('Error while fetching All Comments in user controle');
                         }
                     );
             }
