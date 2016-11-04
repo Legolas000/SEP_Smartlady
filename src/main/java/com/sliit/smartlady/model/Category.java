@@ -2,51 +2,72 @@ package com.sliit.smartlady.model;
 
 public class Category {
 
-	private int id;
+	private int catID;
 	private String catName;
 	private String catDescription;
-	private int noOfHits;
 	
 	public Category(){
-		this.id = 0;
+		this.catID = 0;
 	}
 	
 	public Category(int catID, String catName, String catDescription)
 	{
-		this.id = catID;
+		this.catID = catID;
 		this.catName = catName;
 		this.catDescription = catDescription;
 	}
-
-	public int getId() {
-		return id;
+	
+	public Boolean findByID(int catID)
+	{
+		return catID == this.catID;
 	}
-
-	public void setId(int id) {
-		this.id = id;
+	
+	public int getID()
+	{
+		return catID;
 	}
-
-	public String getCatName() {
+	
+	public void setID(int catID)
+	{
+		this.catID = catID;
+	}
+	
+	public String getcatName()
+	{
 		return catName;
 	}
-
-	public void setCatName(String catName) {
+	
+	public void setcatName(String catName)
+	{
 		this.catName = catName;
 	}
-
-	public String getCatDescription() {
+	
+	public String getcatDescription()
+	{
 		return catDescription;
 	}
-
-	public void setCatDescription(String catDescription) {
+	
+	public void setcatDescription(String catDescription)
+	{
 		this.catDescription = catDescription;
 	}
-
-	public int getNoOfHits() {
-		return noOfHits;
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Category))
+			return false;
+		Category other = (Category) obj;
+		if (catID != other.catID)
+			return false;
+		return true;
 	}
-
-	public void setNoOfHits(int noOfHits) {
-		this.noOfHits = noOfHits;
+	
+	@Override
+	public String toString() {
+		return "Category [catID=" + catID + ", catName=" + catName + ", catDescription=" + catDescription + "]";
 	}
 }
