@@ -36,7 +36,7 @@
 						<h1><span>Like & Rate</span></h1>
 					</div>
 					<div class="tab-content">
-						<a ng-click="doLike(userCtrl.article.id)"><i class="fa fa-thumbs-up fa-3x {{likeColor}}"></i></a> {{likeStaus == false ? ' Like this article. ' : ' You liked this article. '}}
+						<a href="" ng-click="doLike(userCtrl.article.id)"><i class="fa fa-thumbs-up fa-3x {{likeColor}}"></i></a> {{likeStaus == false ? ' Like this article. ' : ' You liked this article. '}}
 						<span class="pull-right"><a href="" ng-click="doRating(userCtrl.article.id)"><star-rating ng-model="user1"></star-rating></a> <br/>
 							{{user1.rating}} stars for this article.</span><br>
 					</div>
