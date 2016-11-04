@@ -6,20 +6,30 @@ import com.sliit.smartlady.model.Reades;
 import java.util.List;
 
 public interface ArticleDAO {
-        /*Created by Fazeel*/
-        public List<Article> getAllArticles(); //Get all unapproved articles
 
+        /* ===================================== Nibras ====================================== */
+
+        /*Created by Nibras*/
         public List<Article> getArticlesByWriterId(int writerId);
 
+        /*Created by Nibras*/
         public List<Article> getFilterArticles(int writerId,int status);
+
+        /* --------------------------------------------------------------------------------------------- */
+        /* ===================================== Fazeel Mohamed ====================================== */
+
+        /*Created by Fazeel*/
+        public List<Article> getAllArticles(); //Get all unapproved articles
 
         /*Created by Fazeel*/
         public Article findByID(int artID);
 
         public void deleteArticle(int articleId);
 
+        /*Created by Fazeel*/
         public void updateStatus(Article article);
 
+        /*Created by Fazeel*/
         public void updateStatuses(Article[] article);//Multiple article updates
 
         /*Created by Fazeel*/
@@ -27,6 +37,9 @@ public interface ArticleDAO {
 
         /*Created by Fazeel*/
         public List<Article> getSortedArticleByDate();
+
+        /*Created by Fazeel*/
+        public List<Article> getTopRatedArticles();
 
         /*Created by Fazeel*/
         public Article getArticleWithWriter(Article article);
@@ -43,15 +56,22 @@ public interface ArticleDAO {
         /*Created by Fazeel*/
         void saveReader(int articleID, int readerID);
 
+        /*Created by Fazeel*/
         void updateReaderRating(Reades reades);
 
+        /*Created by Fazeel*/
         void updateReaderLikes(Reades reades);
 
+        /*Created by Fazeel*/
         void updateAverageReaderRating(Reades reades);
 
+        /*Created by Fazeel*/
         void updateReaderLikeCountsInArticle(Reades reades);
 
+        /*Created by Fazeel*/
         Reades getReaderByReaderIDAndArticleID(int articleID, int readerID);
+
+        /* --------------------------------------------------------------------------------------------- */
 
 
 

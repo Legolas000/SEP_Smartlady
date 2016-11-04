@@ -36,6 +36,8 @@ angular.module('myApp').controller('UserController',
 
             self.wholeArticles = [];
 
+            self.topRatedArticles = [];
+
             self.articlesToAdd = [];
 
             self.obj = null;
@@ -44,6 +46,18 @@ angular.module('myApp').controller('UserController',
              window.location.reload(true);
              }*/
 
+            //tab switching
+            $scope.isPopularTab = 'active';$scope.isRecentTab = '';$scope.isTopReviewsTab = '';
+            $scope.showPopularTab = function () {
+                $scope.isPopularTab = 'active';$scope.isRecentTab = '';$scope.isTopReviewsTab = '';
+            };
+            $scope.showRecentTab = function () {
+                $scope.isPopularTab = '';$scope.isRecentTab = 'active';$scope.isTopReviewsTab = '';
+            };
+            $scope.showTopReviewsTab = function () {
+                $scope.isPopularTab = '';$scope.isRecentTab = '';$scope.isTopReviewsTab = 'active';
+            };
+
 
             $scope.initFunction = function(){
                 getArticlesSortedByDate();
@@ -51,6 +65,7 @@ angular.module('myApp').controller('UserController',
 
             getFeturedArticle();
             getArticlesSortedByDate();
+            getTopRatedArticles();
             getAllComments();
 
             if($routeParams.articleId != null){
@@ -253,6 +268,37 @@ angular.module('myApp').controller('UserController',
                         }
                     );
             }
+
+            function getTopRatedArticles() {
+
+                UserService.getTopRatedArticles()
+                    .then(
+                        function (data) {
+                            angular.forEach(JSON.parse(data), function(value, key){
+                                self.topRatedArticles.push({
+                                    id:value.id,
+                                    title:value.title,
+                                    publishedDate:value.publishedDate,
+                                    description: $sce.trustAsHtml(value.description),
+                                    coverImagePath:value.coverImagePath,
+                                    overallRating:value.overallRating,
+                                    categoryID:value.categoryID,
+                                    categoryName:value.category.catName,
+                                    writerID:value.writerID,
+                                    writerName:value.userAsWriter.fullname,
+                                    totalLikes:value.totalLikes,
+                                    totalViews:value.totalViews
+                                });
+                            });
+
+                        },
+                        function (errResponse) {
+                            console.error('Error while fetching featured article');
+                        }
+                    );
+            }
+
+
 
             function statusOfLike(data) {
                 $scope.likeStaus = JSON.stringify(data.like);

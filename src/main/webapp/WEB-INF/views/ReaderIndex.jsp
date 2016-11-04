@@ -516,207 +516,62 @@
 					<!-- sidebar -->
 					<div class="sidebar">
 
-						<div class="widget social-widget">
-							<div class="title-section">
-								<h1><span>Stay Connected</span></h1>
-							</div>
-							<ul class="social-share">
-								<li>
-									<a href="#" class="rss"><i class="fa fa-rss"></i></a>
-									<span class="number">9,455</span>
-									<span>Subscribers</span>
-								</li>
-								<li>
-									<a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-									<span class="number">56,743</span>
-									<span>Fans</span>
-								</li>
-								<li>
-									<a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-									<span class="number">43,501</span>
-									<span>Followers</span>
-								</li>
-								<li>
-									<a href="#" class="google"><i class="fa fa-google-plus"></i></a>
-									<span class="number">35,003</span>
-									<span>Followers</span>
-								</li>
-							</ul>
-						</div>
 
 						<div class="widget tab-posts-widget">
 
 							<ul class="nav nav-tabs" id="myTab">
 								<li class="active">
-									<a href="#option1" data-toggle="tab">Popular</a>
+									<a href=""  ng-click="showPopularTab()" data-toggle="tab">Popular</a>
 								</li>
 								<li>
-									<a href="#option2" data-toggle="tab">Recent</a>
+									<a href=""  ng-click="showRecentTab()" data-toggle="tab">Recent</a>
 								</li>
 								<li>
-									<a href="#option3" data-toggle="tab">Top Reviews</a>
+									<a href=""  ng-click="showTopReviewsTab()" data-toggle="tab">Top Reviews</a>
 								</li>
 							</ul>
 
 							<div class="tab-content">
-								<div class="tab-pane active" id="option1">
+								<div class="tab-pane {{isPopularTab}}" id="option1Popular" >
 									<ul class="list-posts">
-										<li>
-											<img src="/static/upload/news-posts/listw1.jpg" alt="">
+										<li ng-repeat="article in userCtrl.articlesToAdd | limitTo:5">
+                                            <a href="/#/readarticles/{{article.id}}"><img src="{{article.coverImagePath}}" alt=""></a>
 											<div class="post-content">
-												<h2><a href="single-post.html">Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. </a></h2>
+												<h2><a href="/#/readarticles/{{article.id}}">{{article.title}} </a></h2>
 												<ul class="post-tags">
-													<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-												</ul>
-											</div>
-										</li>
-
-										<li>
-											<img src="/static/upload/news-posts/listw2.jpg" alt="">
-											<div class="post-content">
-												<h2><a href="single-post.html">Sed arcu. Cras consequat. </a></h2>
-												<ul class="post-tags">
-													<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-												</ul>
-											</div>
-										</li>
-
-										<li>
-											<img src="/static/upload/news-posts/listw3.jpg" alt="">
-											<div class="post-content">
-												<h2><a href="single-post.html">Phasellus ultrices nulla quis nibh. Quisque a lectus.  </a></h2>
-												<ul class="post-tags">
-													<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-												</ul>
-											</div>
-										</li>
-
-										<li>
-											<img src="/static/upload/news-posts/listw4.jpg" alt="">
-											<div class="post-content">
-												<h2><a href="single-post.html">Donec consectetuer ligula vulputate sem tristique cursus. </a></h2>
-												<ul class="post-tags">
-													<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-												</ul>
-											</div>
-										</li>
-
-										<li>
-											<img src="/static/upload/news-posts/listw5.jpg" alt="">
-											<div class="post-content">
-												<h2><a href="single-post.html">Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi. </a></h2>
-												<ul class="post-tags">
-													<li><i class="fa fa-clock-o"></i>27 may 2013</li>
+													<li><i class="fa fa-clock-o"></i>{{article.publishedDate}}</li>
 												</ul>
 											</div>
 										</li>
 									</ul>
 								</div>
-								<div class="tab-pane" id="option2">
+								<div class="tab-pane {{isRecentTab}}" id="option2Recent" >
 									<ul class="list-posts">
 
-										<li>
-											<img src="/static/upload/news-posts/listw3.jpg" alt="">
-											<div class="post-content">
-												<h2><a href="single-post.html">Phasellus ultrices nulla quis nibh. Quisque a lectus. </a></h2>
-												<ul class="post-tags">
-													<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-												</ul>
-											</div>
-										</li>
-
-										<li>
-											<img src="/static/upload/news-posts/listw4.jpg" alt="">
-											<div class="post-content">
-												<h2><a href="single-post.html">Donec consectetuer ligula vulputate sem tristique cursus. </a></h2>
-												<ul class="post-tags">
-													<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-												</ul>
-											</div>
-										</li>
-
-										<li>
-											<img src="/static/upload/news-posts/listw5.jpg" alt="">
-											<div class="post-content">
-												<h2><a href="single-post.html">Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.</a></h2>
-												<ul class="post-tags">
-													<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-												</ul>
-											</div>
-										</li>
-										<li>
-											<img src="/static/upload/news-posts/listw1.jpg" alt="">
-											<div class="post-content">
-												<h2><a href="single-post.html">Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. </a></h2>
-												<ul class="post-tags">
-													<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-												</ul>
-											</div>
-										</li>
-
-										<li>
-											<img src="/static/upload/news-posts/listw2.jpg" alt="">
-											<div class="post-content">
-												<h2><a href="single-post.html">Sed arcu. Cras consequat.</a></h2>
-												<ul class="post-tags">
-													<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-												</ul>
-											</div>
-										</li>
+                                        <li ng-repeat="article in userCtrl.wholeArticles | limitTo:5">
+                                            <a href="/#/readarticles/{{article.id}}"><img src="{{article.coverImagePath}}" alt=""></a>
+                                            <div class="post-content">
+                                                <h2><a href="/#/readarticles/{{article.id}}">{{article.title}} </a></h2>
+                                                <ul class="post-tags">
+                                                    <li><i class="fa fa-clock-o"></i>{{article.publishedDate}}</li>
+                                                </ul>
+                                            </div>
+                                        </li>
 									</ul>
 								</div>
-								<div class="tab-pane" id="option3">
+								<div class="tab-pane {{isTopReviewsTab}}" id="option3TopReviews" >
 									<ul class="list-posts">
 
-										<li>
-											<img src="/static/upload/news-posts/listw4.jpg" alt="">
-											<div class="post-content">
-												<h2><a href="single-post.html">Donec consectetuer ligula vulputate sem tristique cursus. </a></h2>
-												<ul class="post-tags">
-													<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-												</ul>
-											</div>
-										</li>
-
-										<li>
-											<img src="/static/upload/news-posts/listw1.jpg" alt="">
-											<div class="post-content">
-												<h2><a href="single-post.html">Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. </a></h2>
-												<ul class="post-tags">
-													<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-												</ul>
-											</div>
-										</li>
-
-										<li>
-											<img src="/static/upload/news-posts/listw3.jpg" alt="">
-											<div class="post-content">
-												<h2><a href="single-post.html">Phasellus ultrices nulla quis nibh. Quisque a lectus.  </a></h2>
-												<ul class="post-tags">
-													<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-												</ul>
-											</div>
-										</li>
-
-										<li>
-											<img src="/static/upload/news-posts/listw2.jpg" alt="">
-											<div class="post-content">
-												<h2><a href="single-post.html">Sed arcu. Cras consequat.</a></h2>
-												<ul class="post-tags">
-													<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-												</ul>
-											</div>
-										</li>
-
-										<li>
-											<img src="/static/upload/news-posts/listw5.jpg" alt="">
-											<div class="post-content">
-												<h2><a href="single-post.html">Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.</a></h2>
-												<ul class="post-tags">
-													<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-												</ul>
-											</div>
-										</li>
+                                        <li ng-repeat="article in userCtrl.topRatedArticles | limitTo:5">
+                                            <a href="/#/readarticles/{{article.id}}"><img src="{{article.coverImagePath}}" alt=""></a>
+                                            <div class="post-content">
+                                                <h2><a href="/#/readarticles/{{article.id}}">{{article.title}} </a></h2>
+                                                <ul class="post-tags">
+                                                    <li><i class="fa fa-clock-o"></i>{{article.publishedDate}}</li>
+                                                </ul>
+                                                <div><average-star-rating ng-model="article.overallRating" max="5" ><average-star-rating></div>
+                                            </div>
+                                        </li>
 									</ul>
 								</div>
 							</div>
@@ -735,11 +590,14 @@
 										<div class="item">
 											<ul class="comment-list">
 												<li owl-carousel-item ng-repeat="commentIndex in [0,1,2]">
-													<img src="{{allComments[commentIndex].user.imagePath}}" alt="">
-													<div class="comment-content">
-														<p class="main-message">{{allComments[commentIndex].comments}}</p>
-														<span><i class="fa fa-user"></i>by {{allComments[commentIndex].user.fullname}}</span>
-													</div>
+                                                    <a style="text-decoration: none;" href="/#/readarticles/{{allComments[commentIndex].articleID}}">
+                                                        <img src="{{allComments[commentIndex].user.imagePath}}" alt="">
+                                                        <div class="comment-content">
+                                                            <p class="main-message">{{allComments[commentIndex].comments}}</p>
+                                                            <span><i class="fa fa-user"></i>by {{allComments[commentIndex].user.fullname}}</span>
+                                                            <span><i class="fa fa-clock-o"></i>{{allComments[commentIndex].dateTime}}</span>
+                                                        </div>
+                                                    </a>
 												</li>
 
 											</ul>
@@ -747,11 +605,14 @@
 										<div class="item">
 											<ul class="comment-list">
 												<li owl-carousel-item ng-repeat="commentIndex in [3,4,5]">
-													<img src="{{allComments[commentIndex].user.imagePath}}" alt="">
-													<div class="comment-content">
-														<p class="main-message">{{allComments[commentIndex].comments}}</p>
-														<span><i class="fa fa-user"></i>by {{allComments[commentIndex].user.fullname}}</span>
-													</div>
+                                                    <a style="text-decoration: none;" href="/#/readarticles/{{allComments[commentIndex].articleID}}">
+                                                        <img src="{{allComments[commentIndex].user.imagePath}}" alt="">
+                                                        <div class="comment-content">
+                                                            <p class="main-message">{{allComments[commentIndex].comments}}</p>
+                                                            <span><i class="fa fa-user"></i>by {{allComments[commentIndex].user.fullname}}</span>
+                                                            <span><i class="fa fa-clock-o"></i>{{allComments[commentIndex].dateTime}}</span>
+                                                        </div>
+                                                    </a>
 												</li>
 
 											</ul>
@@ -759,34 +620,6 @@
 									</div>
 								</div>
 							</owl-carousel>
-						</div>
-
-						<div class="widget subscribe-widget">
-							<form class="subscribe-form">
-								<h1>Subscribe to RSS Feeds</h1>
-								<input type="text" name="sumbscribe" id="subscribe" placeholder="Email"/>
-								<button id="submit-subscribe">
-									<i class="fa fa-arrow-circle-right"></i>
-								</button>
-								<p>Get all latest content delivered to your email a few times a month.</p>
-							</form>
-						</div>
-
-						<div class="widget post-widget">
-							<div class="title-section">
-								<h1><span>Featured Video</span></h1>
-							</div>
-							<div class="news-post video-post">
-								<img alt="" src="/static/upload/news-posts/video-sidebar.jpg">
-								<a href="https://www.youtube.com/watch?v=LL59es7iy8Q" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-								<div class="hover-box">
-									<h2><a href="single-post.html">Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. </a></h2>
-									<ul class="post-tags">
-										<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-									</ul>
-								</div>
-							</div>
-							<p>Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis. </p>
 						</div>
 
 						<div class="advertisement">

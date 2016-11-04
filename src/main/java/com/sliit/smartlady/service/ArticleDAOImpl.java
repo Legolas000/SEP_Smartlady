@@ -50,8 +50,8 @@ public class ArticleDAOImpl implements ArticleDAO {
                     lArticle.setTitle(rs.getString("title"));
                     lArticle.setDescription(rs.getString("description"));
                     lArticle.setPublishedDate(rs.getString ("publishedDate"));
-                    lArticle.setFeatured(rs.getBoolean("isFeatured"));
                     lArticle.setOverallRating(rs.getDouble("overallRating"));
+                    lArticle.setFeatured(rs.getBoolean("isFeatured"));
                     lArticle.setTotalLikes(rs.getInt("totalLikes"));
                     lArticle.setTotalViews(rs.getInt("totalViews"));
                     lArticle.setCoverImagePath(rs.getString ("coverImagePath"));
@@ -66,7 +66,37 @@ public class ArticleDAOImpl implements ArticleDAO {
             return listArticle;
         }
 
-        @Override
+    @Override
+    public List<Article> getTopRatedArticles() {
+        String sql = "SELECT * FROM articles  ORDER BY overallRating DESC ";
+        List<Article> listArticle = jdbcTemplate.query(sql, new RowMapper<Article>() {
+
+            @Override
+            public Article mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+                Article lArticle = new Article();
+
+                lArticle.setId(rs.getInt("id"));
+                lArticle.setDescription(rs.getString("description"));
+                lArticle.setTitle(rs.getString("title"));
+                lArticle.setPublishedDate(rs.getString ("publishedDate"));
+                lArticle.setOverallRating(rs.getDouble("overallRating"));
+                lArticle.setFeatured(rs.getBoolean("isFeatured"));
+                lArticle.setTotalLikes(rs.getInt("totalLikes"));
+                lArticle.setTotalViews(rs.getInt("totalViews"));
+                lArticle.setCoverImagePath(rs.getString ("coverImagePath"));
+                lArticle.setStatus(rs.getInt("status"));
+                lArticle.setWriterID(rs.getInt ("writerId"));
+                lArticle.setCategoryID(rs.getInt("categoryId"));
+
+                return lArticle;
+            }
+        });
+
+        return listArticle;
+    }
+
+    @Override
         public List<Article> getArticlesByWriterId(int writerId) {
             String sql = "SELECT * FROM articles WHERE writerId = "+writerId;
             List<Article> listArticle = jdbcTemplate.query(sql, new RowMapper<Article>() {
@@ -82,9 +112,9 @@ public class ArticleDAOImpl implements ArticleDAO {
                     lArticle.setPublishedDate(rs.getString ("publishedDate"));
                     lArticle.setFeatured(rs.getBoolean("isFeatured"));
                     lArticle.setOverallRating(rs.getDouble("overallRating"));
+                    lArticle.setCoverImagePath(rs.getString ("coverImagePath"));
                     lArticle.setTotalLikes(rs.getInt("totalLikes"));
                     lArticle.setTotalViews(rs.getInt("totalViews"));
-                    lArticle.setCoverImagePath(rs.getString ("coverImagePath"));
                     lArticle.setStatus(rs.getInt("status"));
                     lArticle.setWriterID(rs.getInt ("writerId"));
                     lArticle.setCategoryID(rs.getInt("categoryId"));
@@ -118,8 +148,9 @@ public class ArticleDAOImpl implements ArticleDAO {
                         lArticle.setTotalViews(rs.getInt("totalViews"));
                         lArticle.setCoverImagePath(rs.getString ("coverImagePath"));
                         lArticle.setStatus(rs.getInt("status"));
-                        lArticle.setWriterID(rs.getInt ("writerId"));
                         lArticle.setCategoryID(rs.getInt("categoryId"));
+                        lArticle.setWriterID(rs.getInt ("writerId"));
+
 
                         return lArticle;
 

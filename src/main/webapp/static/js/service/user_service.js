@@ -9,6 +9,7 @@
                     fetchItemById: fetchItemById,
                     getFeturedArticleService: getFeturedArticleService,
                     getArticlesSortedByDate: getArticlesSortedByDate,
+                    getTopRatedArticles : getTopRatedArticles,
                     doRatingForArticle:doRatingForArticle,
                     fetchReadesDetails:fetchReadesDetails,
                     doLike:doLike,
@@ -70,6 +71,21 @@
                 function getArticlesSortedByDate() {
                     var deferred = $q.defer();
                     $http.get(REST_SERVICE_URI+"allarticles/")
+                        .then(
+                            function (response) {
+                                deferred.resolve(JSON.stringify(response.data));
+                            },
+                            function(errResponse){
+                                console.error('Error while fetching allarticles');
+                                deferred.reject(errResponse);
+                            }
+                        );
+                    return deferred.promise;
+                }
+
+                function getTopRatedArticles() {
+                    var deferred = $q.defer();
+                    $http.get(REST_SERVICE_URI+"topRatedArticles")
                         .then(
                             function (response) {
                                 deferred.resolve(JSON.stringify(response.data));

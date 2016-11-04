@@ -81,6 +81,26 @@ public class ReaderArticleController {
             }
             return null;
         }
+
+        //---------------------------- Get All Articles By Date ----------------------------------
+        @RequestMapping(value = "/topRatedArticles", method = RequestMethod.GET)
+        public ResponseEntity<String> getTopRatedArticles(){
+            try {
+                List<Article> articles = articleDAO.getTopRatedArticles();
+                List<Article> articlesWithOtherEntities = articleDAO.getAllArticlesWithOtherEntities(articles);
+
+                ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+                String jsonStringArticles = ow.writeValueAsString(articlesWithOtherEntities);
+
+                if (articles.isEmpty()) {
+                    return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+                }
+                return new ResponseEntity<String>(jsonStringArticles, HttpStatus.OK);
+            }catch (Exception ex){
+
+            }
+            return null;
+        }
 		
 		
         //--------------------Update a status of an article------------------------------
