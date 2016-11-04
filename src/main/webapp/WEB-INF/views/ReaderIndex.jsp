@@ -25,7 +25,7 @@
 
 	<%--writer page css--%>
 
-	<%--<link href="/static/css/writer-css/bootstrap.min.css" rel="stylesheet">--%>
+	<link href="/static/css/writer-css/bootstrap.min.css" rel="stylesheet">
 	<%--<link href="/static/css/writer-css/logo-nav.css" rel="stylesheet">--%>
 	<link href="/static/css/writer-css/sweetAlert/sweetalert.css" rel="stylesheet">
 
@@ -903,6 +903,7 @@
 
 <%--rich text editor js--%>
 <script type="text/javascript" src="/static/js/writer-js/tinymce-dist/tinymce.js"></script>
+<script type="text/javascript" src="/static/js/lib/angular-1.4.4.js"></script>
 <script type="text/javascript" src="/static/js/writer-js/angular-ui-tinymce/src/tinymce.js"></script>
 <%-- end rich text editor --%>
 

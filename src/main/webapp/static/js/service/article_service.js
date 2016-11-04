@@ -13,7 +13,8 @@ angular.module('myApp').factory('ArticleService', ['$http', '$q','$rootScope', '
         fetchAllArticles: fetchAllArticles,
         updateStatus: updateStatus,
         articleFormSubmit: articleFormSubmit,
-        fetchFilterArticles : fetchFilterArticles
+        fetchFilterArticles : fetchFilterArticles,
+        deleteArticle : deleteArticle
     };
 
     return factory;
@@ -70,11 +71,25 @@ angular.module('myApp').factory('ArticleService', ['$http', '$q','$rootScope', '
         $http.get(REST_SERVICE_URI+'/filterArticles/'+writerId+'/'+status)
             .then(
                 function (response) {
-                    console.log('new bbbbbb  '+response.data);
                     deferred.resolve(response.data);
                 },
                 function(errResponse){
                     console.error('Error while fetching Filter Articles');
+                    deferred.reject(errResponse);
+                }
+            );
+        return deferred.promise;
+    }
+
+    function deleteArticle(id){
+        deferred = $q.defer();
+        $http.delete(REST_SERVICE_URI+'/deleteArticle/'+id)
+            .then(
+                function (response) {
+                    deferred.resolve(response.data);
+                },
+                function (errResponse) {
+                    console.log('error while delete article id '+id);
                     deferred.reject(errResponse);
                 }
             );

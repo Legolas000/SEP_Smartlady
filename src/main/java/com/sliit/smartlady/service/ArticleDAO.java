@@ -15,6 +15,8 @@ public interface ArticleDAO {
 
 	/*Created by Fazeel*/
 	public Article findByID(int artID);
+
+	public void deleteArticle(int articleId);
 	
 	public void updateStatus(Article article);
 	
