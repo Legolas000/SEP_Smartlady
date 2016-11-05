@@ -2,8 +2,10 @@ package com.sliit.smartlady.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sliit.smartlady.model.Advertisement;
+import com.sliit.smartlady.model.Category;
 import com.sliit.smartlady.model.fileUpload;
 import com.sliit.smartlady.service.AdvertisementDAO;
+import com.sliit.smartlady.service.CategoryDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,32 +24,35 @@ public class AdvertisementController {
 
 	@Autowired
     AdvertisementDAO advDAO;
-	
+	@Autowired
+	CategoryDAO catDAO;
 	//----------------------------Get All Advertise----------------------------------
 	@RequestMapping(value = "/advertisements/", method = RequestMethod.GET)
-	public ResponseEntity<List<Advertisement>> listAllArticles(){
+	public ResponseEntity<List<Advertisement>> listAllAdvertises(){
 		List<Advertisement> advertise = advDAO.getAllAdvertisements();
 		 if(advertise.isEmpty()){
 	            return new ResponseEntity<List<Advertisement>>(HttpStatus.NO_CONTENT);
 	        }
 	        return new ResponseEntity<List<Advertisement>>(advertise, HttpStatus.OK);
 	}
-			
-			
-	//--------------------Update a status of an article------------------------------
-	@RequestMapping(value = "/advertisements/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Advertisement> updateStatus(@PathVariable("id") int id) {
 
-        Advertisement currentAdvertisement = advDAO.findByID(id);
-         
-        if (currentAdvertisement==null) {
-            System.out.println("Advertisement with id " + id + " not found");
-            return new ResponseEntity<Advertisement>(HttpStatus.NOT_FOUND);
-        }
-          
-        advDAO.updateApproval(currentAdvertisement);
-        return new ResponseEntity<Advertisement>(currentAdvertisement, HttpStatus.OK);
-    }
+
+	//--------------------Update a status of an advertise------------------------------
+	@RequestMapping(value = "/advertisements/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Advertisement> updateStatus(@PathVariable("id") int id) {
+
+		System.out.println("Updating advertisement " + id);
+
+		Advertisement currentAdvertisement = advDAO.findByID(id);
+
+		if (currentAdvertisement==null) {
+			System.out.println("Advertisement with id " + id + " not found");
+			return new ResponseEntity<Advertisement>(HttpStatus.NOT_FOUND);
+		}
+
+		advDAO.updateApproval(currentAdvertisement);
+		return new ResponseEntity<Advertisement>(currentAdvertisement, HttpStatus.OK);
+	}
 
     //--------------------Create New Advertise----------------------------------
 	@RequestMapping(value = "/assignadvertise/advertise/", method = RequestMethod.POST)
@@ -56,6 +61,28 @@ public class AdvertisementController {
 		String mesg = "test creating";
 		return new ResponseEntity<String>(mesg, HttpStatus.OK);
 	}
+
+	//--------------------Update New Advertise------------------------------------------------
+	@RequestMapping(value = "/updateAdvertise", method = RequestMethod.PUT)
+	public ResponseEntity<Advertisement> updateAdvertisement(@RequestBody Advertisement advertise) {
+		System.out.println("Updating Advertisement " + advertise.getId() +" , "+advertise.getUrl());
+
+		//Advertisement currentAdvertisement = advDAO.findByID(advertise.getId());
+		System.out.println("find by ID called " );
+		if (advertise==null) {
+			System.out.println("Advertisement with id " + advertise.getId() + " not found");
+			return new ResponseEntity<Advertisement>(HttpStatus.NOT_FOUND);
+		}
+
+
+		//currentAdvertisement.setId(advertisement.getId());
+		// currentAdvertisement.setUrl(advertisement.getUrl());
+		advDAO.SaveOrUpdate(advertise);
+		System.out.println("passing to DAO impl");
+		return new ResponseEntity<Advertisement>(advertise, HttpStatus.OK);
+	}
+
+
 
     @RequestMapping(value = "/upload", method = RequestMethod.GET)
     public String crunchifyDisplayForm() {
@@ -116,6 +143,18 @@ public class AdvertisementController {
 		return null;
 
 	}
+	//fetch all Categories
+	/*@RequestMapping(value = "/categories/", method = RequestMethod.GET)
+	public ResponseEntity<List<Category>> listAllCategories(){
+		System.out.println("GET category method is calling in java");
+		List<Category> category = catDAO.getAllCategories();
+		System.out.println("data is : " + category);
+		if(category.isEmpty()){
+			return new ResponseEntity<List<Category>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<Category>>(category, HttpStatus.OK);
+	}*/
+
 
 
 }

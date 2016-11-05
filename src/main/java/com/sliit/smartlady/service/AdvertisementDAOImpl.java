@@ -27,24 +27,22 @@ public class AdvertisementDAOImpl implements AdvertisementDAO{
 	public void SaveOrUpdate(Advertisement advertisement) {
 		// TODO Auto-generated method stub
 
-        /*if(category.getID()>0)
-        {
-            String sql = "UPDATE categories SET catName = ?, catDescription = ? "+
-                    " WHERE catID = ?";
-            jdbcTemplate.update(sql, category.getcatName(), category.getcatDescription(), category.getID());
-        }
-        else*/
-
-        /*public String uploadFile(
-        	@FormDataParam("file")InputStream uploadInputStream,
-			@FormDataParam("file") FormDataContentDisposition fileDetail)\{
-
-		}*/
-
-		System.out.println("save method in implementation "+advertisement.getDescription());
-		String sql = "INSERT INTO advertisements(id, description, publishedDate, expiryDate, url, payment, status)" + "VALUES (?, ?, ?, ?, ?, ?, ?)";
-		jdbcTemplate.update(sql, advertisement.getId(), advertisement.getDescription(), advertisement.getPublishedDate(), advertisement.getExpiryDate(), advertisement.getUrl(), advertisement.getPayment(), advertisement.getStatus());
-		System.out.println("save method in implementation bottom "+advertisement);
+		if(advertisement.getId()>0)
+		{
+			System.out.println("caling update condition");
+			String sql = "UPDATE advertisements SET url = ?"+
+					" WHERE id = ?";
+			jdbcTemplate.update(sql, advertisement.getUrl(), advertisement.getId());
+			System.out.println("Updated successfully");
+		}
+		else {
+			System.out.println("save method in implementation " + advertisement.getDescription());
+			/*String sql2 = "SELECT id FROM categories WHERE catName ="+advertisement.getCategory().getCatName();
+			jdbcTemplate.update(sql2);*/
+			String sql = "INSERT INTO advertisements(id, description, publishedDate, expiryDate, url, payment, status)" + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+			jdbcTemplate.update(sql, advertisement.getId(), advertisement.getDescription(), advertisement.getPublishedDate(), advertisement.getExpiryDate(), advertisement.getUrl(), advertisement.getPayment(), advertisement.getStatus());
+			System.out.println("save method in implementation bottom " + advertisement);
+		}
 
 	}
 
@@ -77,7 +75,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO{
 
 	@Override
 	public Advertisement findByID(int advID) {
-		/*String sql = "SELECT * FROM advertisements WHERE advID = " + advID;
+		String sql = "SELECT * FROM advertisements WHERE id = " + advID;
 
 		return jdbcTemplate.query(sql, new ResultSetExtractor<Advertisement>() {
 
@@ -86,20 +84,19 @@ public class AdvertisementDAOImpl implements AdvertisementDAO{
 					DataAccessException {
 				if (rs.next()) {
 					Advertisement advertisement = new Advertisement();
-					advertisement.setID((rs.getInt("advID")));
+					advertisement.setId(rs.getInt("id"));
 					advertisement.setDescription(rs.getString("description"));
-					advertisement.setPublishedDate(rs.getString("published_date"));
-					advertisement.setExpiryDate(rs.getString("expiry_date"));
+					advertisement.setPublishedDate(rs.getString("publishedDate"));
+					advertisement.setExpiryDate(rs.getString("expiryDate"));
 					advertisement.setPayment(rs.getFloat("payment"));
-					advertisement.setURL(rs.getString("url"));
+					advertisement.setUrl(rs.getString("url"));
 					advertisement.setStatus(rs.getString("status"));
 
 					return advertisement;
-				}*//*
+				}
 				return null;
 			}
-		});*/
-		return null;
+		});
 	}
 
 	@Override
