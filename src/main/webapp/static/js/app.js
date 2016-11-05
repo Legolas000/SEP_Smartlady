@@ -53,7 +53,8 @@ angular.module('myApp').config(['$routeProvider', function($routeProvider) {
             controller : "UserController as userCtrl",
             authenticated: true
         })
-        .when('/category', {
+        .when('/category/:categoryIDforArticle', {
+            controller : "UserController as userCtrl",
             templateUrl: '/static/js/template/reader-template/category.html',
             authenticated: true
         })

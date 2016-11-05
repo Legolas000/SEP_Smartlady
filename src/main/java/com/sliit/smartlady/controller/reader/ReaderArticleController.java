@@ -3,11 +3,9 @@ package com.sliit.smartlady.controller.reader;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import com.sliit.smartlady.model.Article;
-import com.sliit.smartlady.model.Comments;
-import com.sliit.smartlady.model.Reades;
-import com.sliit.smartlady.model.User;
+import com.sliit.smartlady.model.*;
 import com.sliit.smartlady.service.ArticleDAO;
+import com.sliit.smartlady.service.CategoryDAO;
 import com.sliit.smartlady.service.CommentsDAO;
 import com.sliit.smartlady.service.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +25,8 @@ public class ReaderArticleController {
     CommentsDAO commentsDAO;
     @Autowired
     UserDAO userDAO;
+    @Autowired
+    CategoryDAO categoryDAO;
 
 	
         //----------------------------Get All Articles----------------------------------
@@ -38,6 +38,17 @@ public class ReaderArticleController {
                     return new ResponseEntity<List<Article>>(HttpStatus.NO_CONTENT);
                 }
                 return new ResponseEntity<List<Article>>(articles, HttpStatus.OK);
+        }
+
+        //----------------------------Get All Categories----------------------------------
+        @RequestMapping(value = "/allCategories", method = RequestMethod.GET)
+        public ResponseEntity<List<Category>> getAllCategories(){
+            List<Category> categories = categoryDAO.getAllCategories();
+
+             if(categories.isEmpty()){
+                    return new ResponseEntity<List<Category>>(HttpStatus.NO_CONTENT);
+                }
+                return new ResponseEntity<List<Category>>(categories, HttpStatus.OK);
         }
 
         //----------------------------Get Featured Articles----------------------------------
@@ -82,11 +93,31 @@ public class ReaderArticleController {
             return null;
         }
 
-        //---------------------------- Get All Articles By Date ----------------------------------
-        @RequestMapping(value = "/topRatedArticles", method = RequestMethod.GET)
-        public ResponseEntity<String> getTopRatedArticles(){
+    //---------------------------- Get All top Rated Articles ----------------------------------
+    @RequestMapping(value = "/topRatedArticles", method = RequestMethod.GET)
+    public ResponseEntity<String> getTopRatedArticles(){
+        try {
+            List<Article> articles = articleDAO.getTopRatedArticles();
+            List<Article> articlesWithOtherEntities = articleDAO.getAllArticlesWithOtherEntities(articles);
+
+            ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+            String jsonStringArticles = ow.writeValueAsString(articlesWithOtherEntities);
+
+            if (articles.isEmpty()) {
+                return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<String>(jsonStringArticles, HttpStatus.OK);
+        }catch (Exception ex){
+
+        }
+        return null;
+    }
+
+        //---------------------------- Get All Articles By CategoryID ----------------------------------
+        @RequestMapping(value = "/categoryidforarticle/{categoryID}", method = RequestMethod.GET)
+        public ResponseEntity<String> getArticlesByCategoryID(@PathVariable("categoryID") int categoryID){
             try {
-                List<Article> articles = articleDAO.getTopRatedArticles();
+                List<Article> articles = articleDAO.getArticleByCategoryID(categoryID);
                 List<Article> articlesWithOtherEntities = articleDAO.getAllArticlesWithOtherEntities(articles);
 
                 ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();

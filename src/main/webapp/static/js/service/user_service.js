@@ -10,12 +10,14 @@
                     getFeturedArticleService: getFeturedArticleService,
                     getArticlesSortedByDate: getArticlesSortedByDate,
                     getTopRatedArticles : getTopRatedArticles,
+                    getArticlesByCategoryID:getArticlesByCategoryID,
                     doRatingForArticle:doRatingForArticle,
                     fetchReadesDetails:fetchReadesDetails,
                     doLike:doLike,
                     getCommentsForArticle:getCommentsForArticle,
                     doComment : doComment,
-                    getAllComments:getAllComments
+                    getAllComments:getAllComments,
+                    getAllCategories:getAllCategories
                 };
 
                 return factory;
@@ -92,6 +94,21 @@
                             },
                             function(errResponse){
                                 console.error('Error while fetching allarticles');
+                                deferred.reject(errResponse);
+                            }
+                        );
+                    return deferred.promise;
+                }
+
+                function getArticlesByCategoryID(categoryID) {
+                    var deferred = $q.defer();
+                    $http.get(REST_SERVICE_URI+"categoryidforarticle/"+categoryID)
+                        .then(
+                            function (response) {
+                                deferred.resolve(JSON.stringify(response.data));
+                            },
+                            function(errResponse){
+                                console.error('Error while fetching articles by category id');
                                 deferred.reject(errResponse);
                             }
                         );
@@ -198,6 +215,21 @@
                             },
                             function(errResponse){
                                 console.error('Error while Registering'+errResponse.statusText);
+                                deferred.reject(errResponse);
+                            }
+                        );
+                    return deferred.promise;
+                }
+
+                function getAllCategories() {
+                    var deferred = $q.defer();
+                    $http.get(REST_SERVICE_URI+"allCategories")
+                        .then(
+                            function (response) {
+                                deferred.resolve(response.data);
+                            },
+                            function(errResponse){
+                                console.error('Error while fetching all categories');
                                 deferred.reject(errResponse);
                             }
                         );

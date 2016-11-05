@@ -71,6 +71,9 @@ public interface ArticleDAO {
         /*Created by Fazeel*/
         Reades getReaderByReaderIDAndArticleID(int articleID, int readerID);
 
+        /*Created by Fazeel*/
+        List<Article> getArticleByCategoryID(int categoryID);
+
         /* --------------------------------------------------------------------------------------------- */
 
 

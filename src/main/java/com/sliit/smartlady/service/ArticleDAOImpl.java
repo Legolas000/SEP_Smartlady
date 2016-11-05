@@ -168,6 +168,36 @@ public class ArticleDAOImpl implements ArticleDAO {
             return listArticle;
         }
 
+    @Override
+    public List<Article> getArticleByCategoryID(int categoryID) {
+        String sql = "SELECT * FROM articles WHERE categoryId = "+ categoryID;
+        List<Article> listArticle = jdbcTemplate.query(sql, new RowMapper<Article>() {
+
+            @Override
+            public Article mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+                Article lArticle = new Article();
+
+                lArticle.setId(rs.getInt("id"));
+                lArticle.setDescription(rs.getString("description"));
+                lArticle.setTitle(rs.getString("title"));
+                lArticle.setPublishedDate(rs.getString ("publishedDate"));
+                lArticle.setOverallRating(rs.getDouble("overallRating"));
+                lArticle.setStatus(rs.getInt("status"));
+                lArticle.setFeatured(rs.getBoolean("isFeatured"));
+                lArticle.setTotalLikes(rs.getInt("totalLikes"));
+                lArticle.setTotalViews(rs.getInt("totalViews"));
+                lArticle.setCoverImagePath(rs.getString ("coverImagePath"));
+                lArticle.setWriterID(rs.getInt ("writerId"));
+                lArticle.setCategoryID(rs.getInt("categoryId"));
+
+                return lArticle;
+            }
+        });
+
+        return listArticle;
+    }
+
         @Override
         public Article getArticleWithWriter(Article article) {
             //article.setWriterName(userDAO.findByID(article.getWriterID()).getFullname());

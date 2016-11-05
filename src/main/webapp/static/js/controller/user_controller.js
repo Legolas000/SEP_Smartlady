@@ -7,8 +7,8 @@ angular.module('myApp').controller('UserController',
             var self = this;
 
             $scope.currentDate = new Date();
-            $scope.likeStaus = false;
-            $scope.likeColor = '';
+            //$scope.isLike = false;
+            //$scope.likeColor = '';
             self.article = {};
             self.top1stArticle = {};
             self.top2ndArticle = {};
@@ -36,7 +36,11 @@ angular.module('myApp').controller('UserController',
 
             self.wholeArticles = [];
 
+            $scope.allCategoriesMore = [];
+
             self.topRatedArticles = [];
+
+            self.articlesByCategoryID = [];
 
             self.articlesToAdd = [];
 
@@ -67,13 +71,17 @@ angular.module('myApp').controller('UserController',
             getArticlesSortedByDate();
             getTopRatedArticles();
             getAllComments();
+            getAllCategories();
 
             if($routeParams.articleId != null){
                 getReaderArticle($routeParams.articleId);
             }
 
-            $scope.user1 = {rating:5};
-            //$scope.likeStaus = false;
+            if($routeParams.categoryIDforArticle != null){
+                getArticlesByCategoryID($routeParams.categoryIDforArticle);
+            }
+
+            $scope.user1 = {rating:1};
             $scope.averageRating = 0;
 
             $scope.isReadonly = true;
@@ -95,10 +103,18 @@ angular.module('myApp').controller('UserController',
             };
 
             $scope.doLike = function(articleId){
-                $scope.likeStaus = !$scope.likeStaus;
-                $scope.likeColor = $scope.likeStaus == true ? 'text-danger':'';
+                $scope.isLike = !$scope.isLike;
+                if($scope.isLike === true){
+                    $scope.likeColor = 'text-danger';
+                    $scope.likeStatus ='Liked';
+                    $scope.likeSize = 'fa-3x';
+                }else{
+                    $scope.likeColor = '';
+                    $scope.likeStatus = 'Like';
+                    $scope.likeSize = 'fa-2x';
+                }
 
-                UserService.doLike(articleId,$scope.likeStaus,$rootScope.user.id)
+                UserService.doLike(articleId,$scope.isLike,$rootScope.user.id)
                     .then(
                         function (data) {
 
@@ -114,13 +130,14 @@ angular.module('myApp').controller('UserController',
                     comments : $scope.userComments,
                     userID : $rootScope.user.id,
                     articleID : articleID,
-                    dateTime : mysqlTimeStampToDate($scope.currentDate)
+                    dateTime : $scope.currentDate
                 };
 
                 UserService.doComment(commentsData)
                     .then(
                         function (data) {
                             getCommentsForArticle(articleID);
+                            $scope.userComments = '';
                         },
                         function (errResponse) {
                             console.error('Error: Login fail. ');
@@ -205,6 +222,25 @@ angular.module('myApp').controller('UserController',
                         },
                         function (errResponse) {
                             console.error('Error while fetching All Comments in user controle');
+                        }
+                    );
+            }
+
+            function getAllCategories() {
+                UserService.getAllCategories()
+                    .then(
+                        function (data) {
+                            $scope.allCategories = data;
+                            var categoryCount = 0;
+                            angular.forEach(data, function(value, key){
+                                if(categoryCount > 7){
+                                    $scope.allCategoriesMore.push(value);
+                                }
+                                categoryCount++;
+                            });
+                        },
+                        function (errResponse) {
+                            console.error('Error while fetching All Categories in user controle');
                         }
                     );
             }
@@ -296,7 +332,40 @@ angular.module('myApp').controller('UserController',
 
                         },
                         function (errResponse) {
-                            console.error('Error while fetching featured article');
+                            console.error('Error while fetching top rated article');
+                        }
+                    );
+            }
+
+            function getArticlesByCategoryID(categoryID) {
+
+                UserService.getArticlesByCategoryID(categoryID)
+                    .then(
+                        function (data) {
+                            angular.forEach(JSON.parse(data), function(value, key){
+                                self.articlesByCategoryID.push({
+                                    id:value.id,
+                                    title:value.title,
+                                    publishedDate:mysqlTimeStampToDate(value.publishedDate),
+                                    description: $sce.trustAsHtml(value.description),
+                                    coverImagePath:value.coverImagePath,
+                                    overallRating:value.overallRating,
+                                    categoryID:value.categoryID,
+                                    categoryName:value.category.catName,
+                                    writerID:value.writerID,
+                                    writerName:value.userAsWriter.fullname,
+                                    totalLikes:value.totalLikes,
+                                    totalViews:value.totalViews
+                                });
+                            });
+                            $scope.articleSize = self.articlesByCategoryID.length;
+                            $scope.articlesByCategoryID = self.articlesByCategoryID;
+
+                            console.log("self.articlesByCategoryID : "+ JSON.stringify(self.articlesByCategoryID));
+
+                        },
+                        function (errResponse) {
+                            console.error('Error while fetching article by categpry id');
                         }
                     );
             }
@@ -304,12 +373,17 @@ angular.module('myApp').controller('UserController',
 
 
             function statusOfLike(data) {
-                $scope.likeStaus = JSON.stringify(data.like);
-                if($scope.likeStaus){
+                $scope.isLike = JSON.stringify(data.like);
+                if($scope.isLike === true){
                     $scope.likeColor = 'text-danger';
+                    $scope.likeStatus ='Liked';
+                    $scope.likeSize = 'fa-3x';
                 }else{
                     $scope.likeColor = '';
+                    $scope.likeStatus = 'Like';
+                    $scope.likeSize = 'fa-2x';
                 }
+
             }
 
             function getPagination() {

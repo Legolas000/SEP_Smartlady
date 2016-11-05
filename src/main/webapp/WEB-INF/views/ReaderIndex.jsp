@@ -168,67 +168,17 @@
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav navbar-left">
 
-							<li class="<%--drop--%>"><a class="home" href="/#/home">Home</a></li>
+							<li ng-if="userRole === 1" class=""><a class="" href="/#/home">Home</a></li>
 
-							<li><a class="<%--world--%>" href="/#/category">World</a></li>
+							<li ng-if="userRole === 1" ng-repeat="category in allCategories | limitTo:7">
+								<a class="" href="/#/category/{{category.id}}">{{category.catName}}</a>
+							</li>
 
-							<li><a class="<%--travel--%>" href="/#/category">Travel</a></li>
-
-							<li><a class="<%--tech--%>" href="/#/category">Tech</a></li>
-
-							<li><a class="<%--fashion--%>" href="/#/category">Fashion</a></li>
-
-							<li><a class="<%--video--%>" href="/#/category">Video</a></li>
-
-							<li><a class="<%--sport--%>" href="/#/category">Sport</a></li>
-							<li><a class="<%--food--%>" href="/#/category">Food &amp; Health</a></li>
-
-							<li class="drop"><a class="features" href="#">More</a>
+							<li ng-if="userRole === 1" class="drop"><a class="features" href="">More</a>
 								<ul class="dropdown features-dropdown">
-									<li class="drop"><a href="#">Category Layouts</a>
-										<ul class="dropdown level2">
-											<li><a href="/#/category">Large Image Sidebar</a></li>
-											<li><a href="/#/category">Left Sidebar Thumbnail</a></li>
-											<li><a href="/#/category">Both Sidebar</a></li>
-											<li><a href="/#/category">2 Grid sidebar</a></li>
-											<li><a href="/#/category">3 Grid no sidebar</a></li>
-											<li><a href="/#/category">Fullwidth &amp; slider</a></li>
-										</ul>
+									<li  class="" ng-repeat="category in allCategoriesMore">
+										<a href="/#/category/{{category.id}}">{{category.catName}}</a>
 									</li>
-									<li class="drop"><a href="#">Header Layouts</a>
-										<ul class="dropdown level2">
-											<li><a href="/#/category">Default header</a></li>
-											<li><a href="/#/category">header 2</a></li>
-											<li><a href="/#/category">header 3</a></li>
-											<li><a href="/#/category">header 4</a></li>
-											<li><a href="/#/category">header 5</a></li>
-										</ul>
-									</li>
-									<li class="drop"><a href="#">Post Formats</a>
-										<ul class="dropdown level2">
-											<li><a href="single-post.html">Single Post 1</a></li>
-											<li><a href="single-post2.html">Single Post 2</a></li>
-											<li><a href="single-post3.html">Single Post 3</a></li>
-											<li><a href="single-post4.html">Single Post 4</a></li>
-											<li><a href="single-post5.html">Single Post 5</a></li>
-											<li><a href="single-post6.html">Single Post 6</a></li>
-											<li><a href="single-post7.html">Single Post 7</a></li>
-											<li><a href="single-post8.html">Single Post 8</a></li>
-										</ul>
-									</li>
-									<li class="drop"><a href="#">Forum Pages</a>
-										<ul class="dropdown level2">
-											<li><a href="forums.html">Forums</a></li>
-											<li><a href="forum-category.html">Topics</a></li>
-											<li><a href="forum-topic.html">Single Topic</a></li>
-										</ul>
-									</li>
-									<li><a href="allfooter.html">All footer widgets</a></li>
-									<li><a href="autor-list.html">Autor List</a></li>
-									<li><a href="autor-details.html">Autor Details</a></li>
-									<li><a href="404-error.html">404 Error</a></li>
-									<li><a href="underconstruction.html">Underconstruction</a></li>
-									<li><a href="comming-soon.html">Comming soon Page</a></li>
 								</ul>
 							</li>
 
