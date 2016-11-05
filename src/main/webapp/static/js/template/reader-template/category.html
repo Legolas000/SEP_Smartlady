@@ -9,7 +9,7 @@
                     <h1><span class="world">{{articlesByCategoryID[0].categoryName}}</span></h1>
                 </div>
 
-                <div class="row" ng-repeat="article in articlesByCategoryID" ng-if="$index % 2 == 0">
+                <div class="row" ng-repeat="article in articlesByCategoryID | filter:searchCat | startFrom:(currentPageCat-1)*entryLimitCat | limitTo:entryLimitCat" ng-if="$index % 2 == 0">
                     <div class="col-md-6" ng-show="articleSize-1 >= $index">
                         <div class="news-post standard-post2">
                             <div class="post-gallery">
@@ -75,15 +75,7 @@
 
             <!-- pagination box -->
             <div class="pagination-box">
-                <ul class="pagination-list">
-                    <li><a class="active" href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><span>...</span></li>
-                    <li><a href="#">9</a></li>
-                    <li><a href="#">Next</a></li>
-                </ul>
-                <p>Page 1 of 9</p>
+                <pagination class="pagination-list" page="currentPageCat" max-size="noOfPagesCat" total-items="totalItemsCat" items-per-page="entryLimitCat"></pagination>
             </div>
             <!-- End Pagination box -->
 

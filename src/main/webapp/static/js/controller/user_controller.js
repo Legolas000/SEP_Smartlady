@@ -360,8 +360,7 @@ angular.module('myApp').controller('UserController',
                             });
                             $scope.articleSize = self.articlesByCategoryID.length;
                             $scope.articlesByCategoryID = self.articlesByCategoryID;
-
-                            console.log("self.articlesByCategoryID : "+ JSON.stringify(self.articlesByCategoryID));
+                            getPaginationForCategory();
 
                         },
                         function (errResponse) {
@@ -407,6 +406,30 @@ angular.module('myApp').controller('UserController',
                     $scope.totalItems = $scope.filtered.length;
                     $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
                     $scope.currentPage = 1;
+                }, true);
+            }
+
+            function getPaginationForCategory() {
+                // create empty search model (object) to trigger $watch on update
+                $scope.searchCat = {};
+
+                $scope.resetFiltersCat = function () {
+                    // needs to be a function or it won't trigger a $watch
+                    $scope.searchCat = {};
+                };
+
+                // pagination controls
+                $scope.currentPageCat = 1;
+                $scope.totalItemsCat = $scope.articlesByCategoryID.length;
+                $scope.entryLimitCat = 10; // items per page
+                $scope.noOfPagesCat = Math.ceil($scope.totalItemsCat / $scope.entryLimitCat);
+
+                // $watch search to update pagination
+                $scope.$watch('search', function (newVal, oldVal) {
+                    $scope.filteredCat = filterFilter($scope.articlesByCategoryID, newVal);
+                    $scope.totalItemsCat = $scope.filteredCat.length;
+                    $scope.noOfPagesCat = Math.ceil($scope.totalItemsCat / $scope.entryLimitCat);
+                    $scope.currentPageCat = 1;
                 }, true);
             }
 
