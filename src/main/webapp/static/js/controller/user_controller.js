@@ -114,7 +114,7 @@ angular.module('myApp').controller('UserController',
                     comments : $scope.userComments,
                     userID : $rootScope.user.id,
                     articleID : articleID,
-                    dateTime : $scope.currentDate
+                    dateTime : mysqlTimeStampToDate($scope.currentDate)
                 };
 
                 UserService.doComment(commentsData)
@@ -141,6 +141,8 @@ angular.module('myApp').controller('UserController',
                         function (data) {
                             self.article = {};
                             self.article = data;
+                            self.article.publishedDate = mysqlTimeStampToDate(self.article.publishedDate);
+
                             self.article.description = $sce.trustAsHtml(self.article.description );
                             getSocialShareModel();
                             getReadesDetails(id);
@@ -196,6 +198,7 @@ angular.module('myApp').controller('UserController',
                             $scope.allComments = JSON.parse(data);
                             var noOfAllComments = 0;
                             angular.forEach(JSON.parse(data), function(value, key){
+                                $scope.allComments[noOfAllComments].dateTime = mysqlTimeStampToDate(value.dateTime);
                                 noOfAllComments++;
                             });
                             $scope.noOfAllComments = noOfAllComments;
@@ -215,7 +218,7 @@ angular.module('myApp').controller('UserController',
                                 self.articlesToAdd.push({
                                     id:value.id,
                                     title:value.title,
-                                    publishedDate:value.publishedDate,
+                                    publishedDate:mysqlTimeStampToDate(value.publishedDate),
                                     description: $sce.trustAsHtml(value.description),
                                     coverImagePath:value.coverImagePath,
                                     overallRating:value.overallRating,
@@ -246,7 +249,7 @@ angular.module('myApp').controller('UserController',
                                 self.wholeArticles.push({
                                     id:value.id,
                                     title:value.title,
-                                    publishedDate:value.publishedDate,
+                                    publishedDate:mysqlTimeStampToDate(value.publishedDate),
                                     description: $sce.trustAsHtml(value.description),
                                     coverImagePath:value.coverImagePath,
                                     overallRating:value.overallRating,
@@ -278,7 +281,7 @@ angular.module('myApp').controller('UserController',
                                 self.topRatedArticles.push({
                                     id:value.id,
                                     title:value.title,
-                                    publishedDate:value.publishedDate,
+                                    publishedDate:mysqlTimeStampToDate(value.publishedDate),
                                     description: $sce.trustAsHtml(value.description),
                                     coverImagePath:value.coverImagePath,
                                     overallRating:value.overallRating,
@@ -340,6 +343,16 @@ angular.module('myApp').controller('UserController',
                     Name: self.article.title,
                     ImageUrl: self.article.coverImagePath
                 };
+            }
+
+            function mysqlTimeStampToDate(timestamp) {
+                timestamp = timestamp.substring(0, timestamp.length - 1);
+                timestamp = timestamp.substring(0, timestamp.length - 1);
+                //function parses mysql datetime string and returns javascript Date object
+                //input has to be in this format: 2007-06-05 15:26:02
+                var regex=/^([0-9]{2,4})-([0-1][0-9])-([0-3][0-9]) (?:([0-2][0-9]):([0-5][0-9]):([0-5][0-9]))?$/;
+                var parts=timestamp.replace(regex,"$1 $2 $3 $4 $5 $6").split(' ');
+                return new Date(parts[0],parts[1]-1,parts[2],parts[3],parts[4],parts[5]);
             }
         }]);
 

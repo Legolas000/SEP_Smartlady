@@ -189,7 +189,7 @@
 								<img alt="" src="{{comment.user.imagePath}}">
 								<div class="comment-content">
 									<h4>{{comment.user.fullname}}</h4>
-									<span><i class="fa fa-clock-o"></i>{{comment.dateTime}}</span>
+									<span><i class="fa fa-clock-o"></i>{{comment.dateTime | date:'medium' }}</span>
 									<p>{{comment.comments}}</p>
 								</div>
 							</div>

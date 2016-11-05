@@ -279,7 +279,7 @@
 								<div class="post-content">
 									<h2><a href="single-post.html">{{userCtrl.articlesToAdd[articleNo].title}}</a></h2>
 									<ul class="post-tags">
-										<li><i class="fa fa-clock-o"></i>{{userCtrl.articlesToAdd[articleNo].publishedDate}}</li>
+										<li><i class="fa fa-clock-o"></i>{{userCtrl.articlesToAdd[articleNo].publishedDate | date:'medium'}}</li>
 										<li><i class="fa fa-user"></i>by <a href="#">{{userCtrl.articlesToAdd[articleNo].writerName}}</a></li>
 										<li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
 										<li><i class="fa fa-eye"></i>872</li>
@@ -318,7 +318,7 @@
 							<div class="post-content">
 								<h2><a href="single-post.html">{{userCtrl.articlesToAdd[articleNo].title}} </a></h2>
 								<ul class="post-tags">
-									<li><i class="fa fa-clock-o"></i>{{userCtrl.articlesToAdd[articleNo].publishedDate}}</li>
+									<li><i class="fa fa-clock-o"></i>{{userCtrl.articlesToAdd[articleNo].publishedDate | date:'medium'}}</li>
 									<li><i class="fa fa-user"></i>by <a href="#">{{userCtrl.articlesToAdd[articleNo].writerName}}</a></li>
 									<li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
 								</ul>
@@ -539,7 +539,7 @@
 											<div class="post-content">
 												<h2><a href="/#/readarticles/{{article.id}}">{{article.title}} </a></h2>
 												<ul class="post-tags">
-													<li><i class="fa fa-clock-o"></i>{{article.publishedDate}}</li>
+													<li><i class="fa fa-clock-o"></i>{{article.publishedDate | date:'medium'}}</li>
 												</ul>
 											</div>
 										</li>
@@ -553,7 +553,7 @@
                                             <div class="post-content">
                                                 <h2><a href="/#/readarticles/{{article.id}}">{{article.title}} </a></h2>
                                                 <ul class="post-tags">
-                                                    <li><i class="fa fa-clock-o"></i>{{article.publishedDate}}</li>
+                                                    <li><i class="fa fa-clock-o"></i>{{article.publishedDate | date:'medium'}}</li>
                                                 </ul>
                                             </div>
                                         </li>
@@ -567,7 +567,7 @@
                                             <div class="post-content">
                                                 <h2><a href="/#/readarticles/{{article.id}}">{{article.title}} </a></h2>
                                                 <ul class="post-tags">
-                                                    <li><i class="fa fa-clock-o"></i>{{article.publishedDate}}</li>
+                                                    <li><i class="fa fa-clock-o"></i>{{article.publishedDate | date:'medium' }}</li>
                                                 </ul>
                                                 <div><average-star-rating ng-model="article.overallRating" max="5" ><average-star-rating></div>
                                             </div>
@@ -595,7 +595,7 @@
                                                         <div class="comment-content">
                                                             <p class="main-message">{{allComments[commentIndex].comments}}</p>
                                                             <span><i class="fa fa-user"></i>by {{allComments[commentIndex].user.fullname}}</span>
-                                                            <span><i class="fa fa-clock-o"></i>{{allComments[commentIndex].dateTime}}</span>
+                                                            <span><i class="fa fa-clock-o"></i>{{allComments[commentIndex].dateTime | date:'medium'}}</span>
                                                         </div>
                                                     </a>
 												</li>
@@ -610,7 +610,7 @@
                                                         <div class="comment-content">
                                                             <p class="main-message">{{allComments[commentIndex].comments}}</p>
                                                             <span><i class="fa fa-user"></i>by {{allComments[commentIndex].user.fullname}}</span>
-                                                            <span><i class="fa fa-clock-o"></i>{{allComments[commentIndex].dateTime}}</span>
+                                                            <span><i class="fa fa-clock-o"></i>{{allComments[commentIndex].dateTime | date:'medium' }}</span>
                                                         </div>
                                                     </a>
 												</li>
