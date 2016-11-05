@@ -49,18 +49,12 @@
                                             <div ng-if="!adctrl.check" style="color:red"><b><label >{{item.status}}</label></b></div>
                                             <div style="color:#009933"><b><label >Expirry Date {{item.exdate}}</label></b></div>
                                             <%--<div style="color:#009933 "><b><label >{{adctrl.remainingDays}}</label></b></div>--%><br/><br/>
-                                            <button type="submit" class="btn btn-warning" data-toggle="modal" data-target="#updateAdvertiseModal">Extend</button>
-
-
-
+                                            <button type="submit" class="btn btn-warning" ng-click="open(item.id)" data-target="#updateAdvertiseModal">Extend</button>
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-
-                               <%-- <input type="button" class="btn btn-warning" ng-click="adctrl.viewAdvertises()" value="View" />--%>
 
                         </form>
                     </div>
