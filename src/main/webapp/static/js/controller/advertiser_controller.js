@@ -28,10 +28,10 @@ angular.module('myApp').controller('AdvertiserController',
                  heading:'',*/
                 url:'www.google.com',
                 description:'',
-                time:'For 2 Weeks',
+                time:'For 2 Weeks middle of right Side',
                 publishedDate:'',
                 expiryDate:'',
-                //place:''
+                place:'middle of right Side',
                 payment:'2650.0',
                 status:'N',
                 advertiseimg:'',
@@ -43,6 +43,7 @@ angular.module('myApp').controller('AdvertiserController',
 
             self.values = {
                 id:'',
+                url:'',
                 exdate: '',
                 status:''
             };
@@ -53,11 +54,15 @@ angular.module('myApp').controller('AdvertiserController',
             self.urltest = 'www.youtube.com';
             self.testdescription = 'D';
             self.swt = "";
+            self.updateUrl = '';
+
             self.check = "";
             self.advertises=[];
             self.Categories=[];
+            self.selectedAdvertise=[];
 
             $scope.uploadFile = function(files) {
+                console.log("Function is uploadFile!");
                 var fd = new FormData();
                 //Take the first selected file
                 fd.append("file", files[0]);
@@ -74,7 +79,7 @@ angular.module('myApp').controller('AdvertiserController',
             };
 
             function submitUser() {
-
+                console.log("Function is submitUser!");
                 var file = self.fileModel;
                 console.log('file is ' + self.fileModel);
                 console.dir(file);
@@ -109,10 +114,18 @@ angular.module('myApp').controller('AdvertiserController',
                     );
             }
 
-            $scope.open = function (id) {
+            $scope.openTimeExtend = function (id) {
                 $rootScope.advertiseId = id;
                 var modalInstance = $modal.open({
-                    templateUrl: '/static/js/template/advertiser-template/updateModal.html',
+                    templateUrl: '/static/js/template/advertiser-template/extendTimeModal.html',
+                    controller: 'PopupCont'
+                });
+            };
+
+            $scope.openUpdateAll = function (id) {
+                $rootScope.advertiseId = id;
+                var modalInstance = $modal.open({
+                    templateUrl: '/static/js/template/advertiser-template/updateAllModal.html',
                     controller: 'PopupCont'
                 });
             };
@@ -153,11 +166,13 @@ angular.module('myApp').controller('AdvertiserController',
                             var firstDate = new Date();
                             self.advertises.forEach(function (item) {
                                 self.values.exdate = item.expiryDate;
+
                                 var secondDate = item.expiryDate;
                                 if( (firstDate.getTime() < new Date(secondDate).getTime())) {
                                     self.check = "true";
                                     self.values.status = "Available";
                                     self.values.id = item.id;
+                                    self.values.url = item.url;
                                 }
                                 else{
                                     self.values.status = "Expired";
@@ -283,26 +298,42 @@ angular.module('myApp').controller('AdvertiserController',
                     heading:'',
                     url:'',
                     description:"",
-                    time:'',
-                    place:'',
+                    time:'For 2 Weeks',
+                    place:'middle of right Side',
                     payment:''};
                 $scope.advertiseForm.$setPristine(); //reset Form
             }
-
+            $scope.getSelectedAdvertise = function(advertiseId){
+                console.log("find by id function calling!")
+                AdvertiserService.getSelectedAdvertise(advertiseId)
+                    .then(
+                        function(d) {
+                            console.log("function(d) in findbyid  calling");
+                            self.selectedAdvertise = d;
+                            self.updateUrl = self.selectedAdvertise.url;
+                            self.updateDescription = self.selectedAdvertise.description;
+                            self.updatePlace = self.selectedAdvertise.place;
+                            //$scope.updateTimePeriod = self.selectedAdvertise.
+                            console.log("Selected adv : "+ self.selectedAdvertise + self.selectedAdvertise.place);
+                        },
+                        function(errResponse){
+                            sweetAlert("Error!!", "Error while fetch!!!!", "error");
+                            console.error('Error while fetch Advertise');
+                        }
+                    );
+            };
 
             function updateAdvertise(id){
                 var advertise = {
                     id : id,
-                    url : self.url2
-
-                } ;
-
+                    url : self.updateUrl,
+                    description : self.updateDescription,
+                    place : self.updatePlace
+                };
                 AdvertiserService.updateAdvertise(advertise)
-
                     .then(
-                        //fetchAllUsers,
                         function(errResponse){
-                            console.error('Error while updating User');
+                            console.error('Error while updating Advertise');
                         }
                     );
             }

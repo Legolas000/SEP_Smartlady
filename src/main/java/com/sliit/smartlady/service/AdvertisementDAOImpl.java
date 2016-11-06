@@ -30,17 +30,17 @@ public class AdvertisementDAOImpl implements AdvertisementDAO{
 		if(advertisement.getId()>0)
 		{
 			System.out.println("caling update condition");
-			String sql = "UPDATE advertisements SET url = ?"+
+			String sql = "UPDATE advertisements SET url = ?, description = ?, place = ?"+
 					" WHERE id = ?";
-			jdbcTemplate.update(sql, advertisement.getUrl(), advertisement.getId());
-			System.out.println("Updated successfully");
+			jdbcTemplate.update(sql, advertisement.getUrl(), advertisement.getDescription(), advertisement.getPlace(), advertisement.getId());
+			System.out.println("Updated successfully with : " +advertisement.getUrl() + " " + advertisement.getDescription());
 		}
 		else {
 			System.out.println("save method in implementation " + advertisement.getDescription());
 			/*String sql2 = "SELECT id FROM categories WHERE catName ="+advertisement.getCategory().getCatName();
 			jdbcTemplate.update(sql2);*/
-			String sql = "INSERT INTO advertisements(id, description, publishedDate, expiryDate, url, payment, status)" + "VALUES (?, ?, ?, ?, ?, ?, ?)";
-			jdbcTemplate.update(sql, advertisement.getId(), advertisement.getDescription(), advertisement.getPublishedDate(), advertisement.getExpiryDate(), advertisement.getUrl(), advertisement.getPayment(), advertisement.getStatus());
+			String sql = "INSERT INTO advertisements(id, description, publishedDate, expiryDate, url, payment, status, place)" + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+			jdbcTemplate.update(sql, advertisement.getId(), advertisement.getDescription(), advertisement.getPublishedDate(), advertisement.getExpiryDate(), advertisement.getUrl(), advertisement.getPayment(), advertisement.getStatus(), advertisement.getPlace());
 			System.out.println("save method in implementation bottom " + advertisement);
 		}
 
@@ -91,6 +91,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO{
 					advertisement.setPayment(rs.getFloat("payment"));
 					advertisement.setUrl(rs.getString("url"));
 					advertisement.setStatus(rs.getString("status"));
+					advertisement.setPlace(rs.getString("place"));
 
 					return advertisement;
 				}

@@ -9,6 +9,7 @@ public class Advertisement {
 	private String expiryDate;
 	private String url;
 	private String status;
+	private String place;
 	private float payment;
 	private int categoryID;
 	private int userID;
@@ -111,6 +112,14 @@ public class Advertisement {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
 	}
 
 	@Override

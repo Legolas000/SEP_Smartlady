@@ -36,6 +36,22 @@ public class AdvertisementController {
 	        return new ResponseEntity<List<Advertisement>>(advertise, HttpStatus.OK);
 	}
 
+	//--------------------Fetch a selected advertise by id------------------------------
+	@RequestMapping(value = "/getSelectedAdvertise/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Advertisement> getSelectedAdvertise(@PathVariable("id") int id) {
+
+		System.out.println("Updating advertisement   " + id);
+
+		Advertisement currentAdvertisement = advDAO.findByID(id);
+		System.out.println("find by ID called " );
+		if (currentAdvertisement==null) {
+			System.out.println("Advertisement with id " + id + " not found");
+			return new ResponseEntity<Advertisement>(HttpStatus.NOT_FOUND);
+		}
+
+		//advDAO.updateApproval(currentAdvertisement);
+		return new ResponseEntity<Advertisement>(currentAdvertisement, HttpStatus.OK);
+	}
 
 	//--------------------Update a status of an advertise------------------------------
 	@RequestMapping(value = "/advertisements/{id}", method = RequestMethod.DELETE)
@@ -57,15 +73,16 @@ public class AdvertisementController {
     //--------------------Create New Advertise----------------------------------
 	@RequestMapping(value = "/assignadvertise/advertise/", method = RequestMethod.POST)
 	public ResponseEntity<String> createAdvertise(@RequestBody Advertisement advertisement) {
+		System.out.println("create advrts calling in java!");
 		advDAO.SaveOrUpdate(advertisement);
 		String mesg = "test creating";
-		return new ResponseEntity<String>(mesg, HttpStatus.OK);
+		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
 	//--------------------Update New Advertise------------------------------------------------
 	@RequestMapping(value = "/updateAdvertise", method = RequestMethod.PUT)
 	public ResponseEntity<Advertisement> updateAdvertisement(@RequestBody Advertisement advertise) {
-		System.out.println("Updating Advertisement " + advertise.getId() +" , "+advertise.getUrl());
+		System.out.println("Updating Advertisement " + advertise.getId() +" , "+advertise.getUrl() + " " + advertise.getDescription());
 
 		//Advertisement currentAdvertisement = advDAO.findByID(advertise.getId());
 		System.out.println("find by ID called " );
@@ -74,9 +91,6 @@ public class AdvertisementController {
 			return new ResponseEntity<Advertisement>(HttpStatus.NOT_FOUND);
 		}
 
-
-		//currentAdvertisement.setId(advertisement.getId());
-		// currentAdvertisement.setUrl(advertisement.getUrl());
 		advDAO.SaveOrUpdate(advertise);
 		System.out.println("passing to DAO impl");
 		return new ResponseEntity<Advertisement>(advertise, HttpStatus.OK);
