@@ -1,0 +1,30 @@
+
+<div class="modal-header">
+    <h3 class="modal-title"><b>Extend Time Of Advertisements</b></h3>
+</div>
+<div ng-controller="AdvertiserController as adctrl">
+<div class="modal-body" >
+    <div style="margin-left: 80px">
+        <img src="/static/js/template/advertiser-template/advertises/gel.jpg" style="height: 330px; width: 410px; align-content: right " class="img-rounded" />
+    </div><br/>
+    <span><b><h4>You can extend the date of this advertisement!</h4></b></span><br/>
+
+    <div class="form-group">
+        <label class="control-label" >Time Period for Avdertisement :</label>
+        <select class="form-control" ng-model="adctrl.extendTime">
+            <option>For 2 Weeks</option>
+            <option>For 1 Month</option>
+            <option>For 3 Month</option>
+            <option>For 6 Month</option>
+            <option>For 1 Year</option>
+        </select>
+    </div>
+
+</div>
+<div class="modal-footer">
+
+
+    <button class="btn btn-warning" type="button"  ng-click="close()">Cancel</button>
+    <button type="button" class="btn btn-primary" ng-click="adctrl.updateAdvertise(advertiseId, adctrl.advertises)">Update Changes</button>
+</div>
+</div>

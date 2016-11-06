@@ -1,0 +1,53 @@
+<div class="modal-header">
+    <h3 class="modal-title"><b>Extend Time Of Advertisements</b></h3>
+</div>
+<div ng-controller="AdvertiserController as adctrl" ng-init="getSelectedAdvertise(advertiseId)">
+    <div class="modal-body" >
+        <!--<div >
+            <img src="/static/js/template/advertiser-template/advertises/gel.jpg" style="height: 330px; width: 410px; align-content: right " class="img-rounded" />
+        </div>
+        <span><b>Passed Parameter after click:</b></span>{{title1}}-->
+        <div>
+            <label class="control-label" >URL of Advertise :</label>
+            <input class="form-control" name="url2" type="text" ng-model="adctrl.updateUrl" required />
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" >Description about advertise :</label>
+            <textarea class="form-control" name="description" type="text" ng-model="adctrl.updateDescription" style="height: 100px" required ng-minlength="15" ng-maxlength="70"></textarea>
+            <div ng-show="description.$touched && advertiseForm.description.$invalid" class="col-md-12 col-sm-12 col-xs-12 ">
+                <span ng-show="description.$error.required">
+                    <a class="errorfont">Description field is required</a> <br/>
+                </span>
+                <a class="errorfont">Description should be greater than 15 or less than 70 letters</a>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" >Time Period for Avdertisement :</label>
+            <select class="form-control" ng-model="adctrl.extendTime">
+                <option>For 2 Weeks</option>
+                <option>For 1 Month</option>
+                <option>For 3 Month</option>
+                <option>For 6 Month</option>
+                <option>For 1 Year</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" >Place to Display Add :</label>
+            <select class="form-control" ng-model="adctrl.updatePlace">
+                <option>middle of right Side</option>
+                <option>Bottom of right Side</option>
+                <option>middle of Page</option>
+                <option>Bottom of Page</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+
+        <button class="btn btn-warning" type="button"  ng-click="close()">Cancel</button>
+        <button type="button" class="btn btn-primary" ng-click="adctrl.updateAdvertise(advertiseId, adctrl.advertises)">Update Changes</button>
+    </div>
+</div>
