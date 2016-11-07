@@ -10,13 +10,20 @@
         font-size: small;
 
     }
+
+    .textarea{
+        resize: vertical;
+
+    }
+
 </style>
+<link href="/static/css/magazine-css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen"/>
 
 <div class="section">
-    <div class="container" ng-init="fetchAllCategories()">
+    <div class="container" ng-init="fetchAllCategories()" ng-controller="AdvertiserController as adctrl">
         <div class="row">
             <div class="col-md-9" style="text-align: left"><br/>
-                <div class="panel panel-info" >
+                <div class="panel panel-info" style="margin-top: 0px">
                     <div class="panel-heading" style="height: 50px"><h4>Assigning New Advertisements</h4></div>
                     <div class="panel-body contact-form-box">
                         <form role="form" name="advertiseForm" class="ng-pristine ng-invalid ng-invalid-required" enctype="multipart/form-data"><%--ng-submit="submitUser()">--%>
@@ -47,7 +54,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label" >Description about advertise :</label>
-                                <textarea class="form-control" name="description" type="text" ng-model="adctrl.advertise.description" style="height: 100px" required ng-minlength="15" ng-maxlength="70"></textarea>
+                                <textarea class="form-control textarea" name="description" type="text" ng-model="adctrl.advertise.description" style="height: 100px" required ng-minlength="15" ng-maxlength="70"></textarea>
                                 <div ng-show="advertiseForm.description.$touched && advertiseForm.description.$invalid" class="col-md-12 col-sm-12 col-xs-12 ">
                                     <span ng-show="advertiseForm.description.$error.required">
                                     <a class="errorfont">Description field is required</a> <br/>
@@ -105,7 +112,7 @@
 </div>
 
 
-
+<script type="text/javascript" src="/static/js/magazine-js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/static/js/lib/angular-1.4.4.js"></script>
 <script type="text/javascript" src="/static/js/lib/angular-route.min.js"></script>
 <script type="text/javascript" src="/static/js/app.js"></script>

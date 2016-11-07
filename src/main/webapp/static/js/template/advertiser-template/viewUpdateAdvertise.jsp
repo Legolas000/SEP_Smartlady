@@ -22,13 +22,13 @@
                                 <div class="well well-sm" >
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <img src="/static/js/template/advertiser-template/advertises/gel.jpg" style="height: 130px; width: 110px; alignment: right" class="img-rounded" />
+                                            <img src="/static/js/template/advertiser-template/advertises/maxresdefault.jpg" style="height: 130px; width: 110px; alignment: right" class="img-rounded" />
                                         </div>
                                         <div class="col-md-6 text-center">
                                             <div ng-if="adctrl.check" style="color:#009933"><b><label >{{item.status}}</label></b></div>
-                                            <div ng-if="!adctrl.check" style="color:red"><b><label >{{item.status}}</label></b></div>
+                                            <div ng-="!adctrl.check" style="color:red"><b><label >{{item.status}}</label></b></div>
                                             <div style="color:#009933"><b><label >Expirry Date {{item.exdate}}</label></b></div>
-                                            <input type="submit" class="btn btn-warning small" ng-click="openTimeExtend(item.id)" value="Extend Time" /><br/><br/>
+                                            <input type="submit" class="btn btn-warning small" ng-click="openTimeExtend(item.id); getSelectedAdvertise(advertiseId)" value="Extend Time" /><br/><br/>
                                             <button type="submit" class="btn btn-warning small"  ng-click="openUpdateAll(item.id); getSelectedAdvertise(advertiseId)" >Update All</button>
                                         </div>
                                     </div>

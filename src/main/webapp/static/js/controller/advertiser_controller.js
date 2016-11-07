@@ -28,7 +28,7 @@ angular.module('myApp').controller('AdvertiserController',
                  heading:'',*/
                 url:'www.google.com',
                 description:'',
-                time:'For 2 Weeks middle of right Side',
+                time:'For 2 Weeks',
                 publishedDate:'',
                 expiryDate:'',
                 place:'middle of right Side',
@@ -285,6 +285,7 @@ angular.module('myApp').controller('AdvertiserController',
             }
 
 
+
             function viewAdvertises() {
                 console.log("Button clicked !!!");
                 fetchAllAdvertise();
@@ -293,16 +294,19 @@ angular.module('myApp').controller('AdvertiserController',
 
             function reset(){
                 console.log("Reset button calling");
-                self.advertise={id:null,
+                self.advertise={
+                    id:null,
                     category:'',
                     heading:'',
                     url:'',
                     description:"",
                     time:'For 2 Weeks',
                     place:'middle of right Side',
-                    payment:''};
+                    payment:''
+                };
                 $scope.advertiseForm.$setPristine(); //reset Form
             }
+
             $scope.getSelectedAdvertise = function(advertiseId){
                 console.log("find by id function calling!")
                 AdvertiserService.getSelectedAdvertise(advertiseId)
@@ -313,8 +317,8 @@ angular.module('myApp').controller('AdvertiserController',
                             self.updateUrl = self.selectedAdvertise.url;
                             self.updateDescription = self.selectedAdvertise.description;
                             self.updatePlace = self.selectedAdvertise.place;
-                            //$scope.updateTimePeriod = self.selectedAdvertise.
-                            console.log("Selected adv : "+ self.selectedAdvertise + self.selectedAdvertise.place);
+                            self.updatePublishedTimePeriod = self.selectedAdvertise.expiryDate;
+                            console.log("Selected adv : "+ self.selectedAdvertise + self.selectedAdvertise.place + self.updatePublishedTimePeriod );
                         },
                         function(errResponse){
                             sweetAlert("Error!!", "Error while fetch!!!!", "error");
@@ -323,16 +327,92 @@ angular.module('myApp').controller('AdvertiserController',
                     );
             };
 
+            $scope.findUpdateExtendTime = function() {
+
+                var availableExpiryDate = self.updatePublishedTimePeriod;
+                var extendTime = self.extendTime;
+
+                var updateFulDate = new Date(availableExpiryDate);
+                var updateDate = new Date(availableExpiryDate).getDate();
+                var updateMonth = new Date(availableExpiryDate).getMonth() + 1;
+                var updateYear = new Date(availableExpiryDate).getFullYear();
+                console.log("times : " + updateDate + " " + " " + updateMonth+ " "+updateYear + " "+ extendTime);
+
+                var numberOfDaysToAdd = null;
+                if (extendTime == 'For 2 Weeks') {
+                    numberOfDaysToAdd = 14;
+                    updateFulDate.setDate(updateFulDate.getDate() + numberOfDaysToAdd);
+                    var dd1 = updateFulDate.getDate();
+                    var mm1 = updateFulDate.getMonth() + 1;
+                    var yyyy1 = updateFulDate.getFullYear();
+
+                    var someFormattedDate1 = mm1 + '/'+ dd1 + '/'+ yyyy1;
+                    console.log("new times : "+ dd1+" "+mm1 +" "+yyyy1 +" "+someFormattedDate1);
+                    return someFormattedDate1;
+                }
+                else if (extendTime == 'For 1 Month') {
+                    numberOfDaysToAdd = 1;
+                    updateFulDate.setMonth(updateFulDate.getMonth() + numberOfDaysToAdd);
+                    var dd1 = updateFulDate.getDate();
+                    var mm1 = updateFulDate.getMonth() + 1;
+                    var yyyy1 = updateFulDate.getFullYear();
+
+                    var someFormattedDate1 = mm1 + '/'+ dd1 + '/'+ yyyy1;
+                    console.log("new times : "+ dd1+" "+mm1 +" "+yyyy1 +" "+someFormattedDate1);
+                    return someFormattedDate1;
+                }
+                else if (extendTime == 'For 3 Month') {
+                    numberOfDaysToAdd = 3;
+                    updateFulDate.setMonth(updateFulDate.getMonth() + numberOfDaysToAdd);
+                    var dd1 = updateFulDate.getDate();
+                    var mm1 = updateFulDate.getMonth() + 1;
+                    var yyyy1 = updateFulDate.getFullYear();
+
+                    var someFormattedDate1 = mm1 + '/'+ dd1 + '/'+ yyyy1;
+                    console.log("new times : "+ dd1+" "+mm1 +" "+yyyy1 +" "+someFormattedDate1);
+                    return someFormattedDate1;
+                }
+                else if (extendTime == 'For 6 Month') {
+                    numberOfDaysToAdd = 6;
+                    updateFulDate.setMonth(updateFulDate.getMonth() + numberOfDaysToAdd);
+                    var dd1 = updateFulDate.getDate();
+                    var mm1 = updateFulDate.getMonth() + 1;
+                    var yyyy1 = updateFulDate.getFullYear();
+
+                    var someFormattedDate1 = mm1 + '/'+ dd1 + '/'+ yyyy1;
+                    console.log("new times : "+ dd1+" "+mm1 +" "+yyyy1 +" "+someFormattedDate1);
+                    return someFormattedDate1;
+                }
+                else if (extendTime == 'For 1 Year') {
+                    numberOfDaysToAdd = 1;
+                    updateFulDate.setFullYear(updateFulDate.getFullYear() + numberOfDaysToAdd);
+                    var dd1 = updateFulDate.getDate();
+                    var mm1 = updateFulDate.getMonth() + 1;
+                    var yyyy1 = updateFulDate.getFullYear();
+
+                    var someFormattedDate1 = mm1 + '/'+ dd1 + '/'+ yyyy1;
+                    console.log("new times : "+ dd1+" "+mm1 +" "+yyyy1 +" "+someFormattedDate1);
+                    return someFormattedDate1;
+                }
+
+            };
+
             function updateAdvertise(id){
+                self.updatedExpiredDate = $scope.findUpdateExtendTime();
                 var advertise = {
                     id : id,
                     url : self.updateUrl,
                     description : self.updateDescription,
+                    expiryDate : self.updatedExpiredDate,
                     place : self.updatePlace
                 };
                 AdvertiserService.updateAdvertise(advertise)
                     .then(
+                        function(Response){
+                            sweetAlert("Success!!", "The Advertise successfully updated!!!!", "success");
+                        },
                         function(errResponse){
+                            sweetAlert("Error!!", "Error while updating Advertise!!!!", "error");
                             console.error('Error while updating Advertise');
                         }
                     );

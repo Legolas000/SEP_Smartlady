@@ -30,10 +30,10 @@ public class AdvertisementDAOImpl implements AdvertisementDAO{
 		if(advertisement.getId()>0)
 		{
 			System.out.println("caling update condition");
-			String sql = "UPDATE advertisements SET url = ?, description = ?, place = ?"+
+			String sql = "UPDATE advertisements SET url = ?, description = ?, expiryDate = ?, place = ?"+
 					" WHERE id = ?";
-			jdbcTemplate.update(sql, advertisement.getUrl(), advertisement.getDescription(), advertisement.getPlace(), advertisement.getId());
-			System.out.println("Updated successfully with : " +advertisement.getUrl() + " " + advertisement.getDescription());
+			jdbcTemplate.update(sql, advertisement.getUrl(), advertisement.getDescription(), advertisement.getExpiryDate(), advertisement.getPlace(), advertisement.getId());
+			System.out.println("Updated successfully with : " +advertisement.getUrl() + " " + advertisement.getDescription() +" " + advertisement.getExpiryDate());
 		}
 		else {
 			System.out.println("save method in implementation " + advertisement.getDescription());

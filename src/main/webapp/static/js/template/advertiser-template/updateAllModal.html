@@ -1,5 +1,13 @@
+
+<style>
+    .textarea{
+        resize: vertical;
+
+    }
+</style>
+
 <div class="modal-header">
-    <h3 class="modal-title"><b>Extend Time Of Advertisements</b></h3>
+    <h3 class="modal-title"><b>Update This Advertisement</b></h3>
 </div>
 <div ng-controller="AdvertiserController as adctrl" ng-init="getSelectedAdvertise(advertiseId)">
     <div class="modal-body" >
@@ -14,7 +22,7 @@
 
         <div class="form-group">
             <label class="control-label" >Description about advertise :</label>
-            <textarea class="form-control" name="description" type="text" ng-model="adctrl.updateDescription" style="height: 100px" required ng-minlength="15" ng-maxlength="70"></textarea>
+            <textarea class="form-control textarea"  name="description" type="text" ng-model="adctrl.updateDescription" style="height: 100px" required ng-minlength="15" ng-maxlength="70"></textarea>
             <div ng-show="description.$touched && advertiseForm.description.$invalid" class="col-md-12 col-sm-12 col-xs-12 ">
                 <span ng-show="description.$error.required">
                     <a class="errorfont">Description field is required</a> <br/>
@@ -48,6 +56,6 @@
     <div class="modal-footer">
 
         <button class="btn btn-warning" type="button"  ng-click="close()">Cancel</button>
-        <button type="button" class="btn btn-primary" ng-click="adctrl.updateAdvertise(advertiseId, adctrl.advertises)">Update Changes</button>
+        <button type="button" class="btn btn-primary" ng-click="adctrl.updateAdvertise(advertiseId); close()">Update Changes</button>
     </div>
 </div>

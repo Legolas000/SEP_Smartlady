@@ -1,11 +1,11 @@
 
 <div class="modal-header">
-    <h3 class="modal-title"><b>Extend Time Of Advertisements</b></h3>
+    <h3 class="modal-title"><b>Extend Time Of Advertisement</b></h3>
 </div>
-<div ng-controller="AdvertiserController as adctrl">
+<div ng-controller="AdvertiserController as adctrl" ng-init="getSelectedAdvertise(advertiseId)">
 <div class="modal-body" >
     <div style="margin-left: 80px">
-        <img src="/static/js/template/advertiser-template/advertises/gel.jpg" style="height: 330px; width: 410px; align-content: right " class="img-rounded" />
+        <img src="/static/js/template/advertiser-template/advertises/maxresdefault.jpg" style="height: 330px; width: 410px; align-content: right " class="img-rounded" />
     </div><br/>
     <span><b><h4>You can extend the date of this advertisement!</h4></b></span><br/>
 
@@ -25,6 +25,6 @@
 
 
     <button class="btn btn-warning" type="button"  ng-click="close()">Cancel</button>
-    <button type="button" class="btn btn-primary" ng-click="adctrl.updateAdvertise(advertiseId, adctrl.advertises)">Update Changes</button>
+    <button type="button" class="btn btn-primary" ng-click="adctrl.updateAdvertise(advertiseId, adctrl.advertises); close()">Update Changes</button>
 </div>
 </div>
