@@ -56,7 +56,7 @@ angular.module('myApp').controller('AdvertiserController',
             self.swt = "";
             self.updateUrl = '';
 
-            self.check = "";
+           // self.check = "";
             self.advertises=[];
             self.Categories=[];
             self.selectedAdvertise=[];
@@ -168,14 +168,16 @@ angular.module('myApp').controller('AdvertiserController',
                                 self.values.exdate = item.expiryDate;
 
                                 var secondDate = item.expiryDate;
-                                if( (firstDate.getTime() < new Date(secondDate).getTime())) {
-                                    self.check = "true";
+                                if( (firstDate.getTime() > new Date(secondDate).getTime())) {
+                                    $scope.checkExp = "true";
+                                    self.values.status = "Expired";
+                                }
+                                else{
+
+                                    $scope.checkAv = "true";
                                     self.values.status = "Available";
                                     self.values.id = item.id;
                                     self.values.url = item.url;
-                                }
-                                else{
-                                    self.values.status = "Expired";
                                 }
                                 self.updateitems.push(angular.copy(self.values));
 

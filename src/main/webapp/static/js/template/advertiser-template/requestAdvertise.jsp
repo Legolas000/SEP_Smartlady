@@ -22,7 +22,7 @@
 <div class="section">
     <div class="container" ng-init="fetchAllCategories()" ng-controller="AdvertiserController as adctrl">
         <div class="row">
-            <div class="col-md-9" style="text-align: left"><br/>
+            <div class="col-md-9" style="text-align: left">
                 <div class="panel panel-info" style="margin-top: 0px">
                     <div class="panel-heading" style="height: 50px"><h4>Assigning New Advertisements</h4></div>
                     <div class="panel-body contact-form-box">
@@ -37,7 +37,7 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <input type="file" ng-model="myFile" accept="image/*" onchange="angular.element(this).scope().uploadFile(this.files)"/>
+                                        <input type="file" ng-model="myFile" accept="image/*" onchange="angular.element(this).scope().uploadFile(this.files); loadFile($event)"/>
                                         <img id="output" height="150" width="250">
                                     </div>
                                 </div>
