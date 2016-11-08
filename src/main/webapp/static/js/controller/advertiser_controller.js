@@ -104,7 +104,7 @@ angular.module('myApp').controller('AdvertiserController',
                     console.log('error' , e);
                 });
             };
-            function saveImage(advertise) {
+            /*function saveImage(advertise) {
                 AdvertiserService.saveImage(advertise)
                     .then(
                         fetchAllAdvertise,
@@ -112,7 +112,7 @@ angular.module('myApp').controller('AdvertiserController',
                             console.error('Error while save images');
                         }
                     );
-            }
+            }*/
 
             $scope.openTimeExtend = function (id) {
                 $rootScope.advertiseId = id;

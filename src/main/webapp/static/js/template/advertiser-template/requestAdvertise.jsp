@@ -37,7 +37,7 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <input type="file" ng-model="myFile" accept="image/*" onchange="angular.element(this).scope().uploadFile(this.files); loadFile($event)"/>
+                                        <input type="file" ng-model="myFile" accept="image/*" onchange="angular.element(this).scope().uploadFile(this.files); loadFile(event)"/>
                                         <img id="output" height="150" width="250">
                                     </div>
                                 </div>

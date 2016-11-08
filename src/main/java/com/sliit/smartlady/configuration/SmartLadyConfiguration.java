@@ -78,10 +78,18 @@ public class SmartLadyConfiguration extends WebMvcConfigurerAdapter{
 		return new FeaturedArticleDAOImpl(getDataSource());
 	}
 
+
 	@Bean
 	public CommentsDAO getCommentsDAO()
 	{
 		return new CommentsDAOImpl(getDataSource());
 	}
+	@Bean(name = "multipartResolver")
+	public CommonsMultipartResolver createMultipartResolver() {
+		CommonsMultipartResolver resolver=new CommonsMultipartResolver();
+		resolver.setDefaultEncoding("utf-8");
+		return resolver;
+	}
+
 
 }
