@@ -231,8 +231,8 @@
 									<ul class="post-tags">
 										<li><i class="fa fa-clock-o"></i>{{userCtrl.articlesToAdd[articleNo].publishedDate | date:'medium'}}</li>
 										<li><i class="fa fa-user"></i>by <a href="#">{{userCtrl.articlesToAdd[articleNo].writerName}}</a></li>
-										<li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
-										<li><i class="fa fa-eye"></i>872</li>
+										<li><a href="#"><i class="fa fa-comments-o"></i><span>{{userCtrl.articlesToAdd[articleNo].noOfComments}}</span></a></li>
+										<li><i class="fa fa-eye"></i>{{userCtrl.articlesToAdd[articleNo].totalViews}}</li>
 									</ul>
 
 								</div>

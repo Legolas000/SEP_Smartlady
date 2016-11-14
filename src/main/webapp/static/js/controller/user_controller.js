@@ -165,7 +165,6 @@ angular.module('myApp').controller('UserController',
                             getReadesDetails(id);
                             getCommentsForArticle(id);
                             //$location.url('/readarticles');
-
                         },
                         function (errResponse) {
                             console.error('Error while fetching Articles');
@@ -263,11 +262,12 @@ angular.module('myApp').controller('UserController',
                                     writerID:value.writerID,
                                     writerName:value.userAsWriter.fullname,
                                     totalLikes:value.totalLikes,
-                                    totalViews:value.totalViews
+                                    totalViews:value.totalViews,
+                                    noOfComments:value.noOfComments
+
                                 });
                             });
                             $scope.featuredArticles = self.articlesToAdd;
-
                         },
                         function (errResponse) {
                             console.error('Error while fetching featured article');
@@ -294,7 +294,8 @@ angular.module('myApp').controller('UserController',
                                     writerID:value.writerID,
                                     writerName:value.userAsWriter.fullname,
                                     totalLikes:value.totalLikes,
-                                    totalViews:value.totalViews
+                                    totalViews:value.totalViews,
+                                    noOfComments:value.noOfComments
                                 });
                             });
 
@@ -326,7 +327,8 @@ angular.module('myApp').controller('UserController',
                                     writerID:value.writerID,
                                     writerName:value.userAsWriter.fullname,
                                     totalLikes:value.totalLikes,
-                                    totalViews:value.totalViews
+                                    totalViews:value.totalViews,
+                                    noOfComments:value.noOfComments
                                 });
                             });
 
@@ -355,7 +357,8 @@ angular.module('myApp').controller('UserController',
                                     writerID:value.writerID,
                                     writerName:value.userAsWriter.fullname,
                                     totalLikes:value.totalLikes,
-                                    totalViews:value.totalViews
+                                    totalViews:value.totalViews,
+                                    noOfComments:value.noOfComments
                                 });
                             });
                             $scope.articleSize = self.articlesByCategoryID.length;

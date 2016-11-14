@@ -9,10 +9,10 @@
 				<div class="title-post">
 					<h1>{{userCtrl.article.title}}</h1>
 					<ul class="post-tags">
-						<li><i class="fa fa-clock-o"></i>{{userCtrl.article.publishedDate}}</li>
-						<li><i class="fa fa-user"></i>by <a href="#">{{userCtrl.article.writerID}}</a></li>
-						<li><a href="#"><i class="fa fa-comments-o"></i><span></span></a></li>
-						<li><i class="fa fa-eye"></i></li>
+						<li><i class="fa fa-clock-o"></i>{{userCtrl.article.publishedDate | date:'medium'}}</li>
+						<li><i class="fa fa-user"></i>by <a href="#">{{userCtrl.article.userAsWriter.fullname}}</a></li>
+						<li><a href=""><i class="fa fa-comments-o"></i><span>{{noOfComments}}</span></a></li>
+						<li><i class="fa fa-eye"></i>{{userCtrl.article.totalViews}}</li>
 					</ul>
 				</div>
 

@@ -22,6 +22,8 @@ public class Article{
 	private String writerName;
 	private String categoryName;
 
+	private int noOfComments;
+
 
 
 	public Article(int id, String title, String description, String publishedDate, String coverImagePath,
@@ -189,6 +191,14 @@ public class Article{
 
 	public void setUserAsWriter(User userAsWriter) {
 		this.userAsWriter = userAsWriter;
+	}
+
+	public int getNoOfComments() {
+		return noOfComments;
+	}
+
+	public void setNoOfComments(int noOfComments) {
+		this.noOfComments = noOfComments;
 	}
 
 	@Override

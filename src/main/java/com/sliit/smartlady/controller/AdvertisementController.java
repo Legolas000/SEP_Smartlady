@@ -169,6 +169,4 @@ public class AdvertisementController {
 		return new ResponseEntity<List<Category>>(category, HttpStatus.OK);
 	}*/
 
-
-
 }

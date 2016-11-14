@@ -33,6 +33,7 @@ public class ReaderArticleController {
         @RequestMapping(value = "/readarticles/", method = RequestMethod.GET)
         public ResponseEntity<List<Article>> listAllArticles(){
             List<Article> articles = articleDAO.getAllArticles();
+            //Article currentArticleWithOtherEntities = articleDAO.getArticleWithOtherEntities(articles);
 
              if(articles.isEmpty()){
                     return new ResponseEntity<List<Article>>(HttpStatus.NO_CONTENT);
@@ -139,14 +140,14 @@ public class ReaderArticleController {
         public ResponseEntity<Article> getArticleById(@PathVariable("id") int id,@PathVariable("readerID") int readerID) {
 
             Article currentArticle = articleDAO.findByID(id);
-            //Article currentArticleWithOtherEntities = articleDAO.getArticleWithOtherEntities(currentArticle);
+            Article currentArticleWithOtherEntities = articleDAO.getArticleWithOtherEntities(currentArticle);
             articleDAO.saveReader(currentArticle.getId(),readerID);
 
             if (currentArticle==null) {
                 return new ResponseEntity<Article>(HttpStatus.NOT_FOUND);
             }
 
-            return new ResponseEntity<Article>(currentArticle, HttpStatus.OK);
+            return new ResponseEntity<Article>(currentArticleWithOtherEntities, HttpStatus.OK);
         }
 
         @RequestMapping(value = "/rating", method = RequestMethod.POST)

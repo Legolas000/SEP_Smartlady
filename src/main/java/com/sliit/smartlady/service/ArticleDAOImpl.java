@@ -212,6 +212,23 @@ public class ArticleDAOImpl implements ArticleDAO {
             return article;
         }
 
+        private int totalComentsForArticle(int articleID){
+            String sql = "SELECT COUNT(articleID) FROM comments WHERE  articleID = "+articleID +" GROUP BY  articleID";
+
+            return (int) jdbcTemplate.query(sql, new ResultSetExtractor() {
+
+                @Override
+                public Object extractData(ResultSet rs) throws SQLException,
+                        DataAccessException {
+                    if (rs.next()) {
+                        return rs.getInt(1);
+                    }
+                    return 0;
+                }
+            });
+
+        }
+
         @Override
         public Article findByID(int articleID) {
             String sql = "SELECT * FROM articles WHERE id = " + articleID;
@@ -283,33 +300,40 @@ public class ArticleDAOImpl implements ArticleDAO {
         public List<Article> getAllArticlesWithOtherEntities(List<Article> articles){
             List<Article> tempArticlesForWriter = new ArrayList<Article>();
             List<Article> tempArticlesForCategory = new ArrayList<Article>();
-            Article tempArticleForW;
-            Article tempArticleForC;
+            List<Article> tempArticlesForComment = new ArrayList<Article>();
+            Article tempArticleForWriter;
+            Article tempArticleForCategory;
+            Article tempArticleForComment;
             for(Article article : articles){
                 //tempArticleForW = new Article();
-                tempArticleForW = this.getArticleWithWriter(article);
-                tempArticlesForWriter.add(tempArticleForW);
+                tempArticleForWriter = this.getArticleWithWriter(article);
+                tempArticlesForWriter.add(tempArticleForWriter);
             }
-
 
             for(Article article : tempArticlesForWriter){
-                //tempArticleForC = new Article();
-                tempArticleForC = this.getArticleWithCategory(article);
-                tempArticlesForCategory.add(tempArticleForC);
-
+                //tempArticleForCategory = new Article();
+                tempArticleForCategory = this.getArticleWithCategory(article);
+                tempArticlesForCategory.add(tempArticleForCategory);
             }
 
-            return  tempArticlesForCategory;
+            for(Article article : tempArticlesForCategory){
+                //tempArticleForComment = new Article();
+                article.setNoOfComments(this.totalComentsForArticle(article.getId()));
+                tempArticlesForComment.add(article);
+            }
+
+            return  tempArticlesForComment;
         }
 
         @Override
         public Article getArticleWithOtherEntities(Article article) {
+            Article tempArticleWithWriter;
+            Article tempArticleWithCategory;
+            tempArticleWithWriter = this.getArticleWithWriter(article);
+            tempArticleWithCategory = this.getArticleWithCategory(tempArticleWithWriter);
 
-            article = this.getArticleWithWriter(article);
-            article = this.getArticleWithCategory(article);
 
-
-            return  article;
+            return  tempArticleWithCategory;
         }
 
         @Override
