@@ -14,6 +14,7 @@ angular.module('myApp').controller('UserController',
             self.top2ndArticle = {};
             self.top3rdArticle = {};
             self.top4thArticle = {};
+            self.commentsForArticle = {};
             self.classStyle = 'second-style';
             self.locationPath = $location.path();
             self.modalPath = "/#"+$location.path();
@@ -195,11 +196,15 @@ angular.module('myApp').controller('UserController',
                     .then(
                         function (data) {
                             $scope.comments = JSON.parse(data);
+
                             var noOfComments = 0;
-                            angular.forEach(JSON.parse(data), function(value, key){
+                            angular.forEach($scope.comments, function(value, key){
+                                $scope.comments[noOfComments].dateTime = mysqlTimeStampToDate(value.dateTime);
                                 noOfComments++;
                             });
                             $scope.noOfComments = noOfComments;
+                            console.log("$scope.comments : "+ JSON.stringify($scope.comments));
+                            //console.log("self.commentsForArticle = "+ JSON.stringify(self.commentsForArticle) );
                         },
                         function (errResponse) {
                             console.error('Error while fetching Articles');
