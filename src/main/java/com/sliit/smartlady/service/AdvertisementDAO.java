@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface AdvertisementDAO {
 
-	public void SaveOrUpdate(Advertisement advertisement);
+	public int SaveOrUpdate(Advertisement advertisement);
 
 	public List<Advertisement> getAllAdvertisements();
 
@@ -15,4 +15,6 @@ public interface AdvertisementDAO {
 	public void updateApproval(Advertisement advertisement);
 
 	public void updateApprovals(Advertisement[] advertisements);//Multiple blog approvals
+
+	public void saveImage(String filepath);
 }

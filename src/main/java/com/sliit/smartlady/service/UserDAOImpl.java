@@ -17,9 +17,6 @@ import java.util.List;
 public class UserDAOImpl implements UserDAO {
     private JdbcTemplate jdbcTemplate;
 
-    public UserDAOImpl(){
-
-    }
     public UserDAOImpl(DataSource datasource)
     {
         jdbcTemplate = new JdbcTemplate(datasource);

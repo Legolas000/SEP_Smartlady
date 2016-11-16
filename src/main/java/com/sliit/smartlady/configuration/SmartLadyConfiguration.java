@@ -78,6 +78,9 @@ public class SmartLadyConfiguration extends WebMvcConfigurerAdapter{
 		return new FeaturedArticleDAOImpl(getDataSource());
 	}
 
+	@Bean
+	public AdPaymentDAO getAdPaymentDAO() { return new AdPaymentDAOImpl(getDataSource());}
+
 
 	@Bean
 	public CommentsDAO getCommentsDAO()

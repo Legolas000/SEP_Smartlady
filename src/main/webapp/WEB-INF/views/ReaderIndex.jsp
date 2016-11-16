@@ -22,7 +22,7 @@
 	<link href="/static/css/magazine-css/style.css" rel="stylesheet" type="text/css" media="screen"/>
 	<link href="/static/css/magazine-css/rating.css" rel="stylesheet" type="text/css" media="screen"/>
 	<link href="/static/css/magazine-css/fonts/fontawesome-webfontba72.woff" rel="stylesheet" type="text/css" media="screen"/>
-
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<%--writer page css--%>
 
 	<link href="/static/css/writer-css/bootstrap.min.css" rel="stylesheet">
@@ -63,6 +63,21 @@
 			top: 0;
 			left: 0;
 			z-index: 2000;
+		}
+
+		.sidenav-head{
+			text-align: center;
+			color: white;
+
+		}
+
+		.sidebar{
+			width: 20%;
+			height: 100%;
+			float: left;
+			background-color: #4d4d4d;
+			margin-top: 0px;
+
 		}
 	</style>
 
@@ -643,6 +658,9 @@
 <script type="text/javascript" src="/static/js/controller/advertiser_controller.js"></script>
 <script type="text/javascript" src="/static/js/service/advertiser_service.js"></script>
 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <%--rich text editor js--%>
 <script type="text/javascript" src="/static/js/writer-js/tinymce-dist/tinymce.js"></script>
 <script type="text/javascript" src="/static/js/lib/angular-1.4.4.js"></script>

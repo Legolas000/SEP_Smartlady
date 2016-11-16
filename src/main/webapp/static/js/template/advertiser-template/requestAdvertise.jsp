@@ -20,31 +20,31 @@
 <link href="/static/css/magazine-css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen"/>
 
 <div class="section">
-    <div class="container" ng-init="fetchAllCategories()" ng-controller="AdvertiserController as adctrl">
+    <div class="container" ng-init="fetchAllCategories(); fetchAllPayments()" ng-controller="AdvertiserController as adctrl">
         <div class="row">
             <div class="col-md-9" style="text-align: left">
                 <div class="panel panel-info" style="margin-top: 0px">
                     <div class="panel-heading" style="height: 50px"><h4>Assigning New Advertisements</h4></div>
                     <div class="panel-body contact-form-box">
-                        <form role="form" name="advertiseForm" class="ng-pristine ng-invalid ng-invalid-required" enctype="multipart/form-data"><%--ng-submit="submitUser()">--%>
+                        <form role="form" name="advertiseForm" class="ng-pristine ng-invalid ng-invalid-required" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label class="control-label" name="category">Select Category test :</label>
                                 <select class="form-control" ng-model="adctrl.advertise.category">
-                                    <option ng-repeat="cName in adctrl.Categories">{{cName.catName}}</option>
+                                    <option ng-repeat="cName in adctrl.Categories" ng-model="adctrl.categoryList">{{cName.catName}}</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <input type="file" ng-model="myFile" accept="image/*" onchange="angular.element(this).scope().uploadFile(this.files); loadFile(event)"/>
+                                        <input type="file" ng-model="myFile" accept="image/*"  onchange="angular.element(this).scope().uploadFile(this.files); loadFile(event)"/>
                                         <img id="output" height="150" width="250">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label" >URL of Advertise :</label>
-                                <input class="form-control" name="aurl" type="text" ng-model="adctrl.advertise.url" required class="glyphicon glyphicon-ok">
+                                <input class="form-control" name="aurl" type="url" ng-model="adctrl.advertise.url" required class="glyphicon glyphicon-ok">
                                 <div ng-show="advertiseForm.aurl.$touched && advertiseForm.aurl.$invalid" class="col-md-12 col-sm-12 col-xs-12 ">
                                     <span ng-show="advertiseForm.aurl.$error.required">
                                     <a class="errorfont">URL field is required</a> <br/>
@@ -64,7 +64,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label" >Time Period for Avdertisement :</label>
-                                <select class="form-control" ng-model="adctrl.advertise.time">
+                                <select class="form-control" ng-model="adctrl.advertise.time" onchange="angular.element(this).scope().fetchAllPayments()">
                                     <option>For 2 Weeks</option>
                                     <option>For 1 Month</option>
                                     <option>For 3 Month</option>
@@ -74,17 +74,17 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label" >Place to Display Add :</label>
-                                <select class="form-control" ng-model="adctrl.advertise.place">
-                                    <option>middle of right Side</option>
+                                <select class="form-control" ng-model="adctrl.advertise.place" onchange="angular.element(this).scope().fetchAllPayments()">
+                                    <option>Middle of right Side</option>
                                     <option>Bottom of right Side</option>
-                                    <option>middle of Page</option>
+                                    <option>Middle of Page</option>
                                     <option>Bottom of Page</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label class="control-label" >Payment for Advertisement :</label>
                                 <%--<input class="form-control" type="text">--%>
-                                <label class="control-label"  ng-model="adctrl.advertise.payment">{{adctrl.advertise.payment}}</label>
+                                <label class="control-label"  ng-model="adctrl.advertise.payment"> Rs. {{adctrl.advertise.payment}}</label>
                             </div>
                             <%--<div class="form-group">
                                 <label class="control-label" >Values are :</label>
@@ -99,7 +99,7 @@
 
                             </div>--%>
                             <button type="button" ng-click="adctrl.reset()"  class="btn btn-warning" >Reset Form</button>
-                            <%--<input type="submit" class="btn btn-danger"  ng-click="adctrl.display()" value="Retrieve Details" />--%>
+                            <input type="submit" class="btn btn-danger"  ng-click="fetchAllPayments()" value="Retrieve Details" />
 
                         </form>
                         <%--<button type="button" ng-click="adctrl.test()"  class="btn btn-warning" >Test Form</button>

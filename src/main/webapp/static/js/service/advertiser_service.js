@@ -19,7 +19,8 @@ angular.module('myApp').factory('AdvertiserService',
             saveImage:saveImage,
             fetchAllCategories:fetchAllCategories,
             updateAdvertise:updateAdvertise,
-            getSelectedAdvertise:getSelectedAdvertise
+            getSelectedAdvertise:getSelectedAdvertise,
+            fetchAllPayments:fetchAllPayments
         };
 
         return factory;
@@ -75,7 +76,7 @@ angular.module('myApp').factory('AdvertiserService',
 
         function createAdvertise(advertise) {
             var deferred = $q.defer();
-            $http.post(REST_SERVICE_URI+'assignadvertise/advertise/', advertise)
+            $http.post(REST_SERVICE_URI+'assignadvertise/advertise/', advertise)  //,advertise.advertiseimg
                 .then(
                     function (response) {
                         deferred.resolve(response.data);
@@ -147,7 +148,22 @@ angular.module('myApp').factory('AdvertiserService',
              });*/
         }
 
-
+        function fetchAllPayments() {
+            var deferred = $q.defer();
+            $http.get(REST_SERVICE_URI+'getPayments/')
+                .then(
+                    function (response) {
+                        console.error('No Errors while fetch payments');
+                        deferred.resolve(response.data);
+                        //console.error('second, No Errors while resolve');
+                    },
+                    function(errResponse){
+                        console.error('Error while fetching payments');
+                        deferred.reject(errResponse);
+                    }
+                );
+            return deferred.promise;
+        }
 
 
 

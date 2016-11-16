@@ -22,7 +22,7 @@
                                 <div class="well well-sm" >
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <img src="/static/js/template/advertiser-template/advertises/maxresdefault.jpg" style="height: 130px; width: 110px; alignment: right" class="img-rounded" />
+                                            <img src="/static/js/template/advertiser-template/advertises/unnamed.png" style="height: 130px; width: 110px; alignment: right" class="img-rounded" />
                                         </div>
                                         <div class="col-md-6 text-center">
                                             <div ng-if="checkAv" style="color:#009933"><b><label >{{item.status}}</label></b></div>

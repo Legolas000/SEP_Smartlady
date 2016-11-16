@@ -11,6 +11,8 @@ import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.sql.Statement;
+//import java.sql.queryForInt;
 
 import java.io.File;
 
@@ -24,7 +26,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO{
 	}
 
 	@Override
-	public void SaveOrUpdate(Advertisement advertisement) {
+	public int SaveOrUpdate(Advertisement advertisement) {
 		// TODO Auto-generated method stub
 
 		if(advertisement.getId()>0)
@@ -34,14 +36,25 @@ public class AdvertisementDAOImpl implements AdvertisementDAO{
 					" WHERE id = ?";
 			jdbcTemplate.update(sql, advertisement.getUrl(), advertisement.getDescription(), advertisement.getExpiryDate(), advertisement.getPlace(), advertisement.getId());
 			System.out.println("Updated successfully with : " +advertisement.getUrl() + " " + advertisement.getDescription() +" " + advertisement.getExpiryDate());
+			return 0;
 		}
 		else {
 			System.out.println("save method in implementation " + advertisement.getDescription());
 			/*String sql2 = "SELECT id FROM categories WHERE catName ="+advertisement.getCategory().getCatName();
 			jdbcTemplate.update(sql2);*/
-			String sql = "INSERT INTO advertisements(id, description, publishedDate, expiryDate, url, payment, status, place)" + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-			jdbcTemplate.update(sql, advertisement.getId(), advertisement.getDescription(), advertisement.getPublishedDate(), advertisement.getExpiryDate(), advertisement.getUrl(), advertisement.getPayment(), advertisement.getStatus(), advertisement.getPlace());
+			String sql = "INSERT INTO advertisements(id, /*imagePath,*/ description, publishedDate, expiryDate, url, payment, status, place)" + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+			int retId = jdbcTemplate.update(sql, advertisement.getId(), /*advertisement.getImagePath(),*/ advertisement.getDescription(), advertisement.getPublishedDate(), advertisement.getExpiryDate(), advertisement.getUrl(), advertisement.getPayment(), advertisement.getStatus(), advertisement.getPlace()); //,Statement.RETURN_GENERATED_KEYS);
+
+           // String sql2 = "SELECT MAX(id) FROM advertisements";
+            //Statement st = jdbcTemplate. .createStatement();
+           //  int maxid = jdbcTemplate.update(sql2);
+
+           // System.out.println("the max id is : " + maxid);
+
 			System.out.println("save method in implementation bottom " + advertisement);
+            //System.out.println("the id is : " + retId);
+			//return jdbcTemplate.queryForInt( "select last_insert_id()" );
+			return retId;
 		}
 
 	}
@@ -112,5 +125,19 @@ public class AdvertisementDAOImpl implements AdvertisementDAO{
 		// TODO Auto-generated method stub
 
 	}
+
+    @Override
+    public void saveImage(String filepath) {
+        // TODO Auto-generated method stub
+
+            System.out.println("save method in implementation " + filepath);
+			/*String sql2 = "SELECT id FROM categories WHERE catName ="+advertisement.getCategory().getCatName();
+			jdbcTemplate.update(sql2);*/
+            String sql = "UPDATE advertisements SET imagePath = ?" + " WHERE id = ?";
+            jdbcTemplate.update(sql, filepath, "1");
+            System.out.println("save method in implementation bottom " + filepath);
+        /*UPDATE advertisements SET url = ?, description = ?, expiryDate = ?, place = ?"+
+        " WHERE id = ?"*/
+    }
 
 }

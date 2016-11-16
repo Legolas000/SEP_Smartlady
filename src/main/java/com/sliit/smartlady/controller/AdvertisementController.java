@@ -1,9 +1,11 @@
 package com.sliit.smartlady.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sliit.smartlady.model.AdPayment;
 import com.sliit.smartlady.model.Advertisement;
 import com.sliit.smartlady.model.Category;
 import com.sliit.smartlady.model.fileUpload;
+import com.sliit.smartlady.service.AdPaymentDAO;
 import com.sliit.smartlady.service.AdvertisementDAO;
 import com.sliit.smartlady.service.CategoryDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ public class AdvertisementController {
     AdvertisementDAO advDAO;
 	@Autowired
 	CategoryDAO catDAO;
+    @Autowired
+    AdPaymentDAO adpayDAO;
+
 	//----------------------------Get All Advertise----------------------------------
 	@RequestMapping(value = "/advertisements/", method = RequestMethod.GET)
 	public ResponseEntity<List<Advertisement>> listAllAdvertises(){
@@ -98,7 +103,7 @@ public class AdvertisementController {
 
 
 
-    @RequestMapping(value = "/upload", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/upload", method = RequestMethod.GET)
     public String crunchifyDisplayForm() {
 
         return "uploadfile";
@@ -134,26 +139,67 @@ public class AdvertisementController {
 		map.addAttribute("files", fileNames);
 		return "uploadfilesuccess";
         //return new ResponseEntity<String>(HttpStatus.OK);
-	}
+	}*/
 
+	/*@RequestMapping(value = "/assignadvertise/advertise/", method = RequestMethod.POST)
+	public ResponseEntity<String> createAdvertise(@RequestParam(value = "file") MultipartFile file, @RequestBody Advertisement advertisement) {
+		System.out.println("create advrts calling in java!");
 
-	@RequestMapping(value = "/user/saveUserDataAndFile", method = RequestMethod.POST)
-	@ResponseBody
-	public Object saveUserDataAndFile(@RequestParam(value = "file") MultipartFile file, HttpServletRequest request) {
-
-		ObjectMapper mapper = new ObjectMapper();
-
-		String rootDirectory = "F:\\testUpload\\";
+		String uploadDirectory = "C:\\Users\\USER\\Desktop\\GIT Local Repo\\sepii\\SEP_Smartlady\\src\\main\\webapp\\static\\js\\template\\advertiser-template\\advertises\\";   //"F:\\testUpload\\";
+		String rootDirectory = "/static/js/template/advertiser-template/advertises/";
 		System.out.println("Root Directory "+rootDirectory);
+
+		//MultipartFile file1 = advertisement.getImagePath();
 		try {
-			file.transferTo(new File(rootDirectory  + file.getOriginalFilename()));
+			file.transferTo(new File(uploadDirectory  + file.getOriginalFilename()));
 		} catch (IllegalStateException e) {
 
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		String fname = file.getOriginalFilename();
+		String fullFileName = rootDirectory+fname;
+		System.out.println("File name is :  " + fullFileName);
 
+		advertisement.setImagePath(fullFileName);
+
+		//advDAO.saveImage(fullFileName);
+
+		advDAO.SaveOrUpdate(advertisement);
+		String mesg = "test creating";
+
+
+
+		return new ResponseEntity<String>(HttpStatus.OK);
+
+
+	}*/
+
+	@RequestMapping(value = "/user/saveUserDataAndFile", method = RequestMethod.POST)
+	@ResponseBody
+	public Object saveUserDataAndFile(@RequestParam(value = "file") MultipartFile file, HttpServletRequest request) {
+		System.out.println("Image selecting caling");
+		//String path = getServletContext.getRealPath("/");
+		//String path2 = application.getRealPath("/");
+		ObjectMapper mapper = new ObjectMapper();
+
+        //String abc = request.getad
+		String uploadDirectory = "C:\\Users\\USER\\Desktop\\GIT Local Repo\\sepii\\SEP_Smartlady\\src\\main\\webapp\\static\\js\\template\\advertiser-template\\advertises\\";   //"F:\\testUpload\\";
+		String rootDirectory = "/static/js/template/advertiser-template/advertises/";
+		System.out.println("Root Directory "+rootDirectory);
+		try {
+			file.transferTo(new File(uploadDirectory  + file.getOriginalFilename()));
+		} catch (IllegalStateException e) {
+
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String fname = file.getOriginalFilename();
+		String fullFileName = rootDirectory+fname;
+		System.out.println("File name is :  " + fullFileName);
+		advDAO.saveImage(fullFileName);
 		return null;
 
 	}
@@ -168,5 +214,14 @@ public class AdvertisementController {
 		}
 		return new ResponseEntity<List<Category>>(category, HttpStatus.OK);
 	}*/
+
+    @RequestMapping(value = "/getPayments/", method = RequestMethod.GET)
+    public ResponseEntity<List<AdPayment>> listAllPayments(){
+        List<AdPayment> payment = adpayDAO.getAllPayments();
+        if(payment.isEmpty()){
+            return new ResponseEntity<List<AdPayment>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<AdPayment>>(payment, HttpStatus.OK);
+    }
 
 }
