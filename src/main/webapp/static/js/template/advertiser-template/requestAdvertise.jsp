@@ -33,7 +33,6 @@
                                     <option ng-repeat="cName in adctrl.Categories" ng-model="adctrl.categoryList">{{cName.catName}}</option>
                                 </select>
                             </div>
-
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -99,7 +98,7 @@
 
                             </div>--%>
                             <button type="button" ng-click="adctrl.reset()"  class="btn btn-warning" >Reset Form</button>
-                            <input type="submit" class="btn btn-danger"  ng-click="fetchAllPayments()" value="Retrieve Details" />
+                            <%--<input type="submit" class="btn btn-danger"  ng-click="fetchAllPayments()" value="Retrieve Details" />--%>
 
                         </form>
                         <%--<button type="button" ng-click="adctrl.test()"  class="btn btn-warning" >Test Form</button>

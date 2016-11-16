@@ -147,7 +147,6 @@ angular.module('myApp').factory('AdvertiserService',
              console.log('error');
              });*/
         }
-
         function fetchAllPayments() {
             var deferred = $q.defer();
             $http.get(REST_SERVICE_URI+'getPayments/')
@@ -164,8 +163,6 @@ angular.module('myApp').factory('AdvertiserService',
                 );
             return deferred.promise;
         }
-
-
 
     }]);
 

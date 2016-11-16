@@ -44,33 +44,20 @@ public class AdvertisementController {
 	//--------------------Fetch a selected advertise by id------------------------------
 	@RequestMapping(value = "/getSelectedAdvertise/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Advertisement> getSelectedAdvertise(@PathVariable("id") int id) {
-
-		System.out.println("Updating advertisement   " + id);
-
 		Advertisement currentAdvertisement = advDAO.findByID(id);
-		System.out.println("find by ID called " );
 		if (currentAdvertisement==null) {
-			System.out.println("Advertisement with id " + id + " not found");
 			return new ResponseEntity<Advertisement>(HttpStatus.NOT_FOUND);
 		}
-
-		//advDAO.updateApproval(currentAdvertisement);
 		return new ResponseEntity<Advertisement>(currentAdvertisement, HttpStatus.OK);
 	}
 
 	//--------------------Update a status of an advertise------------------------------
 	@RequestMapping(value = "/advertisements/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Advertisement> updateStatus(@PathVariable("id") int id) {
-
-		System.out.println("Updating advertisement " + id);
-
 		Advertisement currentAdvertisement = advDAO.findByID(id);
-
 		if (currentAdvertisement==null) {
-			System.out.println("Advertisement with id " + id + " not found");
 			return new ResponseEntity<Advertisement>(HttpStatus.NOT_FOUND);
 		}
-
 		advDAO.updateApproval(currentAdvertisement);
 		return new ResponseEntity<Advertisement>(currentAdvertisement, HttpStatus.OK);
 	}
@@ -78,68 +65,19 @@ public class AdvertisementController {
     //--------------------Create New Advertise----------------------------------
 	@RequestMapping(value = "/assignadvertise/advertise/", method = RequestMethod.POST)
 	public ResponseEntity<String> createAdvertise(@RequestBody Advertisement advertisement) {
-		System.out.println("create advrts calling in java!");
 		advDAO.SaveOrUpdate(advertisement);
-		String mesg = "test creating";
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
 	//--------------------Update New Advertise------------------------------------------------
 	@RequestMapping(value = "/updateAdvertise", method = RequestMethod.PUT)
 	public ResponseEntity<Advertisement> updateAdvertisement(@RequestBody Advertisement advertise) {
-		System.out.println("Updating Advertisement " + advertise.getId() +" , "+advertise.getUrl() + " " + advertise.getDescription());
-
-		//Advertisement currentAdvertisement = advDAO.findByID(advertise.getId());
-		System.out.println("find by ID called " );
 		if (advertise==null) {
-			System.out.println("Advertisement with id " + advertise.getId() + " not found");
 			return new ResponseEntity<Advertisement>(HttpStatus.NOT_FOUND);
 		}
-
 		advDAO.SaveOrUpdate(advertise);
-		System.out.println("passing to DAO impl");
 		return new ResponseEntity<Advertisement>(advertise, HttpStatus.OK);
 	}
-
-
-
-    /*@RequestMapping(value = "/upload", method = RequestMethod.GET)
-    public String crunchifyDisplayForm() {
-
-        return "uploadfile";
-    }
-
-	@RequestMapping(value = "/savefiles", method = RequestMethod.POST)
-	public String crunchifySave(
-			@ModelAttribute("uploadForm") fileUpload uploadForm,
-			Model map) throws IllegalStateException, IOException {
-			    System.out.println("Upload funtion is calling");
-		String saveDirectory = "c:/crunchify/";
-        System.out.println(" saving folder is calling ");
-
-		List<MultipartFile> crunchifyFiles = uploadForm.getFiles();
-        System.out.println(" file is :  " + crunchifyFiles);
-		List<String> fileNames = new ArrayList<String>();
-
-		if (null != crunchifyFiles && crunchifyFiles.size() > 0) {
-            System.out.println("for loop calling");
-
-            for (MultipartFile multipartFile : crunchifyFiles) {
-
-				String fileName = multipartFile.getOriginalFilename();
-				if (!"".equalsIgnoreCase(fileName)) {
-					// Handle file content - multipartFile.getInputStream()
-					multipartFile
-							.transferTo(new File(saveDirectory + fileName));
-					fileNames.add(fileName);
-				}
-			}
-		}
-
-		map.addAttribute("files", fileNames);
-		return "uploadfilesuccess";
-        //return new ResponseEntity<String>(HttpStatus.OK);
-	}*/
 
 	/*@RequestMapping(value = "/assignadvertise/advertise/", method = RequestMethod.POST)
 	public ResponseEntity<String> createAdvertise(@RequestParam(value = "file") MultipartFile file, @RequestBody Advertisement advertisement) {
@@ -179,12 +117,8 @@ public class AdvertisementController {
 	@RequestMapping(value = "/user/saveUserDataAndFile", method = RequestMethod.POST)
 	@ResponseBody
 	public Object saveUserDataAndFile(@RequestParam(value = "file") MultipartFile file, HttpServletRequest request) {
-		System.out.println("Image selecting caling");
-		//String path = getServletContext.getRealPath("/");
-		//String path2 = application.getRealPath("/");
 		ObjectMapper mapper = new ObjectMapper();
 
-        //String abc = request.getad
 		String uploadDirectory = "C:\\Users\\USER\\Desktop\\GIT Local Repo\\sepii\\SEP_Smartlady\\src\\main\\webapp\\static\\js\\template\\advertiser-template\\advertises\\";   //"F:\\testUpload\\";
 		String rootDirectory = "/static/js/template/advertiser-template/advertises/";
 		System.out.println("Root Directory "+rootDirectory);
@@ -201,7 +135,6 @@ public class AdvertisementController {
 		System.out.println("File name is :  " + fullFileName);
 		advDAO.saveImage(fullFileName);
 		return null;
-
 	}
 	//fetch all Categories
 	/*@RequestMapping(value = "/categories/", method = RequestMethod.GET)

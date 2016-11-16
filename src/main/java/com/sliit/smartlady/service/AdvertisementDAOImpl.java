@@ -134,7 +134,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO{
 			/*String sql2 = "SELECT id FROM categories WHERE catName ="+advertisement.getCategory().getCatName();
 			jdbcTemplate.update(sql2);*/
             String sql = "UPDATE advertisements SET imagePath = ?" + " WHERE id = ?";
-            jdbcTemplate.update(sql, filepath, "1");
+            jdbcTemplate.update(sql, filepath, "7");
             System.out.println("save method in implementation bottom " + filepath);
         /*UPDATE advertisements SET url = ?, description = ?, expiryDate = ?, place = ?"+
         " WHERE id = ?"*/

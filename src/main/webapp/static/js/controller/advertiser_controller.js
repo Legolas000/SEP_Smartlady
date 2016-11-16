@@ -130,7 +130,6 @@ angular.module('myApp').controller('AdvertiserController',
                         }
                     );
             }*/
-
             $scope.openTimeExtend = function (id) {
                 $rootScope.advertiseId = id;
                 var modalInstance = $modal.open({
@@ -146,7 +145,6 @@ angular.module('myApp').controller('AdvertiserController',
                     controller: 'PopupCont'
                 });
             };
-
 
             /*$scope.onFileSelect = function($files) {
 
@@ -169,7 +167,6 @@ angular.module('myApp').controller('AdvertiserController',
              });
              }
              };*/
-
             function fetchAllAdvertise(){
                 console.log("fetch function calling");
 
