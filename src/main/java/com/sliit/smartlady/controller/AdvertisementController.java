@@ -101,14 +101,9 @@ public class AdvertisementController {
 		System.out.println("File name is :  " + fullFileName);
 
 		advertisement.setImagePath(fullFileName);
-
-		//advDAO.saveImage(fullFileName);
-
+		//advDAO.saveImage(fullFileNam);
 		advDAO.SaveOrUpdate(advertisement);
 		String mesg = "test creating";
-
-
-
 		return new ResponseEntity<String>(HttpStatus.OK);
 
 

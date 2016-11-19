@@ -28,15 +28,15 @@
                     <div class="panel-body contact-form-box">
                         <form role="form" name="advertiseForm" class="ng-pristine ng-invalid ng-invalid-required" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label class="control-label" name="category">Select Category test :</label>
-                                <select class="form-control" ng-model="adctrl.advertise.category">
-                                    <option ng-repeat="cName in adctrl.Categories" ng-model="adctrl.categoryList">{{cName.catName}}</option>
+                                <label class="control-label" name="category">Select Category :</label>
+                                <select class="form-control" ng-model="categoriesName" onchange="angular.element(this).scope().fetchAllCategories()">
+                                    <option ng-repeat="cName in adctrl.Categories" >{{cName.catName}}</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <input type="file" ng-model="myFile" accept="image/*"  onchange="angular.element(this).scope().uploadFile(this.files); loadFile(event)"/>
+                                        <input type="file" ng-model="myFile" accept="image/*"  onchange="loadFile(event); angular.element(this).scope().uploadFile(this.files)"/> <%-- angular.element(this).scope().uploadFile(this.files);--%>
                                         <img id="output" height="150" width="250">
                                     </div>
                                 </div>
@@ -98,7 +98,7 @@
 
                             </div>--%>
                             <button type="button" ng-click="adctrl.reset()"  class="btn btn-warning" >Reset Form</button>
-                            <%--<input type="submit" class="btn btn-danger"  ng-click="fetchAllPayments()" value="Retrieve Details" />--%>
+                            <input type="submit" class="btn btn-danger"  ng-click="viewAdvertises()" value="Retrieve Details" />
 
                         </form>
                         <%--<button type="button" ng-click="adctrl.test()"  class="btn btn-warning" >Test Form</button>

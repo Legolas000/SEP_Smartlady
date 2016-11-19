@@ -39,22 +39,37 @@ public class AdvertisementDAOImpl implements AdvertisementDAO{
 			return 0;
 		}
 		else {
-			System.out.println("save method in implementation " + advertisement.getDescription());
+			//System.out.println("save method in implementation " + advertisement.getDescription());
 			/*String sql2 = "SELECT id FROM categories WHERE catName ="+advertisement.getCategory().getCatName();
 			jdbcTemplate.update(sql2);*/
-			String sql = "INSERT INTO advertisements(id, /*imagePath,*/ description, publishedDate, expiryDate, url, payment, status, place)" + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-			int retId = jdbcTemplate.update(sql, advertisement.getId(), /*advertisement.getImagePath(),*/ advertisement.getDescription(), advertisement.getPublishedDate(), advertisement.getExpiryDate(), advertisement.getUrl(), advertisement.getPayment(), advertisement.getStatus(), advertisement.getPlace()); //,Statement.RETURN_GENERATED_KEYS);
+			String sql = "INSERT INTO advertisements(id, /*imagePath,*/ description, publishedDate, expiryDate, url, payment, status, place, categoryID)" + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			jdbcTemplate.update(sql, advertisement.getId(), /*advertisement.getImagePath(),*/ advertisement.getDescription(), advertisement.getPublishedDate(), advertisement.getExpiryDate(), advertisement.getUrl(), advertisement.getPayment(), advertisement.getStatus(), advertisement.getPlace(), advertisement.getCategoryID()); //,Statement.RETURN_GENERATED_KEYS);
 
-           // String sql2 = "SELECT MAX(id) FROM advertisements";
-            //Statement st = jdbcTemplate. .createStatement();
-           //  int maxid = jdbcTemplate.update(sql2);
 
-           // System.out.println("the max id is : " + maxid);
+//            String sql2 = "SELECT MAX(id) FROM advertisements";
+//            Advertisement ad =  jdbcTemplate.query(sql2, new ResultSetExtractor<Advertisement>() {
+//
+//                @Override
+//                public Advertisement extractData(ResultSet rs) throws SQLException,
+//                        DataAccessException {
+//                    if (rs.next()) {
+//                        Advertisement advertisement = new Advertisement();
+//                        advertisement.setId((rs.getInt("id")));
+//                        return advertisement;
+//                    }                               //Ithu ID value ah Object ku assign pannum
+//                    return null;
+//                }
+//            });
+//
+//            int maxid = ad.getId();
 
-			System.out.println("save method in implementation bottom " + advertisement);
+         //   System.out.println("the max id is : " + maxid);
+
+            int a = 0;
+			//System.out.println("save method in implementation bottom " + advertisement);
             //System.out.println("the id is : " + retId);
 			//return jdbcTemplate.queryForInt( "select last_insert_id()" );
-			return retId;
+			return a;
 		}
 
 	}
@@ -126,18 +141,33 @@ public class AdvertisementDAOImpl implements AdvertisementDAO{
 
 	}
 
+    private Advertisement getMaxId() {
+        System.out.println("Hello Arham shan...!!!");
+        String sql = "SELECT MAX(id) FROM advertisements";
+        return jdbcTemplate.query(sql, new ResultSetExtractor<Advertisement>() {
+
+            //@Override
+            public Advertisement extractData(ResultSet rs) throws SQLException,
+                    DataAccessException {
+                if (rs.next()) {
+                    Advertisement advertisement = new Advertisement();
+                    advertisement.setId(rs.getInt(1));
+                    return advertisement;
+                }
+                return null;
+            }
+
+        });
+
+    }
+
     @Override
     public void saveImage(String filepath) {
-        // TODO Auto-generated method stub
-
-            System.out.println("save method in implementation " + filepath);
-			/*String sql2 = "SELECT id FROM categories WHERE catName ="+advertisement.getCategory().getCatName();
-			jdbcTemplate.update(sql2);*/
+        Advertisement advs =  getMaxId();
+        System.out.println("THE MAX ID IS : " + advs.getId());
+		int advID = advs.getId();
             String sql = "UPDATE advertisements SET imagePath = ?" + " WHERE id = ?";
-            jdbcTemplate.update(sql, filepath, "7");
-            System.out.println("save method in implementation bottom " + filepath);
-        /*UPDATE advertisements SET url = ?, description = ?, expiryDate = ?, place = ?"+
-        " WHERE id = ?"*/
+            jdbcTemplate.update(sql, filepath , advID);
     }
 
 }

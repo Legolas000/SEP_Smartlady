@@ -25,8 +25,8 @@
                                             <img src="/static/js/template/advertiser-template/advertises/unnamed.png" style="height: 130px; width: 110px; alignment: right" class="img-rounded" />
                                         </div>
                                         <div class="col-md-6 text-center">
-                                            <div ng-if="checkAv" style="color:#009933"><b><label >{{item.status}}</label></b></div>
-                                            <div ng-if="checkExp" style="color:red"><b><label >{{item.status}}</label></b></div>
+                                            <div ng-if="checkAv.isEqual(2)" style="color:#009933"><b><label >{{item.status}}</label></b></div>
+                                            <div ng-if="checkAv.isEqual(1)" style="color:red"><b><label >{{item.status}}</label></b></div>
                                             <div style="color:#009933"><b><label >Expirry Date {{item.exdate}}</label></b></div>
                                             <input type="submit" class="btn btn-warning small" ng-click="openTimeExtend(item.id); getSelectedAdvertise(advertiseId)" value="Extend Time" /><br/><br/>
                                             <button type="submit" class="btn btn-warning small"  ng-click="openUpdateAll(item.id); getSelectedAdvertise(advertiseId)" >Update All</button>

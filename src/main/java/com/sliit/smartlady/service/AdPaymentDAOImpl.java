@@ -28,11 +28,11 @@ public class AdPaymentDAOImpl implements AdPaymentDAO{
 
             @Override
             public AdPayment mapRow(ResultSet rs, int rowNum) throws SQLException {
-                System.out.println("Get payment methd calling");
+                //System.out.println("Get payment methd calling");
 
                 AdPayment lAdPayment = new AdPayment();
 
-                System.out.println("paymentPlans is : " +rs.getString("paymentPlans"));
+                //System.out.println("paymentPlans is : " +rs.getString("paymentPlans"));
 
                 lAdPayment.setId((rs.getInt("id")));
                 lAdPayment.setPaymentPlans(rs.getString("paymentPlans"));

@@ -76,9 +76,11 @@ angular.module('myApp').factory('AdvertiserService',
 
         function createAdvertise(advertise) {
             var deferred = $q.defer();
+            console.log(advertise);
             $http.post(REST_SERVICE_URI+'assignadvertise/advertise/', advertise)  //,advertise.advertiseimg
                 .then(
                     function (response) {
+
                         deferred.resolve(response.data);
                     },
                     function(errResponse){
@@ -86,6 +88,17 @@ angular.module('myApp').factory('AdvertiserService',
                         deferred.reject(errResponse);
                     }
                 );
+            // /$http.post(REST_SERVICE_URI+'assignadvertise/advertise/', advertise)  //,advertise.advertiseimg
+            //     .then(
+            //         function (response) {
+            //
+            //             deferred.resolve(response.data);
+            //         },
+            //         function(errResponse){
+            //             console.error('hey Service error : Error while creating Advertise');
+            //             deferred.reject(errResponse);
+            //         }
+            //     );
             return deferred.promise;
         }
 

@@ -15,7 +15,7 @@ angular.module('myApp').controller('AdvertiserController',
             self.reset = reset;
             self.updateAdvertise = updateAdvertise;
             self.test = test;
-            self.viewAdvertises = viewAdvertises;
+           // self.viewAdvertises = viewAdvertises;
             self.submitUser = submitUser;
             self.items = [];
             function test() {
@@ -26,14 +26,16 @@ angular.module('myApp').controller('AdvertiserController',
                 id:null,
                 //category:'Arham Khan',
                 // heading:'',*/
-                url:'www.google.com',
+                //categoriesName:'',
+                url:'http://www.google.com',
                 description:'',
                 time:'For 2 Weeks',
                 publishedDate:'',
                 expiryDate:'',
                 place:'Middle of right Side',
                 payment:'',
-                status:'N'
+                status:'N',
+                categoryID:''
                 //advertiseimg:'',
                 //myFile:''
             };
@@ -65,6 +67,7 @@ angular.module('myApp').controller('AdvertiserController',
              $scope.uploadFile = function(files) {
                 console.log("Function is uploadFile!");
                 var fd = new FormData();
+                 $scope.fd = fd;
 
                  var someDate = new Date();
                  var d = someDate.getDate();
@@ -76,23 +79,12 @@ angular.module('myApp').controller('AdvertiserController',
                  self.advertise.publishedDate = publishedDate;
                  self.advertise.expiryDate = expiryDate;
 
-                 /*fd = {
-                     "advertises" : self.advertise
-                 };*/
-                //Take the first selected file
-                fd.append("file", files[0]);
-
-                console.log("Testing image : " +fd);
-                //return fd;
-
+                 //Take the first selected file
+                 fd.append("file", files[0]);
+                 console.log("Testing image : " +fd);
                  $scope.imageupl = fd;
 
-                var uploadUrl = "http://localhost:8080/user/saveUserDataAndFile";
-                $http.post(uploadUrl, fd, {
-                    withCredentials: true,
-                    headers: {'Content-Type': undefined },
-                    transformRequest: angular.identity
-                }).success().error();
+
             };
 
             function submitUser() {
@@ -183,12 +175,12 @@ angular.module('myApp').controller('AdvertiserController',
 
                                 var secondDate = item.expiryDate;
                                 if( (firstDate.getTime() > new Date(secondDate).getTime())) {
-                                    $scope.checkExp = "true";
+                                    $scope.checkExp = 1;
                                     self.values.status = "Expired";
                                 }
                                 else{
-
-                                    $scope.checkAv = "true";
+                                    $scope.checkExp = 2;
+                                    //$scope.checkAv = 2;
                                     self.values.status = "Available";
                                     self.values.id = item.id;
                                     self.values.url = item.url;
@@ -217,17 +209,13 @@ angular.module('myApp').controller('AdvertiserController',
                             console.error('Error while creating Advertise');
                         }
                     );
+
+
+                console.log("Function is uploadFile!");
+
             }
 
             function submit() {
-                console.log("IMGS : " + $scope.imageupl);
-
-                /*var uploadUrl = "http://localhost:8080/user/saveUserDataAndFile";
-                $http.post(uploadUrl, fd, {
-                    withCredentials: true,
-                    headers: {'Content-Type': undefined },
-                    transformRequest: angular.identity
-                }).success().error();*/
 
                 var someDate = new Date();
                 var d = someDate.getDate();
@@ -238,7 +226,6 @@ angular.module('myApp').controller('AdvertiserController',
                 var expiryDate = selectDates();
                 self.advertise.publishedDate = publishedDate;
                 self.advertise.expiryDate = expiryDate;
-                //self.advertise.advertiseimg = $scope.imageupl;
 
                 if(self.advertise.id===null){
                     console.log('Saving New Advertise', self.advertise);
@@ -246,7 +233,18 @@ angular.module('myApp').controller('AdvertiserController',
                 } else{
                     console.log('Error in submit ');
                 }
+
                 reset();
+
+                // if(test != null)
+                 var uploadUrl = "http://localhost:8080/user/saveUserDataAndFile";
+                 $http.post(uploadUrl, $scope.fd, {
+                     withCredentials: true,
+                     headers: {'Content-Type': undefined },
+                     transformRequest: angular.identity
+                 }).success(
+                 ).error();
+
             }
 
             function selectDates() {
@@ -312,11 +310,13 @@ angular.module('myApp').controller('AdvertiserController',
 
 
 
-            function viewAdvertises() {
-                console.log("Button clicked !!!");
-                fetchAllAdvertise();
+            $scope.viewAdvertises = function () {
+                /*console.log("Button clicked !!!");
+                fetchAllAdvertise();*/
+                /*$scope.categoriesName= "Technology";
+                console.log("category selected is  : " +$scope.categoriesName)*/
 
-            }
+            };
 
             function reset(){
                 console.log("Reset button calling");
@@ -460,6 +460,8 @@ angular.module('myApp').controller('AdvertiserController',
              });
 
              };*/
+            $scope.categoriesName = "";
+
             $scope.fetchAllCategories = function(){
                 console.log("fetch category function calling");
 
@@ -469,8 +471,17 @@ angular.module('myApp').controller('AdvertiserController',
                             console.log("function(d)  calling");
                             self.Categories = d;
                             console.log("Categories : " +self.Categories[0].catName);
-                            self.categoryList = "Arham";//self.Categories[0].id;
+                            //$scope.categoriesName= self.Categories[0].catName;
+                            //self.categoryList = self.Categories[0].catName;//"Technology";//self.Categories[0].id;
+                            //$scope.categoriesName = self.Categories[0].catName;
 
+                            for(var j = 0; j<self.Categories.length; j++){
+                                //console.log("inside of catgry for loop "+j);
+                                if($scope.categoriesName == self.Categories[j].catName){
+                                    self.advertise.categoryID = self.Categories[j].id;
+                                   // console.log("the cat ID : "+ self.Categories[j].id)
+                                }
+                            }
                         },
                         function(errResponse){
                             console.error('Error while fetching Category');
@@ -500,8 +511,6 @@ angular.module('myApp').controller('AdvertiserController',
 
                                 }
                             }
-
-
                         },
                         function(errResponse){
                             sweetAlert("Error!!", "Error while fetch!!!!", "error");
