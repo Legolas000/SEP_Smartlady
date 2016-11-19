@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('myApp')
-    .controller('ArticleController', ['$scope', 'ArticleService','$location','$route','$window','$rootScope',
-        function($scope,ArticleService,$location,$route,$window,$rootScope) {
+    .controller('ArticleController', ['$scope', 'ArticleService','$location','$http','$route','$modal','$rootScope',
+        function($scope,ArticleService,$location,$http,$route,$modal,$rootScope) {
 
             //var self = this;
 
@@ -13,10 +13,20 @@ angular.module('myApp')
 
             $scope.categories = [];
             $scope.categoriesName = [];
-            $scope.title='';
-            $scope.description = '';
-            $scope.articles=[];
 
+            $scope.title='';
+            $scope.category='';
+            $scope.articleBody = '';
+
+            /*var article = {
+                title:'',
+                catName: '',
+                description:''
+            };*/
+            $scope.articles = [];
+            $scope.comments = [];
+
+            var fd;
 
             $scope.fetchAllCategories = function (){
                 ArticleService.fetchAllCategories()
@@ -35,14 +45,19 @@ angular.module('myApp')
 
             /*$scope.saveArticle = function(){
 
-             $window.alert(self.article.description);
+             $window.alert(self.article.articleBody);
              }*/
 
+            $scope.getImageDetails = function(files){
+                fd = new FormData();
+                fd.append("file", files[0]);
+            }
+
+            //submit the article
             $scope.articleFormSubmit = function(){
-                swal("Here's a message!");
-                var v = (''+$scope.article.title).length;
-                console.log(v);
-                if(((''+$scope.article.title).length == 0) || ((''+$scope.description).length == 0)){
+
+                var v = (''+$scope.title).length;
+                if(((''+$scope.title).length == 0) || ((''+$scope.articleBody).length == 0)){
                      sweetAlert("Error", "Article Title or Body Cannot be Empty", "error");
                 }
 
@@ -52,7 +67,8 @@ angular.module('myApp')
                     sweetAlert("Error", "Please Select a Category", "error");
                  }
                  else {
-                    ArticleService.articleFormSubmit()
+                    var file = document.getElementById("myFile");
+                    /*ArticleService.articleFormSubmit($scope.title,$scope.category,$scope.articleBody,file)
                         .then(
                             function (response) {
                                 if (response) {
@@ -61,11 +77,34 @@ angular.module('myApp')
                                     sweetAlert("Error", "Something went wrong. Article not created", "error");
                                 }
                             }
-                        )
+                        )*/
+                     var article = {
+                         'title':$scope.title,
+                         'catName': $scope.category,
+                         'description':$scope.articleBody
+                     };
+                     JSON.stringify(article);
+                     /*var fd = new FormData();
+                      fd.append("file", file[0]);*/
+
+                     $http.post('http://localhost:8080/createArticle/',fd, article, {
+                         withCredentials: true,
+                         headers: {'Content-Type': undefined},
+                         transformRequest: angular.identity
+                     })
+                         /*.then(
+                             function (response) {
+                                console.log('article created successfully');
+                             },
+                             function(errResponse){
+                                console.error('Error create article');
+                             }
+                         )*/
+                         .success().error();
                  }
-            }
+            };
 
-
+            //fetch a specific type of article(All, approved, pending, rejected)
             $scope.fetchAllArticles = function(){
                 ArticleService.fetchAllArticles()
                     .then(
@@ -110,24 +149,55 @@ angular.module('myApp')
                         $scope.fetchAllArticles();
 
                     });
-
-
             }
 
-
-            function updateStatus(id){
-                ArticleService.updateStatus(id)
+            $scope.viewComments = function(articleId){
+                ArticleService.fetchCommentsByArticleId(articleId)
                     .then(
-                        fetchAllArticles,
+                        function(data){
+                            $scope.comments = data;
+                            $scope.commentsCount = data.length;
+                        },
                         function(errResponse){
-                            console.error('Error while updating Article');
+                            console.error('Controller-Error while fetching comments');
                         }
-                    );
-            }
 
-            function approve(id) {
-                updateStatus(id);
-                console.log('Article approval confirmed for id:- ', id);
-            }
+                    )
+            };
+
+            //display the selected article details for update
+            $scope.fetchArticleForUpdate = function(articleId){
+
+            };
+
+            $scope.updateArticle = function(articleId){
+
+            };
+
+            $scope.openCommentsModal = function(articleId){
+                $rootScope.articleId = articleId;
+                var commentsPopup = $modal.open({
+                    templateUrl: '/static/js/template/writer-template/commentsModal.html',
+                    controller: 'modalController'
+                });
+            };
+
+            $scope.openUpdateArticleModal = function(articleId){
+                $rootScope.articleId = articleId;
+                var updatePopup = $modal.open({
+                    templateUrl: '/static/js/template/writer-template/updateArticleModal.html',
+                    controller: 'modalController'
+                });
+            };
 
         }]);
+
+angular.module('myApp').controller('modalController', ['$scope','$modalInstance',function ($scope, $modalInstance) {
+
+    $scope.close = function () {
+        $modalInstance.dismiss('cancel');
+    };
+    $scope.submit = function() {
+        //submit......
+    }
+}]);

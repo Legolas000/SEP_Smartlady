@@ -11,5 +11,6 @@ import java.util.List;
 public interface CommentsDAO {
     List<Comments> getReaderCommentsByArticleID(int articleID);
     List<Comments> getAllCommentsOrderByDateTime();
+    List<Comments> getAllCommentsByArticle(int articleId);
     void saveUserComments(Comments comments);
 }

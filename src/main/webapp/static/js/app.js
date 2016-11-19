@@ -1,6 +1,6 @@
 'use strict';
 
-var App = angular.module('myApp',['ngRoute','ngCookies','ngPassword','ui.bootstrap','angulike']);
+var App = angular.module('myApp',['ngRoute','ngCookies','ngPassword','ui.bootstrap','angulike','ui.tinymce']);
 
 angular.module('myApp').config(['$routeProvider', function($routeProvider) {
     $routeProvider
@@ -14,7 +14,7 @@ angular.module('myApp').config(['$routeProvider', function($routeProvider) {
             resolve: {
                 "check":function($location,$rootScope) {
                     if($rootScope.userRole == 2){
-                        $location.path('/writer_home');
+                        $location.path('/writer_articles');
                     }else if($rootScope.userRole == 3){
                         $location.path('/advertiser_home');
                     }

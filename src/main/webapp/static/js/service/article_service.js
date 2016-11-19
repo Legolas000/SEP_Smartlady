@@ -12,9 +12,10 @@ angular.module('myApp').factory('ArticleService', ['$http', '$q','$rootScope', '
         fetchAllCategories:fetchAllCategories,
         fetchAllArticles: fetchAllArticles,
         updateStatus: updateStatus,
-        articleFormSubmit: articleFormSubmit,
+       /* articleFormSubmit: articleFormSubmit,*/
         fetchFilterArticles : fetchFilterArticles,
-        deleteArticle : deleteArticle
+        deleteArticle : deleteArticle,
+        fetchCommentsByArticleId : fetchCommentsByArticleId
     };
 
     return factory;
@@ -34,9 +35,25 @@ angular.module('myApp').factory('ArticleService', ['$http', '$q','$rootScope', '
         return deferred.promise;
     }
 
-    function articleFormSubmit(){
+    /*function articleFormSubmit(title,category,articleBody,file){
+        var article = {
+            'title':title,
+            'catName': category,
+            'description':articleBody
+        };
+        JSON.stringify(article);
+
         deferred = $q.defer();
-        $http.post(REST_SERVICE_URI+'/createArticle/')
+
+        var fd = new FormData();
+        //Take the first selected file
+        fd.append("file", file[0]);
+
+        $http.post(REST_SERVICE_URI+'/createArticle/',article, fd, {
+            withCredentials: true,
+            headers: {'Content-Type': undefined },
+            transformRequest: angular.identity
+        })
             .then(
                 function (response) {
                     deferred.resolve(response.data);
@@ -48,7 +65,7 @@ angular.module('myApp').factory('ArticleService', ['$http', '$q','$rootScope', '
                 }
             );
         return deferred.promise;
-    }
+    }*/
 
     function fetchAllArticles(){
         deferred = $q.defer();
@@ -90,6 +107,21 @@ angular.module('myApp').factory('ArticleService', ['$http', '$q','$rootScope', '
                 },
                 function (errResponse) {
                     console.log('error while delete article id '+id);
+                    deferred.reject(errResponse);
+                }
+            );
+        return deferred.promise;
+    }
+
+    function fetchCommentsByArticleId(articleId){
+        deferred = $q.defer();
+        $http.get(REST_SERVICE_URI+'/getCommentsWriter/'+articleId)
+            .then(
+                function (response) {
+                    deferred.resolve(response.data);
+                },
+                function(errResponse){
+                    console.error('Error while fetching comments');
                     deferred.reject(errResponse);
                 }
             );

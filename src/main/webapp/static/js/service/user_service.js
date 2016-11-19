@@ -125,7 +125,7 @@
                     JSON.stringify(reades);
 
                     var deferred = $q.defer();
-                    $http.post(REST_SERVICE_URI+"rating",reades)
+                    $http.post(REST_SERVICE_URI,rating,reades)
                         .then(
                             function (response) {
                                 deferred.resolve(response.data);

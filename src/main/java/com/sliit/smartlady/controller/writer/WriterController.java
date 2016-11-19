@@ -1,17 +1,24 @@
 package com.sliit.smartlady.controller.writer;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sliit.smartlady.model.Article;
 import com.sliit.smartlady.model.Category;
+import com.sliit.smartlady.model.Comments;
 import com.sliit.smartlady.service.ArticleDAO;
 import com.sliit.smartlady.service.CategoryDAO;
 
+import com.sliit.smartlady.service.CommentsDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -29,6 +36,9 @@ public class WriterController extends HttpServlet{
 
     @Autowired
     ArticleDAO articleDAO;
+
+    @Autowired
+    CommentsDAO commentsDAO;
 
     //fetch all categories
     @RequestMapping(value = "/categories/", method = RequestMethod.GET)
@@ -59,6 +69,37 @@ public class WriterController extends HttpServlet{
 
     }*/
 
+     //create new article
+    @RequestMapping(value = "/createArticle/", method = RequestMethod.POST)
+    @ResponseBody
+    public void createNewArticle(@RequestParam(value = "file") MultipartFile file, HttpServletRequest request,
+                                                 @RequestBody Article article){
+        String title = article.getTitle();
+        String category = article.getCategory().getCatName();
+        String description = article.getDescription();
+
+        System.out.println("hello java");
+        System.out.println("title : "+title);
+        System.out.println("category : "+category);
+        System.out.println("description : "+description);
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        String rootDirectory = "C:\\Users\\mohamed\\Desktop\\uploadFile\\";
+        System.out.println("Root Directory "+rootDirectory);
+        try {
+            file.transferTo(new File(rootDirectory  + file.getOriginalFilename()));
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+
     //fetch all articles
     @RequestMapping(value = "/getAllArticles/{writerId}", method = RequestMethod.GET)
     public ResponseEntity<List<Article>>getAllArticles(@PathVariable("writerId") int writerId){
@@ -85,6 +126,16 @@ public class WriterController extends HttpServlet{
         articleDAO.deleteArticle(articleId);
         System.out.println("Article id "+articleId+" deleted success");
         return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    //fetchAllComments
+    @RequestMapping(value = "/getCommentsWriter/{articleId}", method = RequestMethod.GET)
+    public ResponseEntity<List<Comments>>getAllCommentsbyArticle(@PathVariable("articleId") int articleId){
+        List<Comments> comments = commentsDAO.getAllCommentsByArticle(articleId);
+        if(comments.isEmpty()){
+            return new ResponseEntity<List<Comments>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Comments>>(comments, HttpStatus.OK);
     }
 
 

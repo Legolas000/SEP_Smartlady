@@ -10,6 +10,9 @@ public interface ArticleDAO {
         /* ===================================== Nibras ====================================== */
 
         /*Created by Nibras*/
+        public void createNewArticle(String title, String category, String articleBody, String imgPath);
+
+        /*Created by Nibras*/
         public List<Article> getArticlesByWriterId(int writerId);
 
         /*Created by Nibras*/

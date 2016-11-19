@@ -1,0 +1,29 @@
+<link href="/static/css/magazine-css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen"/>
+<style>
+    p.test{
+        width: 40em;
+        word-wrap: break-word;
+    }
+</style>
+
+<div class="modal-header">
+    <h3 class="modal-title"><b>Comments</b></h3>
+</div>
+
+<div ng-controller="ArticleController" ng-init="viewComments(articleId)">
+    <div class="modal-body">
+        <div ng-show="commentsCount == 0"><p>No Comments for this article!!!</p></div>
+            <ul class="list-group" ng-repeat="comment in comments">
+                <li class="list-group-item list-group-item-info"><p class="test">{{comment.comments}}</p></li>
+                <h5>{{comment.dateTime}}</h5>
+            </ul>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-warning" type="button"  ng-click="close()">Cancel</button>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="/static/js/magazine-js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/magazine-js/bootstrap.min.js"></script>

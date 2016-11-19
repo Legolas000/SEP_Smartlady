@@ -1,0 +1,32 @@
+<div class="modal-header">
+    <h3 class="modal-title"><b>Comments</b></h3>
+</div>
+
+<div ng-controller="ArticleController" ng-init="fetchAllCategories()">
+    <div class="modal-body">
+        <div class="container">
+            <form name="articleForm" ng-submit="articleFormSubmit()" class="form-horizontal"  method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input type="text" name="titleName" class="form-control" ng-model="title" id="title" placeholder="Enter title"  />
+                </div>
+                <div class="form-group">
+                    <div class="dropdown">
+                        <select id="categories" class="form-control" ng-model="category" ng-options="item for item in categoriesName"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea ui-tinymce="tinymceOptions" ng-model="articleBody" rows="18" cols="40"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="file" name="file" id="myFile" accept="image/*" onchange="loadFile(event); angular.element(this).scope().getImageDetails(this.files);"/>
+                    <img id="output" width="150" height="150"/>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success" ng-click="submit()">Save</button>
+        <button class="btn btn-warning" ng-click="close()">Cancel</button>
+    </div>
+
+</div>

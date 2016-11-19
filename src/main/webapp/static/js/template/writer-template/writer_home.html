@@ -43,26 +43,26 @@
             <div class="form-group">
                 <label class="col-sm-2">Title:<span style="color:red;font-weight:normal"><noraml>*</noraml></span></label>
                 <div class="col-sm-6">
-                    <input type="text" name="titleName" class="form-control" ng-model="article.title" id="title" placeholder="Enter title"  />
+                    <input type="text" name="titleName" class="form-control" ng-model="title" id="title" placeholder="Enter title"  />
                 </div>
             </div>
             <div class="form-group">
                 <div class="dropdown">
                     <label class="col-sm-2">Category:<span style="color:red;font-weight:normal"><noraml>*</noraml></span></label>
                     <div class="col-sm-6">
-                        <select id="categories" class="form-control" ng-model="article.category" ng-options="item for item in categoriesName"></select>
+                        <select id="categories" class="form-control" ng-model="category" ng-options="item for item in categoriesName"></select>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2">Article Body:<span style="color:red;font-weight:normal"><noraml>*</noraml></span></label>
                 <div class="col-sm-8">
-                    <textarea ui-tinymce="tinymceOptions" ng-model="article.description" rows="18" cols="40"></textarea>
+                    <textarea ui-tinymce="tinymceOptions" ng-model="articleBody" rows="18" cols="40"></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2">Cover Image:<span style="color:red;font-weight:normal"><noraml>*</noraml></span></label>
-                <input type="file" name="file" accept="image/*" onchange="loadFile(event)">
+                <input type="file" name="file" id="myFile" accept="image/*" onchange="loadFile(event); angular.element(this).scope().getImageDetails(this.files);"/>
                 <img id="output" width="150" height="150"/>
 
             </div>
@@ -72,8 +72,8 @@
                     <label class="col-sm-2"><span style="color:red;font-weight:normal"><noraml>* - Required</noraml></span></label>
                 </div>
                 <div class="col-sm-4">
-                    <button type="submit" class="btn btn-default">Save</button>
-                    <button type="button" class="btn btn-default">Cancel</button>
+                    <button type="submit" class="btn btn-success" style="height:40px;width:130px">Save</button>
+                    <button type="button" class="btn btn-warning" style="height:40px;width:130px">Cancel</button>
                 </div>
             </div>
 

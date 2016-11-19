@@ -97,6 +97,15 @@ public class ArticleDAOImpl implements ArticleDAO {
     }
 
     @Override
+    public void createNewArticle(String title, String category, String articleBody, String imgPath) {
+
+        String sql = "INSERT INTO articles(title,description,coverImagePath,categoryId) VALUES(" +
+                     "?,?,?,(SELECT id FROM categories WHERE catName = "+category+"))";
+        jdbcTemplate.update(sql,title,articleBody,imgPath);
+        System.out.println("Article value inserted");
+    }
+
+    @Override
         public List<Article> getArticlesByWriterId(int writerId) {
             String sql = "SELECT * FROM articles WHERE writerId = "+writerId;
             List<Article> listArticle = jdbcTemplate.query(sql, new RowMapper<Article>() {
