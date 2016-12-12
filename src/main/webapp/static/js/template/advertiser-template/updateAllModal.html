@@ -14,70 +14,94 @@
 <div class="modal-header">
     <h3 class="modal-title"><b>Update This Advertisement</b></h3>
 </div>
-<div ng-controller="AdvertiserController as adctrl" ng-init="getSelectedAdvertise(advertiseId)">
+<div ng-controller="AdvertiserController as adctrl" ng-init="getSelectedAdvertise(advertiseId); fetchAllPayments()">
 
-        <!--<div >
-            <img src="/static/js/template/advertiser-template/advertises/gel.jpg" style="height: 330px; width: 410px; align-content: right " class="img-rounded" />
-        </div>
-        <span><b>Passed Parameter after click:</b></span>{{title1}}-->
+    <!--<div >
+        <img src="/static/js/template/advertiser-template/advertises/gel.jpg" style="height: 330px; width: 410px; align-content: right " class="img-rounded" />
+    </div>
+    <span><b>Passed Parameter after click:</b></span>{{title1}}-->
 
-            <div class="modal-body" >
-                <form name="UploadAllForm" >
-                <div>
-                    <label class="control-label" >URL of Advertise :</label>
-                    <input class="form-control" name="url2" type="url" ng-model="adctrl.updateUrl" required />
-                    <!--<span ng-show="UploadAllForm.url2.$invalid && !form.url2.$pristine" class="help-block errorfont">Url is required</span>-->
-                    <div ng-show="UploadAllForm.url2.$touched && UploadAllForm.url2.$invalid">
+    <div class="modal-body" >
+        <form name="UploadAllForm" >
+            <div>
+                <label class="control-label" >URL of Advertise :</label>
+                <input class="form-control" name="url2" type="url" ng-model="adctrl.updateUrl" required />
+                <!--<span ng-show="UploadAllForm.url2.$invalid && !form.url2.$pristine" class="help-block errorfont">Url is required</span>-->
+                <div ng-show="UploadAllForm.url2.$touched && UploadAllForm.url2.$invalid">
                         <span ng-show="UploadAllForm.url2.$error.required">
                             <a class="errorfont">URL field is required</a> <br/>
                         </span>
-                        <a class="errorfont">Invalid URL address </a>
-                    </div>
+                    <a class="errorfont">Invalid URL address </a>
                 </div>
+            </div>
 
-                <div class="form-group" class="ng-pristine ng-invalid ng-invalid-required" role="form">
-                    <label class="control-label" >Description about advertise :</label>
-                    <textarea class="form-control textarea"  name="description" type="text" ng-model="adctrl.updateDescription" style="height: 100px" required ng-minlength="15" ng-maxlength="70"></textarea>
-                    <div ng-show="UploadAllForm.description.$touched && UploadAllForm.description.$invalid">
+            <div class="form-group" class="ng-pristine ng-invalid ng-invalid-required" role="form">
+                <label class="control-label" >Description about advertise :</label>
+                <textarea class="form-control textarea"  name="description" type="text" ng-model="adctrl.updateDescription" style="height: 100px" required ng-minlength="15" ng-maxlength="70"></textarea>
+                <div ng-show="UploadAllForm.description.$touched && UploadAllForm.description.$invalid">
                     <span ng-show="UploadAllForm.description.$error.required">
                         <a class="errorfont">Description field is required</a> <br/>
                     </span>
-                        <a class="errorfont">Description should be greater than 15 or less than 70 letters</a>
-                    </div>
-                    <!--<span ng-show="UploadAllForm.description.$invalid && !form.description.$pristine" class="help-block errorfont">Description is required</span>-->
-                   <!-- <span style="color:red" ng-show="UploadAllForm.description.$dirty && UploadAllForm.description.$invalid && UploadAllForm.description.$touched">
-                        <span ng-show="UploadAllForm.description.$error.required">Email is required.</span>
-
-                    </span>-->
+                    <a class="errorfont">Description should be greater than 15 or less than 70 letters</a>
                 </div>
+                <!--<span ng-show="UploadAllForm.description.$invalid && !form.description.$pristine" class="help-block errorfont">Description is required</span>-->
+                <!-- <span style="color:red" ng-show="UploadAllForm.description.$dirty && UploadAllForm.description.$invalid && UploadAllForm.description.$touched">
+                     <span ng-show="UploadAllForm.description.$error.required">Email is required.</span>
 
-                <div class="form-group">
-                    <label class="control-label" >Time Period for Avdertisement :</label>
-                    <select class="form-control" ng-model="adctrl.extendTime">
-                        <option>For 2 Weeks</option>
-                        <option>For 1 Month</option>
-                        <option>For 3 Month</option>
-                        <option>For 6 Month</option>
-                        <option>For 1 Year</option>
-                    </select>
-                </div>
+                 </span>-->
+            </div>
 
-                <div class="form-group">
-                    <label class="control-label" >Place to Display Add :</label>
-                    <select class="form-control" ng-model="adctrl.updatePlace">
-                        <option>middle of right Side</option>
-                        <option>Bottom of right Side</option>
-                        <option>middle of Page</option>
-                        <option>Bottom of Page</option>
-                    </select>
-                </div>
+            <!--<div class="form-group">
+                <label class="control-label" >Time Period for Avdertisement :</label>
+                <select class="form-control" ng-model="adctrl.extendTime" onchange="angular.element(this).scope().fetchAllPayments()">
+                    <option>For 2 Weeks</option>
+                    <option>For 1 Month</option>
+                    <option>For 3 Month</option>
+                    <option>For 6 Month</option>
+                    <option>For 1 Year</option>
+                </select>
+            </div>
 
-            </form>
-        </div>
+            <div class="form-group">
+                <label class="control-label" >Place to Display Add :</label>
+                <select class="form-control" ng-model="adctrl.updatePlace" onchange="angular.element(this).scope().fetchAllPayments()">
+                    <option>Middle of right Side</option>
+                    <option>Bottom of right Side</option>
+                    <option>Middle of Page</option>
+                    <option>Bottom of Page</option>
+                </select>
+            </div>-->
+            <div class="form-group">
+                <label class="control-label" >Time Period for Avdertisement :</label>
+                <select class="form-control" ng-model="adctrl.extendTime" onchange="angular.element(this).scope().fetchAllPayments()">
+                    <option>For 2 Weeks</option>
+                    <option>For 1 Month</option>
+                    <option>For 3 Month</option>
+                    <option>For 6 Month</option>
+                    <option>For 1 Year</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label" >Place to Display Add :</label>
+                <select class="form-control" ng-model="adctrl.updatePlace" onchange="angular.element(this).scope().fetchAllPayments()">
+                    <option>Middle of right Side</option>
+                    <option>Bottom of right Side</option>
+                    <option>Middle of Page</option>
+                    <option>Bottom of Page</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label" >Payment for Advertisement :</label>
+
+                <label class="control-label"  ng-model="adctrl.updatePayment"> Rs. {{adctrl.updatePayment}}</label>
+            </div> <br/>
+
+        </form>
+    </div>
     <div class="modal-footer">
 
         <button class="btn btn-warning" type="button"  ng-click="close()">Cancel</button>
-        <button type="button" class="btn btn-primary" ng-disabled="UploadAllForm.$invalid" ng-click="adctrl.updateAdvertise(advertiseId); close()">Update Changes</button>
+        <button type="button" class="btn btn-primary" ng-disabled="UploadAllForm.$invalid" ng-click="adctrl.updateAdvertise(advertiseId); close(); viewAdvertises()">Update Changes</button>
     </div>
 </div>
 

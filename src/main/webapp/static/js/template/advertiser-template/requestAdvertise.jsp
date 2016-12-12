@@ -33,14 +33,7 @@
                                     <option ng-repeat="cName in adctrl.Categories" >{{cName.catName}}</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <input type="file" ng-model="myFile" accept="image/*"  onchange="loadFile(event); angular.element(this).scope().uploadFile(this.files)"/> <%-- angular.element(this).scope().uploadFile(this.files);--%>
-                                        <img id="output" height="150" width="250">
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="form-group">
                                 <label class="control-label" >URL of Advertise :</label>
                                 <input class="form-control" name="aurl" type="url" ng-model="adctrl.advertise.url" required class="glyphicon glyphicon-ok">
@@ -84,7 +77,36 @@
                                 <label class="control-label" >Payment for Advertisement :</label>
                                 <%--<input class="form-control" type="text">--%>
                                 <label class="control-label"  ng-model="adctrl.advertise.payment"> Rs. {{adctrl.advertise.payment}}</label>
+                            </div> <br/>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <input type="file" id="advertiseImage" class="advertiseImage" ng-model="myFile" accept="image/*" name="advertiseImage" onchange="loadFile(event); angular.element(this).scope().uploadFile(this.files)"/>
+                                        <%--<div ng-if="fileValid" >
+                                            <a class="errorfont">Please select an image. The file format is wrong</a>
+                                        </div>--%><br/>
+                                        <img id="output" height="200" width="300"> <br/>
+                                        <%--<div ng-if="adctrl.dimensions == 'true'">
+
+                                            &lt;%&ndash;<img id="output" height="200" width="300"> <br/>&ndash;%&gt;
+                                        </div>--%>
+                                        <div ng-if="adctrl.dimensions == ''">
+                                            <%--<a class="errorfont">Invalid File Format</a> <br/>--%>
+                                            <a class="errorfont">Invalid Dimensions</a> <br/>
+                                        </div>
+
+                                        <%--<a class="errorfont">The image width is : {{imgWidth}} Height is : {{imgHeight}}</a>--%>
+                                        <%--<div ng-show="advertiseForm.advertiseImage.$invalid" class="col-md-12 col-sm-12 col-xs-12 ">
+                                            <span ng-show="advertiseForm.advertiseImage.$error.required">
+                                                <a class="errorfont">Image field is required</a> <br/>
+                                            </span>
+
+                                        </div>--%>
+                                    </div>
+                                </div>
                             </div>
+
                             <%--<div class="form-group">
                                 <label class="control-label" >Values are :</label>
                                 &lt;%&ndash;<input class="form-control" type="text">&ndash;%&gt;
@@ -98,7 +120,7 @@
 
                             </div>--%>
                             <button type="button" ng-click="adctrl.reset()"  class="btn btn-warning" >Reset Form</button>
-                            <input type="submit" class="btn btn-danger"  ng-click="viewAdvertises()" value="Retrieve Details" />
+                            <%--<input type="submit" class="btn btn-danger"  ng-click="viewAdvertises()" value="Retrieve Details" />--%>
 
                         </form>
                         <%--<button type="button" ng-click="adctrl.test()"  class="btn btn-warning" >Test Form</button>

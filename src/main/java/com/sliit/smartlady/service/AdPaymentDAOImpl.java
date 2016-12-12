@@ -46,4 +46,46 @@ public class AdPaymentDAOImpl implements AdPaymentDAO{
         return listAdPayment;
     }
 
+    /*@Override
+    public List<AdPayment> getPaymentPlans() {
+        String sql = "SELECT DISTINCT paymentPlans FROM advertisements";
+        List<AdPayment> listpaymentPlans = jdbcTemplate.query(sql,  new RowMapper<AdPayment>() {
+
+            @Override
+            public AdPayment mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+                AdPayment lpaymentPlans = new AdPayment();
+
+                lpaymentPlans.setId((rs.getInt("id")));
+                lpaymentPlans.setPaymentPlans(rs.getString("paymentPlans"));
+
+                return lpaymentPlans;
+            }
+        });
+
+        return listpaymentPlans;
+    }
+
+    @Override
+    public List<AdPayment> getPagePlacements() {
+        String sql = "SELECT DISTINCT pagePlacements FROM advertisements";
+        List<AdPayment> listpagePlacements = jdbcTemplate.query(sql,  new RowMapper<AdPayment>() {
+
+            @Override
+            public AdPayment mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+                AdPayment lpagePlacements = new AdPayment();
+
+                lpagePlacements.setId((rs.getInt("id")));
+                lpagePlacements.setPagePlacements(rs.getString("pagePlacements"));
+
+                return lpagePlacements;
+            }
+        });
+
+        return listpagePlacements;
+
+    }*/
+
+
 }

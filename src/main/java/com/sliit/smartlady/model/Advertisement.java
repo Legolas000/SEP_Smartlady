@@ -8,7 +8,7 @@ public class Advertisement {
 	private String publishedDate;
 	private String expiryDate;
 	private String url;
-	private String status;
+	private int status;
 	private String place;
 	private float payment;
 	private int categoryID;
@@ -82,11 +82,11 @@ public class Advertisement {
 		this.payment = payment;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 

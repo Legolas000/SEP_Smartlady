@@ -64,6 +64,21 @@
 			left: 0;
 			z-index: 2000;
 		}
+
+		.sidenav-head{
+			text-align: center;
+			color: white;
+
+		}
+
+		.sidebar{
+			width: 20%;
+			height: 1300px;
+			float: left;
+			background-color: #4d4d4d;
+
+		}
+
 	</style>
 
 
@@ -451,11 +466,11 @@
 				<!-- --- Arham's page side nav bar ------->
 				<div class="col-sm-3 sidebar" ng-if="userRole === 3">
 					<div class="container-fluid">
-						<h4 class="sidenav-head"><b>Advertiser's Self Blog</b></h4>
+						<h3 class="sidenav-head"><b>Advertiser's Self Blog</b></h3><br/><br/>
 						<ul class="nav nav-pills nav-stacked">
-							<li><a href="/#/assignadvertise" class="glyphicon glyphicon-upload"> Assign New Addvertise</a></li>
-							<li><a href="/#/advertiserprofile" class="glyphicon glyphicon-user" > View My Profile</a></li>
-							<li><a href="/#/viewUpdateAdvertise" class="glyphicon glyphicon-upload" ng-click="adctrl.viewAdvertises()"> All My Updates</a></li>
+							<li><a href="/#/assignadvertise" class="glyphicon glyphicon-upload" style="color: #ccffff; border-color: turquoise; height: 50px; "> Assign New Addvertise</a></li> <br/>
+							<%--<li><a href="/#/advertiserprofile" class="glyphicon glyphicon-user" > View My Profile</a></li>--%>
+							<li><a href="/#/viewUpdateAdvertise" class="glyphicon glyphicon-upload" style="color: #ccffff; border-color: turquoise; height: 50px; font-size: medium"> All My Updates</a></li>
 						</ul><br>
 					</div>
 				</div>

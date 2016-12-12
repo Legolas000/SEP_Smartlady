@@ -5,17 +5,16 @@
 'use strict';
 
 angular.module('myApp').controller('AdvertiserController',
-    ['$scope', 'AdvertiserService','$rootScope','$http','$window','$modal',
-        function($scope,AdvertiserService,$rootScope,$http,$window,$modal){
+    ['$scope', 'AdvertiserService','$rootScope','$http','$window','$modal','$timeout',
+        function($scope,AdvertiserService,$rootScope,$http,$window,$modal,$timeout){
 
-            fetchAllAdvertise();
+            //fetchAllAdvertise();
 
             var self = this;
             self.submit = submit;
             self.reset = reset;
             self.updateAdvertise = updateAdvertise;
             self.test = test;
-           // self.viewAdvertises = viewAdvertises;
             self.submitUser = submitUser;
             self.items = [];
             function test() {
@@ -24,9 +23,6 @@ angular.module('myApp').controller('AdvertiserController',
 
             self.advertise={
                 id:null,
-                //category:'Arham Khan',
-                // heading:'',*/
-                //categoriesName:'',
                 url:'http://www.google.com',
                 description:'',
                 time:'For 2 Weeks',
@@ -34,17 +30,19 @@ angular.module('myApp').controller('AdvertiserController',
                 expiryDate:'',
                 place:'Middle of right Side',
                 payment:'',
-                status:'N',
+                status:0,
                 categoryID:''
-                //advertiseimg:'',
-                //myFile:''
             };
 
+            $scope.myFile = '';
+
             self.url2 = "www.youtube.com";
-            self.extendTime="For 1 Weeks";
+            self.extendTime="For 2 Weeks";
+            self.updatePayment="";
 
             self.values = {
                 id:'',
+                imagePath:'',
                 url:'',
                 exdate: '',
                 status:''
@@ -58,44 +56,67 @@ angular.module('myApp').controller('AdvertiserController',
             self.swt = "";
             self.updateUrl = '';
 
-           // self.check = "";
+            //$scope.fileValid = null;
+            $scope.imgWidth ="Arham";
+            $scope.fileInValid = "";
+
+            // self.check = "";
             self.advertises=[];
             self.Categories=[];
             self.selectedAdvertise=[];
             self.payments=[];
+            $scope.AllPaymentPlans=[];
 
-             $scope.uploadFile = function(files) {
+            $scope.uploadFile = function(files) {
                 console.log("Function is uploadFile!");
                 var fd = new FormData();
-                 $scope.fd = fd;
+                $scope.fd = fd;
 
-                 var someDate = new Date();
-                 var d = someDate.getDate();
-                 var m = someDate.getMonth() + 1;
-                 var y = someDate.getFullYear();
-
-                 var publishedDate = m + '/'+ d + '/'+ y;
-                 var expiryDate = selectDates();
-                 self.advertise.publishedDate = publishedDate;
-                 self.advertise.expiryDate = expiryDate;
-
-                 //Take the first selected file
-                 fd.append("file", files[0]);
-                 console.log("Testing image : " +fd);
-                 $scope.imageupl = fd;
-
+                var ext = files[0].name.match(/\.(.+)$/)[1];
+                if(angular.lowercase(ext) ==='jpg' || angular.lowercase(ext) ==='jpeg' || angular.lowercase(ext) ==='png'){
+                    self.dimensions = "true";
+                    $scope.fileValid = "valid";
+                    $scope.fileInValid = "";
+                    fd.append("file", files[0]);
+                    $scope.imageupl = fd;
+                }
+                else{
+                    $scope.fileInValid = "invalid";
+                    sweetAlert("Invalid!!", "Selected file format is wrong!", "error");
+                    something_happens();
+                }
 
             };
 
+            var _URL = window.URL || window.webkitURL;
+
+            $("#advertiseImage").change(function(e) {
+                var file, img;
+
+                if ((file = this.files[0])) {
+                    img = new Image();
+                    img.onload = function() {
+                        $scope.imgWidth = this.width;
+                        $scope.imgHeight = this.height;
+                        if($scope.imgWidth != 300 || $scope.imgHeight != 200){
+                            sweetAlert("Wrong Image Dimensions!", "Please select an image with Width 300px and Height 200px", "error");
+                            //loadFile(event);
+                            $scope.fileInValid = "invalid";
+                            self.dimensions = "";
+                            something_happens();
+                        }
+                        else
+                            self.dimensions = "true";
+                    };
+                    img.src = _URL.createObjectURL(file);
+                }
+            });
+
             function submitUser() {
-                console.log("Function is submitUser!");
                 var file = self.fileModel;
-                console.log('file is ' + self.fileModel);
-                console.dir(file);
                 var uploadUrl = "http://localhost:8080/user/saveUserDataAndFile";
                 var fd = new FormData();
                 fd.append('file', file);
-
                 var data = {
                     call1:
                         function (value) {
@@ -113,15 +134,7 @@ angular.module('myApp').controller('AdvertiserController',
                     console.log('error' , e);
                 });
             };
-            /*function saveImage(advertise) {
-                AdvertiserService.saveImage(advertise)
-                    .then(
-                        fetchAllAdvertise,
-                        function(errResponse){
-                            console.error('Error while save images');
-                        }
-                    );
-            }*/
+
             $scope.openTimeExtend = function (id) {
                 $rootScope.advertiseId = id;
                 var modalInstance = $modal.open({
@@ -138,55 +151,47 @@ angular.module('myApp').controller('AdvertiserController',
                 });
             };
 
-            /*$scope.onFileSelect = function($files) {
-
-             console.log("Function calling");
-             console.log($files); // undefined
-             //$files: an array of files selected, each file has name, size, and type.
-             for (var i = 0; i < $files.length; i++) {
-             var file = $files[i];
-             $scope.upload = $upload.upload({
-             url: '/cards/avatar/save_from_disk', //upload.php script, node.js route, or servlet url
-             data: {
-             myObj: $scope.myModelObj
-             },
-             file: file
-             }).progress(function(evt) {
-             console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-             }).success(function(data, status, headers, config) {
-             // file is uploaded successfully
-             console.log(data);
-             });
-             }
-             };*/
             function fetchAllAdvertise(){
                 console.log("fetch function calling");
-
                 AdvertiserService.fetchAllAdvertise()
                     .then(
                         function(d) {
-                            console.log("function(d)  calling");
                             self.advertises = d;
-                            self.remainingDays = "2 Months and 10 Days more";
-
                             var firstDate = new Date();
                             self.advertises.forEach(function (item) {
                                 self.values.exdate = item.expiryDate;
-
                                 var secondDate = item.expiryDate;
                                 if( (firstDate.getTime() > new Date(secondDate).getTime())) {
-                                    $scope.checkExp = 1;
+                                    $scope.checkExp = 'Expired';
                                     self.values.status = "Expired";
-                                }
-                                else{
-                                    $scope.checkExp = 2;
-                                    //$scope.checkAv = 2;
-                                    self.values.status = "Available";
                                     self.values.id = item.id;
+                                    self.values.imagePath = item.imagePath;
                                     self.values.url = item.url;
                                 }
+                                else{
+                                    if(item.status == 1) {
+                                        $scope.checkAv = 2;
+                                        self.values.status = "Available";
+                                        self.values.id = item.id;
+                                        self.values.imagePath = item.imagePath;
+                                        self.values.url = item.url;
+                                    }
+                                    else if(item.status == 2) {
+                                        $scope.checkAv = 3;
+                                        self.values.status = "Rejected";
+                                        self.values.id = item.id;
+                                        self.values.imagePath = item.imagePath;
+                                        self.values.url = item.url;
+                                    }
+                                    else {
+                                        $scope.checkAv = 2;
+                                        self.values.status = "Pending";
+                                        self.values.id = item.id;
+                                        self.values.imagePath = item.imagePath;
+                                        self.values.url = item.url;
+                                    }
+                                }
                                 self.updateitems.push(angular.copy(self.values));
-
                             });
                         },
                         function(errResponse){
@@ -201,7 +206,7 @@ angular.module('myApp').controller('AdvertiserController',
                     .then(
                         function(Response){
 
-                            sweetAlert("Success!!", "New Advertise successfully inserted!!!!", "success");
+                            sweetAlert("Success!!", "New Advertise successfully created!!!!", "success");
                             console.error(' No Error while creating Advertise');
                         },
                         function(errResponse){
@@ -209,42 +214,43 @@ angular.module('myApp').controller('AdvertiserController',
                             console.error('Error while creating Advertise');
                         }
                     );
-
-
                 console.log("Function is uploadFile!");
-
             }
 
             function submit() {
-
-                var someDate = new Date();
-                var d = someDate.getDate();
-                var m = someDate.getMonth() + 1;
-                var y = someDate.getFullYear();
-
-                var publishedDate = m + '/'+ d + '/'+ y;
-                var expiryDate = selectDates();
-                self.advertise.publishedDate = publishedDate;
-                self.advertise.expiryDate = expiryDate;
-
-                if(self.advertise.id===null){
-                    console.log('Saving New Advertise', self.advertise);
-                    createAdvertise(self.advertise);
-                } else{
-                    console.log('Error in submit ');
+                if ($scope.fileInValid){
                 }
+                else {
+                    var someDate = new Date();
+                    var d = someDate.getDate();
+                    var m = someDate.getMonth() + 1;
+                    var y = someDate.getFullYear();
 
-                reset();
+                    var publishedDate = m + '/'+ d + '/'+ y;
+                    var expiryDate = selectDates();
+                    self.advertise.publishedDate = publishedDate;
+                    self.advertise.expiryDate = expiryDate;
 
-                // if(test != null)
-                 var uploadUrl = "http://localhost:8080/user/saveUserDataAndFile";
-                 $http.post(uploadUrl, $scope.fd, {
-                     withCredentials: true,
-                     headers: {'Content-Type': undefined },
-                     transformRequest: angular.identity
-                 }).success(
-                 ).error();
+                    if(self.advertise.id===null){
+                        console.log('Saving New Advertise', self.advertise);
+                        createAdvertise(self.advertise);
+                    } else{
+                        console.log('Error in submit ');
+                    }
 
+                    reset();
+                    $timeout(submitImage, 5000);
+                }
+            }
+
+            function submitImage() {
+                var uploadUrl = "http://localhost:8080/user/saveUserDataAndFile";
+                $http.post(uploadUrl, $scope.fd, {
+                    withCredentials: true,
+                    headers: {'Content-Type': undefined },
+                    transformRequest: angular.identity
+                }).success(
+                ).error();
             }
 
             function selectDates() {
@@ -308,14 +314,9 @@ angular.module('myApp').controller('AdvertiserController',
                 }
             }
 
-
-
             $scope.viewAdvertises = function () {
-                /*console.log("Button clicked !!!");
-                fetchAllAdvertise();*/
-                /*$scope.categoriesName= "Technology";
-                console.log("category selected is  : " +$scope.categoriesName)*/
-
+                console.log("Button clicked !!!");
+                fetchAllAdvertise();
             };
 
             function reset(){
@@ -338,13 +339,12 @@ angular.module('myApp').controller('AdvertiserController',
                 AdvertiserService.getSelectedAdvertise(advertiseId)
                     .then(
                         function(d) {
-                            console.log("function(d) in findbyid  calling");
                             self.selectedAdvertise = d;
                             self.updateUrl = self.selectedAdvertise.url;
                             self.updateDescription = self.selectedAdvertise.description;
                             self.updatePlace = self.selectedAdvertise.place;
                             self.updatePublishedTimePeriod = self.selectedAdvertise.expiryDate;
-                            console.log("Selected adv : "+ self.selectedAdvertise + self.selectedAdvertise.place + self.updatePublishedTimePeriod );
+                            self.updateImagePath = self.selectedAdvertise.imagePath;
                         },
                         function(errResponse){
                             sweetAlert("Error!!", "Error while fetch!!!!", "error");
@@ -354,15 +354,13 @@ angular.module('myApp').controller('AdvertiserController',
             };
 
             $scope.findUpdateExtendTime = function() {
-
                 var availableExpiryDate = self.updatePublishedTimePeriod;
-                var extendTime = self.extendTime;
+                var extendTime = self.extendTime;// self.updatePublishedTimePeriod;//self.extendTime;
 
                 var updateFulDate = new Date(availableExpiryDate);
                 var updateDate = new Date(availableExpiryDate).getDate();
                 var updateMonth = new Date(availableExpiryDate).getMonth() + 1;
                 var updateYear = new Date(availableExpiryDate).getFullYear();
-                console.log("times : " + updateDate + " " + " " + updateMonth+ " "+updateYear + " "+ extendTime);
 
                 var numberOfDaysToAdd = null;
                 if (extendTime == 'For 2 Weeks') {
@@ -373,7 +371,6 @@ angular.module('myApp').controller('AdvertiserController',
                     var yyyy1 = updateFulDate.getFullYear();
 
                     var someFormattedDate1 = mm1 + '/'+ dd1 + '/'+ yyyy1;
-                    console.log("new times : "+ dd1+" "+mm1 +" "+yyyy1 +" "+someFormattedDate1);
                     return someFormattedDate1;
                 }
                 else if (extendTime == 'For 1 Month') {
@@ -384,7 +381,6 @@ angular.module('myApp').controller('AdvertiserController',
                     var yyyy1 = updateFulDate.getFullYear();
 
                     var someFormattedDate1 = mm1 + '/'+ dd1 + '/'+ yyyy1;
-                    console.log("new times : "+ dd1+" "+mm1 +" "+yyyy1 +" "+someFormattedDate1);
                     return someFormattedDate1;
                 }
                 else if (extendTime == 'For 3 Month') {
@@ -395,7 +391,6 @@ angular.module('myApp').controller('AdvertiserController',
                     var yyyy1 = updateFulDate.getFullYear();
 
                     var someFormattedDate1 = mm1 + '/'+ dd1 + '/'+ yyyy1;
-                    console.log("new times : "+ dd1+" "+mm1 +" "+yyyy1 +" "+someFormattedDate1);
                     return someFormattedDate1;
                 }
                 else if (extendTime == 'For 6 Month') {
@@ -406,7 +401,6 @@ angular.module('myApp').controller('AdvertiserController',
                     var yyyy1 = updateFulDate.getFullYear();
 
                     var someFormattedDate1 = mm1 + '/'+ dd1 + '/'+ yyyy1;
-                    console.log("new times : "+ dd1+" "+mm1 +" "+yyyy1 +" "+someFormattedDate1);
                     return someFormattedDate1;
                 }
                 else if (extendTime == 'For 1 Year') {
@@ -430,12 +424,14 @@ angular.module('myApp').controller('AdvertiserController',
                     url : self.updateUrl,
                     description : self.updateDescription,
                     expiryDate : self.updatedExpiredDate,
-                    place : self.updatePlace
+                    place : self.updatePlace,
+                    payment : self.updatePayment
                 };
                 AdvertiserService.updateAdvertise(advertise)
                     .then(
                         function(Response){
                             sweetAlert("Success!!", "The Advertise successfully updated!!!!", "success");
+                            $timeout(fetchAllAdvertise(), 5000);
                         },
                         function(errResponse){
                             sweetAlert("Error!!", "Error while updating Advertise!!!!", "error");
@@ -443,25 +439,7 @@ angular.module('myApp').controller('AdvertiserController',
                         }
                     );
             }
-
-            /*$scope.showComplex = function() {
-
-             AdvertiserService.showModal({
-             templateUrl: "complex/complex.html",
-             controller: "ComplexController",
-             inputs: {
-             title: "A More Complex Example"
-             }
-             }).then(function(modal) {
-             modal.element.modal();
-             modal.close.then(function(result) {
-             $scope.complexResult  = "Name: " + result.name + ", age: " + result.age;
-             });
-             });
-
-             };*/
-            $scope.categoriesName = "";
-
+            $scope.categoriesName = "Technology";
             $scope.fetchAllCategories = function(){
                 console.log("fetch category function calling");
 
@@ -471,15 +449,11 @@ angular.module('myApp').controller('AdvertiserController',
                             console.log("function(d)  calling");
                             self.Categories = d;
                             console.log("Categories : " +self.Categories[0].catName);
-                            //$scope.categoriesName= self.Categories[0].catName;
-                            //self.categoryList = self.Categories[0].catName;//"Technology";//self.Categories[0].id;
-                            //$scope.categoriesName = self.Categories[0].catName;
 
                             for(var j = 0; j<self.Categories.length; j++){
                                 //console.log("inside of catgry for loop "+j);
                                 if($scope.categoriesName == self.Categories[j].catName){
                                     self.advertise.categoryID = self.Categories[j].id;
-                                   // console.log("the cat ID : "+ self.Categories[j].id)
                                 }
                             }
                         },
@@ -494,21 +468,17 @@ angular.module('myApp').controller('AdvertiserController',
                 AdvertiserService.fetchAllPayments()
                     .then(
                         function(d) {
-                            console.log("function(d) in fetchAllPayments  calling");
                             self.payments = d;
                             self.paymentPlans = self.payments.paymentPlans;
                             self.pagePlacements = self.payments.pagePlacements;
                             self.amount = self.payments.amount;
-                            //self.updatePublishedTimePeriod = self.selectedAdvertise.expiryDate;
-                            console.log("Selected adv : "+ self.payments[0].paymentPlans + " " + self.payments[0].pagePlacements + " " + self.payments[0].amount);
 
                             for(var i = 0; i<self.payments.length; i++){
-                                //console.log("Testing data" + i);
-
                                 if(self.advertise.time == self.payments[i].paymentPlans && (self.advertise.place == self.payments[i].pagePlacements)){
-                                    console.log("the amount is : " + self.payments[i].amount);
                                     self.advertise.payment = self.payments[i].amount
-
+                                }
+                                if(self.extendTime == self.payments[i].paymentPlans && (self.updatePlace == self.payments[i].pagePlacements)){
+                                    self.updatePayment = self.payments[i].amount
                                 }
                             }
                         },
@@ -519,13 +489,26 @@ angular.module('myApp').controller('AdvertiserController',
                     );
             };
 
+            /*$scope.fetchAllPaymentPlans = function () {
+             AdvertiserService.fetchAllPaymentPlans()
+             .then(
+             function (d) {
+             $scope.AllPaymentPlans = d;
+             $scope.testval = $scope.AllPaymentPlans.paymentPlans;
+
+             console.log("Test payment plane is : " + $scope.testval)
+
+             }
+             );
+
+
+             }*/
+
 
         }]);
 
 angular.module('myApp').controller('PopupCont', ['$scope','$modalInstance',function ($scope, $modalInstance) {
     $scope.title1 = "Test title!!!";
-
-    //$scope.url2 = "www.google.com" ;
     $scope.close = function () {
         $modalInstance.dismiss('cancel');
     };
@@ -533,3 +516,10 @@ angular.module('myApp').controller('PopupCont', ['$scope','$modalInstance',funct
 
     }
 }]);
+
+
+var input = $("#advertiseImage");
+
+function something_happens() {
+    document.getElementById("advertiseImage").value = "";
+};

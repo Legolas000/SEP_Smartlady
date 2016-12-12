@@ -25,20 +25,20 @@ import java.util.List;
 public class AdvertisementController {
 
 	@Autowired
-    AdvertisementDAO advDAO;
+	AdvertisementDAO advDAO;
 	@Autowired
 	CategoryDAO catDAO;
-    @Autowired
-    AdPaymentDAO adpayDAO;
+	@Autowired
+	AdPaymentDAO adpayDAO;
 
 	//----------------------------Get All Advertise----------------------------------
 	@RequestMapping(value = "/advertisements/", method = RequestMethod.GET)
 	public ResponseEntity<List<Advertisement>> listAllAdvertises(){
 		List<Advertisement> advertise = advDAO.getAllAdvertisements();
-		 if(advertise.isEmpty()){
-	            return new ResponseEntity<List<Advertisement>>(HttpStatus.NO_CONTENT);
-	        }
-	        return new ResponseEntity<List<Advertisement>>(advertise, HttpStatus.OK);
+		if(advertise.isEmpty()){
+			return new ResponseEntity<List<Advertisement>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<Advertisement>>(advertise, HttpStatus.OK);
 	}
 
 	//--------------------Fetch a selected advertise by id------------------------------
@@ -62,11 +62,11 @@ public class AdvertisementController {
 		return new ResponseEntity<Advertisement>(currentAdvertisement, HttpStatus.OK);
 	}
 
-    //--------------------Create New Advertise----------------------------------
+	//--------------------Create New Advertise----------------------------------
 	@RequestMapping(value = "/assignadvertise/advertise/", method = RequestMethod.POST)
-	public ResponseEntity<String> createAdvertise(@RequestBody Advertisement advertisement) {
+	public ResponseEntity<Void> createAdvertise(@RequestBody Advertisement advertisement) {
 		advDAO.SaveOrUpdate(advertisement);
-		return new ResponseEntity<String>(HttpStatus.OK);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
 	//--------------------Update New Advertise------------------------------------------------
@@ -79,42 +79,12 @@ public class AdvertisementController {
 		return new ResponseEntity<Advertisement>(advertise, HttpStatus.OK);
 	}
 
-	/*@RequestMapping(value = "/assignadvertise/advertise/", method = RequestMethod.POST)
-	public ResponseEntity<String> createAdvertise(@RequestParam(value = "file") MultipartFile file, @RequestBody Advertisement advertisement) {
-		System.out.println("create advrts calling in java!");
-
-		String uploadDirectory = "C:\\Users\\USER\\Desktop\\GIT Local Repo\\sepii\\SEP_Smartlady\\src\\main\\webapp\\static\\js\\template\\advertiser-template\\advertises\\";   //"F:\\testUpload\\";
-		String rootDirectory = "/static/js/template/advertiser-template/advertises/";
-		System.out.println("Root Directory "+rootDirectory);
-
-		//MultipartFile file1 = advertisement.getImagePath();
-		try {
-			file.transferTo(new File(uploadDirectory  + file.getOriginalFilename()));
-		} catch (IllegalStateException e) {
-
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		String fname = file.getOriginalFilename();
-		String fullFileName = rootDirectory+fname;
-		System.out.println("File name is :  " + fullFileName);
-
-		advertisement.setImagePath(fullFileName);
-		//advDAO.saveImage(fullFileNam);
-		advDAO.SaveOrUpdate(advertisement);
-		String mesg = "test creating";
-		return new ResponseEntity<String>(HttpStatus.OK);
-
-
-	}*/
-
 	@RequestMapping(value = "/user/saveUserDataAndFile", method = RequestMethod.POST)
 	@ResponseBody
 	public Object saveUserDataAndFile(@RequestParam(value = "file") MultipartFile file, HttpServletRequest request) {
 		ObjectMapper mapper = new ObjectMapper();
 
-		String uploadDirectory = "C:\\Users\\USER\\Desktop\\GIT Local Repo\\sepii\\SEP_Smartlady\\src\\main\\webapp\\static\\js\\template\\advertiser-template\\advertises\\";   //"F:\\testUpload\\";
+		String uploadDirectory =  "C:\\Users\\USER\\Desktop\\GIT Local Repo\\sepii\\LastClone\\SEP_Smartlady\\src\\main\\webapp\\static\\js\\template\\advertiser-template\\advertises\\";   //"F:\\testUpload\\";
 		String rootDirectory = "/static/js/template/advertiser-template/advertises/";
 		System.out.println("Root Directory "+rootDirectory);
 		try {
@@ -143,13 +113,32 @@ public class AdvertisementController {
 		return new ResponseEntity<List<Category>>(category, HttpStatus.OK);
 	}*/
 
-    @RequestMapping(value = "/getPayments/", method = RequestMethod.GET)
-    public ResponseEntity<List<AdPayment>> listAllPayments(){
-        List<AdPayment> payment = adpayDAO.getAllPayments();
-        if(payment.isEmpty()){
-            return new ResponseEntity<List<AdPayment>>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<List<AdPayment>>(payment, HttpStatus.OK);
-    }
+	@RequestMapping(value = "/getPayments/", method = RequestMethod.GET)
+	public ResponseEntity<List<AdPayment>> listAllPayments(){
+		List<AdPayment> payment = adpayDAO.getAllPayments();
+		if(payment.isEmpty()){
+			return new ResponseEntity<List<AdPayment>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<AdPayment>>(payment, HttpStatus.OK);
+	}
 
+	/*@RequestMapping(value = "/getPaymentPlans/", method = RequestMethod.GET)
+	public ResponseEntity<List<AdPayment>> listpaymentPlans(){
+		List<AdPayment> planes = adpayDAO.getPaymentPlans();
+		System.out.println("Planes : " + planes);
+		if(planes.isEmpty()){
+			return new ResponseEntity<List<AdPayment>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<AdPayment>>(planes, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/getPayments/", method = RequestMethod.GET)
+	public ResponseEntity<List<AdPayment>> listPagePlacements(){
+		List<AdPayment> placement = adpayDAO.getAllPayments();
+		System.out.println("Page placements : " + placement);
+		if(placement.isEmpty()){
+			return new ResponseEntity<List<AdPayment>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<AdPayment>>(placement, HttpStatus.OK);
+	}*/
 }

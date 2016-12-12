@@ -21,4 +21,5 @@ public interface AdvertisementDAO {
 	public List<Advertisement> getAllAdvertisementsOrderByPrice();
 
 	public List<Advertisement> getAllAdvertisementsByCategoryIDOrderByPrice(int  categoryID);
+
 }

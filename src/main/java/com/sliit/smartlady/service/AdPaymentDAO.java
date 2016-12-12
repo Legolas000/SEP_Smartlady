@@ -11,4 +11,8 @@ public interface AdPaymentDAO {
 
     public List<AdPayment> getAllPayments();
 
+    /*public List<AdPayment> getPaymentPlans();
+
+    public List<AdPayment> getPagePlacements();*/
+
 }
