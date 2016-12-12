@@ -71,24 +71,24 @@ public class CategoryDAOImpl implements CategoryDAO {
 		        }
 		    });
 	}
-	
+
 	@Override
 	public Category findByName(String catName) {
-		
-		String sql = "SELECT * FROM categories WHERE catName = " + catName;
+
+		String sql = "SELECT * FROM categories WHERE catName = '" + catName +"'";
 
 		 return jdbcTemplate.query(sql, new ResultSetExtractor<Category>() {
-			 
+
 		        @Override
 		        public Category extractData(ResultSet rs) throws SQLException,
 		                DataAccessException {
 		            if (rs.next()) {
 		            	Category category = new Category();
-		            	category.setId(rs.getInt("catID"));
+		            	category.setId(rs.getInt("id"));
 		                category.setCatName(rs.getString("catName"));
 		                category.setCatDescription(rs.getString("catDescription"));
 						category.setNoOfHits(rs.getInt("noOfHits"));
-		                
+
 
 		                return category;
 		            }
@@ -118,9 +118,9 @@ public class CategoryDAOImpl implements CategoryDAO {
 		return listCategory;
 	}
 
-	@Override
+	/*@Override
 	public boolean isCategoryExist(Category category)
 	{
 		return findByName(category.getCatName()) != null;
-	}
+	}*/
 }

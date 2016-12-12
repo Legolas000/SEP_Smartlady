@@ -20,14 +20,12 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#">Write Article</a>
+                    <a href="/#/writer_home">Write Article</a>
                 </li>
                 <li class="active">
-                    <a href="#">My Articles</a>
+                    <a href="/#/writer_articles">My Articles</a>
                 </li>
-                <li>
-                    <a href="#">Summery</a>
-                </li>
+
             </ul>
         </div>
 
@@ -52,10 +50,10 @@
                     <input type="radio" name="search" ng-model="searchRadioBtn" ng-change='fetchAllArticles()' value="all" checked="checked">All
                 </div>
                 <div class="col-sm-2">
-                    <input type="radio" name="search" ng-model="searchRadioBtn" ng-change='fetchFilterAllArticles(0)' value="approved">Approved
+                    <input type="radio" name="search" ng-model="searchRadioBtn" ng-change='fetchFilterAllArticles(1)' value="approved">Approved
                 </div>
                 <div class="col-sm-2">
-                    <input type="radio" name="search" ng-model="searchRadioBtn" ng-change='fetchFilterAllArticles(1)' value="pending">Pending
+                    <input type="radio" name="search" ng-model="searchRadioBtn" ng-change='fetchFilterAllArticles(0)' value="pending">Pending
                 </div>
                 <div class="col-sm-2">
                     <input type="radio" name="search" ng-model="searchRadioBtn" ng-change='fetchFilterAllArticles(2)' value="rejected">Rejected
@@ -76,8 +74,7 @@
                     <i class="fa fa-thumbs-up" aria-hidden="true"></i>{{articles[$index].totalLikes}} Likes<br>
                     <i class="fa fa-eye" aria-hidden="true"></i>{{articles[$index].totalViews}} Views<br>
                     <button type="button" class="btn btn-primary" ng-click="openCommentsModal(articles[$index].id)">Comments</button><br><br>
-                    <button type="button" class="btn btn-danger" ng-click="deleteArticle(articles[$index].id)">Delete</button>
-                    <button type="button" class="btn btn-warning">Update</button><br><br><br><br>
+                    <button type="button" class="btn btn-danger" ng-click="deleteArticle(articles[$index].id)">Delete</button><br><br>
                 </div>
             </div>
             <div class="col-sm-4" ng-show="size-1 >= $index+1">
@@ -87,8 +84,7 @@
                     <i class="fa fa-thumbs-up" aria-hidden="true"></i>{{articles[$index+1].totalLikes}} Likes<br>
                     <i class="fa fa-eye" aria-hidden="true"></i>{{articles[$index+1].totalViews}} Views<br>
                     <button type="button" class="btn btn-primary" ng-click="openCommentsModal(articles[$index+1].id)">Comments</button><br><br>
-                    <button type="button" class="btn btn-danger" ng-click="deleteArticle(articles[$index+1].id)">Delete</button>
-                    <button type="button" class="btn btn-warning">Update</button><br><br><br><br>
+                    <button type="button" class="btn btn-danger" ng-click="deleteArticle(articles[$index+1].id)">Delete</button><br><br>
                 </div>
             </div>
             <div class="col-sm-4" ng-show="size-1 >= $index+2">
@@ -98,8 +94,7 @@
                     <i class="fa fa-thumbs-up" aria-hidden="true"></i>{{articles[$index+2].totalLikes}} Likes<br>
                     <i class="fa fa-eye" aria-hidden="true"></i>{{articles[$index+2].totalViews}} Views<br>
                     <button type="button" class="btn btn-primary" ng-click="openCommentsModal(articles[$index+2].id)">Comments</button><br><br>
-                    <button type="button" class="btn btn-danger" ng-click="deleteArticle(articles[$index+2].id)">Delete</button>
-                    <button type="button" class="btn btn-warning">Update</button><br><br><br><br>
+                    <button type="button" class="btn btn-danger" ng-click="deleteArticle(articles[$index+2].id)">Delete</button><br><br>
                 </div>
             </div>
         </div>

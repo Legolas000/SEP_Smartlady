@@ -10,13 +10,15 @@ public interface ArticleDAO {
         /* ===================================== Nibras ====================================== */
 
         /*Created by Nibras*/
-        public void createNewArticle(String title, String category, String articleBody, String imgPath);
+        public void createNewArticle(Article article);
 
         /*Created by Nibras*/
         public List<Article> getArticlesByWriterId(int writerId);
 
         /*Created by Nibras*/
         public List<Article> getFilterArticles(int writerId,int status);
+
+        public void uploadImage(String filePath);
 
         /* --------------------------------------------------------------------------------------------- */
         /* ===================================== Fazeel Mohamed ====================================== */

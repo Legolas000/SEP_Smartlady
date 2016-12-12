@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('myApp')
-    .controller('ArticleController', ['$scope', 'ArticleService','$location','$http','$route','$modal','$rootScope',
-        function($scope,ArticleService,$location,$http,$route,$modal,$rootScope) {
+    .controller('ArticleController', ['$scope', 'ArticleService','$location','$http','$route','$modal','$sce','$timeout','$rootScope',
+        function($scope,ArticleService,$location,$http,$route,$modal,$sce,$timeout,$rootScope) {
 
-            //var self = this;
+            var writerId = $rootScope.user.id;
 
             $scope.tinymceOptions = {
                 plugins: 'link image code',
@@ -26,7 +26,7 @@ angular.module('myApp')
             $scope.articles = [];
             $scope.comments = [];
 
-            var fd;
+
 
             $scope.fetchAllCategories = function (){
                 ArticleService.fetchAllCategories()
@@ -49,8 +49,20 @@ angular.module('myApp')
              }*/
 
             $scope.getImageDetails = function(files){
-                fd = new FormData();
+                var fd = new FormData();
+                $scope.fd = fd;
                 fd.append("file", files[0]);
+            }
+
+
+            function submitImage() {
+                var uploadUrl = "http://localhost:8080/uploadImage/";
+                $http.post(uploadUrl, $scope.fd, {
+                    withCredentials: true,
+                    headers: {'Content-Type': undefined },
+                    transformRequest: angular.identity
+                }).success(
+                ).error();
             }
 
             //submit the article
@@ -59,52 +71,37 @@ angular.module('myApp')
                 var v = (''+$scope.title).length;
                 if(((''+$scope.title).length == 0) || ((''+$scope.articleBody).length == 0)){
                      sweetAlert("Error", "Article Title or Body Cannot be Empty", "error");
-                }
 
-                 var e = document.getElementById("categories");
-                 var select = e.options[e.selectedIndex].value;
-                 if(select==0) {
-                    sweetAlert("Error", "Please Select a Category", "error");
-                 }
-                 else {
-                    var file = document.getElementById("myFile");
-                    /*ArticleService.articleFormSubmit($scope.title,$scope.category,$scope.articleBody,file)
-                        .then(
-                            function (response) {
-                                if (response) {
-                                    swal('Article created succussfully');
-                                } else {
-                                    sweetAlert("Error", "Something went wrong. Article not created", "error");
+                }else{
+                    var e = document.getElementById("categories");
+                    var select = e.options[e.selectedIndex].value;
+                    if(select==0) {
+                        sweetAlert("Error", "Please Select a Category", "error");
+                    }
+                    else {
+                        var article = {
+                            'title':$scope.title,
+                            'categoryName': $scope.category,
+                            'description':$scope.articleBody,
+                            'writerID':writerId
+                        };
+                        JSON.stringify(article);
+                        ArticleService.submitArticle(article)
+                            .then(
+                                function(response){
+                                    sweetAlert("Success!!", "Article Created Successfully!!!!", "success");
+                                    fetchAllArticles;
+                                },
+                                function(errResponse){
+                                    console.log('Error while create article');
                                 }
-                            }
-                        )*/
-                     var article = {
-                         'title':$scope.title,
-                         'catName': $scope.category,
-                         'description':$scope.articleBody
-                     };
-                     JSON.stringify(article);
-                     /*var fd = new FormData();
-                      fd.append("file", file[0]);*/
-
-                     $http.post('http://localhost:8080/createArticle/',fd, article, {
-                         withCredentials: true,
-                         headers: {'Content-Type': undefined},
-                         transformRequest: angular.identity
-                     })
-                         /*.then(
-                             function (response) {
-                                console.log('article created successfully');
-                             },
-                             function(errResponse){
-                                console.error('Error create article');
-                             }
-                         )*/
-                         .success().error();
-                 }
+                            )
+                    }
+                }
+                $timeout(submitImage, 5000);
             };
 
-            //fetch a specific type of article(All, approved, pending, rejected)
+
             $scope.fetchAllArticles = function(){
                 ArticleService.fetchAllArticles()
                     .then(
@@ -119,6 +116,7 @@ angular.module('myApp')
                     );
             }
 
+            //fetch a specific type of article(All, approved, pending, rejected)
             $scope.fetchFilterAllArticles = function(status){
                 ArticleService.fetchFilterArticles(status)
                     .then(
@@ -167,7 +165,18 @@ angular.module('myApp')
 
             //display the selected article details for update
             $scope.fetchArticleForUpdate = function(articleId){
-
+                ArticleService.fetchArticleById(articleId)
+                    .then(
+                        function(data){
+                            $scope.articles = data;
+                            document.getElementById("titleID").value = data.title;
+                            document.getElementById("categoryID").value = data.catName;
+                            document.getElementById("descriptionID").value = $sce.trustAsHtml(data.description);
+                        },
+                        function(errResponse){
+                            console.error('Controller-Error while fetching single article');
+                        }
+                    )
             };
 
             $scope.updateArticle = function(articleId){

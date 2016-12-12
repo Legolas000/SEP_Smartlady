@@ -15,7 +15,9 @@ angular.module('myApp').factory('ArticleService', ['$http', '$q','$rootScope', '
        /* articleFormSubmit: articleFormSubmit,*/
         fetchFilterArticles : fetchFilterArticles,
         deleteArticle : deleteArticle,
-        fetchCommentsByArticleId : fetchCommentsByArticleId
+        fetchCommentsByArticleId : fetchCommentsByArticleId,
+        fetchArticleById : fetchArticleById,
+        submitArticle : submitArticle
     };
 
     return factory;
@@ -35,37 +37,24 @@ angular.module('myApp').factory('ArticleService', ['$http', '$q','$rootScope', '
         return deferred.promise;
     }
 
-    /*function articleFormSubmit(title,category,articleBody,file){
-        var article = {
-            'title':title,
-            'catName': category,
-            'description':articleBody
-        };
-        JSON.stringify(article);
 
+    function submitArticle(article){
         deferred = $q.defer();
-
-        var fd = new FormData();
-        //Take the first selected file
-        fd.append("file", file[0]);
-
-        $http.post(REST_SERVICE_URI+'/createArticle/',article, fd, {
-            withCredentials: true,
-            headers: {'Content-Type': undefined },
-            transformRequest: angular.identity
-        })
+        $http.post(REST_SERVICE_URI+'/createArticle/',article)
             .then(
                 function (response) {
+                    console.log('response');
                     deferred.resolve(response.data);
                 },
-                function (errResponse) {
-                    console.error('error while create article');
+                function(errResponse){
+                    console.error('Error while create article');
                     deferred.reject(errResponse);
-
                 }
-            );
+        );
         return deferred.promise;
-    }*/
+    }
+
+
 
     function fetchAllArticles(){
         deferred = $q.defer();
@@ -128,20 +117,20 @@ angular.module('myApp').factory('ArticleService', ['$http', '$q','$rootScope', '
         return deferred.promise;
     }
 
-    /*function fetchArticleById(id) {
-     var deferred = $q.defer();
-     $http.get(REST_SERVICE_URI+id)
-     .then(
-     function (response) {
-     deferred.resolve(response.data);
-     },
-     function(errResponse){
-     console.error('Error while fetching Articles');
-     deferred.reject(errResponse);
-     }
-     );
-     return deferred.promise;
-     }*/
+    function fetchArticleById(articleId){
+        deferred = $q.defer();
+        $http.get(REST_SERVICE_URI+'/fetchArticleById/'+articleId)
+            .then(
+                function (response) {
+                    deferred.resolve(response.data);
+                },
+                function(errResponse){
+                    console.error('Error while fetching single article');
+                    deferred.reject(errResponse);
+                }
+            );
+        return deferred.promise;
+    }
 
     function updateStatus(id) {
         deferred = $q.defer();

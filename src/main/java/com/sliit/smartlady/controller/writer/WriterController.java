@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,8 +29,6 @@ import java.util.List;
 
 @RestController
 public class WriterController extends HttpServlet{
-
-   // public String UPLOAD_DIRECTORY = "C:/Users/mohamed/Desktop/uploadFile";
 
     @Autowired
     CategoryDAO categoryDAO;
@@ -50,51 +49,36 @@ public class WriterController extends HttpServlet{
         return new ResponseEntity<List<Category>>(category, HttpStatus.OK);
     }
 
-    //create Article
-   /* @RequestMapping(value = "/createArticle/", method = RequestMethod.POST)
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public ResponseEntity<Void> createNewArticle(@FormDataParam("file") InputStream uploadedInputStream
-                                                 *//*,@FormDataParam("file") FormDataContentDisposition fileDetails*//*){
-
-        System.out.println("came to java");
-       // System.out.println(article.getTitle());
-
-        String imageUploadLocation = "C:/Users/mohamed/Desktop/uploadFile/abc.jpg";
-        Boolean status = articleDAO.createArticle(uploadedInputStream,imageUploadLocation);
-        if(status){
-            return new ResponseEntity<Void>(HttpStatus.OK);
-        }else{
-            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-        }
-
-    }*/
-
      //create new article
     @RequestMapping(value = "/createArticle/", method = RequestMethod.POST)
+    public ResponseEntity<Void> createNewArticle(@RequestBody Article article){
+
+        articleDAO.createNewArticle(article);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = "/uploadImage/", method = RequestMethod.POST)
     @ResponseBody
-    public void createNewArticle(@RequestParam(value = "file") MultipartFile file, HttpServletRequest request,
-                                                 @RequestBody Article article){
-        String title = article.getTitle();
-        String category = article.getCategory().getCatName();
-        String description = article.getDescription();
-
-        System.out.println("hello java");
-        System.out.println("title : "+title);
-        System.out.println("category : "+category);
-        System.out.println("description : "+description);
-
+    public Object saveUserDataAndFile(@RequestParam(value = "file") MultipartFile file, HttpServletRequest request) {
         ObjectMapper mapper = new ObjectMapper();
 
-        String rootDirectory = "C:\\Users\\mohamed\\Desktop\\uploadFile\\";
-        System.out.println("Root Directory "+rootDirectory);
+        String uploadDirectory = "E:\\01.SLIIT\\3rd Year\\2nd Semester\\SEP II\\Project\\uploadFile";   //"F:\\testUpload\\";
+
+        String rootDirectory = "/static/images/";
         try {
-            file.transferTo(new File(rootDirectory  + file.getOriginalFilename()));
+            file.transferTo(new File(uploadDirectory  + file.getOriginalFilename()));
         } catch (IllegalStateException e) {
+
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        String fname = file.getOriginalFilename();
+        String fullFileName = rootDirectory+fname;
+        System.out.println("File name is :  " + fullFileName);
+        articleDAO.uploadImage(fullFileName);
+        return null;
     }
 
 
@@ -136,6 +120,17 @@ public class WriterController extends HttpServlet{
             return new ResponseEntity<List<Comments>>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<List<Comments>>(comments, HttpStatus.OK);
+    }
+
+    //fetchArticleById
+    @RequestMapping(value = "/fetchArticleById/{articleId}", method = RequestMethod.GET)
+    public ResponseEntity<Article>fetchArticleById(@PathVariable("articleId") int articleId){
+        Article article = articleDAO.findByID(articleId);
+        if(article.getId() == articleId){
+            return new ResponseEntity<Article>(article, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<Article>(article, HttpStatus.NO_CONTENT);
+        }
     }
 
 

@@ -1,6 +1,7 @@
 package com.sliit.smartlady.service;
 
 import com.sliit.smartlady.model.Article;
+import com.sliit.smartlady.model.Category;
 import com.sliit.smartlady.model.Reades;
 import com.sliit.smartlady.model.User;
 import org.springframework.dao.DataAccessException;
@@ -11,10 +12,9 @@ import org.springframework.jdbc.core.RowMapper;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class ArticleDAOImpl implements ArticleDAO {
 
@@ -38,7 +38,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 
         @Override
         public List<Article> getAllArticles() {
-            String sql = "SELECT * FROM articles WHERE status = 0 ";
+            String sql = "SELECT * FROM articles WHERE status = 1 ";
             List<Article> listArticle = jdbcTemplate.query(sql, new RowMapper<Article>() {
 
                 @Override
@@ -96,13 +96,46 @@ public class ArticleDAOImpl implements ArticleDAO {
         return listArticle;
     }
 
-    @Override
-    public void createNewArticle(String title, String category, String articleBody, String imgPath) {
 
-        String sql = "INSERT INTO articles(title,description,coverImagePath,categoryId) VALUES(" +
-                     "?,?,?,(SELECT id FROM categories WHERE catName = "+category+"))";
-        jdbcTemplate.update(sql,title,articleBody,imgPath);
-        System.out.println("Article value inserted");
+    @Override
+    public void createNewArticle(Article article) {
+
+       // Category c = getCategoryId(article);
+        Category c = categoryDAO.findByName(article.getCategoryName());
+
+        //get current date
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date dateobj = new Date();
+        String today = df.format(dateobj);
+        System.out.println(df.format(dateobj));
+
+        String sql = "INSERT INTO articles(title,description,publishedDate,isFeatured,overallRating,totalLikes,totalViews,link,coverImagePath,status,writerId,categoryId) " + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+        int a = jdbcTemplate.update(sql,article.getTitle(),article.getDescription(),today,0,0.0,0,0,0,"",0,article.getWriterID(),c.getId());
+        System.out.println("Article data inserted");
+    }
+
+    private Article getMaxId() {
+        String sql = "SELECT MAX(id) FROM articles";
+        return jdbcTemplate.query(sql, new ResultSetExtractor<Article>() {
+
+            //@Override
+            public Article extractData(ResultSet rs) throws SQLException,DataAccessException {
+                if (rs.next()) {
+                    Article article = new Article();
+                    article.setId(rs.getInt(1));
+                    return article;
+                }
+                return null;
+            }
+        });
+    }
+
+    @Override
+    public void uploadImage(String filePath){
+        Article a = getMaxId();
+        int articleID = a.getId();
+        String sql = "UPDATE articles SET coverImagePath = ?" + " WHERE id = ?";
+        jdbcTemplate.update(sql, filePath , articleID);
     }
 
     @Override
@@ -249,6 +282,7 @@ public class ArticleDAOImpl implements ArticleDAO {
                             DataAccessException {
                         if (rs.next()) {
                             Article article = new Article();
+                            Category category = new Category();
 
                             article.setId(rs.getInt("id"));
                             article.setTitle(rs.getString("title"));
@@ -262,6 +296,10 @@ public class ArticleDAOImpl implements ArticleDAO {
                             article.setCoverImagePath(rs.getString ("coverImagePath"));
                             article.setWriterID(rs.getInt ("writerId"));
                             article.setCategoryID(rs.getInt("categoryId"));
+
+                            //get the category name and push it to article object
+                            category = categoryDAO.findByID(rs.getInt("categoryId"));
+                            article.setCategoryName(category.getCatName());
 
                             return article;
                         }

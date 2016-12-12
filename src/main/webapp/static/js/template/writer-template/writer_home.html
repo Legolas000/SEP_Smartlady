@@ -20,14 +20,12 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="#">Write Article</a>
+                        <a href="/#/writer_home">Write Article</a>
                     </li>
-                    <li>
-                        <a href="#">My Articles</a>
+                    <li class="active">
+                        <a href="/#/writer_articles">My Articles</a>
                     </li>
-                    <li>
-                        <a href="#">Summery</a>
-                    </li>
+
                 </ul>
             </div>
         </div>
@@ -39,7 +37,7 @@
 
     <!-- Page Content -->
     <div class="container">
-        <form name="articleForm" ng-submit="articleFormSubmit()" class="form-horizontal"  method="post" enctype="multipart/form-data">
+        <form name="articleForm" class="form-horizontal"  method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label class="col-sm-2">Title:<span style="color:red;font-weight:normal"><noraml>*</noraml></span></label>
                 <div class="col-sm-6">
@@ -72,7 +70,7 @@
                     <label class="col-sm-2"><span style="color:red;font-weight:normal"><noraml>* - Required</noraml></span></label>
                 </div>
                 <div class="col-sm-4">
-                    <button type="submit" class="btn btn-success" style="height:40px;width:130px">Save</button>
+                    <button type="submit" class="btn btn-success" ng-click="articleFormSubmit()" style="height:40px;width:130px">Save</button>
                     <button type="button" class="btn btn-warning" style="height:40px;width:130px">Cancel</button>
                 </div>
             </div>

@@ -25,17 +25,17 @@ angular.module('myApp').config(['$routeProvider', function($routeProvider) {
         })
         .when('/writer_home', {
             templateUrl: '/static/js/template/writer-template/writer_home.html',
-            authenticated: false
+            authenticated: true
             // controller : "UserController as userCtrl"
         })
         .when('/advertiser_home', {
             templateUrl: '/static/js/template/advertiser-template/requestAdvertise.jsp',
-            authenticated: false
+            authenticated: true
             // controller : "UserController as userCtrl"
         })
         .when('/writer_articles', {
             templateUrl: '/static/js/template/writer-template/writer_articles.html',
-            authenticated: false
+            authenticated: true
             // controller : "UserController as userCtrl"
         })
         .when('/register', {

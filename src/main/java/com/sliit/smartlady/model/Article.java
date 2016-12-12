@@ -28,7 +28,7 @@ public class Article{
 
 	public Article(int id, String title, String description, String publishedDate, String coverImagePath,
 				   boolean isFeatured, double overallRating, int totalLikes, int totalViews, int categoryID,
-				   int writerID, int status) {
+				   int writerID, int status, String categoryName) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -43,6 +43,8 @@ public class Article{
 		this.writerID = writerID;
 
 		this.status = status;
+
+		this.categoryName = categoryName;
 
 
 	}
