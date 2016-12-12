@@ -6,7 +6,7 @@
 angular.module('myApp').factory('LoginService',
     ['$http', '$q','$cookies','$rootScope', function($http, $q, $cookies,$rootScope){
 
-        var REST_SERVICE_URI = 'http://localhost:8080/';
+        var REST_SERVICE_URI = 'http://localhost:1212/';
 
         var factory = {
             doLogin: doLogin,

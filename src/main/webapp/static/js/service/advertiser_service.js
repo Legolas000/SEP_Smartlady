@@ -7,7 +7,7 @@
 angular.module('myApp').factory('AdvertiserService',
     ['$http', '$q', function($http, $q){
 
-        var REST_SERVICE_URI = 'http://localhost:8080/';
+        var REST_SERVICE_URI = 'http://localhost:1212/';
 
         var factory = {
             fetchAllAdvertise:fetchAllAdvertise,

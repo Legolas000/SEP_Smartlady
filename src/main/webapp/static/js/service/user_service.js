@@ -3,7 +3,7 @@
     angular.module('myApp').factory('UserService',
                             ['$http', '$q','$rootScope', function($http, $q, $rootScope){
 
-                var REST_SERVICE_URI = 'http://localhost:8080/';
+                var REST_SERVICE_URI = 'http://localhost:1212/';
 
                 var factory = {
                     fetchItemById: fetchItemById,

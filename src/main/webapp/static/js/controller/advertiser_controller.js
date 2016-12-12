@@ -114,7 +114,7 @@ angular.module('myApp').controller('AdvertiserController',
 
             function submitUser() {
                 var file = self.fileModel;
-                var uploadUrl = "http://localhost:8080/user/saveUserDataAndFile";
+                var uploadUrl = "http://localhost:1212/user/saveUserDataAndFile";
                 var fd = new FormData();
                 fd.append('file', file);
                 var data = {
@@ -244,7 +244,7 @@ angular.module('myApp').controller('AdvertiserController',
             }
 
             function submitImage() {
-                var uploadUrl = "http://localhost:8080/user/saveUserDataAndFile";
+                var uploadUrl = "http://localhost:1212/user/saveUserDataAndFile";
                 $http.post(uploadUrl, $scope.fd, {
                     withCredentials: true,
                     headers: {'Content-Type': undefined },

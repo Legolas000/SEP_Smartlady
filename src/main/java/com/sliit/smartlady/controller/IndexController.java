@@ -17,7 +17,10 @@ public class IndexController {
 	}
 
 
-
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	public String getAdminIndexPage() {
+		return "Admin/AdminMainTemplate";
+	}
 
 
 

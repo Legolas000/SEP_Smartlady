@@ -2,7 +2,7 @@
 
 angular.module('myApp').factory('ArticleService', ['$http', '$q','$rootScope', '$window', function($http, $q,$rootScope,$window){
 
-    var REST_SERVICE_URI = 'http://localhost:8080';
+    var REST_SERVICE_URI = 'http://localhost:1212';
 
     var writerId = $rootScope.user.id;
 

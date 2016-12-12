@@ -56,7 +56,7 @@ angular.module('myApp')
 
 
             function submitImage() {
-                var uploadUrl = "http://localhost:8080/uploadImage/";
+                var uploadUrl = "http://localhost:1212/uploadImage/";
                 $http.post(uploadUrl, $scope.fd, {
                     withCredentials: true,
                     headers: {'Content-Type': undefined },
