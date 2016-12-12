@@ -22,7 +22,7 @@
 	<link href="/static/css/magazine-css/style.css" rel="stylesheet" type="text/css" media="screen"/>
 	<link href="/static/css/magazine-css/rating.css" rel="stylesheet" type="text/css" media="screen"/>
 	<link href="/static/css/magazine-css/fonts/fontawesome-webfontba72.woff" rel="stylesheet" type="text/css" media="screen"/>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 	<%--writer page css--%>
 
 	<link href="/static/css/writer-css/bootstrap.min.css" rel="stylesheet">
@@ -63,21 +63,6 @@
 			top: 0;
 			left: 0;
 			z-index: 2000;
-		}
-
-		.sidenav-head{
-			text-align: center;
-			color: white;
-
-		}
-
-		.sidebar{
-			width: 20%;
-			height: 100%;
-			float: left;
-			background-color: #4d4d4d;
-			margin-top: 0px;
-
 		}
 	</style>
 
@@ -501,7 +486,7 @@
 								<div class="tab-pane {{isPopularTab}}" id="option1Popular" >
 									<ul class="list-posts">
 										<li ng-repeat="article in userCtrl.articlesToAdd | limitTo:5">
-                                            <a href="/#/readarticles/{{article.id}}"><img src="{{article.coverImagePath}}" alt=""></a>
+											<a href="/#/readarticles/{{article.id}}"><img src="{{article.coverImagePath}}" alt=""></a>
 											<div class="post-content">
 												<h2><a href="/#/readarticles/{{article.id}}">{{article.title}} </a></h2>
 												<ul class="post-tags">
@@ -514,30 +499,30 @@
 								<div class="tab-pane {{isRecentTab}}" id="option2Recent" >
 									<ul class="list-posts">
 
-                                        <li ng-repeat="article in userCtrl.wholeArticles | limitTo:5">
-                                            <a href="/#/readarticles/{{article.id}}"><img src="{{article.coverImagePath}}" alt=""></a>
-                                            <div class="post-content">
-                                                <h2><a href="/#/readarticles/{{article.id}}">{{article.title}} </a></h2>
-                                                <ul class="post-tags">
-                                                    <li><i class="fa fa-clock-o"></i>{{article.publishedDate | date:'medium'}}</li>
-                                                </ul>
-                                            </div>
-                                        </li>
+										<li ng-repeat="article in userCtrl.wholeArticles | limitTo:5">
+											<a href="/#/readarticles/{{article.id}}"><img src="{{article.coverImagePath}}" alt=""></a>
+											<div class="post-content">
+												<h2><a href="/#/readarticles/{{article.id}}">{{article.title}} </a></h2>
+												<ul class="post-tags">
+													<li><i class="fa fa-clock-o"></i>{{article.publishedDate | date:'medium'}}</li>
+												</ul>
+											</div>
+										</li>
 									</ul>
 								</div>
 								<div class="tab-pane {{isTopReviewsTab}}" id="option3TopReviews" >
 									<ul class="list-posts">
 
-                                        <li ng-repeat="article in userCtrl.topRatedArticles | limitTo:5">
-                                            <a href="/#/readarticles/{{article.id}}"><img src="{{article.coverImagePath}}" alt=""></a>
-                                            <div class="post-content">
-                                                <h2><a href="/#/readarticles/{{article.id}}">{{article.title}} </a></h2>
-                                                <ul class="post-tags">
-                                                    <li><i class="fa fa-clock-o"></i>{{article.publishedDate | date:'medium' }}</li>
-                                                </ul>
-                                                <div><average-star-rating ng-model="article.overallRating" max="5" ><average-star-rating></div>
-                                            </div>
-                                        </li>
+										<li ng-repeat="article in userCtrl.topRatedArticles | limitTo:5">
+											<a href="/#/readarticles/{{article.id}}"><img src="{{article.coverImagePath}}" alt=""></a>
+											<div class="post-content">
+												<h2><a href="/#/readarticles/{{article.id}}">{{article.title}} </a></h2>
+												<ul class="post-tags">
+													<li><i class="fa fa-clock-o"></i>{{article.publishedDate | date:'medium' }}</li>
+												</ul>
+												<div><average-star-rating ng-model="article.overallRating" max="5" ><average-star-rating></div>
+											</div>
+										</li>
 									</ul>
 								</div>
 							</div>
@@ -562,14 +547,14 @@
 										<div class="item">
 											<ul class="comment-list">
 												<li owl-carousel-item ng-repeat="commentIndex in [0,1,2]">
-                                                    <a style="text-decoration: none;" href="/#/readarticles/{{allComments[commentIndex].articleID}}">
-                                                        <img src="{{allComments[commentIndex].user.imagePath}}" alt="">
-                                                        <div class="comment-content">
-                                                            <p class="main-message">{{allComments[commentIndex].comments}}</p>
-                                                            <span><i class="fa fa-user"></i>by {{allComments[commentIndex].user.fullname}}</span>
-                                                            <span><i class="fa fa-clock-o"></i>{{allComments[commentIndex].dateTime | date:'medium'}}</span>
-                                                        </div>
-                                                    </a>
+													<a style="text-decoration: none;" href="/#/readarticles/{{allComments[commentIndex].articleID}}">
+														<img src="{{allComments[commentIndex].user.imagePath}}" alt="">
+														<div class="comment-content">
+															<p class="main-message">{{allComments[commentIndex].comments}}</p>
+															<span><i class="fa fa-user"></i>by {{allComments[commentIndex].user.fullname}}</span>
+															<span><i class="fa fa-clock-o"></i>{{allComments[commentIndex].dateTime | date:'medium'}}</span>
+														</div>
+													</a>
 												</li>
 
 											</ul>
@@ -577,14 +562,14 @@
 										<div class="item">
 											<ul class="comment-list">
 												<li owl-carousel-item ng-repeat="commentIndex in [3,4,5]">
-                                                    <a style="text-decoration: none;" href="/#/readarticles/{{allComments[commentIndex].articleID}}">
-                                                        <img src="{{allComments[commentIndex].user.imagePath}}" alt="">
-                                                        <div class="comment-content">
-                                                            <p class="main-message">{{allComments[commentIndex].comments}}</p>
-                                                            <span><i class="fa fa-user"></i>by {{allComments[commentIndex].user.fullname}}</span>
-                                                            <span><i class="fa fa-clock-o"></i>{{allComments[commentIndex].dateTime | date:'medium' }}</span>
-                                                        </div>
-                                                    </a>
+													<a style="text-decoration: none;" href="/#/readarticles/{{allComments[commentIndex].articleID}}">
+														<img src="{{allComments[commentIndex].user.imagePath}}" alt="">
+														<div class="comment-content">
+															<p class="main-message">{{allComments[commentIndex].comments}}</p>
+															<span><i class="fa fa-user"></i>by {{allComments[commentIndex].user.fullname}}</span>
+															<span><i class="fa fa-clock-o"></i>{{allComments[commentIndex].dateTime | date:'medium' }}</span>
+														</div>
+													</a>
 												</li>
 
 											</ul>
@@ -595,13 +580,13 @@
 						</div>
 
 
-                       <div class="advertisement">
-                            <div class="desktop-advert" >
+						<div class="advertisement">
+							<div class="desktop-advert" >
 								<span>Advertisement</span>
-                                <br/>
-                                <a target="_blank" href="{{adSideBottomRendom.url}}"><img height="200" width="300" src="{{adSideBottomRendom.imagePath}}" alt=""></a>
+								<br/>
+								<a target="_blank" href="{{adSideBottomRendom.url}}"><img height="200" width="300" src="{{adSideBottomRendom.imagePath}}" alt=""></a>
 							</div>
-                       </div>
+						</div>
 
 					</div>
 					<!-- End sidebar -->
@@ -659,9 +644,6 @@
 <script type="text/javascript" src="/static/js/controller/advertiser_controller.js"></script>
 <script type="text/javascript" src="/static/js/service/advertiser_service.js"></script>
 
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <%--rich text editor js--%>
 <script type="text/javascript" src="/static/js/writer-js/tinymce-dist/tinymce.js"></script>
 <script type="text/javascript" src="/static/js/lib/angular-1.4.4.js"></script>

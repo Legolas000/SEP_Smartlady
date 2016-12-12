@@ -95,7 +95,6 @@ angular.module('myApp').controller('UserController',
             };
 
             $scope.doRating = function(articleId){
-                //alert("$scope.user1 : "+ $scope.user1.rating+" & articleId : "+articleId +" & userid : "+$rootScope.user.id);
                 UserService.doRatingForArticle(articleId, $scope.user1.rating,$rootScope.user.id)
                     .then(
                         function (data) {
@@ -300,7 +299,6 @@ angular.module('myApp').controller('UserController',
             }
 
             function getAllAdvertisementOrderByPriceAndByCategoryID(categoryID){
-                alert("getAllAdvertisementOrderByPrice in controler Called");
                 UserService.getAllAdvertisementOrderByPriceAndByCategoryID(categoryID)
                     .then(
                         function (data) {

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface AdvertisementDAO {
 
-	public void SaveOrUpdate(Advertisement advertisement);
+	public int SaveOrUpdate(Advertisement advertisement);
 
 	public List<Advertisement> getAllAdvertisements();
 
