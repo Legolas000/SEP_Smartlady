@@ -1,0 +1,132 @@
+<div class="col-sm-8">
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="advertisement">
+                    <div class="desktop-advert" >
+                        <span>Advertisement</span>
+                        <br/>
+                        <a target="_blank" href="{{adRendomForMiddleOfPageSideByCategoryID1.url}}"><img height="200" width="300" src="{{adRendomForMiddleOfPageSideByCategoryID1.imagePath}}" alt=""></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="advertisement">
+                    <div class="desktop-advert" >
+                        <span>Advertisement</span>
+                        <br/>
+                        <a target="_blank" href="{{adRendomForMiddleOfPageSideByCategoryID2.url}}"><img height="200" width="300" src="{{adRendomForMiddleOfPageSideByCategoryID2.imagePath}}" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- block content -->
+        <div class="block-content">
+
+            <!-- grid box -->
+            <div class="grid-box">
+                <div class="title-section">
+                    <h1><span class="world">{{articlesByCategoryID[0].categoryName}}</span></h1>
+                </div>
+
+                <div class="row" ng-repeat="article in articlesByCategoryID | filter:searchCat | startFrom:(currentPageCat-1)*entryLimitCat | limitTo:entryLimitCat" ng-if="$index % 2 == 0">
+                    <div class="col-md-6" ng-show="articleSize-1 >= $index">
+                        <div class="news-post standard-post2">
+                            <div class="post-gallery">
+                                <img src="{{articlesByCategoryID[$index].coverImagePath}}" alt="">
+                                <a class="category-post world" ng-href="/#/readarticles/{{articlesByCategoryID[$index].id}}">{{articlesByCategoryID[$index].categoryName}}</a>
+                            </div>
+                            <div class="post-title">
+                                <h2><a href=""  ng-href="/#/readarticles/{{articlesByCategoryID[$index].id}}" >{{articlesByCategoryID[$index].title}} </a></h2>
+                                <ul class="post-tags">
+                                    <li><i class="fa fa-clock-o"></i>{{articlesByCategoryID[$index].publishedDate | date:'medium'}}</li>
+                                    <li><i class="fa fa-user"></i>by <a href="">{{articlesByCategoryID[$index].writerName}}</a></li>
+                                    <li><a href=""><i class="fa fa-comments-o"></i><span>23</span></a></li>
+                                    <li><i class="fa fa-eye"></i>872</li>
+                                </ul>
+                            </div>
+                            <div class="post-content">
+                                <a href="" ng-href="/#/readarticles/{{articlesByCategoryID[$index].id}}" class="read-more-button"><i class="fa fa-arrow-circle-right"></i>Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6" ng-show="articleSize-1 >= $index+1" >
+                        <div class="news-post standard-post2">
+                            <div class="post-gallery">
+                                <img src="{{articlesByCategoryID[$index+1].coverImagePath}}" alt="">
+                                <a class="category-post world" ng-href="/#/readarticles/{{articlesByCategoryID[$index+1].id}}">{{articlesByCategoryID[$index+1].categoryName}}</a>
+                            </div>
+                            <div class="post-title">
+                                <h2><a href=""  ng-href="/#/readarticles/{{articlesByCategoryID[$index+1].id}}" >{{articlesByCategoryID[$index+1].title}} </a></h2>
+                                <ul class="post-tags">
+                                    <li><i class="fa fa-clock-o"></i>{{articlesByCategoryID[$index+1].publishedDate | date:'medium'}}</li>
+                                    <li><i class="fa fa-user"></i>by <a href="">{{articlesByCategoryID[$index+1].writerName}}</a></li>
+                                    <li><a href=""><i class="fa fa-comments-o"></i><span>23</span></a></li>
+                                    <li><i class="fa fa-eye"></i>872</li>
+                                </ul>
+                            </div>
+                            <div class="post-content">
+                                <a href="" ng-href="/#/readarticles/{{articlesByCategoryID[$index+1].id}}" class="read-more-button"><i class="fa fa-arrow-circle-right"></i>Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- End grid box -->
+
+            <!-- google addsense -->
+            <!--<div class="advertisement">
+                <div class="desktop-advert">
+                    <span>Advertisement</span>
+                    <img src="/static/upload/addsense/728x90-white.jpg" alt="">
+                </div>
+                <div class="tablet-advert">
+                    <span>Advertisement</span>
+                    <img src="/static/upload/addsense/468x60-white.jpg" alt="">
+                </div>
+                <div class="mobile-advert">
+                    <span>Advertisement</span>
+                    <img src="/static/upload/addsense/300x250.jpg" alt="">
+                </div>
+            </div>
+            &lt;!&ndash; End google addsense &ndash;&gt;-->
+
+
+            <!-- pagination box -->
+            <div class="pagination-box">
+                <pagination class="pagination-list" page="currentPageCat" max-size="noOfPagesCat" total-items="totalItemsCat" items-per-page="entryLimitCat"></pagination>
+            </div>
+            <!-- End Pagination box -->
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="advertisement">
+                        <div class="desktop-advert" >
+                            <span>Advertisement</span>
+                            <br/>
+                            <a target="_blank" href="{{adRendomForBottomOfPageByCategoryID1.url}}"><img height="200" width="300" src="{{adRendomForBottomOfPageByCategoryID1.imagePath}}" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="advertisement">
+                        <div class="desktop-advert" >
+                            <span>Advertisement</span>
+                            <br/>
+                            <a target="_blank" href="{{adRendomForBottomOfPageByCategoryID2.url}}"><img height="200" width="300" src="{{adRendomForBottomOfPageByCategoryID2.imagePath}}" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- End block content -->
+
+</div>
+
+
+
+
+

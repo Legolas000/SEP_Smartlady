@@ -461,7 +461,7 @@
 				</div>
 				<div ng-view autoscroll="true"></div>
 				<%--<ng-include src="'/static/js/template/reader-template/include/side-bar.html'"></ng-include>--%>
-				<div class="col-sm-4" ng-if="userRole === 1 || userRole === 0">
+				<div class="col-sm-4" ng-if="userRole === 1" >
 
 					<!-- sidebar -->
 					<div class="sidebar">
@@ -563,6 +563,137 @@
 											<ul class="comment-list">
 												<li owl-carousel-item ng-repeat="commentIndex in [3,4,5]">
 													<a style="text-decoration: none;" href="/#/readarticles/{{allComments[commentIndex].articleID}}">
+														<img src="{{allComments[commentIndex].user.imagePath}}" alt="">
+														<div class="comment-content">
+															<p class="main-message">{{allComments[commentIndex].comments}}</p>
+															<span><i class="fa fa-user"></i>by {{allComments[commentIndex].user.fullname}}</span>
+															<span><i class="fa fa-clock-o"></i>{{allComments[commentIndex].dateTime | date:'medium' }}</span>
+														</div>
+													</a>
+												</li>
+
+											</ul>
+										</div>
+									</div>
+								</div>
+							</owl-carousel>
+						</div>
+
+
+						<div class="advertisement">
+							<div class="desktop-advert" >
+								<span>Advertisement</span>
+								<br/>
+								<a target="_blank" href="{{adSideBottomRendom.url}}"><img height="200" width="300" src="{{adSideBottomRendom.imagePath}}" alt=""></a>
+							</div>
+						</div>
+
+					</div>
+					<!-- End sidebar -->
+
+				</div>
+				<div class="col-sm-4" ng-if="userRole === 0">
+
+					<!-- sidebar -->
+					<div class="sidebar">
+
+
+
+						<div class="widget tab-posts-widget">
+
+							<ul class="nav nav-tabs" id="myTab">
+								<li class="active">
+									<a href=""  ng-click="showPopularTab()" data-toggle="tab">Popular</a>
+								</li>
+								<li>
+									<a href=""  ng-click="showRecentTab()" data-toggle="tab">Recent</a>
+								</li>
+								<li>
+									<a href=""  ng-click="showTopReviewsTab()" data-toggle="tab">Top Reviews</a>
+								</li>
+							</ul>
+
+							<div class="tab-content">
+								<div class="tab-pane {{isPopularTab}}" id="option1Popular" >
+									<ul class="list-posts">
+										<li ng-repeat="article in userCtrl.articlesToAdd | limitTo:5">
+											<a href="/#/login"><img src="{{article.coverImagePath}}" alt=""></a>
+											<div class="post-content">
+												<h2><a href="/#/login">{{article.title}} </a></h2>
+												<ul class="post-tags">
+													<li><i class="fa fa-clock-o"></i>{{article.publishedDate | date:'medium'}}</li>
+												</ul>
+											</div>
+										</li>
+									</ul>
+								</div>
+								<div class="tab-pane {{isRecentTab}}" id="option2Recent" >
+									<ul class="list-posts">
+
+										<li ng-repeat="article in userCtrl.wholeArticles | limitTo:5">
+											<a href="/#/login"><img src="{{article.coverImagePath}}" alt=""></a>
+											<div class="post-content">
+												<h2><a href="/#/login">{{article.title}} </a></h2>
+												<ul class="post-tags">
+													<li><i class="fa fa-clock-o"></i>{{article.publishedDate | date:'medium'}}</li>
+												</ul>
+											</div>
+										</li>
+									</ul>
+								</div>
+								<div class="tab-pane {{isTopReviewsTab}}" id="option3TopReviews" >
+									<ul class="list-posts">
+
+										<li ng-repeat="article in userCtrl.topRatedArticles | limitTo:5">
+											<a href="/#/login"><img src="{{article.coverImagePath}}" alt=""></a>
+											<div class="post-content">
+												<h2><a href="/#/login">{{article.title}} </a></h2>
+												<ul class="post-tags">
+													<li><i class="fa fa-clock-o"></i>{{article.publishedDate | date:'medium' }}</li>
+												</ul>
+												<div><average-star-rating ng-model="article.overallRating" max="5" ><average-star-rating></div>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="advertisement">
+							<div class="desktop-advert" >
+								<span>Advertisement</span>
+								<br/>
+								<a target="_blank" href="{{adSideTopRendom.url}}"><img height="200" width="300" src="{{adSideTopRendom.imagePath}}" alt=""></a>
+							</div>
+						</div>
+
+						<div class="widget recent-comments-widget">
+							<div class="title-section">
+								<h1><span>Recent Comments</span></h1>
+							</div>
+
+							<owl-carousel owl-options="owlOptions">
+								<div class="owl-wrapper">
+									<div class="owl-carousel" data-num="1">
+										<div class="item">
+											<ul class="comment-list">
+												<li owl-carousel-item ng-repeat="commentIndex in [0,1,2]">
+													<a style="text-decoration: none;" href="/#/login">
+														<img src="{{allComments[commentIndex].user.imagePath}}" alt="">
+														<div class="comment-content">
+															<p class="main-message">{{allComments[commentIndex].comments}}</p>
+															<span><i class="fa fa-user"></i>by {{allComments[commentIndex].user.fullname}}</span>
+															<span><i class="fa fa-clock-o"></i>{{allComments[commentIndex].dateTime | date:'medium'}}</span>
+														</div>
+													</a>
+												</li>
+
+											</ul>
+										</div>
+										<div class="item">
+											<ul class="comment-list">
+												<li owl-carousel-item ng-repeat="commentIndex in [3,4,5]">
+													<a style="text-decoration: none;" href="/#/login">
 														<img src="{{allComments[commentIndex].user.imagePath}}" alt="">
 														<div class="comment-content">
 															<p class="main-message">{{allComments[commentIndex].comments}}</p>

@@ -54,6 +54,11 @@
                 </div>
             </div>
         </div>
+
+        <div ng-if="isEmailError">
+            sweetAlert("Success..!!!", "You have successfully assigned a New Promotion", "success");
+        </div>
+
         <div class="col-md-3">
             <br>
         </div>

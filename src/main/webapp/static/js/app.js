@@ -6,6 +6,20 @@ angular.module('myApp').config(['$routeProvider', function($routeProvider) {
     $routeProvider
 
         .when('/', {
+            templateUrl: '/static/js/template/reader-template/guest-home.html',
+            authenticated: false
+        })
+        .when('/guest_readarticles/:guest_articleId', {
+            templateUrl: '/static/js/template/reader-template/guest-single-post.html',
+            controller : "UserController as userCtrl",
+            authenticated: false
+        })
+        .when('/guest_category/:categoryIDforArticle', {
+            controller : "UserController as userCtrl",
+            templateUrl: '/static/js/template/reader-template/guest-category.html',
+            authenticated: false
+        })
+        .when('/login', {
             templateUrl: '/static/js/template/reader-template/login.html',
             authenticated: false
         })
@@ -71,7 +85,7 @@ angular.module('myApp').config(['$routeProvider', function($routeProvider) {
             controller : "AdvertiserController as adctrl"
         })
 
-        .otherwise({redirectTo:'/'});
+        .otherwise({redirectTo:'/login'});
 }]);
 
 
