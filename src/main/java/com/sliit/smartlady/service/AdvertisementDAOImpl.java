@@ -170,4 +170,60 @@ public class AdvertisementDAOImpl implements AdvertisementDAO{
             jdbcTemplate.update(sql, filepath , advID);
     }
 
+	@Override
+	public List<Advertisement> getAllAdvertisementsOrderByPrice() {
+		String sql = "SELECT * FROM advertisements WHERE status = 'Y' ORDER BY payment DESC ";
+		List<Advertisement> listAdvertisement = jdbcTemplate.query(sql,  new RowMapper<Advertisement>() {
+
+			@Override
+			public Advertisement mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+				Advertisement lAdvertisement = new Advertisement();
+
+				lAdvertisement.setId((rs.getInt("id")));
+				lAdvertisement.setImagePath(rs.getString("imagePath"));
+				lAdvertisement.setDescription(rs.getString("description"));
+				lAdvertisement.setPublishedDate(rs.getString("publishedDate"));
+				lAdvertisement.setExpiryDate(rs.getString("expiryDate"));
+				lAdvertisement.setUrl(rs.getString("url"));
+				lAdvertisement.setPayment(rs.getFloat("payment"));
+				lAdvertisement.setPlace(rs.getString("place"));
+				lAdvertisement.setStatus(rs.getString("status"));
+				lAdvertisement.setCategoryID(rs.getInt("categoryID"));
+
+				return lAdvertisement;
+			}
+		});
+
+		return listAdvertisement;
+	}
+
+	@Override
+	public List<Advertisement> getAllAdvertisementsByCategoryIDOrderByPrice(int categoryID) {
+		String sql = "SELECT * FROM advertisements WHERE status = 'Y' AND " +
+				"categoryID = "+ categoryID +"  ORDER BY payment DESC ";
+		List<Advertisement> listAdvertisement = jdbcTemplate.query(sql,  new RowMapper<Advertisement>() {
+
+			@Override
+			public Advertisement mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+				Advertisement lAdvertisement = new Advertisement();
+
+				lAdvertisement.setId((rs.getInt("id")));
+				lAdvertisement.setImagePath(rs.getString("imagePath"));
+				lAdvertisement.setDescription(rs.getString("description"));
+				lAdvertisement.setPublishedDate(rs.getString("publishedDate"));
+				lAdvertisement.setExpiryDate(rs.getString("expiryDate"));
+				lAdvertisement.setUrl(rs.getString("url"));
+				lAdvertisement.setPlace(rs.getString("place"));
+				lAdvertisement.setPayment(rs.getFloat("payment"));
+				lAdvertisement.setStatus(rs.getString("status"));
+				lAdvertisement.setCategoryID(rs.getInt("categoryID"));
+
+				return lAdvertisement;
+			}
+		});
+
+		return listAdvertisement;
+	}
 }

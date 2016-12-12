@@ -4,10 +4,7 @@ package com.sliit.smartlady.controller.reader;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.sliit.smartlady.model.*;
-import com.sliit.smartlady.service.ArticleDAO;
-import com.sliit.smartlady.service.CategoryDAO;
-import com.sliit.smartlady.service.CommentsDAO;
-import com.sliit.smartlady.service.UserDAO;
+import com.sliit.smartlady.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +24,9 @@ public class ReaderArticleController {
     UserDAO userDAO;
     @Autowired
     CategoryDAO categoryDAO;
+    @Autowired
+    AdvertisementDAO advertisementDAO;
+
 
 	
         //----------------------------Get All Articles----------------------------------
@@ -253,6 +253,42 @@ public class ReaderArticleController {
          commentsDAO.saveUserComments(comments);
 
         return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+    }
+
+    @RequestMapping(value = "/advertisementsorderbyprice", method = RequestMethod.GET)
+    public ResponseEntity<List<Advertisement>> getAllAdvertisementsOrderByPrice(){
+
+        List<Advertisement> advertisements = advertisementDAO.getAllAdvertisementsOrderByPrice();
+
+        if (advertisements==null) {
+            return new ResponseEntity<List<Advertisement> >(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<List<Advertisement>>(advertisements, HttpStatus.OK);
+    }
+
+    /*@RequestMapping(value = "/advertisementsorderbyprice/{categoryID}", method = RequestMethod.GET)
+    public ResponseEntity<List<Advertisement>> getAllAdvertisementsOrderByPriceAndByCategryID(){
+
+        List<Advertisement> advertisements = advertisementDAO.getAllAdvertisementsOrderByPrice();
+
+        if (advertisements==null) {
+            return new ResponseEntity<List<Advertisement> >(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<List<Advertisement>>(advertisements, HttpStatus.OK);
+    }*/
+
+    @RequestMapping(value = "/advertisementsByCategoryOrderByPrice/{categoryID}", method = RequestMethod.GET)
+    public ResponseEntity<List<Advertisement>> getAllAdvertisementsByCategoryIDOrderByPrice(@PathVariable int categoryID){
+
+        List<Advertisement> advertisements = advertisementDAO.getAllAdvertisementsByCategoryIDOrderByPrice(categoryID);
+
+        if (advertisements==null) {
+            return new ResponseEntity<List<Advertisement> >(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<List<Advertisement>>(advertisements, HttpStatus.OK);
     }
 
 

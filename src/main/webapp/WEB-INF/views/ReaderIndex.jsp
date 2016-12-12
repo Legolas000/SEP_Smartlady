@@ -308,7 +308,7 @@
 			<!-- block content -->
 			<div class="block-content non-sidebar">
 
-				<!-- google addsense -->
+				<%--<!-- google addsense -->
 				<div class="advertisement">
 					<div class="desktop-advert">
 						<span>Advertisement</span>
@@ -323,7 +323,7 @@
 						<img src="/static/upload/addsense/300x250.jpg" alt="">
 					</div>
 				</div>
-				<!-- End google addsense -->
+				<!-- End google addsense -->--%>
 
 				<%--<!-- grid box -->
                 <div class="grid-box">
@@ -482,6 +482,7 @@
 					<div class="sidebar">
 
 
+
 						<div class="widget tab-posts-widget">
 
 							<ul class="nav nav-tabs" id="myTab">
@@ -542,7 +543,13 @@
 							</div>
 						</div>
 
-
+						<div class="advertisement">
+							<div class="desktop-advert" >
+								<span>Advertisement</span>
+								<br/>
+								<a target="_blank" href="{{adSideTopRendom.url}}"><img height="200" width="300" src="{{adSideTopRendom.imagePath}}" alt=""></a>
+							</div>
+						</div>
 
 						<div class="widget recent-comments-widget">
 							<div class="title-section">
@@ -587,20 +594,14 @@
 							</owl-carousel>
 						</div>
 
-						<div class="advertisement">
-							<div class="desktop-advert">
+
+                       <div class="advertisement">
+                            <div class="desktop-advert" >
 								<span>Advertisement</span>
-								<img src="/static/upload/addsense/300x250.jpg" alt="">
+                                <br/>
+                                <a target="_blank" href="{{adSideBottomRendom.url}}"><img height="200" width="300" src="{{adSideBottomRendom.imagePath}}" alt=""></a>
 							</div>
-							<div class="tablet-advert">
-								<span>Advertisement</span>
-								<img src="/static/upload/addsense/200x200.jpg" alt="">
-							</div>
-							<div class="mobile-advert">
-								<span>Advertisement</span>
-								<img src="/static/upload/addsense/300x250.jpg" alt="">
-							</div>
-						</div>
+                       </div>
 
 					</div>
 					<!-- End sidebar -->

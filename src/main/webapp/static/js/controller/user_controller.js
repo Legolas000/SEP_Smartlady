@@ -2,8 +2,8 @@
 
 angular.module('myApp').controller('UserController',
     ['$scope', 'UserService','LoginService','$location','$route','$routeParams','$sce',
-        '$cookies','$rootScope','filterFilter',
-        function($scope, UserService,LoginService,$location,$route,$routeParams,$sce,$cookies,$rootScope,filterFilter) {
+        '$cookies','$rootScope','filterFilter','$interval',
+        function($scope, UserService,LoginService,$location,$route,$routeParams,$sce,$cookies,$rootScope,filterFilter,$interval) {
             var self = this;
 
             $scope.currentDate = new Date();
@@ -18,6 +18,8 @@ angular.module('myApp').controller('UserController',
             self.classStyle = 'second-style';
             self.locationPath = $location.path();
             self.modalPath = "/#"+$location.path();
+            $scope.BottomOfPage=[];
+            $scope.MiddleOfPage=[];
             self.articleT={
                 id:null,
                 title:'',
@@ -73,13 +75,16 @@ angular.module('myApp').controller('UserController',
             getTopRatedArticles();
             getAllComments();
             getAllCategories();
+            getAllAdvertisementOrderByPrice();
 
             if($routeParams.articleId != null){
                 getReaderArticle($routeParams.articleId);
+
             }
 
             if($routeParams.categoryIDforArticle != null){
                 getArticlesByCategoryID($routeParams.categoryIDforArticle);
+                getAllAdvertisementOrderByPriceAndByCategoryID($routeParams.categoryIDforArticle);
             }
 
             $scope.user1 = {rating:1};
@@ -162,6 +167,8 @@ angular.module('myApp').controller('UserController',
                             self.article.publishedDate = mysqlTimeStampToDate(self.article.publishedDate);
 
                             self.article.description = $sce.trustAsHtml(self.article.description );
+                            console.log("CatID : "+ self.article.categoryID);
+                            getAllAdvertisementOrderByPriceAndByCategoryID(self.article.categoryID);
                             getSocialShareModel();
                             getReadesDetails(id);
                             getCommentsForArticle(id);
@@ -203,7 +210,6 @@ angular.module('myApp').controller('UserController',
                                 noOfComments++;
                             });
                             $scope.noOfComments = noOfComments;
-                            console.log("$scope.comments : "+ JSON.stringify($scope.comments));
                             //console.log("self.commentsForArticle = "+ JSON.stringify(self.commentsForArticle) );
                         },
                         function (errResponse) {
@@ -248,6 +254,113 @@ angular.module('myApp').controller('UserController',
                         }
                     );
             }
+
+            function getAllAdvertisementOrderByPrice(){
+                console.log("getAllAdvertisementOrderByPrice in controler Called");
+                UserService.getAllAdvertisementOrderByPrice()
+                    .then(
+                        function (data) {
+                            $scope.Advertisements = data;
+
+                            $interval(function() {
+                                var randomIndex = Math.round( Math.random() * ($scope.Advertisements.length-1) );
+                                $scope.adSideTopRendom = $scope.Advertisements[randomIndex];
+                            }, 1000*5);
+
+                                $interval(function() {
+                                    var randomIndex = Math.round( Math.random() * ($scope.Advertisements.length-1) );
+                                    $scope.adSideBottomRendom = $scope.Advertisements[randomIndex];
+                                }, 1000*4);
+
+                            $interval(function() {
+                                var randomIndex = Math.round( Math.random() * ($scope.Advertisements.length-1) );
+                                $scope.adMiddlePageRendom1 = $scope.Advertisements[randomIndex];
+                            }, 1000*5);
+
+                                $interval(function() {
+                                    var randomIndex = Math.round( Math.random() * ($scope.Advertisements.length-1) );
+                                    $scope.adMiddlePageRendom2 = $scope.Advertisements[randomIndex];
+                                }, 1000*4);
+
+                            $interval(function() {
+                                var randomIndex = Math.round( Math.random() * ($scope.Advertisements.length-1) );
+                                    $scope.adMiddleBottomPageRendom1 = $scope.Advertisements[randomIndex];
+                            }, 1000*5);
+
+                                $interval(function() {
+                                    var randomIndex = Math.round( Math.random() * ($scope.Advertisements.length-1) );
+                                    $scope.adMiddleBottomPageRendom2 = $scope.Advertisements[randomIndex];
+                                }, 1000*4);
+
+                        },
+                        function (errResponse) {
+                            console.error('Error while fetching featured article');
+                        }
+                    );
+            }
+
+            function getAllAdvertisementOrderByPriceAndByCategoryID(categoryID){
+                alert("getAllAdvertisementOrderByPrice in controler Called");
+                UserService.getAllAdvertisementOrderByPriceAndByCategoryID(categoryID)
+                    .then(
+                        function (data) {
+                            $scope.Advertisements = data;
+
+
+                            for(var a=0;a<data.length;a++){
+                                if(data[a].place = "Bottom of Page"){
+                                    $scope.BottomOfPage.push(data[a]);
+                                }
+                            }
+                            $interval(function() {
+                                var randomIndex = Math.round( Math.random() * ($scope.BottomOfPage.length-1) );
+                                $scope.adRendomForBottomOfPageByCategoryID1 = $scope.BottomOfPage[randomIndex];
+                            }, 1000*5);
+
+                            $interval(function() {
+                                var randomIndex = Math.round( Math.random() * ($scope.BottomOfPage.length-1) );
+                                $scope.adRendomForBottomOfPageByCategoryID2 = $scope.BottomOfPage[randomIndex];
+                            }, 1000*4);
+
+                            for(var a=0;a<data.length;a++){
+                                if(data[a].place = "Middle of Page"){
+                                    $scope.MiddleOfPage.push(data[a]);
+                                }
+                            }
+                            $interval(function() {
+                                var randomIndex = Math.round( Math.random() * ($scope.MiddleOfPage.length-1) );
+                                $scope.adRendomForMiddleOfPageSideByCategoryID1 = $scope.MiddleOfPage[randomIndex];
+                            }, 1000*5);
+
+                            $interval(function() {
+                                var randomIndex = Math.round( Math.random() * ($scope.MiddleOfPage.length-1) );
+                                $scope.adRendomForMiddleOfPageSideByCategoryID2 = $scope.MiddleOfPage[randomIndex];
+                            }, 1000*4);
+
+
+
+
+
+
+
+
+
+                            /*angular.forEach(JSON.parse(data), function(value, key){
+                               /!* if(value.place = "Middle of Page"){
+                                    $scope.adMiddleOfPage.push(value);
+                                }*!/
+                                alert(" Addver"+value.place);
+
+                            });*/
+
+
+                        },
+                        function (errResponse) {
+                            console.error('Error while fetching featured article');
+                        }
+                    );
+            }
+
 
 
             function getFeturedArticle() {
@@ -459,5 +572,7 @@ angular.module('myApp').controller('UserController',
                 var parts=timestamp.replace(regex,"$1 $2 $3 $4 $5 $6").split(' ');
                 return new Date(parts[0],parts[1]-1,parts[2],parts[3],parts[4],parts[5]);
             }
+
+
         }]);
 

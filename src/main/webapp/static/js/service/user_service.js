@@ -17,7 +17,9 @@
                     getCommentsForArticle:getCommentsForArticle,
                     doComment : doComment,
                     getAllComments:getAllComments,
-                    getAllCategories:getAllCategories
+                    getAllCategories:getAllCategories,
+                    getAllAdvertisementOrderByPrice : getAllAdvertisementOrderByPrice,
+                    getAllAdvertisementOrderByPriceAndByCategoryID:getAllAdvertisementOrderByPriceAndByCategoryID
                 };
 
                 return factory;
@@ -63,6 +65,38 @@
                             },
                             function(errResponse){
                                 console.error('Error while fetching featuredarticle');
+                                deferred.reject(errResponse);
+                            }
+                        );
+                    return deferred.promise;
+                }
+
+                function getAllAdvertisementOrderByPrice() {
+                    console.log("getAllAdvertisementOrderByPrice in controler Called");
+
+                    var deferred = $q.defer();
+                    $http.get(REST_SERVICE_URI+"advertisementsorderbyprice")
+                        .then(
+                            function (response) {
+                                deferred.resolve(response.data);
+                            },
+                            function(errResponse){
+                                console.error('Error while fetching advertisements order by price');
+                                deferred.reject(errResponse);
+                            }
+                        );
+                    return deferred.promise;
+                }
+
+                function getAllAdvertisementOrderByPriceAndByCategoryID(categoryID) {
+                    var deferred = $q.defer();
+                    $http.get(REST_SERVICE_URI+"advertisementsByCategoryOrderByPrice/"+categoryID)
+                        .then(
+                            function (response) {
+                                deferred.resolve(response.data);
+                            },
+                            function(errResponse){
+                                console.error('Error while fetching advertisements order by price');
                                 deferred.reject(errResponse);
                             }
                         );
