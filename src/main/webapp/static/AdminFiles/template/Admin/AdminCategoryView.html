@@ -1,0 +1,40 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <section class="box ">
+        <header class="panel_header">
+            <h2 class="title pull-left">Category View</h2>
+        </header>
+        <div class="content-body">
+
+            <div class="row content-body" >
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <body ng-app="influx" id="dialogContainer">
+                    <div ng-controller="CATMainCtrl as vm">
+                        <div style="padding-left: 30px; padding-right : 30px;">
+                            <button type="button" id="addRow" class="btn btn-primary btn-block" ng-click="addRow($event)">Add Row</button>
+                        </div>
+                        <br />
+                        <div style="height: 500px;" id="serviceGrid"
+                             ui-grid-move-columns
+                             ui-grid-selection
+                             ui-grid-resize-columns
+
+                             ui-grid-pinning
+                             ui-grid-exporter
+                             ui-grid-auto-resize
+                             ui-grid-pagination
+
+                             ui-grid-edit
+                             ui-grid="vm.serviceGrid" class="influxGrid" >
+
+                        </div>
+                    </div>
+                    </body>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+

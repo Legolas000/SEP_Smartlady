@@ -1,0 +1,58 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" aria-hidden="true" ng-click="$close()">×</button>
+            <h4 class="modal-title">Category View Details</h4>
+        </div>
+        <form name="serviceForm">
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">ID</label>
+
+                            <input type="text" class="form-control" id="field-1" placeholder="0" value="{{vm.entity.id}}" disabled>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            <label for="field-2" class="control-label">Category Name</label>
+
+                            <input type="text" class="form-control" id="field-2" placeholder="----" ng-model="vm.entity.catName" name="CatName" required>
+                            <span ng-show="serviceForm.CatName.$error.required" class="error">Please enter something!</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="form-group">
+                            <label for="field-3" class="control-label">Category Description</label>
+
+                            <textarea class="form-control" id="field-3" placeholder="catDesc" ng-model="vm.entity.catDescription" name="catDesc" required>{{vm.entity.catDescription}}</textarea>
+                            <span ng-show="serviceForm.catDesc.$error.required" class="error">Please enter something!</span>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-md-4"><button class="btn btn-success btn-block" ng-click="vm.save()" ng-disabled = "serviceForm.$invalid">Save</button></div>
+                    <div class="col-md-4"><button class="btn btn-danger btn-block" ng-click="vm.remove()" ng-disabled = "serviceForm.$invalid">Delete</button></div>
+                    <div class="col-md-4"><button class="btn btn-warning btn-block" ng-click="$close()">Cancel</button></div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

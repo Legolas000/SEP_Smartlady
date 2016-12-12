@@ -1,0 +1,67 @@
+<style>
+    textarea {
+        resize: none;
+    }
+</style>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="page-title">
+            <div class="pull-left">
+                <h1 class="title">User Profile</h1>
+            </div>
+            <div class="pull-right hidden-xs">
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="#/"><i class="fa fa-home"></i>Home</a>
+                    </li>
+                    <li class="active">
+                        <strong>Profile</strong>
+                    </li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="col-lg-12">
+        <section class="box nobox">
+            <div class="content-body">    <div class="row">
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <div class="uprofile-image">
+                        <img src="{{ImagePath}}" class="img-responsive">
+                    </div>
+                    <div class="uprofile-name">
+                        <h3>
+                            <a href="#">{{UserName}}</a>
+                            <!-- Available statuses: online, idle, busy, away and offline -->
+                            <span class="uprofile-status online"></span>
+                        </h3>
+                        <p class="uprofile-title">Administrator</p>
+                    </div>
+                    <div class="uprofile-info">
+                        <ul class="list-unstyled">
+                            <li><i class="fa fa-home"></i> {{Address}}</li>
+                            <li><i class="fa fa-user"></i> {{EMail}}</li>
+                            <!--<li><i class="fa fa-suitcase"></i> Tech Lead, YIAM</li>-->
+                        </ul>
+                    </div>
+                    <div class="uprofile-buttons">
+                        <!--<a class="btn btn-md btn-primary">Send Message</a>-->
+                        <!--<a class="btn btn-md btn-primary">Add as Friend</a>-->
+                    </div>
+                    <div class=" uprofile-social">
+                        <!--<a href="#" class="btn btn-primary btn-md facebook"><i class="fa fa-facebook icon-xs"></i></a>-->
+                        <!--<a href="#" class="btn btn-primary btn-md twitter"><i class="fa fa-twitter icon-xs"></i></a>-->
+                        <!--<a href="#" class="btn btn-primary btn-md google-plus"><i class="fa fa-google-plus icon-xs"></i></a>-->
+                        <!--<a href="#" class="btn btn-primary btn-md dribbble"><i class="fa fa-dribbble icon-xs"></i></a>-->
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <div class="uprofile-content">
+                        <textarea class="form-control" name="UsrDescrip" readonly rows="10" cols="50">{{UserDesc}}</textarea>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+    </div>
