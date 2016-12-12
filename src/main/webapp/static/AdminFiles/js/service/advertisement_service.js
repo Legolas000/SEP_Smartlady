@@ -9,7 +9,7 @@ function ADVRowEditor($http, $rootScope, $modal) {
 
     function editRow(grid, row,event) {
         $modal.open({
-            templateUrl : 'static/js/partials/advertisementEditModal.html',
+            templateUrl : 'static/AdminFiles/js/partials/advertisementEditModal.html',
             controller : [ '$http', '$modalInstance', 'grid', 'row','$mdDialog', ADVRowEditCtrl ],
             controllerAs : 'vm',
             resolve : {

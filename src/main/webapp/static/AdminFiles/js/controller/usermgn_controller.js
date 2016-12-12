@@ -68,7 +68,7 @@ angular.module('influx').controller('USRMainCtrl',['$scope', '$http', '$mdDialog
         enableCellEdit : false
     }];
 
-    $http.get('http://localhost:1212/SmartLady/admin/users/1').success(function(response) {
+    $http.get('http://localhost:1212/admin/users/1').success(function(response) {
         vm.serviceGrid.data = response;
     });
 
@@ -110,7 +110,7 @@ function USRRowEditCtrl($http, $modalInstance, grid, row, $mdDialog , $scope)
     var vm = this;
     vm.entity = angular.copy(row.entity);
     vm.save = save;
-    var REST_SERVICE_URI = 'http://localhost:1212/SmartLady/admin/users/';
+    var REST_SERVICE_URI = 'http://localhost:1212/admin/users/';
     function save() {
         if (row.entity.id == '0') {
             row.entity = angular.extend(row.entity, vm.entity);
@@ -246,7 +246,7 @@ function USRRowEditCtrl($http, $modalInstance, grid, row, $mdDialog , $scope)
 
     $scope.submitImage = submitImage;
     function submitImage() {
-        var uploadUrl = "http://localhost:1212/SmartLady/im/users/saveUserDataAndFile";
+        var uploadUrl = "http://localhost:1212/im/users/saveUserDataAndFile";
         $http.post(uploadUrl, $scope.fd, {
             withCredentials: true,
             headers: {'Content-Type': undefined },
@@ -266,7 +266,7 @@ angular.module('influx').controller('SendSubs', ['$scope','$mdDialog','$http', f
     {
         console.log("This Triggered send subscriptions");
         alert("This is workignkjsd");
-        $http.get('http://localhost:1212/SmartLady/admin/smail/')
+        $http.get('http://localhost:1212/admin/smail/')
             .then(
                 function (response) {
                     console.log('Sucessful sent mail',response);

@@ -128,14 +128,14 @@ angular.module('influx').controller('ADVMainCtrl',['$scope', '$http', '$mdDialog
 
     $scope.getNADVAppList = getNADVAppList;
     function getNADVAppList() {
-        $http.get('http://localhost:1212/SmartLady/admin/advertisements/').success(function (response) {
+        $http.get('http://localhost:1212/admin/advertisements/').success(function (response) {
             vm.serviceGrid.data = response;
         });
     }
 
     $scope.getADVAppList = getADVAppList;
     function getADVAppList() {
-        $http.get('http://localhost:1212/SmartLady/admin/advertisements/1').success(function (response) {
+        $http.get('http://localhost:1212/admin/advertisements/1').success(function (response) {
             vm.serviceGrid1.data = response;
         });
     }
@@ -175,7 +175,7 @@ function ADVRowEditCtrl($http, $modalInstance, grid, row, $mdDialog) {
     vm.entity = angular.copy(row.entity);
     vm.update = update;
     vm.reject = reject;
-    var REST_SERVICE_URI = 'http://localhost:1212/SmartLady/admin/advertisements/';
+    var REST_SERVICE_URI = 'http://localhost:1212/admin/advertisements/';
 
     // addEventListener('update', update, false);
     function update(event) {

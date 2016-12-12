@@ -30,7 +30,7 @@ angular.module('influx').controller('LoginController',['$rootScope','$scope', 'L
                             }
                             else
                             {
-                                $window.location.href = '/SmartLady/admin'
+                                $window.location.href = '/admin'
                                 console.log('You passed',data);
                             }
                         },
@@ -54,7 +54,7 @@ angular.module('influx').controller('LoginController',['$rootScope','$scope', 'L
 
                 doLogOut : function () {
                     LoginService.doLogOut();
-                    $location.path('/');
+                    $location.path('/adlog');
                 }
             });
 

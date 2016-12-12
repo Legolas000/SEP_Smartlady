@@ -9,7 +9,7 @@ function ARTRowEditor($http, $rootScope, $modal) {
 
     function editRow(grid, row,event) {
         $modal.open({
-            templateUrl : 'static/js/partials/articleEditModal.html',
+            templateUrl : 'static/AdminFiles/js/partials/articleEditModal.html',
             controller : [ '$http', '$modalInstance', 'grid', 'row','$mdDialog', ARTRowEditCtrl ],
             controllerAs : 'vm',
             resolve : {

@@ -10,7 +10,7 @@ function ADRowEditor($http, $rootScope, $modal) {
     function editRow(grid, row,event) {
         console.log('This is executing ADPayments');
         $modal.open({
-            templateUrl : 'static/js/partials/adPaymentEditModal.html',
+            templateUrl : 'static/AdminFiles/js/partials/adPaymentEditModal.html',
             controller : [ '$http', '$modalInstance', 'grid', 'row','$mdDialog', ADRowEditCtrl ],
             controllerAs : 'vm',
             resolve : {

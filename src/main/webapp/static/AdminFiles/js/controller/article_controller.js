@@ -85,7 +85,7 @@ angular.module('influx').controller('ARTMainCtrl',['$scope', '$http', '$mdDialog
     function getNAPList()
     {
         //For non-approved list.
-        $http.get('http://localhost:1212/SmartLady/admin/articles/0').success(function(response) {
+        $http.get('http://localhost:1212/admin/articles/0').success(function(response) {
             vm.serviceGrid.data = response;
         });
     }
@@ -94,7 +94,7 @@ angular.module('influx').controller('ARTMainCtrl',['$scope', '$http', '$mdDialog
     function getAPList()
     {
         //For approved list.
-        $http.get('http://localhost:1212/SmartLady/admin/articles/1').success(function(response) {
+        $http.get('http://localhost:1212/admin/articles/1').success(function(response) {
             vm.serviceGrid1.data = response;
         });
     }
@@ -124,7 +124,7 @@ function ARTRowEditCtrl($http, $modalInstance, grid, row, $mdDialog) {
     vm.entity = angular.copy(row.entity);
     vm.update = update;
     vm.reject = reject;
-    var REST_SERVICE_URI = 'http://localhost:1212/SmartLady/admin/articles/';
+    var REST_SERVICE_URI = 'http://localhost:1212/admin/articles/';
 
     // addEventListener('update', update, false);
     function update(event) {

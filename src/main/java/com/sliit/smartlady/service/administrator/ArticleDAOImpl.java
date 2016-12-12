@@ -23,7 +23,7 @@ public class ArticleDAOImpl implements ArticleDAO{
 
 	@Override
 	public List<Article> getAllArticles() {
-		String sql = "SELECT * FROM articles ar,usertemp us WHERE status = '0' AND us.id = ar.writerID";
+		String sql = "SELECT * FROM articles ar,user us WHERE status = '0' AND us.id = ar.writerID";
 		List<Article> listArticle = jdbcTemplate.query(sql,  new RowMapper<Article>() {
 			
 			@Override
@@ -55,7 +55,7 @@ public class ArticleDAOImpl implements ArticleDAO{
 	@Override
 	public List<Article> getFilteredArticles(int status)
 	{
-		String sql = "SELECT * FROM articles ar,usertemp us WHERE us.id = ar.writerID AND status = " + status;
+		String sql = "SELECT * FROM articles ar,user us WHERE us.id = ar.writerID AND status = " + status;
 		List<Article> listArticle = jdbcTemplate.query(sql,  new RowMapper<Article>() {
 			
 			@Override

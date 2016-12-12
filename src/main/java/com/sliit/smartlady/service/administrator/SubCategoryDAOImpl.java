@@ -28,12 +28,12 @@ public class SubCategoryDAOImpl implements SubCategoryDAO {
 		if(subCategory.getID()>0)
 		{
 			String sql = "UPDATE subcategories SET subCatName = ?, subCatDescription = ? "+
-						" WHERE subCatID = ?";
+						" WHERE id = ?";
 			jdbcTemplate.update(sql, subCategory.getsubCatName(), subCategory.getsubCatDescription(), subCategory.getID());
 		}
 		else
 		{
-			String sql = "INSERT INTO subcategories(subCatName,subCatDescription,catID) VALUES(?, ?, ?)";
+			String sql = "INSERT INTO subcategories(subCatName,subCatDescription,categoryID) VALUES(?, ?, ?)";
 			jdbcTemplate.update(sql, subCategory.getsubCatName(), subCategory.getsubCatDescription(), subCategory.getcatID());
 			System.out.println("Inside inside loop");
 		}
@@ -41,14 +41,14 @@ public class SubCategoryDAOImpl implements SubCategoryDAO {
 
 	@Override
 	public void delete(int subCatID) {
-		String sql = "DELETE FROM subcategories WHERE subCatID = ?";
+		String sql = "DELETE FROM subcategories WHERE id = ?";
 		jdbcTemplate.update(sql, subCatID);
 	}
 
 	@Override
 	public SubCategory findByID(int subCatID) {
 		
-		String sql = "SELECT * FROM subcategories WHERE subCatID = " + subCatID;
+		String sql = "SELECT * FROM subcategories WHERE id = " + subCatID;
 
 		 return jdbcTemplate.query(sql, new ResultSetExtractor<SubCategory>() {
 			 
@@ -57,10 +57,10 @@ public class SubCategoryDAOImpl implements SubCategoryDAO {
 		                DataAccessException {
 		            if (rs.next()) {
 		            	SubCategory subCategory = new SubCategory();
-		            	subCategory.setID(rs.getInt("subCatID"));
+		            	subCategory.setID(rs.getInt("id"));
 		            	subCategory.setsubCatName(rs.getString("subCatName"));
 		            	subCategory.setsubCatDescription(rs.getString("subCatDescription"));
-		            	subCategory.setcatID(rs.getInt("catID"));
+		            	subCategory.setcatID(rs.getInt("categoryID"));
 		            	return subCategory;
 		            }
 		            return null;
@@ -83,7 +83,7 @@ public class SubCategoryDAOImpl implements SubCategoryDAO {
 		            	subCategory.setID(rs.getInt("subCatID"));
 		            	subCategory.setsubCatName(rs.getString("subCatName"));
 		            	subCategory.setsubCatDescription(rs.getString("subCatDescription"));
-		            	subCategory.setcatID(rs.getInt("catID"));
+		            	subCategory.setcatID(rs.getInt("categoryID"));
 		            	
 		            	return subCategory;
 		            }
@@ -94,7 +94,7 @@ public class SubCategoryDAOImpl implements SubCategoryDAO {
 
 	@Override
 	public List<SubCategory> getAllSubCategories() {
-		String sql = "SELECT * FROM subcategories s,categories c WHERE s.catID = c.CatID";
+		String sql = "SELECT *,c.id catID,s.id subCatID FROM subcategories s,categories c WHERE s.categoryID = c.id";
 		List<SubCategory> listSubCategory = jdbcTemplate.query(sql,  new RowMapper<SubCategory>() {
 			
 			@Override
@@ -122,7 +122,7 @@ public class SubCategoryDAOImpl implements SubCategoryDAO {
 
 	@Override
 	public List<SubCategory> getFilteredSubCategories(int catID) {
-		String sql = "SELECT * FROM subcategories sc, categories c WHERE sc.catID = c.catID AND c.catID = " + catID;
+		String sql = "SELECT *,c.id catID,sc.id subCatID FROM subcategories sc, categories c WHERE sc.categoryID = c.id AND c.id = " + catID;
 		List<SubCategory> listSubCategory = jdbcTemplate.query(sql,  new RowMapper<SubCategory>() {
 			
 			@Override
@@ -156,7 +156,7 @@ public class SubCategoryDAOImpl implements SubCategoryDAO {
 
 	@Override
 	public List<Category> getExistCategories() {
-		String sql = "SELECT * FROM categories WHERE catID IN (SELECT catID FROM subcategories)";
+		String sql = "SELECT * FROM categories WHERE id IN (SELECT categoryID FROM subcategories)";
 		List<Category> listCategory = jdbcTemplate.query(sql,  new RowMapper<Category>() {
 			
 			@Override
@@ -164,7 +164,7 @@ public class SubCategoryDAOImpl implements SubCategoryDAO {
 				
 				Category lCategory = new Category();
 				
-				lCategory.setID((rs.getInt("catID")));
+				lCategory.setID((rs.getInt("id")));
 				lCategory.setcatName(rs.getString("catName"));
 				lCategory.setcatDescription(rs.getString("catDescription"));
 				

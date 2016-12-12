@@ -1,7 +1,7 @@
 angular.module('influx').factory('LoginService',
     ['$http', '$q','$cookies','$window','$rootScope', function($http, $q, $cookies,$window,$rootScope){
 
-        var REST_SERVICE_URI = 'http://localhost:1212/SmartLady/admin/';
+        var REST_SERVICE_URI = 'http://localhost:1212/admin/';
 
         var factory = {
             doLogin: doLogin,
@@ -49,7 +49,7 @@ angular.module('influx').factory('LoginService',
             alert('This is the loggout working');
             $cookies.remove('auth');
             $cookies.remove('userAuthObj');
-            $window.location.href = '/SmartLady/adlog'
+            $window.location.href = '/adlog'
         }
 
 

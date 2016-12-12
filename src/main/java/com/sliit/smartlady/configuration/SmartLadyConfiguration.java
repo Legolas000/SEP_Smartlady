@@ -123,7 +123,7 @@ public class SmartLadyConfiguration extends WebMvcConfigurerAdapter{
 		return new com.sliit.smartlady.service.administrator.ArticleDAOImpl(getDataSource());
 	}
 
-	@Bean(name = "AdminAdvertisementBean")
+	@Bean
 	public com.sliit.smartlady.service.administrator.AdvertisementDAO getAdminAdvertisementDAO()
 	{
 		return new com.sliit.smartlady.service.administrator.AdvertisementDAOImpl(getDataSource());

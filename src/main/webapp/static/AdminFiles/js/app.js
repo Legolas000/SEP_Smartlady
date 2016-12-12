@@ -6,7 +6,7 @@ var App = angular.module('myApp',['ngMaterial','ngCookies']);
 // App.config(['$routeProvider', function($routeProvider) {
 //     $routeProvider
 //         .when('/advertisement', {
-//             templateUrl: '/static/template/AdminAdverstisementViewPartial.html',
+//             templateUrl: '/static/AdminFiles/template/AdminAdverstisementViewPartial.html',
 //             controller : "AdvertisementController as AdCrtl"
 //         })
 //         .otherwise({redirectTo:'/advertisement'});
@@ -23,59 +23,59 @@ angular.module('influx').config(['$routeProvider', function($routeProvider){
 
     $routeProvider
         .when('/adpview',{
-            templateUrl: 'static/template/Admin/AdminADPaymentsView.html'
+            templateUrl: 'static/AdminFiles/template/Admin/AdminADPaymentsView.html'
             // controller : 'MainCtrl as vm'
         })
         .when('/advview',{
-            templateUrl: 'static/template/Admin/AdminAdvertisementView.html'
+            templateUrl: 'static/AdminFiles/template/Admin/AdminAdvertisementView.html'
             // authenticated : true
             // controller : 'MainCtrl as vm'
         })
         .when('/artview',{
-            templateUrl: 'static/template/Admin/AdminArticleView.html',
+            templateUrl: 'static/AdminFiles/template/Admin/AdminArticleView.html',
             // authenticated  : true
             // controller : 'MainCtrl as vm'
         })
         .when('/catview',{
-            templateUrl: 'static/template/Admin/AdminCategoryView.html',
+            templateUrl: 'static/AdminFiles/template/Admin/AdminCategoryView.html',
             // authenticated  : true
             // controller : 'MainCtrl as vm'
         })
         .when('/subcatview',{
-            templateUrl: 'static/template/Admin/AdminSubCategoryView.html',
+            templateUrl: 'static/AdminFiles/template/Admin/AdminSubCategoryView.html',
             // authenticated  :   true
             // controller : 'MainCtrl as vm'
         })
         .when('/usrview',{
-            templateUrl: 'static/template/Admin/AdminUsrMgmView.html',
+            templateUrl: 'static/AdminFiles/template/Admin/AdminUsrMgmView.html',
             // authenticated  :   true
             // controller : 'MainCtrl as vm'
         })
         .when('/404',{
-            templateUrl: 'static/template/Admin/Admin404Page.html',
+            templateUrl: 'static/AdminFiles/template/Admin/Admin404Page.html',
             // authenticated  :   true
             // controller : 'MainCtrl as vm'
         })
         .when('/adprof',{
-            templateUrl: 'static/template/Admin/AdminProfileView.html',
+            templateUrl: 'static/AdminFiles/template/Admin/AdminProfileView.html',
             // authenticated  :   true
             // controller : 'MainCtrl as vm'
         })
         .when('/SendMail',{
-            templateUrl: 'static/template/Admin/AdminSendUsrSubs.html',
+            templateUrl: 'static/AdminFiles/template/Admin/AdminSendUsrSubs.html',
             // authenticated  :   true
             controller : 'SendSubs as vm'
         })
         // .when('/gaview1',{
-        //     templateUrl: 'static/template/Admin/Analytics/AdminGoogleAnalytics_1.html',
+        //     templateUrl: 'static/AdminFiles/template/Admin/Analytics/AdminGoogleAnalytics_1.html',
         //     // controller : 'MainCtrl as vm'
         // })
         .when('/gaview2',{
-            templateUrl: 'static/template/Admin/Analytics/AdminGoogleAnalytics_2.html',
+            templateUrl: 'static/AdminFiles/template/Admin/Analytics/AdminGoogleAnalytics_2.html',
             // controller : 'MainCtrl as vm'
         })
         // .when('/adboard',{
-        //     templateUrl: 'static/template/Admin/Analytics/AdminDashBoard.html',
+        //     templateUrl: 'static/AdminFiles/template/Admin/Analytics/AdminDashBoard.html',
         //     // controller : 'MainCtrl as vm'
         // })
         .otherwise({redirectTo:'/'
@@ -95,7 +95,7 @@ angular.module('influx').config(['$routeProvider', function($routeProvider){
         {
            // alert('not yet logged in');
             // $rootScope.currentUerLoggedin = true;
-            $window.location.href = '/SmartLady/adlog'
+            $window.location.href = '/adlog'
         }
         else {
             $rootScope.USId = $cookies.getObject("userAuthObj").id;

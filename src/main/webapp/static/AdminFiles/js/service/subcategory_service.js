@@ -9,7 +9,7 @@ function SUBCRowEditor($http, $rootScope, $modal) {
 
     function editRow(grid, row) {
         $modal.open({
-            templateUrl : 'static/js/partials/subCategoryEditModal.html',
+            templateUrl : 'static/AdminFiles/js/partials/subCategoryEditModal.html',
             controller : [ '$http', '$modalInstance', 'grid', 'row','$mdDialog', SUBCRowEditCtrl ],
             controllerAs : 'vm',
             //windowTemplateUrl: 'modalWindowTemplte.html',

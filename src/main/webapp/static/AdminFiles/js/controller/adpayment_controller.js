@@ -44,7 +44,7 @@ angular.module('influx').controller('ADMainCtrl',['$scope', '$http', '$mdDialog'
         enableCellEdit : false
     } ];
 
-    $http.get('http://localhost:1212/SmartLady/admin/adpayments/').success(function(response) {
+    $http.get('http://localhost:1212/admin/adpayments/').success(function(response) {
         vm.serviceGrid.data = response;
     });
 
@@ -73,7 +73,7 @@ function ADRowEditCtrl($http, $modalInstance, grid, row, $mdDialog)
     var vm = this;
     vm.entity = angular.copy(row.entity);
     vm.save = save;
-    var REST_SERVICE_URI = 'http://localhost:1212/SmartLady/admin/adpayments/';
+    var REST_SERVICE_URI = 'http://localhost:1212/admin/adpayments/';
 
     function save() {
         if (row.entity.id == '0') {

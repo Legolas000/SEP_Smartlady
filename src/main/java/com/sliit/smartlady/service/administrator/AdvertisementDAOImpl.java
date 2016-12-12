@@ -23,7 +23,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
 
 	@Override
 	public List<Advertisement> getAllAdvertisements() {
-		String sql = "SELECT * FROM advertisements ad, usertemp us WHERE status = '0' AND us.id = ad.userID";
+		String sql = "SELECT *,ad.id advID,us.id usrID FROM advertisements ad, user us WHERE status = '0' AND us.id = ad.userID";
 		List<Advertisement> listAdvertisement = jdbcTemplate.query(sql,  new RowMapper<Advertisement>() {
 			
 			@Override
@@ -39,8 +39,8 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
 				
 				lAdvertisement.setID((rs.getInt("advID")));
 				lAdvertisement.setDescription(rs.getString("description"));
-				lAdvertisement.setPublishedDate(rs.getString("published_date"));
-				lAdvertisement.setExpiryDate(rs.getString("expiry_date"));
+				lAdvertisement.setPublishedDate(rs.getString("publishedDate"));
+				lAdvertisement.setExpiryDate(rs.getString("expiryDate"));
 				lAdvertisement.setPayment(rs.getFloat("payment"));
 				lAdvertisement.setURL(rs.getString("url"));
 				lAdvertisement.setStatus(rs.getString("status"));
@@ -58,7 +58,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
 	@Override
 	public List<Advertisement> getFilteredAllAdvertisements(int status)
 	{
-		String sql = "SELECT * FROM advertisements ad, usertemp us WHERE us.id = ad.userID AND  status = " + status;
+		String sql = "SELECT *,ad.id advID,us.id usrID FROM advertisements ad, user us WHERE us.id = ad.userID AND  status = " + status;
 		List<Advertisement> listAdvertisement = jdbcTemplate.query(sql,  new RowMapper<Advertisement>() {
 			
 			@Override
@@ -66,16 +66,16 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
 				
 				Advertisement lAdvertisement = new Advertisement();
 				User insAdvert = new User();
-				
+
 				insAdvert.setFullname(rs.getString("fullname"));
 				insAdvert.setEmail(rs.getString("email"));
 				insAdvert.setAddress(rs.getString("address"));
 				insAdvert.setUserdescription(rs.getString("userdescription"));
-				
+
 				lAdvertisement.setID((rs.getInt("advID")));
 				lAdvertisement.setDescription(rs.getString("description"));
-				lAdvertisement.setPublishedDate(rs.getString("published_date"));
-				lAdvertisement.setExpiryDate(rs.getString("expiry_date"));
+				lAdvertisement.setPublishedDate(rs.getString("publishedDate"));
+				lAdvertisement.setExpiryDate(rs.getString("expiryDate"));
 				lAdvertisement.setPayment(rs.getFloat("payment"));
 				lAdvertisement.setURL(rs.getString("url"));
 				lAdvertisement.setStatus(rs.getString("status"));

@@ -52,13 +52,13 @@ angular.module('influx').controller('SUBCMainCtrl',['$scope', '$http', '$mdDialo
         enableCellEdit : false
     }  ];
 
-    $http.get('http://localhost:1212/SmartLady/admin/subcategories/').success(function(response) {
+    $http.get('http://localhost:1212/admin/subcategories/').success(function(response) {
         vm.serviceGrid.data = response;
         //vm.entity.downloadCtegert = response;  //for category load
     });
 
 
-    $http.get('http://localhost:1212/SmartLady/admin/subcategories/exist/').success(function(response) {
+    $http.get('http://localhost:1212/admin/subcategories/exist/').success(function(response) {
         vm.filCats = response;
         console.log('These are the categories', vm.filCats);
     });
@@ -85,12 +85,12 @@ angular.module('influx').controller('SUBCMainCtrl',['$scope', '$http', '$mdDialo
     {
         console.log(vm.selCategs);
         if(vm.selCategs === '')
-            $http.get('http://localhost:1212/SmartLady/admin/subcategories/').success(function(response) {
+            $http.get('http://localhost:1212/admin/subcategories/').success(function(response) {
                 vm.serviceGrid.data = response;
 
             });
         else
-            $http.get('http://localhost:1212/SmartLady/admin/subcategories/sub/'+vm.selCategs).success(function(response) {
+            $http.get('http://localhost:1212/admin/subcategories/sub/'+vm.selCategs).success(function(response) {
                 console.log('The resp val', response);
                 vm.serviceGrid.data = response;
                 alert(response);
@@ -119,13 +119,13 @@ function SUBCRowEditCtrl($http, $modalInstance, grid, row, $mdDialog)
     vm.save = save;
 //        vm.getData = getData
 
-    $http.get('http://localhost:1212/SmartLady/admin/categories/').success(function(response) {
+    $http.get('http://localhost:1212/admin/categories/').success(function(response) {
         //vm.serviceGrid.data = response;
         vm.entity.downloadCtegert = response;  //for category load
     });
 
 
-    var REST_SERVICE_URI = 'http://localhost:1212/SmartLady/admin/subcategories/';
+    var REST_SERVICE_URI = 'http://localhost:1212/admin/subcategories/';
     function save() {
         if (row.entity.id == '0') {
             row.entity = angular.extend(row.entity, vm.entity);

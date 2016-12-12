@@ -9,7 +9,7 @@ function CATRowEditor($http, $rootScope, $modal) {
 
     function editRow(grid, row) {
         $modal.open({
-            templateUrl : 'static/js/partials/categoryEditModal.html',
+            templateUrl : 'static/AdminFiles/js/partials/categoryEditModal.html',
             controller : [ '$http', '$modalInstance', 'grid', 'row', '$mdDialog', CATRowEditCtrl ],
             controllerAs : 'vm',
             resolve : {

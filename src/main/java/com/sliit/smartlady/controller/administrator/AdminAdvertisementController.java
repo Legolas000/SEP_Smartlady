@@ -16,7 +16,7 @@ import java.util.List;
 public class AdminAdvertisementController {
 
 	@Autowired
-	AdvertisementDAO advDAO;
+    AdvertisementDAO advDAO;
 	
 	//----------------------------Get All Advertisements----------------------------------
 	@RequestMapping(value = "admin/advertisements/", method = RequestMethod.GET)

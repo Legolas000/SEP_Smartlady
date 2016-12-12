@@ -54,7 +54,7 @@ angular.module('influx').controller('MainCtrl',['$scope', '$http', '$mdDialog', 
     }];
 
 
-    $http.get('http://localhost:1212/SmartLady/advertisements/').success(function(response) {
+    $http.get('http://localhost:1212/advertisements/').success(function(response) {
         vm.serviceGrid.data = response;
     });
 
@@ -92,7 +92,7 @@ function RowEditCtrl($http, $modalInstance, grid, row, $mdDialog) {
     var vm = this;
     vm.entity = angular.copy(row.entity);
     vm.update = update;
-    var REST_SERVICE_URI = 'http://localhost:1212/SmartLady/advertisements/';
+    var REST_SERVICE_URI = 'http://localhost:1212/advertisements/';
 
     // addEventListener('update', update, false);
     function update(event) {
