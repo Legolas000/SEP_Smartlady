@@ -100,11 +100,11 @@ angular.module('myApp')
                     $rootScope.currentUserSignedIn = true;
                     if(!LoginService.getAuthStatus()){
                         $rootScope.currentUserSignedIn = false;
-                        $location.path('/');
+                        $location.path('/login');
                     }
                 }
 
-                if(next.$$route.originalPath == '/'){
+                if(next.$$route.originalPath == '/login'){
                     $rootScope.currentUserSignedIn = false;
                     if(LoginService.getAuthStatus()){
                         $rootScope.currentUserSignedIn = true;

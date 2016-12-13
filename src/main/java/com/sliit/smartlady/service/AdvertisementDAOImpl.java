@@ -32,14 +32,14 @@ public class AdvertisementDAOImpl implements AdvertisementDAO{
 
 		if(advertisement.getId()>0)
 		{
-			String sql = "UPDATE advertisements SET url = ?, description = ?, expiryDate = ?, place = ?, payment = ?"+
+			String sql = "UPDATE advertisements SET url = ?, description = ?, expiryDate = ?, place = ?, payment = ?, status = ?, userID = ?"+
 					" WHERE id = ?";
-			jdbcTemplate.update(sql, advertisement.getUrl(), advertisement.getDescription(), advertisement.getExpiryDate(), advertisement.getPlace(), advertisement.getPayment(), advertisement.getId());
+			jdbcTemplate.update(sql, advertisement.getUrl(), advertisement.getDescription(), advertisement.getExpiryDate(), advertisement.getPlace(), advertisement.getPayment(), advertisement.getStatus(), advertisement.getUserID(), advertisement.getId());
 			return 0;
 		}
 		else {
-			String sql = "INSERT INTO advertisements(id, description, publishedDate, expiryDate, url, payment, status, place, categoryID)" + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			jdbcTemplate.update(sql, advertisement.getId(), advertisement.getDescription(), advertisement.getPublishedDate(), advertisement.getExpiryDate(), advertisement.getUrl(), advertisement.getPayment(), advertisement.getStatus(), advertisement.getPlace(), advertisement.getCategoryID()); //,Statement.RETURN_GENERATED_KEYS);
+			String sql = "INSERT INTO advertisements(id, description, publishedDate, expiryDate, url, payment, status, place, categoryID, userID)" + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			jdbcTemplate.update(sql, advertisement.getId(), advertisement.getDescription(), advertisement.getPublishedDate(), advertisement.getExpiryDate(), advertisement.getUrl(), advertisement.getPayment(), advertisement.getStatus(), advertisement.getPlace(), advertisement.getCategoryID(), advertisement.getUserID()); //,Statement.RETURN_GENERATED_KEYS);
 
 			int a = 0;
 			return a;
@@ -142,7 +142,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO{
 
 	@Override
 	public List<Advertisement> getAllAdvertisementsOrderByPrice() {
-		String sql = "SELECT * FROM advertisements WHERE status = 'Y' ORDER BY payment DESC ";
+		String sql = "SELECT * FROM advertisements WHERE status = '1' ORDER BY payment DESC ";
 		List<Advertisement> listAdvertisement = jdbcTemplate.query(sql,  new RowMapper<Advertisement>() {
 
 			@Override
@@ -170,7 +170,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO{
 
 	@Override
 	public List<Advertisement> getAllAdvertisementsByCategoryIDOrderByPrice(int categoryID) {
-		String sql = "SELECT * FROM advertisements WHERE status = 'Y' AND " +
+		String sql = "SELECT * FROM advertisements WHERE status = '1' AND " +
 				"categoryID = "+ categoryID +"  ORDER BY payment DESC ";
 		List<Advertisement> listAdvertisement = jdbcTemplate.query(sql,  new RowMapper<Advertisement>() {
 

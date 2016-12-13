@@ -2,7 +2,7 @@
 
 angular.module('myApp').controller('LoginController',
     ['$rootScope','$scope', 'LoginService','$location','$routeParams','$sce','$cookies',
-                    function($rootScope, $scope, LoginService,$location,$routeParams,$sce,$cookies) {
+        function($rootScope, $scope, LoginService,$location,$routeParams,$sce,$cookies) {
             var self = this;
 
             angular.extend($scope,{
@@ -13,14 +13,14 @@ angular.module('myApp').controller('LoginController',
                     };
 
                     LoginService.doLogin(userData)
-                    .then(
-                        function (data) {
-                            $location.path('/home');
-                        },
-                        function (errResponse) {
-                            console.error('Error: Login fail. ');
-                        }
-                    );
+                        .then(
+                            function (data) {
+                                $location.path('/home');
+                            },
+                            function (errResponse) {
+                                sweetAlert("Error!!", "Invalid user name or password!", "error");
+                            }
+                        );
 
                 },
 

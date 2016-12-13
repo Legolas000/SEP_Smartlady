@@ -90,7 +90,8 @@ angular.module('myApp')
                             .then(
                                 function(response){
                                     sweetAlert("Success!!", "Article Created Successfully!!!!", "success");
-                                    fetchAllArticles;
+                                    $location.path('/writer_articles');
+
                                 },
                                 function(errResponse){
                                     console.log('Error while create article');

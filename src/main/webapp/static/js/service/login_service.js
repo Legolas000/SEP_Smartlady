@@ -24,8 +24,10 @@ angular.module('myApp').factory('LoginService',
                     function (response) {
                         $cookies.put('auth',response.data);
                         $cookies.putObject("userAuthObj",response.data);
-                        console.log("$cookies.getObject(userAuthObj)) :> ", $cookies.getObject("userAuthObj"));
-                        console.log("$cookies.getObject(userAuthObj).fullname) :> ", $cookies.getObject("userAuthObj").fullname);
+
+                        if(!$cookies.get('auth')){
+                            sweetAlert("Error!!", "Invalid user name or password!", "error");
+                        }
 
                         deferred.resolve(response.data);
                     },
