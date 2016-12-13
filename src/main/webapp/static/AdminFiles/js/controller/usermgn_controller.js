@@ -68,7 +68,7 @@ angular.module('influx').controller('USRMainCtrl',['$scope', '$http', '$mdDialog
         enableCellEdit : false
     }];
 
-    $http.get('http://localhost:1212/admin/users/1').success(function(response) {
+    $http.get('http://localhost:1212/admin/users/4').success(function(response) {
         vm.serviceGrid.data = response;
     });
 
@@ -87,7 +87,7 @@ angular.module('influx').controller('USRMainCtrl',['$scope', '$http', '$mdDialog
             "address" : "",
             "password" : "",
             "imagePath" : "",
-            "userrole" : "1"
+            "userrole" : "4"
         };
         var rowTmp = {};
         rowTmp.entity = newService;

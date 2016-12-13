@@ -84,7 +84,7 @@ public class AdvertisementController {
 	public Object saveUserDataAndFile(@RequestParam(value = "file") MultipartFile file, HttpServletRequest request) {
 		ObjectMapper mapper = new ObjectMapper();
 
-		String uploadDirectory =  "C:\\Users\\USER\\Desktop\\GIT Local Repo\\sepii\\LastClone\\SEP_Smartlady\\src\\main\\webapp\\static\\js\\template\\advertiser-template\\advertises\\";   //"F:\\testUpload\\";
+		String uploadDirectory =  "C:\\Users\\Sinthujan\\Desktop\\SEP_BackUp\\SEP_Smartlady\\src\\main\\webapp\\static\\js\\template\\advertiser-template\\advertises\\";   //"F:\\testUpload\\";
 		String rootDirectory = "/static/js/template/advertiser-template/advertises/";
 		System.out.println("Root Directory "+rootDirectory);
 		try {

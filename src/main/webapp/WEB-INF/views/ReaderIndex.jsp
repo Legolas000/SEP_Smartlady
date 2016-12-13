@@ -4,7 +4,7 @@
 
 <!-- Mirrored from nunforest.com/hotmagazine/default/home2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 03 Sep 2016 22:27:21 GMT -->
 <head >
-	<title>Bright | Magazine</title>
+	<title>Smart Article</title>
 
 	<meta charset="utf-8">
 
@@ -64,21 +64,6 @@
 			left: 0;
 			z-index: 2000;
 		}
-
-		.advSidenav-head{
-			text-align: center;
-			color: white;
-
-		}
-
-		.advSidebar{
-
-			height: 1000px;
-			float: left;
-			background-color: #4d4d4d;
-
-		}
-
 	</style>
 
 
@@ -97,8 +82,7 @@
 					<div class="row">
 						<div class="col-md-9">
 							<ul class="top-line-list">
-								<li>
-									<span class="city-weather">London, United Kingdom</span>
+								<%--<li>
 									<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="24px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
 												<path fill="#777777" d="M208,64c8.833,0,16-7.167,16-16V16c0-8.833-7.167-16-16-16s-16,7.167-16,16v32
 													C192,56.833,199.167,64,208,64z M332.438,106.167l22.625-22.625c6.249-6.25,6.249-16.375,0-22.625
@@ -120,10 +104,8 @@
 												/>
 											</svg>
 									<span class="cel-temperature">+7</span>
-								</li>
+								</li>--%>
 								<li><span class="time-now">{{currentDate | date:'medium'}}</span></li>
-								<li><a href="#" >Contact</a></li>
-
 								<li ng-if="!currentUserSignedIn"><a href="/#/login">Log In</a></li>
 								<li ng-if="!currentUserSignedIn"><a href="/#/register">Sign Up</a></li>
 								<li ng-if="currentUserSignedIn" ng-controller="LoginController"><a href="/#/editProfile">Your Profile</a></li>
@@ -132,16 +114,7 @@
 
 							</ul>
 						</div>
-						<div class="col-md-3">
-							<ul class="social-icons">
-								<li><a target="_blank" class="facebook" href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
-								<li><a target="_blank" class="twitter" href="https://twitter.com/search?q=%23login"><i class="fa fa-twitter"></i></a></li>
-								<li><a target="_blank" class="rss" href="https://www.rssinclude.com/login"><i class="fa fa-rss"></i></a></li>
-								<li><a target="_blank" class="google" href="https://plus.google.com/collections/featured"><i class="fa fa-google-plus"></i></a></li>
-								<li><a target="_blank" class="linkedin" href="https://www.linkedin.com/uas/login"><i class="fa fa-linkedin"></i></a></li>
-								<li><a target="_blank" class="pinterest" href="https://www.pinterest.com/login/"><i class="fa fa-pinterest"></i></a></li>
-							</ul>
-						</div>
+
 					</div>
 				</div>
 			</div>
@@ -159,17 +132,15 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" ng-href="/#/home"><img src="/static/images/logo-black.png" alt=""></a>
+						<a class="navbar-brand" ng-href="/#/home"><img src="/static/images/logosa1.png" alt=""></a>
 					</div>
 
 					<div class="advertisement">
 						<div class="desktop-advert">
-							<span>Advertisement</span>
-							<img src="/static/upload/addsense/728x90-white.jpg" alt="">
+							<br><br><br><br>
 						</div>
 						<div class="tablet-advert">
-							<span>Advertisement</span>
-							<img src="/static/upload/addsense/468x60-white.jpg" alt="">
+							<br><br><br><br>
 						</div>
 					</div>
 				</div>
@@ -198,10 +169,7 @@
 							</li>
 
 						</ul>
-						<form class="navbar-form navbar-right" role="search">
-							<input type="text" id="search" name="search" placeholder="Search here">
-							<button type="submit" id="search-submit"><i class="fa fa-search"></i></button>
-						</form>
+
 					</div>
 					<!-- /.navbar-collapse -->
 				</div>
@@ -239,10 +207,10 @@
 							<div class="news-post image-post4">
 								<div class="post-gallery">
 									<img src="{{userCtrl.articlesToAdd[articleNo].coverImagePath}}" alt="">
-									<a class="category-post {{userCtrl.articlesToAdd[articleNo].categoryName | lowercase}}" href="world.html">{{userCtrl.articlesToAdd[articleNo].categoryName}}</a>
+									<a class="category-post {{userCtrl.articlesToAdd[articleNo].categoryName | lowercase}}" href="/#/readarticles/{{userCtrl.articlesToAdd[articleNo].id}}">{{userCtrl.articlesToAdd[articleNo].categoryName}}</a>
 								</div>
 								<div class="post-content">
-									<h2><a href="single-post.html">{{userCtrl.articlesToAdd[articleNo].title}}</a></h2>
+									<h2><a href="/#/readarticles/{{userCtrl.articlesToAdd[articleNo].id}}">{{userCtrl.articlesToAdd[articleNo].title}}</a></h2>
 									<ul class="post-tags">
 										<li><i class="fa fa-clock-o"></i>{{userCtrl.articlesToAdd[articleNo].publishedDate | date:'medium'}}</li>
 										<li><i class="fa fa-user"></i>by <a href="#">{{userCtrl.articlesToAdd[articleNo].writerName}}</a></li>
@@ -278,14 +246,14 @@
 						<div class="item news-post standard-post" owl-carousel-item ng-repeat="articleNo in [0,1,2,3,4,5,6,7]">
 							<div class="post-gallery">
 								<img src="{{userCtrl.articlesToAdd[articleNo].coverImagePath}}" alt="">
-								<a class="category-post {{userCtrl.articlesToAdd[articleNo].categoryName | lowercase}}" href="fashion.html">{{userCtrl.articlesToAdd[articleNo].categoryName}}</a>
+								<a class="category-post {{userCtrl.articlesToAdd[articleNo].categoryName | lowercase}}" href="/#/readarticles/{{userCtrl.articlesToAdd[articleNo].id}}">{{userCtrl.articlesToAdd[articleNo].categoryName}}</a>
 							</div>
 							<div class="post-content">
-								<h2><a href="single-post.html">{{userCtrl.articlesToAdd[articleNo].title}} </a></h2>
+								<h2><a href="/#/readarticles/{{userCtrl.articlesToAdd[articleNo].id}}">{{userCtrl.articlesToAdd[articleNo].title}} </a></h2>
 								<ul class="post-tags">
 									<li><i class="fa fa-clock-o"></i>{{userCtrl.articlesToAdd[articleNo].publishedDate | date:'medium'}}</li>
 									<li><i class="fa fa-user"></i>by <a href="#">{{userCtrl.articlesToAdd[articleNo].writerName}}</a></li>
-									<li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
+									<li><a href=""><i class="fa fa-comments-o"></i><span>23</span></a></li>
 								</ul>
 
 							</div>
@@ -464,13 +432,13 @@
 		<div class="container">
 			<div class="row">
 				<!-- --- Arham's page side nav bar ------->
-				<div class="col-sm-3 advSidebar" ng-if="userRole === 3">
+				<div class="col-sm-3 sidebar" ng-if="userRole === 3">
 					<div class="container-fluid">
-						<h3 class="advSidenav-head"><b>Advertiser's Self Blog</b></h3><br/><br/>
+						<h4 class="sidenav-head"><b>Advertiser's Self Blog</b></h4>
 						<ul class="nav nav-pills nav-stacked">
-							<li><a href="/#/assignadvertise" class="glyphicon glyphicon-upload" style="color: #ccffff; border-color: turquoise; height: 50px; "> Create New Advertisement</a></li> <br/>
-							<%--<li><a href="/#/advertiserprofile" class="glyphicon glyphicon-user" > View My Profile</a></li>--%>
-							<li><a href="/#/viewUpdateAdvertise" class="glyphicon glyphicon-upload" style="color: #ccffff; border-color: turquoise; height: 50px; font-size: medium"> My Dashboard</a></li>
+							<li><a href="/#/assignadvertise" class="glyphicon glyphicon-upload"> Assign New Addvertise</a></li>
+							<li><a href="/#/advertiserprofile" class="glyphicon glyphicon-user" > View My Profile</a></li>
+							<li><a href="/#/viewUpdateAdvertise" class="glyphicon glyphicon-upload" ng-click="adctrl.viewAdvertises()"> All My Updates</a></li>
 						</ul><br>
 					</div>
 				</div>
@@ -616,7 +584,7 @@
 
 						<div class="widget tab-posts-widget">
 
-							<ul class="nav nav-tabs" id="myTab">
+							<ul class="nav nav-tabs" id="guest-myTab">
 								<li class="active">
 									<a href=""  ng-click="showPopularTab()" data-toggle="tab">Popular</a>
 								</li>
@@ -629,7 +597,7 @@
 							</ul>
 
 							<div class="tab-content">
-								<div class="tab-pane {{isPopularTab}}" id="option1Popular" >
+								<div class="tab-pane {{isPopularTab}}" id="guest-option1Popular" >
 									<ul class="list-posts">
 										<li ng-repeat="article in userCtrl.articlesToAdd | limitTo:5">
 											<a href="/#/login"><img src="{{article.coverImagePath}}" alt=""></a>
@@ -642,7 +610,7 @@
 										</li>
 									</ul>
 								</div>
-								<div class="tab-pane {{isRecentTab}}" id="option2Recent" >
+								<div class="tab-pane {{isRecentTab}}" id="guest-option2Recent" >
 									<ul class="list-posts">
 
 										<li ng-repeat="article in userCtrl.wholeArticles | limitTo:5">
@@ -656,7 +624,7 @@
 										</li>
 									</ul>
 								</div>
-								<div class="tab-pane {{isTopReviewsTab}}" id="option3TopReviews" >
+								<div class="tab-pane {{isTopReviewsTab}}" id="guest-option3TopReviews" >
 									<ul class="list-posts">
 
 										<li ng-repeat="article in userCtrl.topRatedArticles | limitTo:5">
