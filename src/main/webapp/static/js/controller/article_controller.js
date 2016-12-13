@@ -19,10 +19,10 @@ angular.module('myApp')
             $scope.articleBody = '';
 
             /*var article = {
-                title:'',
-                catName: '',
-                description:''
-            };*/
+             title:'',
+             catName: '',
+             description:''
+             };*/
             $scope.articles = [];
             $scope.comments = [];
 
@@ -51,12 +51,25 @@ angular.module('myApp')
             $scope.getImageDetails = function(files){
                 var fd = new FormData();
                 $scope.fd = fd;
-                fd.append("file", files[0]);
+                //fd.append("file", files[0]);
+                var ext = files[0].name.match(/\.(.+)$/)[1];
+                if(angular.lowercase(ext) ==='jpg' || angular.lowercase(ext) ==='jpeg' || angular.lowercase(ext) ==='png'){
+                    self.dimensions = "true";
+                    $scope.fileValid = "valid";
+                    $scope.fileInValid = "";
+                    fd.append("file", files[0]);
+                    $scope.imageupl = fd;
+                }
+                else{
+                    $scope.fileInValid = "invalid";
+                    sweetAlert("Invalid!!", "Selected file format is wrong!", "error");
+                    something_happens();
+                }
             }
 
 
             function submitImage() {
-                var uploadUrl = "http://localhost:1212/uploadImage/";
+                var uploadUrl = "http://smartarticle.azurewebsites.net/SEPIISmartLady/uploadImage/";
                 $http.post(uploadUrl, $scope.fd, {
                     withCredentials: true,
                     headers: {'Content-Type': undefined },
@@ -70,7 +83,7 @@ angular.module('myApp')
 
                 var v = (''+$scope.title).length;
                 if(((''+$scope.title).length == 0) || ((''+$scope.articleBody).length == 0)){
-                     sweetAlert("Error", "Article Title or Body Cannot be Empty", "error");
+                    sweetAlert("Error", "Article Title or Body Cannot be Empty", "error");
 
                 }else{
                     var e = document.getElementById("categories");
@@ -145,7 +158,8 @@ angular.module('myApp')
                     function(){
                         ArticleService.deleteArticle(id);
                         swal("Deleted!", "Your imaginary file has been deleted.", "success");
-                        $scope.fetchAllArticles();
+                        //$scope.fetchAllArticles();
+                        location.reload();
 
                     });
             }
@@ -187,7 +201,7 @@ angular.module('myApp')
             $scope.openCommentsModal = function(articleId){
                 $rootScope.articleId = articleId;
                 var commentsPopup = $modal.open({
-                    templateUrl: '/static/js/template/writer-template/commentsModal.html',
+                    templateUrl: 'static/js/template/writer-template/commentsModal.html',
                     controller: 'modalController'
                 });
             };
@@ -195,7 +209,7 @@ angular.module('myApp')
             $scope.openUpdateArticleModal = function(articleId){
                 $rootScope.articleId = articleId;
                 var updatePopup = $modal.open({
-                    templateUrl: '/static/js/template/writer-template/updateArticleModal.html',
+                    templateUrl: 'static/js/template/writer-template/updateArticleModal.html',
                     controller: 'modalController'
                 });
             };
@@ -211,3 +225,8 @@ angular.module('myApp').controller('modalController', ['$scope','$modalInstance'
         //submit......
     }
 }]);
+
+
+function something_happens() {
+    document.getElementById("myFile").value = "";
+};

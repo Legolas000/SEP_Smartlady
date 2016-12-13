@@ -96,8 +96,8 @@
             </div>
             <div class="modal-footer">
                 <div class="row">
-                    <div class="col-md-4"><button class="btn btn-success btn-block" ng-click="vm.update($event)" ng-disabled="vm.entity.status == 1">Approve</button></div>
-                    <div class="col-md-4"><button class="btn btn-danger btn-block" ng-click="vm.reject($event)">Reject</button></div>
+                    <div class="col-md-4"><button class="btn btn-success btn-block" ng-click="vm.update($event)" ng-disabled="vm.entity.status == 1 || vm.entity.status == 2">Approve</button></div>
+                    <div class="col-md-4"><button class="btn btn-danger btn-block" ng-click="vm.reject($event)" ng-disabled="vm.entity.status == 1 || vm.entity.status == 2">Reject</button></div>
                     <div class="col-md-4"><button class="btn btn-warning btn-block" ng-click="$close()">Cancel</button></div>
                 </div>
             </div>

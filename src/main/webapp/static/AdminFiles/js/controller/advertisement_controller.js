@@ -33,6 +33,62 @@ angular.module('influx').controller('ADVMainCtrl',['$scope', '$http', '$mdDialog
         rowTemplate : "<div ng-dblclick=\"grid.appScope.vm.editRow(grid, row)\" ng-repeat=\"(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name\" class=\"ui-grid-cell\" ng-class=\"{ 'ui-grid-row-header-cell': col.isRowHeader }\" ui-grid-cell></div>"
     };
 
+    //For rejected
+    vm.serviceGrid2 = {
+        enableRowSelection : true,
+        enableRowHeaderSelection : false,
+        enablePagination : true,
+        paginationPageSizes: [25, 50, 75],
+        paginationPageSize: 25,
+        multiSelect : false,
+        enableSorting : true,
+        enableFiltering : true,
+        enableGridMenu : true,
+        rowTemplate : "<div ng-dblclick=\"grid.appScope.vm.editRow(grid, row)\" ng-repeat=\"(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name\" class=\"ui-grid-cell\" ng-class=\"{ 'ui-grid-row-header-cell': col.isRowHeader }\" ui-grid-cell></div>"
+    };
+
+    vm.serviceGrid.columnDefs = [ {
+        field : 'id',
+        displayName : 'ID',
+        enableSorting : true,
+        type : 'number',
+        enableCellEdit : false,
+        width : 60,
+        sort : {
+            direction : uiGridConstants.ASC,
+            priority : 1,
+        },
+    }, {
+        field : 'description',
+        displayName : 'Description',
+        enableSorting : true,
+        enableCellEdit : false
+    }, {
+        field : 'url',
+        displayName : 'URL',
+        enableSorting : true,
+        enableCellEdit : false
+    }, {
+        field : 'status',
+        displayName : 'Status',
+        enableSorting : true,
+        enableCellEdit : false
+    }, {
+        field : 'payment',
+        displayName : 'Payment',
+        enableSorting : true,
+        enableCellEdit : false
+    }, {
+        field : 'publishedDate',
+        displayName : 'Published Date',
+        enableSorting : true,
+        enableCellEdit : false
+    }, {
+        field : 'expiryDate',
+        displayName : 'Expiry Date',
+        enableSorting : true,
+        enableCellEdit : false
+    }];
 
     //For approved list
     vm.serviceGrid1.columnDefs = [ {
@@ -78,7 +134,7 @@ angular.module('influx').controller('ADVMainCtrl',['$scope', '$http', '$mdDialog
         enableCellEdit : false
     }];
 
-    vm.serviceGrid.columnDefs = [ {
+    vm.serviceGrid2.columnDefs = [ {
         field : 'id',
         displayName : 'ID',
         enableSorting : true,
@@ -122,9 +178,10 @@ angular.module('influx').controller('ADVMainCtrl',['$scope', '$http', '$mdDialog
     }];
 
 
+
     getNADVAppList();
     getADVAppList();
-
+    getRADVAppList();
 
     $scope.getNADVAppList = getNADVAppList;
     function getNADVAppList() {
@@ -137,6 +194,13 @@ angular.module('influx').controller('ADVMainCtrl',['$scope', '$http', '$mdDialog
     function getADVAppList() {
         $http.get('http://localhost:1212/admin/advertisements/1').success(function (response) {
             vm.serviceGrid1.data = response;
+        });
+    }
+
+    $scope.getRADVAppList = getRADVAppList;
+    function getRADVAppList() {
+        $http.get('http://localhost:1212/admin/advertisements/2').success(function (response) {
+            vm.serviceGrid2.data = response;
         });
     }
 

@@ -28,6 +28,20 @@ angular.module('influx').controller('ARTMainCtrl',['$scope', '$http', '$mdDialog
         enableGridMenu : true,
         rowTemplate : "<div ng-dblclick=\"grid.appScope.vm.editRow(grid, row)\" ng-repeat=\"(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name\" class=\"ui-grid-cell\" ng-class=\"{ 'ui-grid-row-header-cell': col.isRowHeader }\" ui-grid-cell></div>"
     };
+
+
+    vm.serviceGrid2 = {
+        enableRowSelection : true,
+        enableRowHeaderSelection : false,
+        enablePagination : true,
+        paginationPageSizes: [25, 50, 75],
+        paginationPageSize: 25,
+        multiSelect : false,
+        enableSorting : true,
+        enableFiltering : true,
+        enableGridMenu : true,
+        rowTemplate : "<div ng-dblclick=\"grid.appScope.vm.editRow(grid, row)\" ng-repeat=\"(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name\" class=\"ui-grid-cell\" ng-class=\"{ 'ui-grid-row-header-cell': col.isRowHeader }\" ui-grid-cell></div>"
+    };
     //Removed Status column from both
     /*
          , {
@@ -78,8 +92,30 @@ angular.module('influx').controller('ARTMainCtrl',['$scope', '$http', '$mdDialog
         enableCellEdit : false
     }];
 
+    vm.serviceGrid2.columnDefs = [ {
+        field : 'id',
+        displayName : 'id',
+        enableSorting : true,
+        type : 'number',
+        enableCellEdit : false,
+        width : 60,
+        sort : {
+            direction : uiGridConstants.ASC,
+            priority : 1,
+        },
+    }, {
+        field : 'title',
+        enableSorting : true,
+        enableCellEdit : false
+    }, {
+        field : 'description',
+        enableSorting : true,
+        enableCellEdit : false
+    }];
+
     getNAPList();
     getAPList();
+    getRAPList();
 
     $scope.getNAPList = getNAPList;
     function getNAPList()
@@ -98,6 +134,16 @@ angular.module('influx').controller('ARTMainCtrl',['$scope', '$http', '$mdDialog
             vm.serviceGrid1.data = response;
         });
     }
+
+    $scope.getRAPList = getRAPList;
+    function getRAPList()
+    {
+        //For approved list.
+        $http.get('http://localhost:1212/admin/articles/2').success(function(response) {
+            vm.serviceGrid2.data = response;
+        });
+    }
+
     $scope.addRow = addRow;
     function addRow(event) {
         var newService = {

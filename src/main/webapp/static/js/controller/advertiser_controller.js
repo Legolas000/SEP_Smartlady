@@ -23,7 +23,7 @@ angular.module('myApp').controller('AdvertiserController',
 
             self.advertise={
                 id:null,
-                url:'http://www.google.com',
+                url:'',
                 description:'',
                 time:'For 2 Weeks',
                 publishedDate:'',
