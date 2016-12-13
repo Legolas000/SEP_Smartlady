@@ -49,7 +49,7 @@
                                                     <label style="color:#ff9900; ">{{item.status}}</label> <br/>
                                                     <label style="color:#ff9900">Expiry Date {{item.exdate}}</label>
 
-                                                </b>
+                                                </b><br/><br/><br/><br/>
                                             </div>
                                         </div>
 
@@ -58,7 +58,7 @@
                                             <div class="col-md-4">
                                                 <img ng-src="{{item.imagePath}}" style="height: 130px; width: 110px; alignment: right" class="img-rounded" />
                                             </div>
-                                            <div class="col-md-8 text-center">
+                                            <div class="col-md-8 text-center" style="margin-top: 35px">
                                                 <b>
                                                     <label style="color:red">{{item.status}}</label><br/>
                                                     <label style="color:red">Expired Date {{item.exdate}}</label>

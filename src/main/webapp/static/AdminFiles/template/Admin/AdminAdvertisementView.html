@@ -1,0 +1,70 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <section class="box ">
+        <header class="panel_header">
+            <h2 class="title pull-left">Advertisement View</h2>
+        </header>
+        <div class="content-body">
+            <body ng-app="influx" id="dialogContainer">
+                <div ng-controller="ADVMainCtrl as vm">
+                    <div ng-cloak>
+                        <md-content>
+                            <md-tabs md-dynamic-height md-border-bottom>
+                                <md-tab label="Approval Requests">
+                                    <md-content class="md-padding">
+                                        <div style="height: 500px;" id="serviceGrid"
+                                             ui-grid-move-columns
+                                             ui-grid-selection
+                                             ui-grid-resize-columns
+
+                                             ui-grid-pinning
+                                             ui-grid-exporter
+                                             ui-grid-auto-resize
+                                             ui-grid-pagination
+
+                                             ui-grid-edit
+                                             ui-grid="vm.serviceGrid" class="influxGrid">
+                                        </div>
+                                    </md-content>
+                                </md-tab>
+                                <md-tab label="Approved List">
+                                    <md-content class="md-padding">
+                                        <div style="height: 500px;" id="serviceGrid2"
+                                             ui-grid-move-columns
+                                             ui-grid-selection
+                                             ui-grid-resize-columns
+
+                                             ui-grid-pinning
+                                             ui-grid-exporter
+                                             ui-grid-auto-resize
+                                             ui-grid-pagination
+
+                                             ui-grid-edit
+                                             ui-grid="vm.serviceGrid1" class="influxGrid">
+                                        </div>
+                                    </md-content>
+                                </md-tab>
+                                <md-tab label="Rejected List">
+                                    <md-content class="md-padding">
+                                        <div style="height: 500px;" id="serviceGrid3"
+                                             ui-grid-move-columns
+                                             ui-grid-selection
+                                             ui-grid-resize-columns
+
+                                             ui-grid-pinning
+                                             ui-grid-exporter
+                                             ui-grid-auto-resize
+                                             ui-grid-pagination
+
+                                             ui-grid-edit
+                                             ui-grid="vm.serviceGrid2" class="influxGrid">
+                                        </div>
+                                    </md-content>
+                                </md-tab>
+                            </md-tabs>
+                        </md-content>
+                    </div>
+                </div>
+            </body>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,108 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" aria-hidden="true" ng-click="$close()">×</button>
+            <h4 class="modal-title">Advertisement View Details</h4>
+        </div>
+        <form name="serviceForm">
+            <div class="modal-body">
+                <div ng-cloak>
+                    <md-content>
+                        <md-tabs md-dynamic-height md-border-bottom>
+                            <md-tab label="Advertisement Details">
+                                <md-content class="md-padding">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="field-1" class="control-label">ID</label>
+                                                <input type="text" class="form-control" id="field-1" placeholder="0" value="{{vm.entity.id}}" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="field-2" class="control-label">URL</label>
+                                                <input type="text" class="form-control" id="field-2" placeholder="----" ng-model="vm.entity.url"  disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="field-3" class="control-label">Status</label>
+                                                <input type="text" class="form-control" id="field-3" placeholder="0" ng-model="vm.entity.status" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="field-5" class="control-label">Payment</label>
+                                                <input type="text" class="form-control" id="field-5" placeholder="0" ng-model="vm.entity.payment" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="field-6" class="control-label">Published Date</label>
+                                                <input type="text" class="form-control" id="field-6" placeholder="0" value="{{vm.entity.publishedDate}}" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="field-7" class="control-label">Expiry Date</label>
+                                                <input type="text" class="form-control" id="field-7" placeholder="----" ng-model="vm.entity.expiryDate"  disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </md-content>
+                            </md-tab>
+
+                            <md-tab label="Advertiser Details">
+                                <md-content class="md-padding">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="field-8" class="control-label">Full Name</label>
+                                                    <input type="text" class="form-control" id="field-8" placeholder="0" value="{{vm.entity.user.fullname}}" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="field-9" class="control-label">Email</label>
+                                                    <input type="text" class="form-control" id="field-9" placeholder="0" value="{{vm.entity.user.email}}" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="field-10" class="control-label">Address</label>
+                                                <input type="text" class="form-control" id="field-10" placeholder="0" value="{{vm.entity.user.address}}" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="field-11" class="control-label">User Description</label>
+                                                <textarea type="text" class="form-control" rows="5" id="field-11" disabled>{{vm.entity.user.userdescription}}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </md-content>
+                            </md-tab>
+                        </md-tabs>
+                    </md-content>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-md-4"><button class="btn btn-success btn-block" ng-click="vm.update($event)" ng-disabled="vm.entity.status == 1 || vm.entity.status == 2">Approve</button></div>
+                    <div class="col-md-4"><button class="btn btn-danger btn-block" ng-click="vm.reject($event)" ng-disabled="vm.entity.status == 1 || vm.entity.status == 2">Reject</button></div>
+                    <div class="col-md-4"><button class="btn btn-warning btn-block" ng-click="$close()">Cancel</button></div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

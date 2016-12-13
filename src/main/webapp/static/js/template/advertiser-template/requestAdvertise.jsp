@@ -46,16 +46,16 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label" >Description about advertise :</label>
-                                <textarea class="form-control textarea" name="description" type="text" ng-model="adctrl.advertise.description" style="height: 100px" required ng-minlength="15" ng-maxlength="70"></textarea>
+                                <textarea class="form-control textarea" name="description" type="text" ng-model="adctrl.advertise.description" style="height: 100px" required ng-minlength="15" ng-maxlength="150"></textarea>
                                 <div ng-show="advertiseForm.description.$touched && advertiseForm.description.$invalid" class="col-md-12 col-sm-12 col-xs-12 ">
                                     <span ng-show="advertiseForm.description.$error.required">
                                     <a class="errorfont">Description field is required</a> <br/>
                                     </span>
-                                    <a class="errorfont">Description should be greater than 15 or less than 70 letters</a>
+                                    <a class="errorfont">Description should be greater than 15 or less than 150 letters</a>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label" >Time Period for Avdertisement :</label>
+                                <label class="control-label" >Time Period for Advertisement :</label>
                                 <select class="form-control" ng-model="adctrl.advertise.time" onchange="angular.element(this).scope().fetchAllPayments()">
                                     <option>For 2 Weeks</option>
                                     <option>For 1 Month</option>

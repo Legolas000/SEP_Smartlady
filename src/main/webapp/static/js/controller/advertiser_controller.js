@@ -7,7 +7,7 @@
 angular.module('myApp').controller('AdvertiserController',
     ['$scope', 'AdvertiserService','$rootScope','$http','$window','$modal','$timeout',
         function($scope,AdvertiserService,$rootScope,$http,$window,$modal,$timeout){
-
+            var advertiserId = $rootScope.user.id;
             //fetchAllAdvertise();
 
             var self = this;
@@ -23,7 +23,7 @@ angular.module('myApp').controller('AdvertiserController',
 
             self.advertise={
                 id:null,
-                url:'http://www.google.com',
+                url:'',
                 description:'',
                 time:'For 2 Weeks',
                 publishedDate:'',
@@ -31,7 +31,8 @@ angular.module('myApp').controller('AdvertiserController',
                 place:'Middle of right Side',
                 payment:'',
                 status:0,
-                categoryID:''
+                categoryID:'',
+                userID:advertiserId
             };
 
             $scope.myFile = '';
@@ -39,6 +40,7 @@ angular.module('myApp').controller('AdvertiserController',
             self.url2 = "www.youtube.com";
             self.extendTime="For 2 Weeks";
             self.updatePayment="";
+            self.status = 0;
 
             self.values = {
                 id:'',
@@ -114,7 +116,7 @@ angular.module('myApp').controller('AdvertiserController',
 
             function submitUser() {
                 var file = self.fileModel;
-                var uploadUrl = "http://localhost:8080/user/saveUserDataAndFile";
+                var uploadUrl = "http://localhost:1212/user/saveUserDataAndFile";
                 var fd = new FormData();
                 fd.append('file', file);
                 var data = {
@@ -244,7 +246,7 @@ angular.module('myApp').controller('AdvertiserController',
             }
 
             function submitImage() {
-                var uploadUrl = "http://localhost:8080/user/saveUserDataAndFile";
+                var uploadUrl = "http://localhost:1212/user/saveUserDataAndFile";
                 $http.post(uploadUrl, $scope.fd, {
                     withCredentials: true,
                     headers: {'Content-Type': undefined },
@@ -425,7 +427,8 @@ angular.module('myApp').controller('AdvertiserController',
                     description : self.updateDescription,
                     expiryDate : self.updatedExpiredDate,
                     place : self.updatePlace,
-                    payment : self.updatePayment
+                    payment : self.updatePayment,
+                    status : self.status
                 };
                 AdvertiserService.updateAdvertise(advertise)
                     .then(

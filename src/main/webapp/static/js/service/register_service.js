@@ -6,7 +6,7 @@
 angular.module('myApp').factory('RegisterService',
     ['$http', '$q','$cookies','$rootScope', function($http, $q, $cookies,$rootScope){
 
-        var REST_SERVICE_URI = 'http://localhost:8080/';
+        var REST_SERVICE_URI = 'http://localhost:1212/';
 
         var factory = {
             doRegister : doRegister

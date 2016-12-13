@@ -1,0 +1,106 @@
+<style>
+    textarea{
+        resize: none;
+    }
+</style>
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" aria-hidden="true" ng-click="$close()">×</button>
+            <h4 class="modal-title">Sub - Category View Details</h4>
+        </div>
+        <form name="serviceForm">
+            <div class="modal-body">
+                <div ng-cloak>
+                    <md-content>
+                        <md-tabs md-dynamic-height md-border-bottom>
+                            <md-tab label="Sub-Category Details">
+                                <md-content class="md-padding">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="field-1" class="control-label">ID</label>
+                                                <input type="text" class="form-control" id="field-1" placeholder="0" value="{{vm.entity.id}}" disabled>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="field-2" class="control-label">Category</label>
+                                                <select ng-model="vm.entity.catID" class="form-control" id="field-2" name="catID" required >
+                                                    <option value="">---Please select---</option>
+                                                    <option ng-repeat="catFils in vm.entity.downloadCtegert" ng-selected="vm.entity.catID == catFils.id" value = "{{catFils.id}}">{{catFils.catName}} ></option>
+                                                </select>
+                                                <span class="error" ng-show="serviceForm.catID.$dirty && serviceForm.catID.$invalid">Please select a category</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="field-4" class="control-label">Sub-Category Name</label>
+                                                <input type="text" class="form-control" id="field-4" placeholder="Give a sub category name...." ng-model="vm.entity.subCatName" name="subCatName" required>
+                                                <span ng-show="serviceForm.subCatName.$error.required" class="error">Please enter something!</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class = "row">
+                                        <div class="col-md-12">
+
+                                            <div class="form-group">
+                                                <label for="field-5" class="control-label">Sub-Category Description</label>
+                                                <textarea class="form-control" id="field-5" placeholder="Give a short desciption..." name="subCatDesc" ng-model="vm.entity.subCatDescription" required></textarea>
+                                                <span ng-show="serviceForm.subCatDesc.$error.required" class="error">Please enter something!</span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </md-content>
+                            </md-tab>
+                            <div ng-if="vm.entity.category.id">
+                                <md-tab label="Category Details">
+                                    <md-content class="md-padding">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="field-6" class="control-label">Category ID</label>
+                                                        <input type="text" class="form-control" id="field-6"  value="{{vm.entity.category.id}}" disabled>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="field-7" class="control-label">Category Name</label>
+                                                        <input type="text" class="form-control" id="field-7" placeholder="0" value="{{vm.entity.category.catName}}" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="field-8" class="control-label">Category Description</label>
+                                                        <textarea type="text" class="form-control" id="field-8" disabled>{{vm.entity.category.catDescription}}</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </md-content>
+                                </md-tab>
+                            </div>
+                        </md-tabs>
+                    </md-content>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-md-4"><button class="btn btn-success btn-block" ng-click="vm.save()" ng-disabled = "serviceForm.$invalid">Save</button></div>
+                    <div class="col-md-4"><button class="btn btn-danger btn-block" ng-click="vm.remove()" ng-disabled = "serviceForm.$invalid">Delete</button></div>
+                    <div class="col-md-4"><button class="btn btn-warning btn-block" ng-click="$close()">Cancel</button></div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

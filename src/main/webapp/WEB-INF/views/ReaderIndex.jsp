@@ -73,7 +73,7 @@
 
 		.advSidebar{
 
-			height: 1300px;
+			height: 1000px;
 			float: left;
 			background-color: #4d4d4d;
 
@@ -468,9 +468,9 @@
 					<div class="container-fluid">
 						<h3 class="advSidenav-head"><b>Advertiser's Self Blog</b></h3><br/><br/>
 						<ul class="nav nav-pills nav-stacked">
-							<li><a href="/#/assignadvertise" class="glyphicon glyphicon-upload" style="color: #ccffff; border-color: turquoise; height: 50px; "> Assign New Addvertise</a></li> <br/>
+							<li><a href="/#/assignadvertise" class="glyphicon glyphicon-upload" style="color: #ccffff; border-color: turquoise; height: 50px; "> Create New Advertisement</a></li> <br/>
 							<%--<li><a href="/#/advertiserprofile" class="glyphicon glyphicon-user" > View My Profile</a></li>--%>
-							<li><a href="/#/viewUpdateAdvertise" class="glyphicon glyphicon-upload" style="color: #ccffff; border-color: turquoise; height: 50px; font-size: medium"> All My Updates</a></li>
+							<li><a href="/#/viewUpdateAdvertise" class="glyphicon glyphicon-upload" style="color: #ccffff; border-color: turquoise; height: 50px; font-size: medium"> My Dashboard</a></li>
 						</ul><br>
 					</div>
 				</div>
