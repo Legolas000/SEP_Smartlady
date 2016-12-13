@@ -9,7 +9,7 @@ angular.module('influx').controller('LoginController',['$rootScope','$scope', 'L
                         email : $scope.email,
                         password : $scope.password
                     };
-
+                    //Added changes to login
                     LoginService.doLogin(userData)
                     .then(
                         function (data) {
