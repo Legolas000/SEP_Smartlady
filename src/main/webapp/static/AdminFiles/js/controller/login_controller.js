@@ -14,7 +14,7 @@ angular.module('influx').controller('LoginController',['$rootScope','$scope', 'L
                     .then(
                         function (data) {
                             //$location.path('/adboard');
-                            if(data.userrole != 1)
+                            if(data.userrole != 4)
                             {
                                 $mdDialog.show(
                                     $mdDialog.alert()
@@ -30,7 +30,7 @@ angular.module('influx').controller('LoginController',['$rootScope','$scope', 'L
                             }
                             else
                             {
-                                $window.location.href = '/admin'
+                                $window.location.href = 'admin#/gaview2'
                                 console.log('You passed',data);
                             }
                         },
@@ -54,7 +54,7 @@ angular.module('influx').controller('LoginController',['$rootScope','$scope', 'L
 
                 doLogOut : function () {
                     LoginService.doLogOut();
-                    $location.path('/adlog');
+                    $location.path('adlog');
                 }
             });
 
