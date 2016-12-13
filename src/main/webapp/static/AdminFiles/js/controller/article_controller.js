@@ -119,7 +119,7 @@ angular.module('influx').controller('ARTMainCtrl',['$scope', '$http', '$mdDialog
 
 }]);
 
-function ARTRowEditCtrl($http, $modalInstance, grid, row, $mdDialog) {
+function ARTRowEditCtrl($http, $modalInstance, grid, row, $mdDialog, $scope) {
     var vm = this;
     vm.entity = angular.copy(row.entity);
     vm.update = update;

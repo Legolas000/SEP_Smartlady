@@ -170,7 +170,7 @@ angular.module('influx').controller('ADVMainCtrl',['$scope', '$http', '$mdDialog
 
 
 // TestTabApp.controller('RowEditCtrl',['$scope', '$http', '$mdDialog', '$modalInstance', 'grid', 'row',function($scope, $http, $mdDialog,$modalInstance, grid, row) {
-function ADVRowEditCtrl($http, $modalInstance, grid, row, $mdDialog) {
+function ADVRowEditCtrl($http, $modalInstance, grid, row, $mdDialog, $rootScope) {
     var vm = this;
     vm.entity = angular.copy(row.entity);
     vm.update = update;
@@ -236,8 +236,8 @@ function ADVRowEditCtrl($http, $modalInstance, grid, row, $mdDialog) {
             console.log("No was triggered.");
         });
 
-        getNADVAppList();
-        getADVAppList();
+        $scope.getNADVAppList();
+        $scope.getADVAppList();
 
     }
 
@@ -300,8 +300,8 @@ function ADVRowEditCtrl($http, $modalInstance, grid, row, $mdDialog) {
             console.log("No was triggered.");
         });
 
-        getNADVAppList();
-        getADVAppList();
+        $scope.getNADVAppList();
+        $scope.getADVAppList();
     }
 
 // }]);

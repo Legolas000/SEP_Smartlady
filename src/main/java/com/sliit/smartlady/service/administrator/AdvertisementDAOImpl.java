@@ -90,7 +90,7 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
 
 	@Override
 	public Advertisement findByID(int advID) {
-		String sql = "SELECT * FROM advertisements WHERE advID = " + advID;
+		String sql = "SELECT * FROM advertisements WHERE id = " + advID;
 
 		 return jdbcTemplate.query(sql, new ResultSetExtractor<Advertisement>() {
 			 
@@ -99,10 +99,10 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
 		                DataAccessException {
 		            if (rs.next()) {
 		            	Advertisement advertisement = new Advertisement();
-		            	advertisement.setID((rs.getInt("advID")));
+		            	advertisement.setID((rs.getInt("id")));
 		            	advertisement.setDescription(rs.getString("description"));
-		            	advertisement.setPublishedDate(rs.getString("published_date"));
-		            	advertisement.setExpiryDate(rs.getString("expiry_date"));
+		            	advertisement.setPublishedDate(rs.getString("publishedDate"));
+		            	advertisement.setExpiryDate(rs.getString("expiryDate"));
 		            	advertisement.setPayment(rs.getFloat("payment"));
 		            	advertisement.setURL(rs.getString("url"));
 		            	advertisement.setStatus(rs.getString("status"));
@@ -117,14 +117,14 @@ public class AdvertisementDAOImpl implements AdvertisementDAO {
 	@Override
 	public void updateApproval(Advertisement advertisement) {
 		String sql = "UPDATE advertisements SET status = '1' "+
-				" WHERE advID = ?";
+				" WHERE id = ?";
 		jdbcTemplate.update(sql, advertisement.getID());
 	}
 	
 	@Override
 	public void rejectApproval(Advertisement advertisement) {
 		String sql = "UPDATE advertisements SET status = '2' "+
-				" WHERE advID = ?";
+				" WHERE id = ?";
 		jdbcTemplate.update(sql, advertisement.getID());
 	}
 

@@ -32,7 +32,7 @@ public class CategoryDAOImpl implements CategoryDAO{
 		}
 		else
 		{
-			String sql = "INSERT INTO categories(catName,catDescription) VALUES(?, ?)";
+			String sql = "INSERT INTO categories(catName,catDescription,noOfHits) VALUES(?, ?, 0)";
 			status = jdbcTemplate.update(sql, category.getcatName(), category.getcatDescription());
 		}		
 	}
