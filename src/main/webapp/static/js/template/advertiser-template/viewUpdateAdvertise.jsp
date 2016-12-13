@@ -8,7 +8,7 @@
 
 <link href="/static/css/magazine-css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen"/>
 
-<div class="section" ng-init="viewAdvertises()">
+<div class="section" ng-init="viewAdvertises()" ng-controller="AdvertiserController as adctrl">
     <div class="container">
         <div class="row">
             <div class="col-md-9" style="text-align: left">
