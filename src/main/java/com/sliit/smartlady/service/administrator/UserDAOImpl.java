@@ -217,9 +217,10 @@ public class UserDAOImpl implements UserDAO {
 	{ 
 		User usr =  getMaxId();
 		System.out.println("THE MAX ID IS : " + usr.getId());
+        String imPath = "/static/AdminFiles/images/profile/US_01.png";
 		int advID = usr.getId();
         String sql = "UPDATE user SET imagePath = ?" + " WHERE id = ?";
-        jdbcTemplate.update(sql, imagePath , advID);
+        jdbcTemplate.update(sql, imPath , advID);
 		
 	}
 

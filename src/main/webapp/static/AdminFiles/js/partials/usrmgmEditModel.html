@@ -36,8 +36,9 @@
                         <div class="form-group">
                             <label for="field-3" class="control-label">E-Mail</label>
 
-                            <input type="text" class="form-control" id="field-3" placeholder="" ng-model="vm.entity.email" name = "email" required>
+                            <input type="email" class="form-control" id="field-3" placeholder="" ng-model="vm.entity.email" name = "email" required>
                             <span ng-show="serviceForm.email.$error.required" class="error">Please enter something!</span>
+                            <span ng-show="serviceForm.email.$dirty " class="error">Please enter valid email!</span>
                             <!--<span class="error" ng-show="serviceForm.Iemail.$error.email">Not valid email!</span>-->
                         </div>
 
@@ -81,12 +82,8 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <!-- Bring image here-->
-                        <!--<label for="field-7" class="control-label">Image Path</label>-->
-
-                        <!--<input type="text" class="form-control" id="field-7" placeholder="&#45;&#45;&#45;&#45;" ng-model="vm.entity.imagePath" name="imagePath" required>-->
-                        <!--<img ng-src="{{vm.entity.imagePath}}" alt="{{vm.entity.imagePath}}" id="field-7"  name="imagePath">-->
-                        <!--<span ng-show="serviceForm.imagePath.$error.required" class="error">Please input the image!</span>-->
+                        <label for="field-10" class="form-control">Image</label>
+                        <img ng-src="{{vm.entity.imagePath}}" width="100" height="100" ng-show="vm.entity.imagePath" id="field-10"/>
                         <input type="file" id="file" ng-model="myFile" accept="image/*" name="advertiseImage" valid-file required onchange="angular.element(this).scope().uploadFile(this.files);"/>
                     </div>
                 </div>

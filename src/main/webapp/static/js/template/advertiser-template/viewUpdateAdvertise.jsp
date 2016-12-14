@@ -78,7 +78,7 @@
                                             </div>
                                             <div class="col-md-8 text-center">
                                                 <b>
-                                                    <label style="color:#cc0000; font-style: oblique; text-shadow: black; font-size: 25px; text-align: left; margin-top: 40px"><b>{{item.status}}</b></label>
+                                                    <label style="color:#cc0000; font-style: oblique; text-shadow: black; font-size: 25px; text-align: left; margin-top: 45px"><b>{{item.status}}</b></label>
                                                     <%--<label style="color:#ff9900">Expired Date {{item.exdate}}</label>--%>
                                                 </b>
                                             </div>

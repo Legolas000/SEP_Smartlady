@@ -28,13 +28,27 @@
 	<link href="/static/css/writer-css/bootstrap.min.css" rel="stylesheet">
 	<%--<link href="/static/css/writer-css/logo-nav.css" rel="stylesheet">--%>
 	<link href="/static/css/writer-css/sweetAlert/sweetalert.css" rel="stylesheet">
-
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<%--End writer css--%>
 
 	<%--<link href="/static/css/magazine-css/sign-style.css" rel="stylesheet" type="text/css" media="screen"/>
     <link href="/static/css/magazine-css/sign-form-elements.css" rel="stylesheet" type="text/css" media="screen"/>--%>
 
+<style>
+		.advSidenav-head{
+			text-align: center;
+			color: white;
 
+		}
+
+		.advSidebar{
+
+			height: 1000px;
+			float: left;
+			background-color: #4d4d4d;
+
+		}
+</style>
 
 
 
@@ -114,7 +128,16 @@
 
 							</ul>
 						</div>
-
+						<div class="col-md-3">
+							<ul class="social-icons">
+								<li><a target="_blank" class="facebook" href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
+								<li><a target="_blank" class="twitter" href="https://twitter.com/search?q=%23login"><i class="fa fa-twitter"></i></a></li>
+								<li><a target="_blank" class="rss" href="https://www.rssinclude.com/login"><i class="fa fa-rss"></i></a></li>
+								<li><a target="_blank" class="google" href="https://plus.google.com/collections/featured"><i class="fa fa-google-plus"></i></a></li>
+								<li><a target="_blank" class="linkedin" href="https://www.linkedin.com/uas/login"><i class="fa fa-linkedin"></i></a></li>
+								<li><a target="_blank" class="pinterest" href="https://www.pinterest.com/login/"><i class="fa fa-pinterest"></i></a></li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -169,7 +192,10 @@
 							</li>
 
 						</ul>
-
+						<%--<form class="navbar-form navbar-right" role="search">--%>
+							<%--<input type="text" id="search" name="search" placeholder="Search here">--%>
+							<%--<button type="submit" id="search-submit"><i class="fa fa-search"></i></button>--%>
+						<%--</form>--%>
 					</div>
 					<!-- /.navbar-collapse -->
 				</div>
@@ -432,13 +458,14 @@
 		<div class="container">
 			<div class="row">
 				<!-- --- Arham's page side nav bar ------->
-				<div class="col-sm-3 sidebar" ng-if="userRole === 3">
+				<div class="col-sm-3 advSidebar" ng-if="userRole === 3">
 					<div class="container-fluid">
-						<h4 class="sidenav-head"><b>Advertiser's Self Blog</b></h4>
+						<h3 class="advSidenav-head"><b>Advertiser's Self Blog</b></h3><br/><br/>
 						<ul class="nav nav-pills nav-stacked">
-							<li><a href="/#/assignadvertise" class="glyphicon glyphicon-upload"> Assign New Addvertise</a></li>
-							<li><a href="/#/advertiserprofile" class="glyphicon glyphicon-user" > View My Profile</a></li>
-							<li><a href="/#/viewUpdateAdvertise" class="glyphicon glyphicon-upload" ng-click="adctrl.viewAdvertises()"> All My Updates</a></li>
+							<%--<li><a href="/#/advertiserprofile" class="glyphicon glyphicon-user" > View My Profile</a></li>--%>
+							<li><a href="/#/viewUpdateAdvertise" class="glyphicon glyphicon-home" style="color: #ccffff; border-color: turquoise; height: 50px; font-size: medium"> My Dashboard</a></li>
+							<li><a href="/#/assignadvertise" class="glyphicon glyphicon-upload" style="color: #ccffff; border-color: turquoise; height: 50px; "> Create New Advertisement</a></li> <br/>
+
 						</ul><br>
 					</div>
 				</div>

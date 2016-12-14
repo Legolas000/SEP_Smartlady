@@ -37,7 +37,7 @@
                             <div class="form-group">
                                 <label class="control-label" >URL of Advertise :</label>
                                 <input class="form-control" name="aurl" type="url" ng-model="adctrl.advertise.url" required class="glyphicon glyphicon-ok">
-                                <div ng-show="advertiseForm.aurl.$touched && advertiseForm.aurl.$invalid" class="col-md-12 col-sm-12 col-xs-12 ">
+                                <div ng-show="advertiseForm.aurl.$touched && advertiseForm.aurl.$invalid && variableValid" class="col-md-12 col-sm-12 col-xs-12 ">
                                     <span ng-show="advertiseForm.aurl.$error.required">
                                     <a class="errorfont">URL field is required</a> <br/>
                                     </span>
@@ -47,7 +47,7 @@
                             <div class="form-group">
                                 <label class="control-label" >Description about advertise :</label>
                                 <textarea class="form-control textarea" name="description" type="text" ng-model="adctrl.advertise.description" style="height: 100px" required ng-minlength="15" ng-maxlength="150"></textarea>
-                                <div ng-show="advertiseForm.description.$touched && advertiseForm.description.$invalid" class="col-md-12 col-sm-12 col-xs-12 ">
+                                <div ng-show="advertiseForm.description.$touched && advertiseForm.description.$invalid && variableValid" class="col-md-12 col-sm-12 col-xs-12 ">
                                     <span ng-show="advertiseForm.description.$error.required">
                                     <a class="errorfont">Description field is required</a> <br/>
                                     </span>
@@ -76,7 +76,7 @@
                             <div class="form-group">
                                 <label class="control-label" >Payment for Advertisement :</label>
                                 <%--<input class="form-control" type="text">--%>
-                                <label class="control-label"  ng-model="adctrl.advertise.payment"> Rs. {{adctrl.advertise.payment}}</label>
+                                <label class="control-label"  ng-model="adctrl.advertise.payment"> Rs. {{adctrl.advertise.payment}}.0</label>
                             </div> <br/>
 
                             <div class="form-group">

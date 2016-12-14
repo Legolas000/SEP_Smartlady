@@ -121,8 +121,6 @@ function USRRowEditCtrl($http, $modalInstance, grid, row, $mdDialog , $scope)
                 .then(
                     function (response) {
 //                                    deferred.resolve(response.data);
-
-                        $scope.submitImage();
                         console.log('This has been posted successfully',response);
                         $mdDialog.show(
                             $mdDialog.alert()
@@ -134,6 +132,7 @@ function USRRowEditCtrl($http, $modalInstance, grid, row, $mdDialog , $scope)
                                 .ok('OK')
                             //.targetEvent(ev)
                         );
+                        $scope.submitImage();
                     },
                     function(errResponse){
                         console.error('Error while creating user', errResponse);
@@ -240,7 +239,7 @@ function USRRowEditCtrl($http, $modalInstance, grid, row, $mdDialog , $scope)
         var fd = new FormData();
         $scope.fd = fd;
         fd.append("file", files[0]);
-        alert("It loads");
+        //alert("It loads");
         //$scope.submitImage();
     }
 

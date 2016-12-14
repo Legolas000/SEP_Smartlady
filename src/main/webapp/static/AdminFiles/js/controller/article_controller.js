@@ -228,6 +228,7 @@ function ARTRowEditCtrl($http, $modalInstance, grid, row, $mdDialog, $scope) {
                 $scope.getNAPList();
             }
             // $modalInstance.close(row.entity);
+            location.reload();
 
         }, function () {
             console.log("No was triggered.");
@@ -286,11 +287,11 @@ function ARTRowEditCtrl($http, $modalInstance, grid, row, $mdDialog, $scope) {
                             );
                         }
                     );
-                $scope.getAPList();
-                $scope.getNAPList();
+                // $scope.getAPList();
+                // $scope.getNAPList();
+                location.reload();
             }
             // $modalInstance.close(row.entity);
-
         }, function () {
             console.log("No was triggered.");
         });

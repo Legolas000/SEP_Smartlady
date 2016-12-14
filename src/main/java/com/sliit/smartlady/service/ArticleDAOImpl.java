@@ -134,8 +134,10 @@ public class ArticleDAOImpl implements ArticleDAO {
     public void uploadImage(String filePath){
         Article a = getMaxId();
         int articleID = a.getId();
-        String sql = "UPDATE articles SET coverImagePath = ?" + " WHERE id = ?";
-        jdbcTemplate.update(sql, filePath , articleID);
+        System.out.println("Called function");
+        String imagePath = "/static/images/article/A1.jpg";
+        String sql = "UPDATE articles SET coverImagePath = ? WHERE id = ?";
+        jdbcTemplate.update(sql,imagePath, articleID);
     }
 
     @Override
