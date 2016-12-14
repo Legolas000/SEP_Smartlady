@@ -246,7 +246,7 @@ function ARTRowEditCtrl($http, $modalInstance, grid, row, $mdDialog, $scope) {
             .title('Are you sure to reject the record?')
             .textContent('Record will be rejected.')
             .ariaLabel('REJECTION')
-            // .parent(parentEl)
+            // .parent(parentEl) Not needed
             .targetEvent(event)
             .ok('Yes')
             .cancel('No');
