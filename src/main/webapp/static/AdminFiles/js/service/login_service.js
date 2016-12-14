@@ -46,7 +46,7 @@ angular.module('influx').factory('LoginService',
         }
 
         function doLogOut() {
-            alert('This is the loggout working');
+            //alert('This is the loggout working');
             $cookies.remove('auth');
             $cookies.remove('userAuthObj');
             $window.location.href = '/adlog'

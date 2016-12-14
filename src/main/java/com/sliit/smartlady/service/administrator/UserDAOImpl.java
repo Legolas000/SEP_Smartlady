@@ -217,9 +217,10 @@ public class UserDAOImpl implements UserDAO {
 	{ 
 		User usr =  getMaxId();
 		System.out.println("THE MAX ID IS : " + usr.getId());
+        String imPath = "/static/AdminFiles/images/profile/US_01.png";
 		int advID = usr.getId();
         String sql = "UPDATE user SET imagePath = ?" + " WHERE id = ?";
-        jdbcTemplate.update(sql, imagePath , advID);
+        jdbcTemplate.update(sql, imPath , advID);
 		
 	}
 
@@ -246,7 +247,7 @@ public class UserDAOImpl implements UserDAO {
                 art.setID(rs.getInt("id"));
                 art.setTitle(rs.getString("title"));
                 art.setDescription(rs.getString("description"));
-                art.setSubCatID(rs.getInt("subCategoryID"));
+                art.setCatID(rs.getInt("categoryId"));
                 art.setcoverImagePath(rs.getString("coverImagePath"));
                 return art;
             }
@@ -258,7 +259,7 @@ public class UserDAOImpl implements UserDAO {
 			//FROM usrsubscriptions usr, user ut
 			//WHERE usr.userID = ut.id
 			//GROUP BY usr.userID
-	        String sql1 = "SELECT usr.userID, GROUP_CONCAT(DISTINCT usr.subCatID SEPARATOR ', ') ssubCatID, ut.email FROM usrsubscriptions usr, user ut WHERE usr.userID = ut.id GROUP BY usr.userID";
+	        String sql1 = "SELECT usr.userID, GROUP_CONCAT(DISTINCT usr.catID SEPARATOR ', ') cateID, ut.email FROM usrsubscriptions usr, user ut WHERE usr.userID = ut.id GROUP BY usr.userID";
 	        List<UsrSubs> listUSRSubs = jdbcTemplate.query(sql1, new RowMapper<UsrSubs>() {
 	
 	            @Override
@@ -266,7 +267,7 @@ public class UserDAOImpl implements UserDAO {
 	
 	            	UsrSubs usr = new UsrSubs();
 	                usr.setUSID(rs.getInt("userID"));
-	                usr.setSCID(rs.getString("ssubCatID"));
+	                usr.setSCID(rs.getString("cateID"));
 	                usr.setEmail(rs.getString("email"));
 	                return usr;
 	            }
@@ -284,8 +285,8 @@ public class UserDAOImpl implements UserDAO {
 	        	content = "";
 	        	for(Article ar : listArticles)
 	    		{
-	        		System.out.println("This is a test for availability :- "+ (usr.getSCID().contains((ar.getSubCatID() + ""))));
-	        		if(usr.getSCID().contains((ar.getSubCatID() + "")))
+	        		System.out.println("This is a test for availability :- "+ (usr.getSCID().contains((ar.getCatID() + ""))));
+	        		if(usr.getSCID().contains((ar.getCatID() + "")))
 	        		{
 	        			temp =  ar.getDescription();
 	        			//Get images sent-->+"<img src="+ar.getcoverImagePath().substring(1)+"\" alt="+ar.getTitle()+"\" style=\"width:304px;height:228px;\"> 

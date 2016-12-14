@@ -43,7 +43,7 @@ angular.module('myApp').config(['$routeProvider', function($routeProvider) {
             // controller : "UserController as userCtrl"
         })
         .when('/advertiser_home', {
-            templateUrl: '/static/js/template/advertiser-template/requestAdvertise.jsp',
+            templateUrl: '/static/js/template/advertiser-template/viewUpdateAdvertise.jsp',
             authenticated: true
             // controller : "UserController as userCtrl"
         })

@@ -11,7 +11,7 @@ public class Article {
 	private String User;
 	private String status;
 	private String coverImagePath;
-	private int subCatID;
+	private int catID;
 	private User writer;
 	
 	public Article() {
@@ -76,14 +76,14 @@ public class Article {
 		this.status = status;
 	}
 	
-	public int getSubCatID()
+	public int getCatID()
 	{
-		return this.subCatID;
+		return this.catID;
 	}
 	
-	public void setSubCatID(int subCatID)
+	public void setCatID(int catID)
 	{
-		this.subCatID = subCatID;
+		this.catID = catID;
 	}
 	
 	public String getcoverImagePath()

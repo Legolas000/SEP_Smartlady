@@ -36,7 +36,7 @@ angular.module('myApp').controller('AdvertiserController',
             };
 
             $scope.myFile = '';
-
+            $scope.variableValid = true;
             self.url2 = "www.youtube.com";
             self.extendTime="For 2 Weeks";
             self.updatePayment="";
@@ -239,7 +239,7 @@ angular.module('myApp').controller('AdvertiserController',
                     } else{
                         console.log('Error in submit ');
                     }
-
+                    $scope.variableValid = false;
                     reset();
                     $timeout(submitImage, 5000);
                 }
@@ -322,6 +322,7 @@ angular.module('myApp').controller('AdvertiserController',
             };
 
             function reset(){
+                $scope.variableValid = false;
                 console.log("Reset button calling");
                 self.advertise={
                     id:null,
@@ -331,7 +332,7 @@ angular.module('myApp').controller('AdvertiserController',
                     description:"",
                     time:'For 2 Weeks',
                     place:'Middle of right Side',
-                    payment:''
+                    payment:'250'
                 };
                 $scope.advertiseForm.$setPristine(); //reset Form
             }

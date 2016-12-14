@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +23,7 @@ public class UserController {
 	
 	@Autowired
     UserDAO userDAO;
+	ServletContext context;
 
 	//----------------------------Get All Users----------------------------------
 	@RequestMapping(value = "admin/users/", method = RequestMethod.GET)
@@ -106,8 +108,11 @@ public class UserController {
 	public Object saveUserDataAndFile(@RequestParam(value = "file") MultipartFile file, HttpServletRequest request) {
 		ObjectMapper mapper = new ObjectMapper();
 
+		//String uploadPath = context.getRealPath("");
+
+
 		String uploadDirectory =  "E:\\Images\\";   //"F:\\testUpload\\";
-		String rootDirectory = "/static/js/template/advertiser-template/advertises/";
+		String rootDirectory =  "/static/AdminFiles/images/";
 		System.out.println("Root Directory "+rootDirectory);
 		try {
 			file.transferTo(new File(uploadDirectory  + file.getOriginalFilename()));

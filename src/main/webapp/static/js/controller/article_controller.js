@@ -69,7 +69,7 @@ angular.module('myApp')
 
 
             function submitImage() {
-                var uploadUrl = "http://smartarticle.azurewebsites.net/SEPIISmartLady/uploadImage/";
+                var uploadUrl = "http://localhost:1212/uploadImage/";
                 $http.post(uploadUrl, $scope.fd, {
                     withCredentials: true,
                     headers: {'Content-Type': undefined },
@@ -112,7 +112,8 @@ angular.module('myApp')
                             )
                     }
                 }
-                $timeout(submitImage, 5000);
+                //$timeout(submitImage, 5000);
+                submitImage();
             };
 
 

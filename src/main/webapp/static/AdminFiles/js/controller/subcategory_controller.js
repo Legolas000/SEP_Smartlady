@@ -93,7 +93,7 @@ angular.module('influx').controller('SUBCMainCtrl',['$scope', '$http', '$mdDialo
             $http.get('http://localhost:1212/admin/subcategories/sub/'+vm.selCategs).success(function(response) {
                 console.log('The resp val', response);
                 vm.serviceGrid.data = response;
-                alert(response);
+                //alert(response);
                 if(response == null || !angular.isDefined(response) || response == "")
                 {
                     alert('null');

@@ -295,6 +295,7 @@ function ADVRowEditCtrl($http, $modalInstance, grid, row, $mdDialog, $rootScope)
                     );
             }
             // $modalInstance.close(row.entity);
+            location.reload();
 
         }, function () {
             console.log("No was triggered.");
@@ -359,7 +360,7 @@ function ADVRowEditCtrl($http, $modalInstance, grid, row, $mdDialog, $rootScope)
                     );
             }
             // $modalInstance.close(row.entity);
-
+            location.reload();
         }, function () {
             console.log("No was triggered.");
         });

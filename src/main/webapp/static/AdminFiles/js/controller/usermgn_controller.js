@@ -68,7 +68,7 @@ angular.module('influx').controller('USRMainCtrl',['$scope', '$http', '$mdDialog
         enableCellEdit : false
     }];
 
-    $http.get('http://localhost:1212/admin/users/1').success(function(response) {
+    $http.get('http://localhost:1212/admin/users/4').success(function(response) {
         vm.serviceGrid.data = response;
     });
 
@@ -87,7 +87,7 @@ angular.module('influx').controller('USRMainCtrl',['$scope', '$http', '$mdDialog
             "address" : "",
             "password" : "",
             "imagePath" : "",
-            "userrole" : "1"
+            "userrole" : "4"
         };
         var rowTmp = {};
         rowTmp.entity = newService;
@@ -121,8 +121,6 @@ function USRRowEditCtrl($http, $modalInstance, grid, row, $mdDialog , $scope)
                 .then(
                     function (response) {
 //                                    deferred.resolve(response.data);
-
-                        $scope.submitImage();
                         console.log('This has been posted successfully',response);
                         $mdDialog.show(
                             $mdDialog.alert()
@@ -134,6 +132,7 @@ function USRRowEditCtrl($http, $modalInstance, grid, row, $mdDialog , $scope)
                                 .ok('OK')
                             //.targetEvent(ev)
                         );
+                        $scope.submitImage();
                     },
                     function(errResponse){
                         console.error('Error while creating user', errResponse);
@@ -240,7 +239,7 @@ function USRRowEditCtrl($http, $modalInstance, grid, row, $mdDialog , $scope)
         var fd = new FormData();
         $scope.fd = fd;
         fd.append("file", files[0]);
-        alert("It loads");
+        //alert("It loads");
         //$scope.submitImage();
     }
 

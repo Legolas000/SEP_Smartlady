@@ -16,6 +16,7 @@ angular.module('myApp').controller('LoginController',
                         .then(
                             function (data) {
                                 $location.path('/home');
+
                             },
                             function (errResponse) {
                                 sweetAlert("Error!!", "Invalid user name or password!", "error");
@@ -26,7 +27,8 @@ angular.module('myApp').controller('LoginController',
 
                 doLogOut : function () {
                     LoginService.doLogOut();
-                    $location.path('/');
+                    $location.path('/login');
+                    location.reload();
                 }
             });
 
