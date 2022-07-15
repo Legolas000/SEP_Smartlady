@@ -9,7 +9,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<springframework.version>4.3.2.RELEASE</springframework.version>
-		<jackson.version>2.7.5</jackson.version>
+		<jackson.version>2.12.6.1</jackson.version>
 		<cglib.version>2.2.2</cglib.version>
 	</properties>
 
